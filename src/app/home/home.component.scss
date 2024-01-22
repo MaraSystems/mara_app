@@ -1,0 +1,16 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--XBig-Gap, 3.125rem);
+}
+
+app-home-values {
+    width: 100%;
+}
+
+@media only screen and (min-width: 700px){
+    .home {
+        gap: var(--Masive-Gap, 6.25rem);
+    }
+}

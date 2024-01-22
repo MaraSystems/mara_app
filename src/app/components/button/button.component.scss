@@ -1,0 +1,21 @@
+.button {
+    display: flex;
+    padding: var(--Small-Gap, 0.625rem) var(--XBig-Gap, 3.125rem);
+    justify-content: center;
+    align-items: center;
+    gap: var(--Gap, 1.25rem);
+    flex: 1 0 0;
+    border-radius: var(--XBig-Gap, 3.125rem);
+    cursor: pointer;
+
+    &-icon {}
+    
+    &-title {
+        font-family: Roboto;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 110%; /* 1.375rem */
+        letter-spacing: 0.0625rem;
+    }
+}

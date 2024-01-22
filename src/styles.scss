@@ -1,0 +1,35 @@
+:root {
+    --color-light: #F7FBF9;
+    --color-light-variant: #E9FFF6;
+    --color-dark: #5C5E60;
+    --color-dark-variant: #292A2B;
+    --color-primary: #22D896;
+    --color-secondary: #717CE3;
+
+    --fill-parent-with: -webkit-fill-available;
+    --fill-parent-height: 100%;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-light);
+}
+
+app-root {
+    height: 100%;
+}
+
+.elevated {
+    box-shadow: 0px 3px 8px 0px rgba(92, 94, 96, 0.25);
+}
+
+.bordered {
+    border-radius: var(--XBig-Gap, 3.125rem);
+    border: 1px solid;
+}

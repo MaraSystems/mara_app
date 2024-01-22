@@ -1,0 +1,25 @@
+.switcher {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    &-item {
+        display: flex;
+        width: var(--Gap, 1.25rem);
+        height: var(--Gap, 1.25rem);
+        justify-content: center;
+        align-items: center;
+        gap: var(--Small-Gap, 0.625rem);
+        border-radius: 100%;
+        border: 3px solid var(--Primary, #22D896);
+        cursor: pointer;
+
+        &-hole {
+            width: 50%;
+            height: 50%;
+            flex-shrink: 0;
+            background-color: #22D896;
+            border-radius: 100%;
+        }
+    }
+}

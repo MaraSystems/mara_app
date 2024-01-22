@@ -1,0 +1,17 @@
+<span 
+    class="button"         
+    [ngClass]="{ elevated, 'bordered': !elevated }"
+    [ngStyle]="{ backgroundColor: background, borderColor: textColor }"
+    (click)="onClick.emit()">
+    <span 
+        *ngIf="icon"
+        class="material-symbols-outlined button-icon"
+        [ngStyle]="{ color: iconColor }">
+        {{icon}}
+    </span>
+    <h5 
+        class="button-title" 
+        [ngStyle]="{ color: textColor, fontSize: textSize }">
+        {{text}}
+    </h5>
+</span>
