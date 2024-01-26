@@ -1,1 +1,14 @@
-<p>home-benefits works!</p>
+<div class="home-benefits">
+    <h1 class="home-benefits-title">Your Benefits</h1>
+    <div class="home-benefits-list">
+        <div class="home-benefits-item" *ngFor="let item of list; index as i" [ngClass]="{ reversed: i%2 !== 0 }">
+            <img [src]="item.image" alt="" class="home-benefits-image">
+            <span class="home-benefits-details">
+                <h5 class="home-benefits-name">{{item.name}}</h5>
+                <p class="home-benefits-description">
+                    {{item.description}}
+                </p>
+            </span>
+        </div>
+    </div>
+</div>

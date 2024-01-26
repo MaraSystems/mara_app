@@ -1,0 +1,114 @@
+.home-works {
+    display: flex;
+    padding: var(--XBig-Gap, 3.125rem) 5%;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--XBig-Gap, 3.125rem);
+    align-self: stretch;
+    background: var(--Light-Variant, #EBFDF6);
+
+    &-title {
+        color: var(--Dark-Variant, #292A2B);
+        font-family: "Roboto Mono";
+        font-size: 1.875rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 130%; /* 2.4375rem */
+        letter-spacing: 0.1125rem;
+    }
+
+    &-list {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: var(--XBig-Gap, 3.125rem);
+    }
+
+    &-item {
+        display: flex;
+        align-items: center;
+        padding: var(--Small-Gap, 0.625rem);
+        gap: var(--XSmall-Gap, 1rem);
+    }
+
+    .reversed {
+        flex-direction: row-reverse;
+        .home-works-details {
+            grid-area: 1 / 1 / 1 / 2;
+            align-items: flex-start;
+        }
+
+        .home-works-description {
+            text-align: left !important;
+        }
+    }
+
+    &-image {
+        width: 11.875rem;
+        height: 17.5rem;
+        border-radius: var(--Small-Gap, 0.625rem);
+        justify-self: center;
+    }
+
+    &-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: end;
+        gap: var(--Big-Gap, 1.875rem);
+        flex: 1 0 0;
+    }
+
+    &-description {
+        color: var(--Dark, #5C5E60);
+        text-align: right;
+        font-family: Roboto;
+        font-size: 1.0625rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 105%; /* 1.11563rem */
+        letter-spacing: 0.0425rem;
+    }
+}
+
+@media only screen and (min-width: 700px){
+    .home-works {
+        padding: var(--XBig-Gap, 3.125rem) 15%;
+        gap: var(--XBig-Gap, 3.125rem);
+    
+        &-title {
+            font-family: "Roboto Flex";
+            font-size: 3.75rem;
+            font-weight: 900;
+            line-height: 150%; /* 5.625rem */
+            letter-spacing: 0.375rem;
+        }
+    
+        &-list {
+            gap: var(--XBig-Gap, 3.125rem);
+        }
+    
+        &-item {
+            gap: var(--Masive-Gap, 6.25rem);
+        }
+    
+        &-image {
+            width: 25rem;
+            height: 31.25rem;
+        }
+    
+        &-details {
+            padding: var(--Gap, 1.25rem);
+            gap: var(--XBig-Gap, 3.125rem);
+        }
+    
+        &-description {
+            font-family: "Roboto Mono";
+            font-size: 1.875rem;
+            font-weight: 700;
+            line-height: 130%; /* 2.4375rem */
+            letter-spacing: 0.1125rem;
+        }
+    }
+}

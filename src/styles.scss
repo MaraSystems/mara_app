@@ -33,3 +33,7 @@ app-root {
     border-radius: var(--XBig-Gap, 3.125rem);
     border: 1px solid;
 }
+
+.elevated {
+    box-shadow: 0px 3px 8px 0px rgba(92, 94, 96, 0.25);
+}

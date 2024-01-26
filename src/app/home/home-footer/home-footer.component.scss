@@ -1,0 +1,217 @@
+.home-footer {
+    display: flex;
+    padding: var(--Small-Gap, 0.625rem) 0rem;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--XBig-Gap, 3.125rem);
+
+    .newsletter {
+        display: flex;
+        padding: var(--Small-Gap, 0.625rem) var(--Gap, 1.25rem);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--Gap, 1.25rem);
+        align-self: stretch;
+        background: var(--Light-Variant, #EBFDF6);
+
+        &-header {
+            color: var(--Dark, #5C5E60);
+            font-family: Roboto;
+            font-size: 1.25rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 110%; /* 1.375rem */
+            letter-spacing: 0.0625rem;
+        }
+
+        &-note {
+            color: var(--Dark, #5C5E60);
+            font-family: Roboto;
+            font-size: 1.0625rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 105%; /* 1.11563rem */
+            letter-spacing: 0.0425rem;
+        }
+
+        &-form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            align-self: stretch;
+        }
+
+        &-email{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.3125rem;
+            align-self: stretch;
+            border: 1px solid var(--Primary, #22D896);
+            height: 40px;
+        }
+
+        &-subscribe{
+            display: flex;
+            padding: var(--Small-Gap, 0.625rem) var(--XBig-Gap, 3.125rem);
+            justify-content: center;
+            align-items: center;
+            gap: var(--Gap, 1.25rem);
+            align-self: stretch;
+            background: var(--Primary, #22D896);
+            border: none;
+            color: var(--Dark, #5C5E60);
+            font-family: Roboto;
+            font-size: 1.0625rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 105%; /* 1.11563rem */
+            letter-spacing: 0.0425rem;
+        }
+
+    }
+
+    &-links {
+        display: flex;
+        padding: var(--Small-Gap, 0.625rem);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: var(--Gap, 1.25rem);
+
+        .app-name {
+            color: var(--Dark, #5C5E60);
+            font-family: Roboto;
+            font-size: 1.25rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 110%; /* 1.375rem */
+            letter-spacing: 0.0625rem;
+        }
+
+        &-list {
+            display: flex;
+            align-items: flex-start;
+            gap: 2.875rem;
+        }
+
+        &-item {
+            color: var(--Dark, #5C5E60);
+            font-family: Roboto;
+            font-size: 1.0625rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 105%; /* 1.11563rem */
+            letter-spacing: 0.0425rem;
+            text-decoration: none;
+        }
+    }
+
+    &-copyright {
+        color: var(--Dark, #5C5E60);
+        font-family: Roboto;
+        font-size: 1.0625rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 105%; /* 1.11563rem */
+        letter-spacing: 0.0425rem;
+    }
+}
+
+@media screen {
+    .home-footer {
+        gap: var(--Masive-Gap, 6.25rem);
+        padding: var(--XBig-Gap, 3.125rem) var(--Big-Gap, 1.875rem);
+
+        .newsletter {
+            display: flex;
+            padding: var(--Gap, 1.25rem);
+            flex-direction: column;
+            align-items: flex-start;
+            gap: var(--Gap, 1.25rem);
+            align-self: stretch;
+            background: var(--Light-Variant, #EBFDF6);
+    
+            &-header {
+                font-family: "Roboto Mono";
+                font-size: 1.875rem;
+                font-weight: 700;
+                line-height: 130%; /* 2.4375rem */
+                letter-spacing: 0.1125rem;
+            }
+    
+            &-note {
+                font-family: Roboto;
+                font-size: 1.25rem;
+                font-weight: 500;
+                line-height: 110%; /* 1.375rem */
+                letter-spacing: 0.0625rem;
+            }
+    
+            &-form {
+                max-width: 43.875rem;
+            }
+    
+            &-email{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3125rem;
+                align-self: stretch;
+                border: 1px solid var(--Primary, #22D896);
+                height: 40px;
+            }
+    
+            &-subscribe{
+                font-family: Roboto;
+                font-size: 1.25rem;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 110%; /* 1.375rem */
+                letter-spacing: 0.0625rem;
+            }
+    
+        }
+    
+        &-links {
+            display: flex;
+            padding: var(--Small-Gap, 0.625rem);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: var(--Gap, 1.25rem);
+
+            .app-name {
+                font-family: "Roboto Mono";
+                font-size: 1.875rem;
+                font-weight: 700;
+                line-height: 130%; /* 2.4375rem */
+                letter-spacing: 0.1125rem;
+            }
+    
+            &-list {
+                display: flex;
+                align-items: flex-start;
+                gap: 2.875rem;
+            }
+    
+            &-item {
+                font-family: Roboto;
+                font-size: 1.25rem;
+                font-weight: 500;
+                line-height: 110%; /* 1.375rem */
+                letter-spacing: 0.0625rem;
+            }
+        }
+    
+        &-copyright {
+            color: var(--Dark, #5C5E60);
+            font-family: Roboto;
+            font-size: 1.0625rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 105%; /* 1.11563rem */
+            letter-spacing: 0.0425rem;
+        }
+    }
+}

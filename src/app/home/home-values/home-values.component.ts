@@ -16,17 +16,17 @@ export class HomeValuesComponent implements OnInit {
     {
       title: '1. Confident Collaboration, Secured Transactions',
       descripton: 'Contractor introduces Escrow, ensuring secure payments and fostering confidence in collaborative project management.',
-      image: '../../../assets/images/slide_1.png',
+      image: '../../../assets/images/image_7.png',
     },
     {
       title: '2. Effortless Project Guarantee:',
       descripton: 'Contractor streamlines projects, guarantees payments with intuitive features, including Escrow for financial confidence.',
-      image: '../../../assets/images/feature_1.png',
+      image: '../../../assets/images/image_6.png',
     },
     {
       title: '3. Trustworthy Contracting, Peace of Mind',
       descripton: 'Trust Contractor for secure, trustworthy contracts. Escrow ensures peace of mind, making project navigation seamless and stress-free.',
-      image: '../../../assets/images/feature_2.png',
+      image: '../../../assets/images/image_5.png',
     }
   ];
 
@@ -46,7 +46,7 @@ export class HomeValuesComponent implements OnInit {
   constructor(){}
 
   ngOnInit(): void {
-    this.animateSliding();
+    // this.animateSliding();
   }
 
   nextPostion(currentPositon: number, change: number){ 
