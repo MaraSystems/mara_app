@@ -1,5 +1,5 @@
 <div class="home-testimonials">
-    <h1 class="home-testimonials-title">Customer Testimonials</h1>
+    <h1 class="page-title">Customer Testimonials</h1>
     <div class="home-testimonials-list">
         <div 
             class="home-testimonials-item elevated" 
@@ -7,8 +7,8 @@
             [ngClass]="{ 'active-testimonial': i === current, 'inactive-testimonial': i !== current }">
             <img [src]="testimonial.image" alt="" class="home-testimonials-image">
             <span class="home-testimonials-details">
-                <h1 class="home-testimonials-fullname">{{testimonial.fullname}}</h1>
-                <p class="home-testimonials-description">{{testimonial.description}}</p>
+                <h1 class="home-testimonials-fullname header-3">{{testimonial.fullname}}</h1>
+                <p class="home-testimonials-description text-1">{{testimonial.description}}</p>
             </span>
         </div>
     </div>

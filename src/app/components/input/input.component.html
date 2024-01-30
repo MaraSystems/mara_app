@@ -1,1 +1,7 @@
-<p>input works!</p>
+<div class="input">
+    <span class="input-info">
+        <label [for]="name" class="input-label text-1">{{name}}</label>
+        <h1 *ngIf="unit" class="input-unit">{{unit}}</h1>
+    </span>
+    <input [type]="type" [name]="name" class="form-control input-data" [value]="data">
+</div>

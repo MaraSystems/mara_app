@@ -1,13 +1,13 @@
 <div class="home-works">
-    <h1 class="home-works-title">How it works</h1>
+    <h1 class="page-title">How it works</h1>
     <div class="home-works-list">
         <div class="home-works-item" *ngFor="let item of list; index as i" [ngClass]="{ reversed: i%2 !== 0 }">
             <img [src]="item.image" alt="" class="home-works-image">
             <span class="home-works-details">
-                <p class="home-works-description">
+                <p class="home-works-description text-1">
                     {{item.description}}
                 </p>
-                <app-button [text]="item.action" textColor="#22D896" [background]="item.background"></app-button>
+                <app-button [text]="item.action" textColor="var(--color-primary)" [background]="item.background" [link]="item.link" borderColor="var(--color-primary)"></app-button>
             </span>
         </div>
     </div>

@@ -1,37 +1,25 @@
 .home-footer {
     display: flex;
-    padding: var(--Small-Gap, 0.625rem) 0rem;
+    padding: var(--gap-small) 0rem;
     flex-direction: column;
     align-items: center;
-    gap: var(--XBig-Gap, 3.125rem);
+    gap: var(--gap-x-big);
 
     .newsletter {
         display: flex;
-        padding: var(--Small-Gap, 0.625rem) var(--Gap, 1.25rem);
+        padding: var(--gap-small) var(--gap-normal);
         flex-direction: column;
         align-items: flex-start;
-        gap: var(--Gap, 1.25rem);
+        gap: var(--gap-normal);
         align-self: stretch;
-        background: var(--Light-Variant, #EBFDF6);
+        background: var(--color-light-variant);
 
         &-header {
-            color: var(--Dark, #5C5E60);
-            font-family: Roboto;
-            font-size: 1.25rem;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 110%; /* 1.375rem */
-            letter-spacing: 0.0625rem;
+            color: var(--color-dark);
         }
 
         &-note {
-            color: var(--Dark, #5C5E60);
-            font-family: Roboto;
-            font-size: 1.0625rem;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 105%; /* 1.11563rem */
-            letter-spacing: 0.0425rem;
+            color: var(--color-dark);
         }
 
         &-form {
@@ -47,46 +35,34 @@
             align-items: flex-start;
             gap: 0.3125rem;
             align-self: stretch;
-            border: 1px solid var(--Primary, #22D896);
+            border: 1px solid var(--color-primary);
             height: 40px;
         }
 
         &-subscribe{
             display: flex;
-            padding: var(--Small-Gap, 0.625rem) var(--XBig-Gap, 3.125rem);
+            padding: var(--gap-small) var(--gap-x-big);
             justify-content: center;
             align-items: center;
-            gap: var(--Gap, 1.25rem);
+            gap: var(--gap-normal);
             align-self: stretch;
-            background: var(--Primary, #22D896);
+            background: var(--color-primary);
             border: none;
-            color: var(--Dark, #5C5E60);
-            font-family: Roboto;
-            font-size: 1.0625rem;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 105%; /* 1.11563rem */
-            letter-spacing: 0.0425rem;
+            color: var(--color-dark);
         }
 
     }
 
     &-links {
         display: flex;
-        padding: var(--Small-Gap, 0.625rem);
+        padding: var(--gap-small);
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: var(--Gap, 1.25rem);
+        gap: var(--gap-normal);
 
         .app-name {
-            color: var(--Dark, #5C5E60);
-            font-family: Roboto;
-            font-size: 1.25rem;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 110%; /* 1.375rem */
-            letter-spacing: 0.0625rem;
+            color: var(--color-dark);
         }
 
         &-list {
@@ -96,122 +72,28 @@
         }
 
         &-item {
-            color: var(--Dark, #5C5E60);
-            font-family: Roboto;
-            font-size: 1.0625rem;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 105%; /* 1.11563rem */
-            letter-spacing: 0.0425rem;
+            color: var(--color-dark);
             text-decoration: none;
+            text-align: center;
         }
     }
 
     &-copyright {
-        color: var(--Dark, #5C5E60);
-        font-family: Roboto;
-        font-size: 1.0625rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 105%; /* 1.11563rem */
-        letter-spacing: 0.0425rem;
+        color: var(--color-dark);
     }
 }
 
-@media screen {
+@media only screen and (min-width: 700px){
     .home-footer {
-        gap: var(--Masive-Gap, 6.25rem);
-        padding: var(--XBig-Gap, 3.125rem) var(--Big-Gap, 1.875rem);
+        gap: var(--gap-max);
+        padding: var(--gap-x-big) var(--gap-big);
 
         .newsletter {
-            display: flex;
-            padding: var(--Gap, 1.25rem);
-            flex-direction: column;
-            align-items: flex-start;
-            gap: var(--Gap, 1.25rem);
-            align-self: stretch;
-            background: var(--Light-Variant, #EBFDF6);
-    
-            &-header {
-                font-family: "Roboto Mono";
-                font-size: 1.875rem;
-                font-weight: 700;
-                line-height: 130%; /* 2.4375rem */
-                letter-spacing: 0.1125rem;
-            }
-    
-            &-note {
-                font-family: Roboto;
-                font-size: 1.25rem;
-                font-weight: 500;
-                line-height: 110%; /* 1.375rem */
-                letter-spacing: 0.0625rem;
-            }
+            padding: var(--gap-normal);
     
             &-form {
                 max-width: 43.875rem;
             }
-    
-            &-email{
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.3125rem;
-                align-self: stretch;
-                border: 1px solid var(--Primary, #22D896);
-                height: 40px;
-            }
-    
-            &-subscribe{
-                font-family: Roboto;
-                font-size: 1.25rem;
-                font-style: normal;
-                font-weight: 500;
-                line-height: 110%; /* 1.375rem */
-                letter-spacing: 0.0625rem;
-            }
-    
-        }
-    
-        &-links {
-            display: flex;
-            padding: var(--Small-Gap, 0.625rem);
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: var(--Gap, 1.25rem);
-
-            .app-name {
-                font-family: "Roboto Mono";
-                font-size: 1.875rem;
-                font-weight: 700;
-                line-height: 130%; /* 2.4375rem */
-                letter-spacing: 0.1125rem;
-            }
-    
-            &-list {
-                display: flex;
-                align-items: flex-start;
-                gap: 2.875rem;
-            }
-    
-            &-item {
-                font-family: Roboto;
-                font-size: 1.25rem;
-                font-weight: 500;
-                line-height: 110%; /* 1.375rem */
-                letter-spacing: 0.0625rem;
-            }
-        }
-    
-        &-copyright {
-            color: var(--Dark, #5C5E60);
-            font-family: Roboto;
-            font-size: 1.0625rem;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 105%; /* 1.11563rem */
-            letter-spacing: 0.0425rem;
         }
     }
 }

@@ -11,19 +11,22 @@ export class HomeWorksComponent {
       description: 'Dignissim dictum nisi mattis nunc. Pellentesque non amet lorem nibh augue quis bibendum.. Pellentesque non amet lorem nibh augue quis bibendum.',
       image: '../../../assets/images/image_4.png',
       action: 'Login',
-      background: '#292A2B'
+      background: 'var(--color-dark-variant)',
+      link: '/login'
     },
     {
       description: 'Dignissim dictum nisi mattis nunc. Pellentesque non amet lorem nibh augue quis bibendum.. Pellentesque non amet lorem nibh augue quis bibendum.',
       image: '../../../assets/images/image_5.png',
       action: 'Explore',
-      background: '#F7FBF9'
+      background: 'var(--color-light)',
+      link: '/showcase'
     },
     {
       description: 'Dignissim dictum nisi mattis nunc. Pellentesque non amet lorem nibh augue quis bibendum.. Pellentesque non amet lorem nibh augue quis bibendum.',
       image: '../../../assets/images/image_6.png',
       action: 'Register',
-      background: '#292A2B'
+      background: 'var(--color-dark-variant)',
+      link: '/register'
     }
   ]
 }

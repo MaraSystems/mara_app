@@ -5,20 +5,20 @@
 
     &-item {
         display: flex;
-        width: var(--Gap, 1.25rem);
-        height: var(--Gap, 1.25rem);
+        width: var(--gap-normal);
+        height: var(--gap-normal);
         justify-content: center;
         align-items: center;
-        gap: var(--Small-Gap, 0.625rem);
+        gap: var(--gap-small);
         border-radius: 100%;
-        border: 3px solid var(--Primary, #22D896);
+        border: 3px solid var(--color-primary);
         cursor: pointer;
 
         &-hole {
             width: 50%;
             height: 50%;
             flex-shrink: 0;
-            background-color: #22D896;
+            background-color: var(--color-primary);
             border-radius: 100%;
         }
     }

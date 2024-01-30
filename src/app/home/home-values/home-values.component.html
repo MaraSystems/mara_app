@@ -12,20 +12,23 @@
             [ngStyle]="setBackground(slide.image)"
             >
             <div class="slide-content">
-                <h1 class="slide-title">{{ slide.title }}</h1>
-                <p class="slide-description">{{ slide.descripton }}</p>
+                <h1 class="slide-title header-1">{{ slide.title }}</h1>
+                <p class="slide-description header-2">{{ slide.descripton }}</p>
             </div>
             <div class="slide-buttons">
                 <app-button 
                     text="Login" 
-                    background="#F7FBF9" 
-                    textColor="#22D896"
-                    (onClick)="''">
+                    background="var(--color-light)" 
+                    textColor="var(--color-primary)"
+                    borderColor="var(--color-primary)"
+                    link="/login">
                 </app-button>
                 <app-button 
                     text="Explore" 
-                    background="#292A2B" 
-                    textColor="#22D896">
+                    background="var(--color-dark-variant)" 
+                    borderColor="var(--color-primary)"
+                    textColor="var(--color-primary)"
+                    link="/explore">
                 </app-button>
             </div>
         </div>

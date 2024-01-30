@@ -1,68 +1,43 @@
 .home-features {
     display: flex;
-    padding: var(--Big-Gap, 1.875rem);
+    padding: var(--gap-big);
     flex-direction: column;
     align-items: center;
-    gap: var(--XBig-Gap, 3.125rem);
-
-    &-title {
-        color: var(--Dark-Variant, #292A2B);
-        font-family: "Roboto Mono";
-        font-size: 1.875rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 130%; /* 2.4375rem */
-        letter-spacing: 0.1125rem;
-    }
+    gap: var(--gap-x-big);
 
     &-list {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: var(--XBig-Gap, 3.125rem);
+        gap: var(--gap-x-big);
     }
 
     &-item {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: var(--Small-Gap, 0.625rem);
+        gap: var(--gap-small);
         align-self: stretch;
     }
 
     &-image {
         width: 100%;
         height: 9.375rem;
-        border-radius: var(--XSmall-Gap, 0.3125rem);
+        border-radius: var(--gap-x-small);
     }
 
     &-description {
-        color: var(--Dark, #5C5E60);
+        color: var(--color-dark);
         text-align: center;
-        font-family: Roboto;
-        font-size: 1.0625rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 105%; /* 1.11563rem */
-        letter-spacing: 0.0425rem;
     }
 }
 
 
 @media only screen and (min-width: 700px){
     .home-features {
-        padding: var(--XBig-Gap, 3.125rem);
-        gap: var(--XBig-Gap, 3.125rem);
+        padding: var(--gap-x-big);
+        gap: var(--gap-x-big);
         align-self: stretch;
-    
-        &-title {
-            color: var(--Dark-Variant, #292A2B);
-            font-family: "Roboto Flex";
-            font-size: 3.75rem;
-            font-weight: 900;
-            line-height: 150%; /* 5.625rem */
-            letter-spacing: 0.375rem;
-        }
     
         &-list {
             justify-content: center;
@@ -72,21 +47,14 @@
         }
     
         &-item {
-            padding: var(--Small-Gap, 0.625rem);
-            gap: var(--Small-Gap, 0.625rem);
+            padding: var(--gap-small);
+            gap: var(--gap-small);
         }
     
         &-image {
             width: 100%;
             height: 12rem;
-            border-radius: var(--Small-Gap, 0.625rem);
-        }
-    
-        &-description {
-            font-size: 1.25rem;
-            font-weight: 500;
-            line-height: 110%; /* 1.375rem */
-            letter-spacing: 0.0625rem;
+            border-radius: var(--gap-small);
         }
     }
 }

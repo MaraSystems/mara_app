@@ -1,16 +1,20 @@
-<span 
+<span
     class="button"         
-    [ngClass]="{ elevated, 'bordered': !elevated }"
-    [ngStyle]="{ backgroundColor: background, borderColor: textColor }"
-    (click)="onClick.emit()">
+    [ngClass]="{ elevated, bordered: !!borderColor }"
+    [ngStyle]="{ backgroundColor: background, borderColor }"
+    (click)="this.onClick.emit()"
+    [routerLink]="[link]" >
     <span 
         *ngIf="icon"
         class="material-symbols-outlined button-icon"
         [ngStyle]="{ color: iconColor }">
         {{icon}}
     </span>
+    <svg *ngIf="svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+        <path/>
+    </svg>
     <h5 
-        class="button-title" 
+        class="button-title text-1" 
         [ngStyle]="{ color: textColor, fontSize: textSize }">
         {{text}}
     </h5>
