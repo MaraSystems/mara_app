@@ -1,0 +1,19 @@
+<div class="page">
+    <div class="auth elevated">
+        <h1 class="page-title header-3">Welcome back!</h1>
+
+    <div class="container">
+        <form class="form">
+            <app-input type="email" name="Email" class="form-group"></app-input>
+            <app-password class="form-group"></app-password>
+            <app-button text="Login" background="var(--color-primary)" borderColor="" textColor="var(--color-light-variant)" class="form-group"></app-button>
+        </form>
+
+        <app-alt-auth></app-alt-auth>
+        
+        <span class="register-option text-2">
+            Don't have an account yet? <a [routerLink]="'/clients/register'">Sign Up</a>
+        </span>
+    </div>
+    </div>
+</div>

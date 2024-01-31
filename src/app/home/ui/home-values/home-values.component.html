@@ -1,0 +1,37 @@
+<section class="values">
+    <div class="slider">
+        <div
+            class="slide"
+            *ngFor="let slide of slides; index as i"
+            [ngClass]="{ 
+                'active-slide': (i === currentSlideIndex && direction === 'normal'), 
+                'inactive-slide': (i !== currentSlideIndex && direction === 'normal'),
+                'active-slide-reverse': (i === currentSlideIndex && direction === 'reverse'), 
+                'inactive-slide-reverse': (i !== currentSlideIndex && direction === 'reverse')
+            }"
+            [ngStyle]="setBackground(slide.image)"
+            >
+            <div class="slide-content">
+                <h1 class="slide-title header-1">{{ slide.title }}</h1>
+                <p class="slide-description header-2">{{ slide.descripton }}</p>
+            </div>
+            <div class="slide-buttons">
+                <app-button 
+                    text="Login" 
+                    background="var(--color-light)" 
+                    textColor="var(--color-primary)"
+                    borderColor="var(--color-primary)"
+                    link="/auth">
+                </app-button>
+                <app-button 
+                    text="Explore" 
+                    background="var(--color-dark-variant)" 
+                    borderColor="var(--color-primary)"
+                    textColor="var(--color-primary)"
+                    link="/explore">
+                </app-button>
+            </div>
+        </div>
+    </div>
+    <app-switcher [current]="currentSlideIndex" [totalItems]="slides.length" (selected)="selectSlide($event)"></app-switcher>
+</section>

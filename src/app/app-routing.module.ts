@@ -1,15 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './users/register/register.component';
-import { LoginComponent } from './auth/login/login.component';
-import { NotfoundComponent } from './components/notfound/notfound.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
-  { path: '**', component: NotfoundComponent },
+  { 
+    path: '', 
+    loadChildren: () => import('./home/features/home.module').then(
+      (m) => m.HomeModule
+    )
+  },
+  { 
+    path: 'auth', 
+    loadChildren: () => import('./auth/features/auth.module').then(
+      (m) => m.AuthModule
+    )
+  },
+  { 
+    path: 'clients', 
+    loadChildren: () => import('./client/features/client-shell/client-shell.module').then(
+      (m) => m.ClientShellModule
+    )
+  },
+  { 
+    path: '**', 
+    loadChildren: () => import('./notfound/notfound.module').then(
+      (m) => m.NotfoundModule
+    )
+  },
 ];
 
 @NgModule({
