@@ -6,7 +6,12 @@
         <form class="form">
             <app-input type="email" name="Email" class="form-group"></app-input>
             <app-password class="form-group"></app-password>
-            <app-button text="Login" background="var(--color-primary)" borderColor="" textColor="var(--color-light-variant)" class="form-group"></app-button>
+
+            <button 
+                class="button form-group text-1"
+                [ngClass]="{ elevated: false }">
+                Login
+            </button>
         </form>
 
         <app-alt-auth></app-alt-auth>

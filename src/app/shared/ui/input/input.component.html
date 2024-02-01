@@ -3,5 +3,5 @@
         <label [for]="name" class="input-label text-1">{{name}}</label>
         <h1 *ngIf="unit" class="input-unit">{{unit}}</h1>
     </span>
-    <input [type]="type" [name]="name" class="form-control input-data" [value]="data">
+    <input [type]="type" [name]="name" class="form-control input-data text-1" [(ngModel)]="value" [disabled]="disabled" (input)="onChange(value)" (blur)="onTouched()">
 </div>

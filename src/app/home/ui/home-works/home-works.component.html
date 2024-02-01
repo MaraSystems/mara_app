@@ -7,7 +7,13 @@
                 <p class="home-works-description text-1">
                     {{item.description}}
                 </p>
-                <app-button [text]="item.action" textColor="var(--color-primary)" [background]="item.background" [link]="item.link" borderColor="var(--color-primary)"></app-button>
+                <button 
+                    class="button text-1 bordered"
+                    [ngClass]="{ elevated: false }"
+                    [routerLink]="item.link"
+                    [ngStyle]="{ color: 'var(--color-primary)', backgroundColor: item.background, borderColor: 'var(--color-primary)' }">
+                    {{item.action}}
+                </button>
             </span>
         </div>
     </div>

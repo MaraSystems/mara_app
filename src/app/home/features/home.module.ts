@@ -8,7 +8,6 @@ import { HomeBenefitsComponent } from '../ui/home-benefits/home-benefits.compone
 import { HomeFooterComponent } from '../ui/home-footer/home-footer.component';
 import { HomeFeaturesComponent } from '../ui/home-features/home-features.component';
 import { HomeRoutingModule } from './home-routing.module';
-import { ButtonModule } from 'src/app/shared/ui/button/button.module';
 import { SwitcherModule } from 'src/app/shared/ui/switcher/switcher.module';
 
 
@@ -26,7 +25,6 @@ import { SwitcherModule } from 'src/app/shared/ui/switcher/switcher.module';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    ButtonModule,
     SwitcherModule
   ],
   exports: [

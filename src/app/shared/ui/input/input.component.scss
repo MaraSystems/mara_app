@@ -17,6 +17,8 @@
         border-radius: var(--gap-x-small);
         border: 1px solid var(--color-primary);
         background: var(--color-light-variant);
-        height: 2.5rem;
+        height: 2rem;
+        width: -webkit-fill-available;
+        padding: .25rem .5rem;
     }
 }

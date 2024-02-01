@@ -58,8 +58,9 @@ app-root {
 .page {
     display: flex;
     height: 100%;
-    width: 100%;
+    width: -webkit-fill-available;
     background-color: var(--color-light);
+    overflow: hidden;
 
     &-title {
         color: var(--color-dark);
@@ -68,7 +69,7 @@ app-root {
 
 .bordered {
     border-radius: var(--gap-x-big);
-    border: 1px solid;
+    border: 1px solid !important;
 }
 
 .elevated {
@@ -129,6 +130,25 @@ app-root {
     letter-spacing: 0.03125rem;
 }
 
+.button {
+    display: flex;
+    padding: var(--gap-small) var(--gap-normal);
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap-normal);
+    flex: 1 0 0;
+    border-radius: var(--gap-x-big);
+    background-color: var(--color-primary);
+    color: var(--color-light-variant);
+    cursor: pointer;
+    border: none;
+
+    &:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+    }
+}
+
 @media only screen and (min-width: 700px){
     .header-1 {
         font-size: 3.4375rem;
@@ -164,5 +184,9 @@ app-root {
         font-size: 0.75rem;
         line-height: 103%; /* 0.7725rem */
         letter-spacing: 0.0225rem;
+    }
+    
+    .button {
+        padding: var(--gap-small) var(--gap-x-big);
     }
 }

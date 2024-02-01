@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonModule } from 'src/app/shared/ui/button/button.module';
 import { AltAuthComponent } from './alt-auth.component';
 
 
@@ -11,7 +10,6 @@ import { AltAuthComponent } from './alt-auth.component';
   ],
   imports: [
     CommonModule,
-    ButtonModule
   ],
   exports: [
     AltAuthComponent

@@ -3,12 +3,18 @@
         <h1 class="page-title header-3">Sign Up!</h1>
 
     <div class="container">
-        <form class="form">
-            <app-input type="email" name="Email" class="form-group"></app-input>
-            <app-input type="phone" name="Phone" class="form-group"></app-input>
-            <app-input type="text" name="Username" class="form-group"></app-input>
+        <form action="" class="form" [formGroup]="form" (ngSubmit)="submit()">
+            <app-input type="email" name="Email" class="form-group" formControlName="email"></app-input>
+            <app-input type="phone" name="Phone" class="form-group" formControlName="phone"></app-input>
+            <app-input type="text" name="Username" class="form-group" formControlName="username"></app-input>
 
-            <app-button text="Register" background="var(--color-primary)" borderColor="" textColor="var(--color-light-variant)" class="form-group" ></app-button>
+            <button 
+                [disabled]="form.invalid"
+                class="button form-group text-1"
+                [ngClass]="{ elevated: false }"
+                type="submit">
+                Register
+            </button>
         </form>
 
         <app-alt-auth></app-alt-auth>

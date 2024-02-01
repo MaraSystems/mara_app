@@ -15,4 +15,10 @@
         gap: var(--gap-normal);
         align-self: stretch;
     }
+
+    .button {
+        background-color: var(--color-primary-variant);
+        color: var(--color-dark-variant);
+        border: 1px solid var(--color-primary);
+    }
 }
