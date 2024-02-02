@@ -4,13 +4,15 @@ import { Client } from "../models/client";
 import { ClientActionsType, RegisterClientActionFail, RegisterClientActionSuccess } from "./client-store.action";
 
 export interface ClientState extends EntityState<Client> {
-    selectedId: number | null;
+    selectedId: string | null;
     loading: boolean;
     loaded: boolean;
     error: string;
 }
 
-export const clientAdapter: EntityAdapter<Client> = createEntityAdapter<Client>();
+export const clientAdapter: EntityAdapter<Client> = createEntityAdapter<Client>({
+    selectId: (client: Client) => client._id
+});
 
 export const defualtIssue: ClientState = {
     ids: [],
@@ -23,7 +25,7 @@ export const defualtIssue: ClientState = {
 
 const initialState = clientAdapter.getInitialState(defualtIssue);
 
-export function issueReducer(state = initialState, action: Action): ClientState {
+export function clientReducer(state = initialState, action: Action): ClientState {
     switch (action.type) {
         case ClientActionsType.REGISTER_CLIENT:
             return { ...state, loading: true };

@@ -8,7 +8,7 @@ import { AuthComponent } from './auth.component';
 import { InputModule } from 'src/app/shared/ui/input/input.module';
 import { PasswordModule } from '../ui/password/password.module';
 import { AltAuthModule } from '../ui/alt-auth/alt-auth.module';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +21,8 @@ import { AltAuthModule } from '../ui/alt-auth/alt-auth.module';
     AuthRoutingModule,
     InputModule,
     PasswordModule,
-    AltAuthModule
+    AltAuthModule,
+    ReactiveFormsModule
   ],
   exports: [
     AuthComponent

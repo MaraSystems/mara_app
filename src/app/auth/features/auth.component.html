@@ -3,13 +3,14 @@
         <h1 class="page-title header-3">Welcome back!</h1>
 
     <div class="container">
-        <form class="form">
-            <app-input type="email" name="Email" class="form-group"></app-input>
-            <app-password class="form-group"></app-password>
+        <form action="" class="form" [formGroup]="form" (ngSubmit)="login()">
+            <app-input type="email" name="email" class="form-group" formControlName="email" #email></app-input>
+            <app-password class="form-group" formControlName="password" [clientEmail]="form.get('email')?.value"></app-password>
 
             <button 
+                [disabled]="form.invalid"
                 class="button form-group text-1"
-                [ngClass]="{ elevated: false }">
+                type="submit">
                 Login
             </button>
         </form>

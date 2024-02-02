@@ -1,0 +1,9 @@
+<div class="toast elevated">
+    <span *ngFor="let toast of toasts | async; let i=index" class="toast-item" [ngClass]="{
+        'is-error': toast.isError
+    }">
+        <h4 class="toast-item-title text-1">{{toast.title}}</h4>
+        <p *ngIf="toast.description" class="toast-item-description text-2">{{toast.description}}</p>
+        <span class="material-symbols-outlined toast-item-close" (click)="closeToast(toast.id)">close</span>
+    </span>
+</div>

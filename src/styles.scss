@@ -5,7 +5,8 @@
     --color-dark-variant: #292A2B;
     --color-primary: #22D896;
     --color-secondary: #717CE3;
-
+    --color-error: red;
+    
     --gap-none: 0px;
     --gap-x-small: 5px;
     --gap-small: 10px;
@@ -64,6 +65,7 @@ app-root {
 
     &-title {
         color: var(--color-dark);
+        width: -webkit-fill-available;
     }
 }
 

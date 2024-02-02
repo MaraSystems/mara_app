@@ -1,0 +1,39 @@
+.toast {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    z-index: 1000;
+    right: 1vw;
+    top: 1vh;
+    width: min(100%, 300px);
+
+    &-item {
+        display: grid;
+        grid-template-rows: repeat(2, max-content);
+        gap: var(--gap-small);
+        padding: var(--gap-small);
+        background-color: var(--color-light-variant);
+        position: relative;
+        color: var(--color-primary);
+        border: 1px solid var(--color-primary);
+
+        &-description {
+            color: var(--color-dark);
+        }
+
+        &-close {
+            position: absolute;
+            top: 0.5vh;
+            right: 0.5vw;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+    }
+
+    &-item.is-error{
+        border: 1px solid var(--color-error);
+        color: var(--color-error);
+    }
+}

@@ -14,20 +14,21 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 export class InputComponent implements ControlValueAccessor {
-  @Input() value: string = 'Small';
+  @Input() value: string = '';
   @Input() name: string = '';
   @Input() unit: string = '';
   @Input() type: string = '';
+  @Input() disabled = false;
+  @Input() invalid = false;
 
-  disabled = false;
   onChange: any = (value: any) => {};
   onTouched: any = () => {};
 
-  writeValue(obj: any): void {
+  writeValue(obj: any): void {    
     this.value = obj;
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: any): void {    
     this.onChange = fn;
   }
 

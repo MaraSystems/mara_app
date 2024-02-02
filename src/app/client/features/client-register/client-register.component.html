@@ -3,15 +3,15 @@
         <h1 class="page-title header-3">Sign Up!</h1>
 
     <div class="container">
-        <form action="" class="form" [formGroup]="form" (ngSubmit)="submit()">
-            <app-input type="email" name="Email" class="form-group" formControlName="email"></app-input>
-            <app-input type="phone" name="Phone" class="form-group" formControlName="phone"></app-input>
-            <app-input type="text" name="Username" class="form-group" formControlName="username"></app-input>
+        <form action="" class="form" [formGroup]="form" (ngSubmit)="register()">
+            <app-input type="email" name="email" class="form-group" formControlName="email" [invalid]="isValid('email')"></app-input>
+            <app-input type="phone" name="phone" class="form-group" formControlName="phone" [invalid]="isValid('phone')"></app-input>
+            <app-input type="text" name="username" class="form-group" formControlName="username" [invalid]="isValid('username')"></app-input>
+            <!-- <input type="text" formControlName="username"> -->
 
             <button 
                 [disabled]="form.invalid"
                 class="button form-group text-1"
-                [ngClass]="{ elevated: false }"
                 type="submit">
                 Register
             </button>

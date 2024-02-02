@@ -7,6 +7,8 @@ import { StoreModule } from '@ngrx/store';
 import { appEffects, appReducers } from './app.state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastModule } from './toast/features/toast.module';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { EffectsModule } from '@ngrx/effects';
     AppRoutingModule,
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({ name: 'Contractor' }),
-    EffectsModule.forRoot(appEffects)
+    EffectsModule.forRoot(appEffects),
+    HttpClientModule,
+    ToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]
