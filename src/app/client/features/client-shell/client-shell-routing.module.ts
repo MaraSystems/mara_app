@@ -8,6 +8,12 @@ const routes: Routes = [
       (m) => m.ClientRegisterModule
     )
   },
+  { 
+    path: 'profile', 
+    loadChildren: () => import('../client-profile/client-profile.module').then(
+      (m) => m.ClientProfileModule
+    )
+  },
 ];
 
 @NgModule({

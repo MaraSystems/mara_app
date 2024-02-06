@@ -1,20 +1,17 @@
-<div class="home-works">
-    <h1 class="page-title">How it works</h1>
-    <div class="home-works-list">
-        <div class="home-works-item" *ngFor="let item of list; index as i" [ngClass]="{ reversed: i%2 !== 0 }">
-            <img [src]="item.image" alt="" class="home-works-image">
-            <span class="home-works-details">
-                <p class="home-works-description text-1">
-                    {{item.description}}
-                </p>
+<h1 class="page-title header-3">How it works</h1>
+    <div class="list">
+        <div class="item" *ngFor="let item of list; index as i" [ngClass]="{ reversed: i%2 !== 0 }">
+            <img [src]="item.image" alt="" class="image">
+            <span class="details">
+                <p class="description text-1">{{item.description}}</p>
                 <button 
                     class="button text-1 bordered"
                     [ngClass]="{ elevated: false }"
                     [routerLink]="item.link"
+                    *ngIf="!(['/auth', '/clients/register'].includes(item.link) && auth)"
                     [ngStyle]="{ color: 'var(--color-primary)', backgroundColor: item.background, borderColor: 'var(--color-primary)' }">
                     {{item.action}}
                 </button>
             </span>
         </div>
     </div>
-</div>

@@ -1,18 +1,18 @@
-.home-features {
+:host {
     display: flex;
     padding: var(--gap-big);
     flex-direction: column;
     align-items: center;
     gap: var(--gap-x-big);
 
-    &-list {
+    .list {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         gap: var(--gap-x-big);
     }
 
-    &-item {
+    .item {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -20,13 +20,13 @@
         align-self: stretch;
     }
 
-    &-image {
+    .image {
         width: 100%;
         height: 9.375rem;
         border-radius: var(--gap-x-small);
     }
 
-    &-description {
+    .description {
         color: var(--color-dark);
         text-align: center;
     }
@@ -34,24 +34,24 @@
 
 
 @media only screen and (min-width: 700px){
-    .home-features {
+    :host {
         padding: var(--gap-x-big);
         gap: var(--gap-x-big);
         align-self: stretch;
     
-        &-list {
+        .list {
             justify-content: center;
             flex-direction: row;
             gap: 2.6875rem;
             align-self: stretch;
         }
     
-        &-item {
+        .item {
             padding: var(--gap-small);
             gap: var(--gap-small);
         }
     
-        &-image {
+        .image {
             width: 100%;
             height: 12rem;
             border-radius: var(--gap-small);

@@ -1,4 +1,4 @@
-.auth {
+:host {
     display: flex;
     padding: var(--gap-x-big) var(--gap-normal);
     flex-direction: column;
@@ -6,7 +6,7 @@
     gap: var(--gap-big);
     background: var(--color-light-variant);
     height: 100%;
-    width: -webkit-fill-available;
+    width: 100%;
 }
 
 .register-option {
@@ -23,11 +23,12 @@
 
 
 @media only screen and (min-width: 700px){
-    .auth {
+    :host {
         padding: var(--gap-x-big);
         gap: var(--gap-big);
         height: min-content;
         width: min-content;
         margin: auto;
+        box-shadow: var(--shadow-small);
     }
 }

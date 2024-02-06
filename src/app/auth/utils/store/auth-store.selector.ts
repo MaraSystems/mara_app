@@ -1,15 +1,14 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { Client } from "src/app/client/utils/models/client";
-import { ClientState, clientAdapter } from "src/app/client/utils/store/client-store.reducer";
+import { ClientState } from "src/app/client/utils/store/client-store.reducer";
+import { AuthState } from "./auth-store.reducer";
 
-export const clientSelector = createFeatureSelector<Readonly<ClientState>>('clients');
+export const authSelector = createFeatureSelector<Readonly<AuthState>>('auth');
 
-export const selectAllClients = createSelector(
-    clientSelector,
-    clientAdapter.getSelectors().selectAll
-);
-
-export const selectClientById = (id: string) => createSelector(
-    clientSelector,
-    state => state.entities[id] as Client
+export const selectActiveAuth = createSelector(
+    authSelector,
+    state => {
+        console.log(state.auth);
+        return state.auth
+    }
 );

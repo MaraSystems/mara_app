@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
 import { LoginAuthAction } from '../utils/store/auth-store.action';
+import { selectActiveAuth } from '../utils/store/auth-store.selector';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent extends UnSubscriber implements OnInit {
   form!: FormGroup;
   completed = false;
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) {
     super();
   }
@@ -24,6 +27,12 @@ export class AuthComponent extends UnSubscriber implements OnInit {
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.email, Validators.required]),
       password: new FormControl(null, Validators.required),
+    });
+
+    this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
+      if (auth) {
+        this.router.navigateByUrl('/');
+      }
     });
   }
 

@@ -9,6 +9,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from './toast/features/toast.module';
+import { SidebarModule } from './shared/features/sidebar/sidebar.module';
+import { NavbarModule } from './shared/features/navbar/navbar.module';
+import { FootbarModule } from './shared/features/footbar/footbar.module';
+import { NotfoundModule } from './notfound/notfound.module';
 
 
 @NgModule({
@@ -22,7 +26,11 @@ import { ToastModule } from './toast/features/toast.module';
     StoreDevtoolsModule.instrument({ name: 'Contractor' }),
     EffectsModule.forRoot(appEffects),
     HttpClientModule,
-    ToastModule
+    ToastModule,
+    SidebarModule,
+    NavbarModule,
+    FootbarModule,
+    NotfoundModule
   ],
   providers: [],
   bootstrap: [AppComponent]

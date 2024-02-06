@@ -3,27 +3,19 @@ import { Action } from "@ngrx/store";
 import { Auth } from "../models/auth.model";
 import { AuthActionsType, LoginAuthActionSuccess } from "./auth-store.action";
 
-export interface AuthState extends EntityState<Auth> {
-    selectedId: string | null;
+export interface AuthState  {
+    auth: Auth | undefined;
     loading: boolean;
     loaded: boolean;
     error: string;
 }
 
-export const authAdapter: EntityAdapter<Auth> = createEntityAdapter<Auth>({
-    selectId: (auth: Auth) => auth.client._id
-});
-
-export const defualtIssue: AuthState = {
-    ids: [],
-    entities: {},
-    selectedId: null,
+const initialState: AuthState = {
+    auth: undefined,
     loading: false,
     loaded: false,
     error: ''
 }
-
-const initialState = authAdapter.getInitialState(defualtIssue);
 
 export function authReducer(state = initialState, action: Action): AuthState {
     switch (action.type) {
@@ -41,7 +33,8 @@ export function authReducer(state = initialState, action: Action): AuthState {
 
         case AuthActionsType.LOGIN_AUTH_SUCCESS:
             const payload = (action as LoginAuthActionSuccess).payload;
-            return authAdapter.addOne(payload, { ...state, loading: false, loaded: true, selectedId: payload.client._id })
+            localStorage.setItem('auth', JSON.stringify(payload));
+            return { ...state, loading: false, loaded: true, auth: payload }
             
         case AuthActionsType.LOGIN_AUTH_FAIL:
             return { ...state, loading: false, loaded: true }

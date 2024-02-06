@@ -19,6 +19,7 @@
                 <button 
                     class="button text-1 bordered"
                     routerLink="/auth"
+                    *ngIf="!auth"
                     [ngStyle]="{ color: 'var(--color-primary)', backgroundColor: 'var(--color-light-variant)', borderColor: 'var(--color-primary)' }">
                     Login
                 </button>

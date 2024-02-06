@@ -1,6 +1,7 @@
-.home-footer {
+:host {
     display: flex;
-    padding: var(--gap-small) 0rem;
+    width: calc(100% - var(--gap-small));
+    padding: var(--gap-small);
     flex-direction: column;
     align-items: center;
     gap: var(--gap-x-big);
@@ -53,7 +54,7 @@
 
     }
 
-    &-links {
+    .links {
         display: flex;
         padding: var(--gap-small);
         flex-direction: column;
@@ -78,15 +79,16 @@
         }
     }
 
-    &-copyright {
+    .copyright {
         color: var(--color-dark);
     }
 }
 
 @media only screen and (min-width: 700px){
-    .home-footer {
+    :host {
         gap: var(--gap-max);
         padding: var(--gap-x-big) var(--gap-big);
+        width: calc(100% - var(--gap-big));
 
         .newsletter {
             padding: var(--gap-normal);

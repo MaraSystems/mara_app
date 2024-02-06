@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Auth } from 'src/app/auth/utils/models/auth.model';
 
 @Component({
   selector: 'app-home-values',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-values.component.scss']
 })
 export class HomeValuesComponent implements OnInit {
+  @Input() auth: Auth | undefined;
+
   currentSlideIndex = 0;
   direction = 'normal';
   animationInterval: any = null;

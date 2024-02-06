@@ -1,0 +1,42 @@
+:host {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    padding: var(--gap-small);
+    width: calc(100% - calc(var(--gap-small) * 2));
+
+    .controls {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: var(--gap-normal);
+        width: -webkit-fill-available;
+
+        &-item {
+            color: var(--Dark-Variant, #292A2B);
+            font-size: var(--gap-normal);
+            cursor: pointer;
+
+            &:hover {
+                color: var(--color-primary);
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 700px){
+    :host {
+        background-color: var(--color-light-variant);
+        padding: var(--gap-normal);
+        width: calc(100% - calc(var(--gap-normal) * 2));
+
+        .controls {
+            gap: var(--gap-big);
+    
+            &-item {
+                font-size: var(--gap-big);
+            }
+        }
+    }
+}

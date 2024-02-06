@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Auth } from 'src/app/auth/utils/models/auth.model';
 
 @Component({
   selector: 'app-home-benefits',

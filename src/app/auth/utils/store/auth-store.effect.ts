@@ -9,13 +9,14 @@ import { AuthAccessService } from "../access/auth-access.service";
 import { AuthActionsType, GetPasswordAuthAction, GetPasswordAuthActionFail, GetPasswordAuthActionSuccess, LoginAuthAction, LoginAuthActionFail, LoginAuthActionSuccess } from "./auth-store.action";
 import { DataResponse } from "src/app/shared/utils/models/data-response";
 import { Auth } from "../models/auth.model";
+import { AppState } from "src/app/app.state";
 
 @Injectable()
 export class AuthStoreEffect {
     constructor(
         private actions$: Actions,
         private authAccessService: AuthAccessService,
-        private store: Store,
+        private store: Store<AppState>,
         private router: Router
     ){}
 
@@ -41,6 +42,7 @@ export class AuthStoreEffect {
             this.authAccessService.login(action.payload).pipe(
                 tap(() => {
                     this.store.dispatch(new AddToast(new Toast('Login Successful')));
+                    this.router.navigateByUrl('/clients/profile');
                 }),
                 map((response: DataResponse<Auth>) => {
                     return new LoginAuthActionSuccess(response.data);

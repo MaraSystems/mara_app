@@ -1,0 +1,33 @@
+:host {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .app-page {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+    }
+
+    .app-content {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        background-color: var(--color-light);
+    }
+
+    .app-title {
+        color: var(--color-dark);
+        width: -webkit-fill-available;
+    }
+}
+
+
+@media only screen and (min-width: 700px){
+    :host {
+        flex-direction: row;
+    }
+}

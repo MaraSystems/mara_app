@@ -1,17 +1,15 @@
-<div class="home-testimonials">
-    <h1 class="page-title">Customer Testimonials</h1>
-    <div class="home-testimonials-list">
-        <div 
-            class="home-testimonials-item elevated" 
-            *ngFor="let testimonial of testimonials; index as i"
-            [ngClass]="{ 'active-testimonial': i === current, 'inactive-testimonial': i !== current }">
-            <img [src]="testimonial.image" alt="" class="home-testimonials-image">
-            <span class="home-testimonials-details">
-                <h1 class="home-testimonials-fullname header-3">{{testimonial.fullname}}</h1>
-                <p class="home-testimonials-description text-1">{{testimonial.description}}</p>
-            </span>
-        </div>
+<h1 class="page-title header-3">Customer Testimonials</h1>
+<div class="list">
+    <div 
+        class="item elevated" 
+        *ngFor="let testimonial of testimonials; index as i"
+        [ngClass]="{ 'active-testimonial': i === current, 'inactive-testimonial': i !== current }">
+        <img [src]="testimonial.image" alt="" class="image">
+        <span class="details">
+            <h1 class="fullname header-3">{{testimonial.fullname}}</h1>
+            <p class="description text-1">{{testimonial.description}}</p>
+        </span>
     </div>
-    <app-switcher class="home-testimonials-switcher" [current]="current" [totalItems]="testimonials.length" (selected)="setCurrent($event)">
-    </app-switcher>
 </div>
+<app-switcher class="switcher" [current]="current" [totalItems]="testimonials.length" (selected)="setCurrent($event)">
+</app-switcher>

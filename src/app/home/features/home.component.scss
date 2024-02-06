@@ -1,8 +1,9 @@
-.home {
+:host {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--gap-x-big);
+    overflow-y: scroll;
 }
 
 .home-item {
@@ -10,7 +11,7 @@
 }
 
 @media only screen and (min-width: 700px){
-    .home {
+    :host {
         gap: var(--gap-max);
     }
 }

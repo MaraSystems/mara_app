@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Auth } from 'src/app/auth/utils/models/auth.model';
 
 @Component({
   selector: 'app-home-works',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./home-works.component.scss']
 })
 export class HomeWorksComponent {
+  @Input() auth: Auth | undefined;
+
   list = [
     {
       description: 'Dignissim dictum nisi mattis nunc. Pellentesque non amet lorem nibh augue quis bibendum.. Pellentesque non amet lorem nibh augue quis bibendum.',

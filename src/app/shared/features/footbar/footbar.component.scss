@@ -1,0 +1,28 @@
+:host {
+    display: flex;
+    width: calc(100% - calc(var(--gap-small) * 2));
+    padding: var(--gap-small);
+    align-items: center;
+    justify-content: space-around;
+    gap: var(--gap-small);
+    background: var(--color-light-variant);
+
+    .pane-icon {
+        display: flex;
+        padding: var(--gap-x-small);
+        justify-content: center;
+        align-items: center;
+        font-size: var(--gap-big);
+        color: var(--color-dark);
+    }
+
+    .pane-icon.selected {
+        color: var(--color-primary);
+    }
+}
+
+@media only screen and (min-width: 700px){
+    :host {
+        display: none;
+    }
+}
