@@ -18,7 +18,8 @@ import { LoginAuthActionSuccess } from './auth/utils/store/auth-store.action';
 })
 export class AppComponent  extends UnSubscriber implements OnInit {
   auth: Auth | undefined;
-  isHome = false;
+  notApp = false;
+  notAppUrl = ['/', '/404'];
 
   constructor(
     private store: Store<AppState>,
@@ -34,7 +35,7 @@ export class AppComponent  extends UnSubscriber implements OnInit {
     this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => this.auth = auth);
 
     this.newSubscription = this.router.events.subscribe((event) => {
-      this.isHome = this.document.location.pathname !== '/';
+      this.notApp = !this.notAppUrl.includes(this.document.location.pathname);
     });
   }
 }

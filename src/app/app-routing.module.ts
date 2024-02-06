@@ -22,11 +22,15 @@ const routes: Routes = [
     )
   },
   { 
-    path: '**', 
+    path: '404', 
     loadChildren: () => import('./notfound/notfound.module').then(
       (m) => m.NotfoundModule
     )
   },
+  {
+    path: '**',
+    redirectTo: '404'
+  }
 ];
 
 @NgModule({

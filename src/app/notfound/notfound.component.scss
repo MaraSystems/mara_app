@@ -1,0 +1,14 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-big);
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-light-variant);
+    height: 100%;
+    width: 100%;
+}
+
+.notfound, .explain {
+    color: var(--color-dark)
+}
