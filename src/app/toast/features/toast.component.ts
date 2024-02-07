@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Toast } from './toast.model';
 import { Store } from '@ngrx/store';
@@ -14,10 +14,14 @@ import { RemoveToast } from '../utils/store/toast.action';
 })
 export class ToastComponent extends UnSubscriber implements OnInit {
   toasts!: Observable<Toast[]>
+  element!: Element;
+
   constructor(
     private store: Store<AppState>,
+    el: ElementRef
   ) { 
     super();
+    this.element = el.nativeElement;
   }
 
   ngOnInit(): void {
@@ -26,14 +30,23 @@ export class ToastComponent extends UnSubscriber implements OnInit {
       for (const toast of toasts) {
         if (toast.duration) {
           setTimeout(() => {
-            this.store.dispatch(new RemoveToast(toast.id));
-          }, toast.duration);
+            this.closeToast(toast.id);
+          }, toast.duration * 1000);
         }
       }   
     });
   }
 
-  closeToast(id: string) {    
-    this.store.dispatch(new RemoveToast(id));
+  closeToast(id: string) {   
+    const list = this.element.getElementsByClassName('toast-item');
+    const item = Array.from(list).find(listItem => listItem.id === id);
+
+    if (item) {
+      item.classList.remove('active-toast');
+      item.classList.add('inactive-toast');
+      setTimeout(() => {
+        this.store.dispatch(new RemoveToast(id));
+      }, 1000);
+    }
   }
 }

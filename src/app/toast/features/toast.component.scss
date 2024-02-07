@@ -45,3 +45,12 @@
         color: var(--color-error);
     }
 }
+
+.active-toast {
+    animation: slide-in 1s ease-in-out both;
+    box-shadow: var(--shadow-small);
+}
+
+.inactive-toast {
+    animation: slide-out-reverse 1s ease-in-out both;
+}

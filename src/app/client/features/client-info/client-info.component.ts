@@ -15,6 +15,7 @@ export class ClientInfoComponent extends UnSubscriber implements OnInit {
   bio!: { firstname: string, lastname: string, username: string };
   contact!: { email: string, phone: string };
   address!: { street: string, city: string, state: string, country: string };
+  verification = { bvn: false, nin: false, 'drivers license': false }
 
   constructor (
     private store: Store<AppState>

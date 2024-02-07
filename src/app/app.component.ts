@@ -39,5 +39,7 @@ export class AppComponent  extends UnSubscriber implements OnInit {
     this.newSubscription = this.router.events.subscribe((event) => {
       this.notApp = !this.notAppUrl.includes(this.document.location.pathname);
     });
+
+    // this.store.dispatch(new AddToast(new Toast('Sample toast', false, '', 5)))
   }
 }

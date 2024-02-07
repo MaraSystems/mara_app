@@ -54,19 +54,19 @@
 }
 
 .active-slide {
-    animation: slider-in 3s ease-in-out both;
+    animation: slide-in 3s ease-in-out both;
 }
 
 .inactive-slide {
-    animation: slider-out 3s ease-in-out both;
+    animation: slide-out 3s ease-in-out both;
 }
 
 .active-slide-reverse {
-    animation: slider-in-reverse 3s ease-in-out both;
+    animation: slide-in-reverse 3s ease-in-out both;
 }
 
 .inactive-slide-reverse {
-    animation: slider-out-reverse 3s ease-in-out both;
+    animation: slide-out-reverse 3s ease-in-out both;
 }
 
 @media only screen and (min-width: 700px){
@@ -92,41 +92,5 @@
             padding: 0px var(--gap-x-big);
             width: min-content;
         }
-    }
-}
-
-@keyframes slider-in {
-    from {
-        left: 100%;
-    }
-    to {
-        left: 0%;
-    }
-}
-
-@keyframes slider-out {
-    from {
-        left: 0%;
-    }
-    to {
-        left: -100%;
-    }
-}
-
-@keyframes slider-in-reverse {
-    from {
-        left: -100%;
-    }
-    to {
-        left: 0%;
-    }
-}
-
-@keyframes slider-out-reverse {
-    from {
-        left: 0%;
-    }
-    to {
-        left: 100%;
     }
 }

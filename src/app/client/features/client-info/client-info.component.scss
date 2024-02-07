@@ -89,6 +89,7 @@
         .details {
             grid-template-columns: repeat(2, 1fr);
             gap: var(--gap-x-big);
+            // max-width: 500px;
         }
     }
 }
