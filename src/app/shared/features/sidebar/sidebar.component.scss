@@ -47,6 +47,8 @@
 
         &:hover, &-active {
             color: var(--color-primary) !important;
+            box-shadow: var(--shadow-small);
+            transition-duration: .5s;
         }
     }
 
@@ -85,6 +87,15 @@
     color: var(--color-secondary);
     cursor: pointer;
     align-self: center;
+    box-shadow: var(--shadow-small);
+    padding: var(--gap-small);
+    border-radius: 50%;
+    transition-duration: .5s;
+
+    &:hover {
+        background-color: var(--color-dark);
+        color: var(--color-primary);
+    }
 }
 
 @media only screen and (min-width: 700px){

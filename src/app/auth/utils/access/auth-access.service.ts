@@ -42,4 +42,8 @@ export class AuthAccessService extends UnSubscriber {
         
     return auth;
   }
+
+  logout() {
+    return of(true);
+  }
 }

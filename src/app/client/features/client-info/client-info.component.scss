@@ -1,0 +1,94 @@
+:host {
+    display: flex;
+    padding: var(--gap-normal);
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-normal);
+    align-self: center;
+    overflow-y: auto;
+    width: calc(100% - calc(var(--gap-normal) * 2));
+
+    .summery {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--gap-normal);
+        align-self: stretch;
+    }
+
+    .image {
+        position: relative;
+
+        .verification-badge {
+            padding: var(--gap-x-small);
+            border-radius: 50%;
+            background-color: var(--color-secondary);
+            color: var(--color-light-variant);
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            box-shadow: var(--shadow-small);
+        }
+    }
+
+    .basic {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--gap-small);
+    }
+
+    .names {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--gap-x-small);
+
+        &-extra {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--gap-x-small);
+        }
+    }
+
+    .fullname, .username {
+        color: var(--color-dark);
+        text-wrap: nowrap;
+    }
+
+    .details {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: flex-start;
+        gap: var(--gap-normal);
+        width: 100%;
+
+        &-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: var(--gap-x-small);
+            width: 100%;
+        }
+
+        &-title {
+            color: var(--color-dark);
+            font-weight: bold;
+        }
+    }
+}
+
+@media only screen and (min-width: 700px){
+    :host {
+        max-width: var(--enclosed-normal);
+        width: calc(100% - calc(var(--gap-x-big) * 2));
+        padding: var(--gap-x-big);
+        gap: var(--gap-x-big);
+        
+        .details {
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--gap-x-big);
+        }
+    }
+}

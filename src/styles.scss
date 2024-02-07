@@ -16,6 +16,7 @@
     --gap-max: 100px;
 
     --shadow-small: 0px 3px 8px 0px rgba(92, 94, 96, 0.25);
+    --enclosed-normal: 1000px;
 }
 
 * {
@@ -136,6 +137,11 @@ app-root {
     &:disabled {
         opacity: .5;
         cursor: not-allowed;
+    }
+
+    &:hover {
+        transition-duration: .5s;
+        box-shadow: var(--shadow-small);
     }
 }
 

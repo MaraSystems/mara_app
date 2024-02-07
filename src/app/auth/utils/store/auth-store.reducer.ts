@@ -32,11 +32,21 @@ export function authReducer(state = initialState, action: Action): AuthState {
             return { ...state, loading: true, loaded: false }
 
         case AuthActionsType.LOGIN_AUTH_SUCCESS:
-            const payload = (action as LoginAuthActionSuccess).payload;
-            localStorage.setItem('auth', JSON.stringify(payload));
-            return { ...state, loading: false, loaded: true, auth: payload }
+            const authSuccessPayload = (action as LoginAuthActionSuccess).payload;
+            localStorage.setItem('auth', JSON.stringify(authSuccessPayload));
+            return { ...state, loading: false, loaded: true, auth: authSuccessPayload }
             
         case AuthActionsType.LOGIN_AUTH_FAIL:
+            return { ...state, loading: false, loaded: true }
+
+        case AuthActionsType.LOGOUT_AUTH:
+            return { ...state, loading: true, loaded: false }
+
+        case AuthActionsType.LOGOUT_AUTH_SUCCESS:
+            localStorage.removeItem('auth');
+            return { ...state, loading: false, loaded: true, auth: undefined }
+            
+        case AuthActionsType.LOGOUT_AUTH_FAIL:
             return { ...state, loading: false, loaded: true }
 
         default:

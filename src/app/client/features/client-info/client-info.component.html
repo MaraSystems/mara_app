@@ -1,0 +1,34 @@
+<div class="summery">
+
+    <div class="basic">
+        <span class="image">
+            <img [src]="client?.image" alt="">
+            <span class="material-symbols-rounded verification-badge" *ngIf="client?.verified">
+                {{ client?.isBusiness ? 'handshake' : 'done' }}
+            </span>
+        </span>
+        <div class="names">
+            <h1 class="fullname header-2">{{ client?.fullname }}</h1>
+            <h5 class="username text-1">
+                @{{ client?.username }}
+            </h5>
+        </div>
+    </div>
+</div>
+
+<div class="details">
+    <div class="details-item">
+        <h2 class="text-1 details-title">Bio</h2>
+        <app-keyvalue [object]="bio"></app-keyvalue>
+    </div>
+
+    <div class="details-item">
+        <h2 class="text-1 details-title">Contact</h2>
+        <app-keyvalue [object]="contact"></app-keyvalue>
+    </div>
+
+    <div class="details-item">
+        <h2 class="text-1 details-title">Address</h2>
+        <app-keyvalue [object]="address"></app-keyvalue>
+    </div>
+</div>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ClientProfileComponent } from './client-profile.component';
 import { RouterModule } from '@angular/router';
 import { ClientProfileRoutingModule } from './client-profile-routing.module';
+import { TabsModule } from 'src/app/shared/ui/tabs/tabs.module';
 
 
 
@@ -12,11 +13,11 @@ import { ClientProfileRoutingModule } from './client-profile-routing.module';
   ],
   imports: [
     CommonModule,
-    ClientProfileRoutingModule
+    ClientProfileRoutingModule,
+    TabsModule
   ],
-  exports: [
-    ClientProfileComponent,
-    RouterModule
+  bootstrap: [
+    ClientProfileComponent
   ]
 })
 export class ClientProfileModule { }

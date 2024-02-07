@@ -10,6 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { Auth } from './auth/utils/models/auth.model';
 import { LoginAuthActionSuccess } from './auth/utils/store/auth-store.action';
+import { AddToast } from './toast/utils/store/toast.action';
+import { Toast } from './toast/features/toast.model';
 
 @Component({
   selector: 'app-root',

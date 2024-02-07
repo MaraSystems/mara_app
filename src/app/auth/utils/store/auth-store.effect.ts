@@ -6,7 +6,7 @@ import { AddToast } from "src/app/toast/utils/store/toast.action";
 import { Toast } from "src/app/toast/features/toast.model";
 import { Router } from "@angular/router";
 import { AuthAccessService } from "../access/auth-access.service";
-import { AuthActionsType, GetPasswordAuthAction, GetPasswordAuthActionFail, GetPasswordAuthActionSuccess, LoginAuthAction, LoginAuthActionFail, LoginAuthActionSuccess } from "./auth-store.action";
+import { AuthActionsType, GetPasswordAuthAction, GetPasswordAuthActionFail, GetPasswordAuthActionSuccess, LoginAuthAction, LoginAuthActionFail, LoginAuthActionSuccess, LogoutAuthAction, LogoutAuthActionFail, LogoutAuthActionSuccess } from "./auth-store.action";
 import { DataResponse } from "src/app/shared/utils/models/data-response";
 import { Auth } from "../models/auth.model";
 import { AppState } from "src/app/app.state";
@@ -50,6 +50,26 @@ export class AuthStoreEffect {
                 catchError(err => of(new LoginAuthActionFail(err)).pipe(
                     tap(() => {
                         this.store.dispatch(new AddToast(new Toast('Login Failed', true, 'An error occurred', 0)));
+                    })
+                ))
+            )
+        )
+    ));
+
+    logoutAuth$ = createEffect(() => this.actions$.pipe(
+        ofType<LogoutAuthAction>(AuthActionsType.LOGOUT_AUTH),
+        mergeMap((action: LogoutAuthAction) => 
+            this.authAccessService.logout().pipe(
+                tap(() => {
+                    this.store.dispatch(new AddToast(new Toast('Logout Successful')));
+                    this.router.navigateByUrl('/auth');
+                }),
+                map(() => {
+                    return new LogoutAuthActionSuccess();
+                }),
+                catchError(err => of(new LogoutAuthActionFail(err)).pipe(
+                    tap(() => {
+                        this.store.dispatch(new AddToast(new Toast('Logout Failed', true, 'An error occurred', 0)));
                     })
                 ))
             )
