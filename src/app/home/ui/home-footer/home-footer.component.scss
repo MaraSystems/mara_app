@@ -69,7 +69,7 @@
         &-list {
             display: flex;
             align-items: flex-start;
-            gap: 2.875rem;
+            gap: var(--gap-normal);
         }
 
         &-item {

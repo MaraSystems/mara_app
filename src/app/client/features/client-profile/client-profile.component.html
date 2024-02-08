@@ -1,7 +1,5 @@
 <app-tabs [list]="tabs" (select)="navigate($event)" [selected]="selectedTab"></app-tabs>
 
-<router-outlet></router-outlet>
-
 <div class="more">
     <span class="options elevated" *ngIf="showMore">
         <span class="options-item">
@@ -22,3 +20,5 @@
 
     <span class="material-symbols-rounded more-icon" (click)="showMore = !showMore">grid_view</span>
 </div>
+
+<router-outlet></router-outlet>

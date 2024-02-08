@@ -3,7 +3,9 @@
     flex-direction: column;
     align-items: center;
     gap: var(--gap-x-big);
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: -webkit-fill-available;
 }
 
 .home-item {

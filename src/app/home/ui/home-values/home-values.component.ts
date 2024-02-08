@@ -17,19 +17,19 @@ export class HomeValuesComponent implements OnInit {
 
   slides = [
     {
-      title: '1. Confident Collaboration, Secured Transactions',
-      descripton: 'Contractor introduces Escrow, ensuring secure payments and fostering confidence in collaborative project management.',
-      image: '../../../assets/images/image_7.png',
+      title: 'Trustworthy Contracts',
+      descripton: 'Trust Contractor for secure and safe contracts. With Escrow, experience peaceful and seamless transactions.',
+      image: '../../../../assets/images/home-value-payment.png',
     },
     {
-      title: '2. Effortless Project Guarantee:',
-      descripton: 'Contractor streamlines projects, guarantees payments with intuitive features, including Escrow for financial confidence.',
-      image: '../../../assets/images/image_6.png',
+      title: 'Simplified Projects',
+      descripton: 'Contractor simplifies projects and ensures payments with user-friendly features, including Escrow for financial peace of mind.',
+      image: '../../../../assets/images/home-value-projects.png',
     },
     {
-      title: '3. Trustworthy Contracting, Peace of Mind',
-      descripton: 'Trust Contractor for secure, trustworthy contracts. Escrow ensures peace of mind, making project navigation seamless and stress-free.',
-      image: '../../../assets/images/image_5.png',
+      title: 'Secured Transactions',
+      descripton: 'Contractor introduces Escrow, providing a secure payment solution and instilling trust in collaborative contract management.',
+      image: '../../../../assets/images/home-value-contract.png',
     }
   ];
 

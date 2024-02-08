@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { AuthAccessService } from 'src/app/auth/utils/access/auth-access.service';
 import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
+import { Client } from '../../utils/models/client';
 
 @Component({
   selector: 'app-client-profile',
@@ -15,6 +16,8 @@ export class ClientProfileComponent extends UnSubscriber implements OnInit {
   tabs = ['info', 'interests', 'kin', 'status'];
   selectedTab = 0;
   showMore = false;
+  
+  client = new Client('me@mail.com', '0000000000', 'username');
   
   constructor(
     private store: Store<AppState>,

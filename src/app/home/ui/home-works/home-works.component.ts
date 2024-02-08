@@ -11,22 +11,22 @@ export class HomeWorksComponent {
 
   list = [
     {
-      description: 'Dignissim dictum nisi mattis nunc. Pellentesque non amet lorem nibh augue quis bibendum.. Pellentesque non amet lorem nibh augue quis bibendum.',
-      image: '../../../assets/images/image_4.png',
+      description: 'Users can securely deposit funds into an escrow account managed by Contractor. Upon mutual agreement that contract terms are fulfilled, the funds are released, guaranteeing a secure and reliable payment process.',
+      image: '../../../../assets/images/home-works-payment.png',
       action: 'Login',
       background: 'var(--color-dark-variant)',
       link: '/auth'
     },
     {
-      description: 'Dignissim dictum nisi mattis nunc. Pellentesque non amet lorem nibh augue quis bibendum.. Pellentesque non amet lorem nibh augue quis bibendum.',
-      image: '../../../assets/images/image_5.png',
+      description: 'Contractor simplifies project with an easy-to-use escrow feature, allowing users to set up and manage payments with confidence, knowing their funds are protected until the contract terms are met.',
+      image: '../../../../assets/images/home-works-projects.png',
       action: 'Explore',
       background: 'var(--color-light)',
       link: '/showcase'
     },
     {
-      description: 'Dignissim dictum nisi mattis nunc. Pellentesque non amet lorem nibh augue quis bibendum.. Pellentesque non amet lorem nibh augue quis bibendum.',
-      image: '../../../assets/images/image_6.png',
+      description: 'Our secure platform enables users to confidently create and manage contracts, with the added security of the escrow feature for peace of mind and seamless project navigation.',
+      image: '../../../../assets/images/home-works-contract.png',
       action: 'Register',
       background: 'var(--color-dark-variant)',
       link: '/clients/register'
