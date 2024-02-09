@@ -2,38 +2,50 @@
 
     <div class="basic">
         <span class="image">
-            <img [src]="client?.image" alt="">
+            <img [src]="client.image || '../../../../assets/images/db.png'" alt="">
             <span class="material-symbols-rounded verification-badge" *ngIf="client?.verified">
-                {{ client?.isBusiness ? 'handshake' : 'done' }}
+                {{ client.business ? 'handshake' : 'done' }}
             </span>
         </span>
         <div class="names">
-            <h1 class="fullname header-2">{{ client?.fullname }}</h1>
+            <h1 class="fullname header-2">{{ client.firstname + ' ' + client.lastname }}</h1>
             <h5 class="username text-1">
-                @{{ client?.username }}
+                @{{ client.username }}
             </h5>
         </div>
     </div>
 </div>
 
-<div class="details">
+<div class="details" [formGroup]="form">
     <div class="details-item">
         <h2 class="text-1 details-title">Bio</h2>
-        <app-keyvalue [object]="bio"></app-keyvalue>
-    </div>
-
-    <div class="details-item">
-        <h2 class="text-1 details-title">Contact</h2>
-        <app-keyvalue [object]="contact"></app-keyvalue>
+        <app-keyvalue name="firstname" [edit]="edit" formControlName="firstname" [invalid]="isValid('firstname')"></app-keyvalue>
+        <app-keyvalue name="lastname" [edit]="edit" formControlName="lastname" [invalid]="isValid('lastname')"></app-keyvalue>
+        <app-keyvalue name="username" [edit]="edit" formControlName="username" [invalid]="isValid('username')"></app-keyvalue>
     </div>
 
     <div class="details-item">
         <h2 class="text-1 details-title">Address</h2>
-        <app-keyvalue [object]="address"></app-keyvalue>
+        <app-keyvalue name="country" [edit]="edit" formControlName="country" [invalid]="isValid('country')"></app-keyvalue>
+        <app-keyvalue name="state" [edit]="edit" formControlName="state" [invalid]="isValid('state')"></app-keyvalue>
+        <app-keyvalue name="city" [edit]="edit" formControlName="city" [invalid]="isValid('city')"></app-keyvalue>
+        <app-keyvalue name="street" [edit]="edit" formControlName="street" [invalid]="isValid('street')"></app-keyvalue>
     </div>
 
     <div class="details-item">
-        <h2 class="text-1 details-title">Verification</h2>
-        <app-keyvalue [object]="verification"></app-keyvalue>
+        <h2 class="text-1 details-title">Contact</h2>
+        <app-keyvalue name="email" [edit]="edit" type="email" formControlName="email" [invalid]="isValid('email')"></app-keyvalue>
+        <app-keyvalue name="phone" [edit]="edit" formControlName="phone" [invalid]="isValid('phone')"></app-keyvalue>
     </div>
+
+    <div class="details-item">
+        <h2 class="text-1 details-title">Extras</h2>
+        <app-keyvalue name="gender" [edit]="edit" formControlName="gender" [invalid]="isValid('gender')"></app-keyvalue>
+        <app-keyvalue name="dob" [edit]="edit" formControlName="dob" [invalid]="isValid('dob')" type="date"></app-keyvalue>
+    </div>
+</div>
+
+<div class="update-controls">
+    <button class="button text-1" *ngIf="edit" routerLink="/clients/profile/info">Cancel</button>
+    <button class="button text-1" *ngIf="edit" (click)="saveChanges()" [disabled]="!updateData || form.invalid">Update</button>
 </div>

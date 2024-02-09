@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, ElementRef, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, ElementRef, Inject, OnChanges, OnInit } from '@angular/core';
+import { ActivatedRoute, ActivatedRouteSnapshot, ChildActivationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { AuthAccessService } from 'src/app/auth/utils/access/auth-access.service';
@@ -16,30 +16,36 @@ export class ClientProfileComponent extends UnSubscriber implements OnInit {
   tabs = ['info', 'interests', 'kin', 'status'];
   selectedTab = 0;
   showMore = false;
-  
-  client = new Client('me@mail.com', '0000000000', 'username');
-  
+    
   constructor(
     private store: Store<AppState>,
     private router: Router,
-    @Inject(DOCUMENT) private document: Document,
-    private el: ElementRef
+    private activatedRoute: ActivatedRoute,
+    private el: ElementRef,
   ) {
     super();
   }
 
   ngOnInit(): void {
-    const pathname = this.document.location.pathname;
-    if (pathname === '/clients/profile') {
-      this.navigate(this.tabs[0]);
-    }
+    this.chooseTab();
+    this.router.events.subscribe(event => {
+      if (event.type === 1) {        
+        this.chooseTab();
+      }
+    });
 
-    const [section, ..._] = pathname.split('/').reverse();
-    this.selectedTab = this.tabs.indexOf(section);
+    const [section, ..._] = location.pathname.split('/').reverse();
+    this.selectedTab = this.tabs.indexOf(section);    
   }
 
   navigate (name: string) {    
     this.router.navigateByUrl(`/clients/profile/${name}`);
+  }
+
+  chooseTab() {
+    if (location.pathname === '/clients/profile') {
+      this.navigate(this.tabs[0]);
+    }
   }
 }
 

@@ -15,14 +15,6 @@ export class Client implements NewClient {
     business: any; 
     image: string = '../../../../assets//images/db.png';
 
-    get fullname() {
-        return `${this.firstname} ${this.lastname}`;
-    }
-
-    get isBusiness() {
-        return !!this.business;
-    }
-
     constructor (
         public email: string,
         public phone: string,

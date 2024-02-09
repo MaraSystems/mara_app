@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { map, of, throwError } from 'rxjs';
 import { AccessService } from 'src/app/shared/utils/services/access.service';
 import { Auth } from '../models/auth.model';
 import { Login } from '../models/login.model';
@@ -22,9 +22,12 @@ export class AuthAccessService extends UnSubscriber {
   }
 
   login(auth: Login) {  
-    const { data: client } = this.accessService.get<Client>('clients', { email: auth.email });
-    const response: DataResponse<Auth>  = { success: true, data: { client, token: 'This is token' }};
-    return of(response);
+    return this.accessService.get<Client>('clients', { email: auth.email }).pipe(
+      map(({ data: client, success }) => {
+        const response: DataResponse<Auth>  = { success, data: { id: client._id, token: 'This is token' }};
+        return response;
+      })
+    )
   }
 
   getPassword(email: string) {  
@@ -34,13 +37,13 @@ export class AuthAccessService extends UnSubscriber {
 
   getAuth() {
     const text = localStorage.getItem('auth');
-    let auth: Auth | undefined;
-    if (text) {
-      auth = JSON.parse(text);
-      this.store.dispatch(new LoginAuthActionSuccess(auth as Auth));
+    let auth: Auth;
+    if (!text) {
+      return throwError(() => 'No Auth');
     }
-        
-    return auth;
+    
+    auth = JSON.parse(text as string);
+    return of({ success: true, data: auth });
   }
 
   logout() {

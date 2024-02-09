@@ -9,9 +9,10 @@ import { AuthAccessService } from './auth/utils/access/auth-access.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { Auth } from './auth/utils/models/auth.model';
-import { LoginAuthActionSuccess } from './auth/utils/store/auth-store.action';
+import { GetAuthAction, LoginAuthActionSuccess } from './auth/utils/store/auth-store.action';
 import { AddToast } from './toast/utils/store/toast.action';
 import { Toast } from './toast/features/toast.model';
+import { selectClientById, selectCurrentClient } from './client/utils/store/client-store.selector';
 
 @Component({
   selector: 'app-root',
@@ -33,13 +34,15 @@ export class AppComponent  extends UnSubscriber implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authAccessService.getAuth();    
-    this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => this.auth = auth);
+    this.store.dispatch(new GetAuthAction());
+    this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
+      this.auth = auth      
+    });
 
     this.newSubscription = this.router.events.subscribe((event) => {
       this.notApp = !this.notAppUrl.includes(this.document.location.pathname);
     });
 
-    // this.store.dispatch(new AddToast(new Toast('Sample toast', false, '', 5)))
+    // this.store.dispatch(new AddToast(new Toast({ duration: 0 })));
   }
 }

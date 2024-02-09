@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
 import { Collection, Database } from '@black-ink/lonedb';
 import { DataResponse } from '../models/data-response';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +23,9 @@ export class AccessService {
     });
   }
 
-  public insert<T>(endpoint: string, entry: any) {
+  public insert<T>(endpoint: string, entry: Partial<T>) {
     const collection = this.db.createCollection<T>(endpoint);
-    const data = collection.insertOne(entry);
+    const data = collection.insertOne(entry as T);
     const response: DataResponse<T> = { success: true, data };
     return response;
   }
@@ -33,7 +33,17 @@ export class AccessService {
   public get<T>(endpoint: string, query: any) {
     const collection = this.db.createCollection<T>(endpoint);
     const data = collection.findOne(query);
+    if (!data) {
+      return throwError(() => 'Not found');
+    }
     const response: DataResponse<T> = { success: true, data: data as T };
+    return of(response);
+  }
+
+  public update<T>(endpoint: string, query: any, changes: Partial<T>) {
+    const collection = this.db.createCollection<T>(endpoint);
+    const data = collection.updateOne(query, changes) as T;
+    const response: DataResponse<T> = { success: true, data };
     return response;
   }
 }

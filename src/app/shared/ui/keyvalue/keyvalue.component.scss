@@ -1,32 +1,42 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    align-self: stretch;
     border-radius: var(--XSmall-Gap, 5px);
     border: 1px solid var(--Primary, #22D896);
     background: var(--Light-Variant, #EBFDF6);
+    align-items: center;
+    justify-content: space-between;
+    align-self: stretch;
+    display: flex;
 
-    .keyvalue {
-        display: flex;
-        padding: var(--Small-Gap, 10px);
-        align-items: center;
-        justify-content: space-between;
-        align-self: stretch;
-        border-bottom: 1px solid var(--Primary, #22D896);
-
-        &:last-of-type {
-            border-bottom: none;
-        }
+    .key, .value, .input, .select{
+        color: var(--color-dark);
+        width: calc(100% - var(--gap-small) * 2);
+        padding: var(--gap-small);
     }
 
     .key {
-        color: var(--color-dark);
         text-transform: capitalize;
     }
 
     .value {
-        color: var(--color-dark-variant);
-        text-transform: capitalize;
+        text-align: right;
+    }
+
+    .input {
+        background-color: transparent;
+        border: none;
+        border: 1px solid var(--color-primary);
+        transition: ease-in-out;
+        transition-duration: .5s;
+        color: var(--color-dark);
+        box-shadow: var(--shadow-small);
+        border-radius: var(--XSmall-Gap, 5px);
+
+        &:hover {
+            box-shadow: none;
+        }
+    }
+
+    .invalid {
+        border: 1px solid var(--color-error) !important;
     }
 }

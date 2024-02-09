@@ -79,6 +79,12 @@
     }
 }
 
+.update-controls {
+    display: flex;
+    justify-content: space-evenly;
+    gap: var(--gap-normal);
+}
+
 @media only screen and (min-width: 700px){
     :host {
         max-width: var(--enclosed-normal);

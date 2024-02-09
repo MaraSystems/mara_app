@@ -27,18 +27,18 @@ export class ToastComponent extends UnSubscriber implements OnInit {
   ngOnInit(): void {
     this.toasts = this.store.select(selectToasts);
     this.newSubscription = this.toasts.subscribe(toasts => {         
-      for (const toast of toasts) {
-        if (toast.duration) {
+      for (const { id, data } of toasts) {
+        if (data.duration) {          
           setTimeout(() => {
-            this.closeToast(toast.id);
-          }, toast.duration * 1000);
+            this.closeToast(id);
+          }, data.duration * 1000);
         }
       }   
     });
   }
 
   closeToast(id: string) {   
-    const list = this.element.getElementsByClassName('toast-item');
+    const list = this.element.getElementsByClassName('toast');
     const item = Array.from(list).find(listItem => listItem.id === id);
 
     if (item) {

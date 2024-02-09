@@ -6,10 +6,11 @@ import { AddToast } from "src/app/toast/utils/store/toast.action";
 import { Toast } from "src/app/toast/features/toast.model";
 import { Router } from "@angular/router";
 import { AuthAccessService } from "../access/auth-access.service";
-import { AuthActionsType, GetPasswordAuthAction, GetPasswordAuthActionFail, GetPasswordAuthActionSuccess, LoginAuthAction, LoginAuthActionFail, LoginAuthActionSuccess, LogoutAuthAction, LogoutAuthActionFail, LogoutAuthActionSuccess } from "./auth-store.action";
+import { AuthActionsType, GetAuthAction, GetAuthActionFail, GetAuthActionSuccess, GetPasswordAuthAction, GetPasswordAuthActionFail, GetPasswordAuthActionSuccess, LoginAuthAction, LoginAuthActionFail, LoginAuthActionSuccess, LogoutAuthAction, LogoutAuthActionFail, LogoutAuthActionSuccess } from "./auth-store.action";
 import { DataResponse } from "src/app/shared/utils/models/data-response";
 import { Auth } from "../models/auth.model";
 import { AppState } from "src/app/app.state";
+import { GetClientAction } from "src/app/client/utils/store/client-store.action";
 
 @Injectable()
 export class AuthStoreEffect {
@@ -29,7 +30,7 @@ export class AuthStoreEffect {
                 }),
                 catchError(err => of(new GetPasswordAuthActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast('Request Password Failed', true, 'An error occurred', 0)));
+                        this.store.dispatch(new AddToast(new Toast({ isError: true, description: 'Password Request' })));
                     })
                 ))
             )
@@ -41,7 +42,7 @@ export class AuthStoreEffect {
         mergeMap((action: LoginAuthAction) => 
             this.authAccessService.login(action.payload).pipe(
                 tap(() => {
-                    this.store.dispatch(new AddToast(new Toast('Login Successful')));
+                    this.store.dispatch(new AddToast(new Toast({ description: 'Sign In' })));
                     this.router.navigateByUrl('/clients/profile');
                 }),
                 map((response: DataResponse<Auth>) => {
@@ -49,7 +50,24 @@ export class AuthStoreEffect {
                 }),
                 catchError(err => of(new LoginAuthActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast('Login Failed', true, 'An error occurred', 0)));
+                        this.store.dispatch(new AddToast(new Toast({ isError: true, description: 'Sign In' })));
+                    })
+                ))
+            )
+        )
+    ));
+
+    getAuth$ = createEffect(() => this.actions$.pipe(
+        ofType<GetAuthAction>(AuthActionsType.GET_AUTH),
+        mergeMap((action: GetAuthAction) => 
+            this.authAccessService.getAuth().pipe(
+                map((response: DataResponse<Auth>) => {   
+                    this.store.dispatch(new GetClientAction(response.data.id, true));               
+                    return new GetAuthActionSuccess(response.data);
+                }),
+                catchError(err => of(new GetAuthActionFail(err)).pipe(
+                    tap(() => {
+                        // this.store.dispatch(new AddToast(new Toast({ isError: true, description: 'Sign In' })));
                     })
                 ))
             )
@@ -61,7 +79,7 @@ export class AuthStoreEffect {
         mergeMap((action: LogoutAuthAction) => 
             this.authAccessService.logout().pipe(
                 tap(() => {
-                    this.store.dispatch(new AddToast(new Toast('Logout Successful')));
+                    this.store.dispatch(new AddToast(new Toast({ description: 'Sign Out' })));
                     this.router.navigateByUrl('/auth');
                 }),
                 map(() => {
@@ -69,7 +87,7 @@ export class AuthStoreEffect {
                 }),
                 catchError(err => of(new LogoutAuthActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast('Logout Failed', true, 'An error occurred', 0)));
+                        this.store.dispatch(new AddToast(new Toast({ isError: true, description: 'Sign Out' })));
                     })
                 ))
             )

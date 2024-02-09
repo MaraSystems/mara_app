@@ -1,9 +1,7 @@
-<div class="toast">
-    <span *ngFor="let toast of toasts | async; let i=index" class="toast-item" [ngClass]="{
-        'is-error': toast.isError, 'active-toast': true
-    }" [id]="toast.id">
-        <h4 class="toast-item-title text-1">{{toast.title}}</h4>
-        <p *ngIf="toast.description" class="toast-item-description text-2">{{toast.description}}</p>
-        <span class="material-symbols-rounded toast-item-close" (click)="closeToast(toast.id)">close</span>
-    </span>
-</div>
+<span *ngFor="let toast of toasts | async; let i=index" class="toast" [ngClass]="{
+    'is-error': toast.data.isError, 'active-toast': true
+}" [id]="toast.id">
+    <h4 class="toast-title text-1">{{toast.data.title}}</h4>
+    <p *ngIf="toast.data.description" class="toast-description text-2">{{toast.data.description}}</p>
+    <span class="material-symbols-rounded toast-close" (click)="closeToast(toast.id)">close</span>
+</span>

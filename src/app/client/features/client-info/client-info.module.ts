@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ClientInfoComponent } from './client-info.component';
 import { ClientInfoRoutingModule } from './client-info-routing.module';
 import { KeyvalueModule } from 'src/app/shared/ui/keyvalue/keyvalue.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { KeyvalueModule } from 'src/app/shared/ui/keyvalue/keyvalue.module';
   imports: [
     CommonModule,
     ClientInfoRoutingModule,
-    KeyvalueModule
+    KeyvalueModule,
+    ReactiveFormsModule
   ]
 })
 export class ClientInfoModule { }

@@ -1,4 +1,4 @@
-.client-register {
+:host {
     display: flex;
     padding: var(--gap-x-big) var(--gap-normal);
     flex-direction: column;
@@ -23,11 +23,12 @@
 
 
 @media only screen and (min-width: 700px){
-    .client-register {
+    :host {
         padding: var(--gap-x-big);
         gap: var(--gap-big);
         height: min-content;
         width: min-content;
         margin: auto;
+        box-shadow: var(--shadow-small);
     }
 }

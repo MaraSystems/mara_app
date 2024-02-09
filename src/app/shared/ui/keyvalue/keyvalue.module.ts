@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KeyvalueComponent } from './keyvalue.component';
+import { InputModule } from '../input/input.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -9,7 +11,9 @@ import { KeyvalueComponent } from './keyvalue.component';
     KeyvalueComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    InputModule,
+    FormsModule
   ],
   exports: [
     KeyvalueComponent

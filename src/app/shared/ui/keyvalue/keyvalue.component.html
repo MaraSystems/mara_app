@@ -1,4 +1,9 @@
-<span *ngFor="let item of list" class="keyvalue">
-    <h5 class="text-1 key">{{ item.key }}</h5>
-    <h5 class="text-1 value">{{ item.value }}</h5>
-</span>
+<h5 class="text-1 key">{{ name }}</h5>
+<h5 class="text-1 value" *ngIf="!edit && type !== 'date'">{{ value }}</h5>
+<h5 class="text-1 value" *ngIf="!edit && type === 'date'">{{ value | date:'dd/mm/yy' }}</h5>
+
+<input class="text-1 input" [type]="type" [name]="name" id="" [value]="value" *ngIf="edit && !list" [(ngModel)]="value" [disabled]="disabled" (input)="onChange(value)" (blur)="onTouched()" [ngClass]="{ invalid }">
+
+<!-- <select class="text-1 select" [name]="name" id="" *ngIf="edit && list" [(ngModel)]="value" [disabled]="disabled" (input)="onChange(value)" (blur)="onTouched()" [ngClass]="{ invalid }">
+    <option *ngFor="let item of list" [value]="item">{{ value }}</option>
+</select> -->

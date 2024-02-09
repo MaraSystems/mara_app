@@ -2,6 +2,7 @@ import { Action } from "@ngrx/store";
 import { Auth } from "../models/auth.model";
 import { Client } from "src/app/client/utils/models/client";
 import { Login } from "../models/login.model";
+import { Update } from "@ngrx/entity";
 
 export enum AuthActionsType {
     GET_PASSWORD_AUTH = "[AUTH] Get Password Auth",
@@ -11,6 +12,10 @@ export enum AuthActionsType {
     LOGIN_AUTH = "[AUTH] Login Auth",
     LOGIN_AUTH_SUCCESS = "[AUTH] Login Auth Success",
     LOGIN_AUTH_FAIL = "[AUTH] Login Auth Fail",
+
+    GET_AUTH = "[AUTH] Get Auth",
+    GET_AUTH_SUCCESS = "[AUTH] Get Auth Success",
+    GET_AUTH_FAIL = "[AUTH] Get Auth Fail",
 
     LOGOUT_AUTH = "[AUTH] Logout Auth",
     LOGOUT_AUTH_SUCCESS = "[AUTH] Logout Auth Success",
@@ -45,6 +50,20 @@ export class LoginAuthActionSuccess implements Action {
 
 export class LoginAuthActionFail implements Action {
     readonly type = AuthActionsType.LOGIN_AUTH_FAIL;
+    constructor(public payload: string){}
+}
+
+export class GetAuthAction implements Action {
+    readonly type = AuthActionsType.GET_AUTH;
+}
+
+export class GetAuthActionSuccess implements Action {
+    readonly type = AuthActionsType.GET_AUTH_SUCCESS;
+    constructor(public payload: Auth){}
+}
+
+export class GetAuthActionFail implements Action {
+    readonly type = AuthActionsType.GET_AUTH_FAIL;
     constructor(public payload: string){}
 }
 

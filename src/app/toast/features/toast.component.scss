@@ -1,4 +1,4 @@
-.toast {
+:host {
     display: flex;
     flex-direction: column;
     align-content: flex-start;
@@ -8,8 +8,9 @@
     right: 1vw;
     top: 1vh;
     width: min(100%, 300px);
+    gap: var(--gap-small);
 
-    &-item {
+    .toast {
         display: grid;
         grid-template-rows: repeat(2, max-content);
         padding: var(--gap-small);
@@ -40,17 +41,17 @@
         }
     }
 
-    &-item.is-error{
+    .toast.is-error{
         border: 1px solid var(--color-error);
         color: var(--color-error);
     }
 }
 
 .active-toast {
-    animation: slide-in 1s ease-in-out both;
+    animation: slide-in 1s ease both;
     box-shadow: var(--shadow-small);
 }
 
 .inactive-toast {
-    animation: slide-out-reverse 1s ease-in-out both;
+    animation: slide-out-reverse 1s ease both;
 }

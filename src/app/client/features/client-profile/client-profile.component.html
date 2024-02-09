@@ -2,7 +2,7 @@
 
 <div class="more">
     <span class="options elevated" *ngIf="showMore">
-        <span class="options-item">
+        <span class="options-item" [routerLink]="['info', { edit: 1 }]">
             <span class="material-symbols-rounded option-icon">grid_view</span>
             <h1 class="text-1 options-title">Update Profile</h1>
         </span>
@@ -10,6 +10,11 @@
         <span class="options-item">
             <span class="material-symbols-rounded option-icon">grid_view</span>
             <h1 class="text-1 options-title">Update Kin</h1>
+        </span>
+
+        <span class="options-item">
+            <span class="material-symbols-rounded option-icon">grid_view</span>
+            <h1 class="text-1 options-title">Update Image</h1>
         </span>
 
         <span class="options-item">
