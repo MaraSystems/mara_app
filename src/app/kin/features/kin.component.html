@@ -1,21 +1,3 @@
-<div class="summery">
-
-    <div class="basic">
-        <span class="image">
-            <img [src]="client.image || '../../../../assets/images/db.png'" alt="">
-            <span class="material-symbols-rounded verification-badge" *ngIf="client?.verified">
-                {{ client.business ? 'handshake' : 'done' }}
-            </span>
-        </span>
-        <div class="names">
-            <h1 class="fullname header-2">{{ client.firstname + ' ' + client.lastname }}</h1>
-            <h5 class="username text-1">
-                @{{ client.username }}
-            </h5>
-        </div>
-    </div>
-</div>
-
 <div class="details" [formGroup]="form">
     <div class="details-item">
         <h2 class="text-1 details-title">Bio</h2>
@@ -23,7 +5,7 @@
 
         <app-keyvalue name="lastname" [edit]="edit" formControlName="lastname" [invalid]="isValid('lastname')"></app-keyvalue>
 
-        <app-keyvalue name="username" [edit]="edit" formControlName="username" [invalid]="isValid('username')"></app-keyvalue>
+        <app-keyvalue name="relationship" [edit]="edit" formControlName="relationship" [invalid]="isValid('relationship')"></app-keyvalue>
     </div>
 
     <div class="details-item">
@@ -53,6 +35,6 @@
 </div>
 
 <div class="update-controls">
-    <button class="button text-1" *ngIf="edit" routerLink="/clients/profile/info">Cancel</button>
+    <button class="button text-1" *ngIf="edit" routerLink="/clients/profile/kin">Cancel</button>
     <button class="button text-1" *ngIf="edit" (click)="saveChanges()" [disabled]="!updateData || form.invalid">Update</button>
 </div>

@@ -1,11 +1,12 @@
 :root {
-    --color-light: #F7FBF9;
-    --color-light-variant: #EBFDF6;
-    --color-dark: #5C5E60;
-    --color-dark-variant: hsl(210, 2%, 16%);
-    --color-primary: #22D896;
-    --color-secondary: #717CE3;
+    --color-primary: #7482FE;
+    --color-secondary: #414888;
+    --color-light: #F2F4FF;
+    --color-dark: #1B1E38;
+    --color-white: #FFFFFF;
+    --color-black: #000000;
     --color-error: red;
+    --color-overlay: darken($color: #1B1E38, $amount: 50%);
     
     --gap-none: 0px;
     --gap-x-small: 5px;
@@ -27,7 +28,7 @@
 html, body {
     width: 100%;
     height: 100vh;
-    background-color: var(--color-light);
+    background-color: var(--color-white);
 }
 
 app-root {
@@ -130,7 +131,7 @@ app-root {
     gap: var(--gap-normal);
     border-radius: var(--gap-x-big);
     background-color: var(--color-primary);
-    color: var(--color-light-variant);
+    color: var(--color-light);
     cursor: pointer;
     border: none;
 

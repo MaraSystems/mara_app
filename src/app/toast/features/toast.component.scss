@@ -14,7 +14,7 @@
         display: grid;
         grid-template-rows: repeat(2, max-content);
         padding: var(--gap-small);
-        background-color: var(--color-light-variant);
+        background-color: var(--color-light);
         position: relative;
         color: var(--color-primary);
         border: 1px solid var(--color-primary);
@@ -36,7 +36,7 @@
             color: var(--color-dark);
 
             &:hover {
-                color: var(--color-dark-variant);
+                color: var(--color-black);
             }
         }
     }

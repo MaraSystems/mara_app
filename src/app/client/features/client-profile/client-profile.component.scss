@@ -24,6 +24,7 @@
         box-shadow: var(--shadow-small);
         cursor: pointer;
         font-size: x-large;
+        color: var(--color-white);
     }
 }
 
@@ -35,7 +36,7 @@
     flex-direction: column;
     border: 1px solid var(--color-primary);
     border-radius: var(--gap-small);
-    background-color: var(--color-light);
+    background-color: var(--color-white);
 
     &-item {
         display: flex;
@@ -60,10 +61,3 @@
     }
 }
 
-@media only screen and (min-width: 700px){
-    :host {
-        width: calc(100% - calc(var(--gap-big) * 2));
-        height: calc(100% - calc(var(--gap-big) * 2));
-        padding: var(--gap-big);
-    }
-}

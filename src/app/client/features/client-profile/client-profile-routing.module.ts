@@ -22,8 +22,8 @@ const routes: Routes = [
       },
       { 
         path: 'kin', 
-        loadChildren: () => import('../client-kin/client-kin.module').then(
-          (m) => m.ClientKinModule
+        loadChildren: () => import('../../../kin/features/kin.module').then(
+          (m) => m.KinModule
         )
       },
       { 

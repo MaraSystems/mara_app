@@ -24,11 +24,11 @@ export class InputComponent implements ControlValueAccessor {
   onChange: any = (value: any) => {};
   onTouched: any = () => {};
 
-  writeValue(obj: any): void {    
+  writeValue(obj: any): void {  
     this.value = obj;
   }
 
-  registerOnChange(fn: any): void {    
+  registerOnChange(fn: any): void {        
     this.onChange = fn;
   }
 

@@ -27,7 +27,7 @@
 
 @media only screen and (min-width: 700px){
     :host {
-        background-color: var(--color-light-variant);
+        background-color: var(--color-light);
         padding: var(--gap-normal);
         width: calc(100% - calc(var(--gap-normal) * 2));
 

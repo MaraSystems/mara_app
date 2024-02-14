@@ -2,6 +2,7 @@ import { Action } from "@ngrx/store";
 import { Client } from "../models/client";
 import { NewClient } from "../models/new-client";
 import { Update } from "@ngrx/entity";
+import { Kin } from "../models/kin";
 
 export enum ClientActionsType {
     REGISTER_CLIENT = "[CLIENT] Register Client",
@@ -15,6 +16,10 @@ export enum ClientActionsType {
     GET_CLIENT = "[CLIENT] Get Client",
     GET_CLIENT_SUCCESS = "[CLIENT] Get Client Success",
     GET_CLIENT_FAIL = "[CLIENT] Get Client Fail",
+
+    LIST_CLIENTS = "[CLIENT] List Clients",
+    LIST_CLIENTS_SUCCESS = "[CLIENT] List Clients Success",
+    LIST_CLIENTS_FAIL = "[CLIENT] List Clients Fail"
 }
 
 export class RegisterClientAction implements Action {
@@ -59,6 +64,20 @@ export class GetClientActionSuccess implements Action {
 
 export class GetClientActionFail implements Action {
     readonly type = ClientActionsType.GET_CLIENT_FAIL;
+    constructor(public payload: string){}
+}
+
+export class ListClientsAction implements Action {
+    readonly type = ClientActionsType.LIST_CLIENTS;
+}
+
+export class ListClientsActionSuccess implements Action {
+    readonly type = ClientActionsType.LIST_CLIENTS_SUCCESS;
+    constructor(public payload: Client[]){}
+}
+
+export class ListClientsActionFail implements Action {
+    readonly type = ClientActionsType.LIST_CLIENTS_FAIL;
     constructor(public payload: string){}
 }
 

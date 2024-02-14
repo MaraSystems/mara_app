@@ -2,8 +2,9 @@
 <h5 class="text-1 value" *ngIf="!edit && type !== 'date'">{{ value }}</h5>
 <h5 class="text-1 value" *ngIf="!edit && type === 'date'">{{ value | date:'dd/mm/yy' }}</h5>
 
-<input class="text-1 input" [type]="type" [name]="name" id="" [value]="value" *ngIf="edit && !list" [(ngModel)]="value" [disabled]="disabled" (input)="onChange(value)" (blur)="onTouched()" [ngClass]="{ invalid }">
+<input class="text-1 input" [type]="type" [name]="name" [value]="value" *ngIf="edit && !list" [(ngModel)]="value" [disabled]="disabled" (input)="onChange(value)" (blur)="onTouched()" [ngClass]="{ invalid }">
 
-<!-- <select class="text-1 select" [name]="name" id="" *ngIf="edit && list" [(ngModel)]="value" [disabled]="disabled" (input)="onChange(value)" (blur)="onTouched()" [ngClass]="{ invalid }">
-    <option *ngFor="let item of list" [value]="item">{{ value }}</option>
-</select> -->
+<select class="text-1 select" [name]="name" *ngIf="edit && list" [(ngModel)]="value" [disabled]="disabled" (blur)="onTouched()" [ngClass]="{ invalid }" (ngModelChange)="onChange($event)">
+    <option disabled value="">Select {{name}}</option>
+    <option *ngFor="let item of list" [selected]="item === value" [ngValue]="item">{{ item }}</option>
+</select>
