@@ -137,6 +137,7 @@ app-root {
     color: var(--color-light);
     cursor: pointer;
     border: none;
+    text-wrap: nowrap;
 
     &:disabled {
         opacity: .5;
