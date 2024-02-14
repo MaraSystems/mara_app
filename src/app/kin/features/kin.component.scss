@@ -61,18 +61,19 @@
         display: grid;
         grid-template-columns: 1fr;
         align-items: flex-start;
-        gap: var(--gap-normal);
+        gap: var(--gap-big);
         width: 100%;
 
         &-item {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            gap: var(--gap-x-small);
-            width: calc(100% - calc(var(--gap-small))*2);
-            padding: var(--gap-small);
+            gap: var(--gap-normal);
+            width: calc(100% - calc(var(--gap-normal))*2);
+            height: calc(100% - calc(var(--gap-normal))*2);
+            padding: var(--gap-normal);
             box-shadow: var(--shadow-elevated);
-            border-radius: var(--gap-small);
+            border-radius: var(--gap-normal);
         }
 
         &-title {
