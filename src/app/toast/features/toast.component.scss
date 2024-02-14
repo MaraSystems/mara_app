@@ -49,7 +49,7 @@
 
 .active-toast {
     animation: slide-in 1s ease both;
-    box-shadow: var(--shadow-small);
+    box-shadow: var(--shadow-elevated);
 }
 
 .inactive-toast {

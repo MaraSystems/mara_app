@@ -27,7 +27,7 @@
             position: absolute;
             bottom: 0;
             right: 0;
-            box-shadow: var(--shadow-small);
+            box-shadow: var(--shadow-elevated);
         }
     }
 
@@ -68,8 +68,11 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            gap: var(--gap-x-small);
-            width: 100%;
+            gap: var(--gap-small);
+            width: calc(100% - calc(var(--gap-small))*2);
+            padding: var(--gap-small);
+            box-shadow: var(--shadow-elevated);
+            border-radius: var(--gap-small);
         }
 
         &-title {
@@ -87,7 +90,6 @@
 
 @media only screen and (min-width: 700px){
     :host {
-        max-width: var(--enclosed-normal);
         width: calc(100% - calc(var(--gap-x-big) * 2));
         height: calc(100% - calc(var(--gap-x-big) * 2));
         padding: var(--gap-x-big);
@@ -96,7 +98,7 @@
         .details {
             grid-template-columns: repeat(2, 1fr);
             gap: var(--gap-x-big);
-            // max-width: 500px;
+            max-width: var(--enclosed-small);
         }
     }
 }
