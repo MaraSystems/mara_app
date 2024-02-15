@@ -5,8 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { Client } from 'src/app/client/utils/models/client';
-import { selectCurrentClient } from 'src/app/client/utils/store/client-store.selector';
-import { usernamePattern, phonePattern } from 'src/app/shared/utils/patterns';
+import { phonePattern } from 'src/app/shared/utils/patterns';
 import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
 import { Kin } from 'src/app/client/utils/models/kin';
 import { selectKinByUserId } from '../utils/store/kin-store.selector';
@@ -22,7 +21,7 @@ export class KinComponent extends UnSubscriber implements OnInit {
   kin!: Kin;
   edit = false;
   form!: FormGroup;
-  updateData!: Partial<Client>;
+  updateData!: Partial<Kin>;
   address: addressUtil.IAddress = { countries: addressUtil.listCountries, states: [], cities: [] };
 
   constructor (
@@ -37,6 +36,7 @@ export class KinComponent extends UnSubscriber implements OnInit {
       this.store.dispatch(new GetKinAction(auth?.id as string));
 
       this.newSubscription = this.store.select(selectKinByUserId(auth?.id as string)).subscribe(kin => {
+        this.kin = { ...kin, userId: auth?.id as string };
         this.updateAddress(this.kin);
         this.initForm();
 

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NotfoundComponent } from './notfound/notfound.component';
+import { AuthGuard } from './auth/utils/guard/auth.guard';
+import { NoAuthGuard } from './auth/utils/guard/noauth.guard';
 
 const routes: Routes = [
   { 
@@ -13,12 +14,32 @@ const routes: Routes = [
     path: 'auth', 
     loadChildren: () => import('./auth/features/auth.module').then(
       (m) => m.AuthModule
+    ),
+    canActivate: [NoAuthGuard]
+  },
+  { 
+    path: 'register', 
+    loadChildren: () => import('./client/features/client-register/client-register.module').then(
+      (m) => m.ClientRegisterModule
+    ),
+    canActivate: [NoAuthGuard]
+  },
+  { 
+    path: 'profile', 
+    loadChildren: () => import('./profile/features/profile-shell/profile-shell.module').then(
+      (m) => m.ProfileShellModule
     )
   },
   { 
     path: 'clients', 
     loadChildren: () => import('./client/features/client-shell/client-shell.module').then(
       (m) => m.ClientShellModule
+    )
+  },
+  { 
+    path: 'projects', 
+    loadChildren: () => import('./project/features/project-shell/project-shell.module').then(
+      (m) => m.ProjectShellModule
     )
   },
   { 

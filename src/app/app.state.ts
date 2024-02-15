@@ -4,8 +4,8 @@ import { ClientStoreEffect } from "./client/utils/store/client-store.effect";
 import { ToastState, toastReducer } from "./toast/utils/store/toast.reducer";
 import { AuthState, authReducer } from "./auth/utils/store/auth-store.reducer";
 import { AuthStoreEffect } from "./auth/utils/store/auth-store.effect";
-import { KinStoreEffect } from "./kin/utils/store/kin-store.effect";
-import { KinState, kinReducer } from "./kin/utils/store/kin-store.reducer";
+import { KinStoreEffect } from "./profile/features/kin/utils/store/kin-store.effect";
+import { KinState, kinReducer } from "./profile/features/kin/utils/store/kin-store.reducer";
 
 export const appEffects = [
     ClientStoreEffect,

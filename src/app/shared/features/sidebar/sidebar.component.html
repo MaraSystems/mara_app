@@ -7,27 +7,27 @@
     </span>
     
     <div class="pane">
-        <div class="pane-item pane-item-active">
+        <div class="pane-item pane-item-active" routerLink="/dashboard">
             <span class="material-symbols-rounded pane-icon">dashboard</span>
             <h1 *ngIf="openSidebar" class="pane-title text-1">Dashboard</h1>
         </div>
     
-        <div class="pane-item">
+        <div class="pane-item" routerLink="/projects">
             <span class="material-symbols-rounded pane-icon">cases</span>
             <h1 *ngIf="openSidebar" class="pane-title text-1">Projects</h1>
         </div>
     
-        <div class="pane-item">
+        <div class="pane-item"routerLink="/contracts">
             <span class="material-symbols-rounded pane-icon">checkbook</span>
             <h1 *ngIf="openSidebar" class="pane-title text-1">Contracts</h1>
         </div>
     
-        <div class="pane-item">
+        <div class="pane-item" routerLink="/wallet">
             <span class="material-symbols-rounded pane-icon">wallet</span>
             <h1 *ngIf="openSidebar" class="pane-title text-1">Wallet</h1>
         </div>
     
-        <div class="pane-item">
+        <div class="pane-item" routerLink="/settings">
             <span class="material-symbols-rounded pane-icon">settings</span>
             <h1 *ngIf="openSidebar" class="pane-title text-1">Settings</h1>
         </div>

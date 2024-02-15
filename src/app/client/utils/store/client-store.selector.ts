@@ -9,7 +9,7 @@ export const selectAllClients = createSelector(
     clientAdapter.getSelectors().selectAll
 );
 
-export const selectCurrentClient = createSelector(
+export const selectAuthClient = createSelector(
     clientSelector,
     state => state.entities[state.authId as string] as Client
 );

@@ -18,7 +18,7 @@
     }
 
     .item.selected, .item:hover {
-        color: var(--color-secondary);
+        color: var(--color-primary);
         transition-duration: .5s;
     }
 }

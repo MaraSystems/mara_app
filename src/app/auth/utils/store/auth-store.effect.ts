@@ -43,7 +43,7 @@ export class AuthStoreEffect {
             this.authAccessService.login(action.payload).pipe(
                 tap(() => {
                     this.store.dispatch(new AddToast(new Toast({ description: 'Sign In' })));
-                    this.router.navigateByUrl('/clients/profile');
+                    this.router.navigateByUrl('/profile');
                 }),
                 map((response: DataResponse<Auth>) => {
                     return new LoginAuthActionSuccess(response.data);

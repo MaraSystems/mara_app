@@ -2,16 +2,14 @@
 
     <div class="basic">
         <span class="image">
-            <img [src]="client.image || '../../../../assets/images/db.png'" alt="">
-            <span class="material-symbols-rounded verification-badge" *ngIf="client?.verified">
-                {{ client.business ? 'handshake' : 'done' }}
+            <img [src]="profile.image || '../../../../assets/images/db.png'" alt="">
+            <span class="material-symbols-rounded verification-badge" *ngIf="profile?.verified">
+                {{ profile.business ? 'handshake' : 'done' }}
             </span>
         </span>
         <div class="names">
-            <h1 class="fullname header-2">{{ client.firstname + ' ' + client.lastname }}</h1>
-            <h5 class="username text-1">
-                @{{ client.username }}
-            </h5>
+            <h1 class="fullname header-2">{{ (profile.firstname || '') + ' ' + (profile.lastname || '') }}</h1>
+            <h5 class="username text-1">@{{ profile.username }}</h5>
         </div>
     </div>
 </div>
@@ -53,6 +51,6 @@
 </div>
 
 <div class="update-controls">
-    <button class="button text-1" *ngIf="edit" routerLink="/clients/profile/info">Cancel</button>
+    <button class="button text-1" *ngIf="edit" routerLink="/profiles/profile/info">Cancel</button>
     <button class="button text-1" *ngIf="edit" (click)="saveChanges()" [disabled]="!updateData || form.invalid">Update</button>
 </div>
