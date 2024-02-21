@@ -14,6 +14,8 @@ import { LoginAuthActionSuccess } from '../store/auth-store.action';
   providedIn: 'root'
 })
 export class AuthAccessService extends UnSubscriber {
+  auth!: Auth;
+
   constructor(
     private accessService: AccessService,
     private store: Store<AppState>
@@ -37,13 +39,12 @@ export class AuthAccessService extends UnSubscriber {
 
   getAuth() {
     const text = localStorage.getItem('auth');
-    let auth: Auth;
     if (!text) {
       return throwError(() => 'No Auth');
     }
     
-    auth = JSON.parse(text as string);
-    return of({ success: true, data: auth });
+    this.auth = JSON.parse(text as string);
+    return of({ success: true, data: this.auth });
   }
 
   logout() {

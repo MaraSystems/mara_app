@@ -5,6 +5,7 @@
     flex-shrink: 0;
     padding: var(--gap-small);
     width: calc(100% - calc(var(--gap-small) * 2));
+    background-color: var(--color-light);
 
     .controls {
         display: flex;
@@ -27,7 +28,6 @@
 
 @media only screen and (min-width: 700px){
     :host {
-        background-color: var(--color-light);
         padding: var(--gap-normal);
         width: calc(100% - calc(var(--gap-normal) * 2));
 

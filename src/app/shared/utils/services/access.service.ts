@@ -40,6 +40,13 @@ export class AccessService {
     return of(response);
   }
 
+  public list<T>(endpoint: string, query: any) {
+    const collection = this.db.createCollection<T>(endpoint);
+    const data = collection.find(query);
+    const response: DataResponse<T> = { success: true, data: data as T };
+    return of(response);
+  }
+
   public update<T>(endpoint: string, query: any, changes: Partial<T>) {
     const collection = this.db.createCollection<T>(endpoint);
     const data = collection.updateOne(query, changes) as T;

@@ -2,6 +2,9 @@ import { NewClient } from "./new-client";
 
 export class Client implements NewClient {
     _id = '';
+    email!: string;
+    phone!: string;
+    username!: string
     firstname = 'First';
     lastname = 'Last';
     createdAt = new Date();
@@ -16,8 +19,6 @@ export class Client implements NewClient {
     image: string = '../../../../assets//images/db.png';
 
     constructor (
-        public email: string,
-        public phone: string,
-        public username: string
+        
     ) { }
 }

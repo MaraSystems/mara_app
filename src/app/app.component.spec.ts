@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { Store, StoreModule } from '@ngrx/store';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastModule } from './toast/features/toast.module';
+import { appReducers } from './app.state';
 
 describe('AppComponent', () => {
   let app: AppComponent;
@@ -8,7 +12,13 @@ describe('AppComponent', () => {
   
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [
+        RouterTestingModule,
+        StoreModule.forRoot(appReducers),
+        HttpClientModule,
+        ToastModule
+      ],
+      providers: [Store],
       declarations: [AppComponent]
     });
     fixture = TestBed.createComponent(AppComponent);

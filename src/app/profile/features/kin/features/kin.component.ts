@@ -32,6 +32,7 @@ export class KinComponent extends UnSubscriber implements OnInit {
   }
 
   ngOnInit(): void {    
+    this.initForm();
     this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
       this.store.dispatch(new GetKinAction(auth?.id as string));
 

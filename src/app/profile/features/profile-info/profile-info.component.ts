@@ -16,7 +16,7 @@ import { selectAuthClient } from 'src/app/client/utils/store/client-store.select
   styleUrls: ['./profile-info.component.scss']
 })
 export class ProfileInfoComponent extends UnSubscriber implements OnInit {
-  profile!: Client;
+  profile = new Client();
   edit = false;
   form!: FormGroup;
   updateData!: Partial<Client>;
@@ -30,6 +30,7 @@ export class ProfileInfoComponent extends UnSubscriber implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initForm();
     this.newSubscription = this.store.select(selectAuthClient).subscribe(client => {
       this.profile = client;
 

@@ -1,10 +1,6 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, ElementRef, Inject, OnChanges, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, ChildActivationEnd, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.state';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Client } from 'src/app/client/utils/models/client';
-import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
 import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
 
 @Component({
@@ -20,7 +16,6 @@ export class ProfileShellComponent extends UnSubscriber implements OnInit {
     
   constructor(
     private router: Router,
-    private store: Store<AppState>
   ) {
     super();
   }

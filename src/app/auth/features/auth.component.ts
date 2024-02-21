@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
 import { LoginAuthAction } from '../utils/store/auth-store.action';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -17,7 +16,6 @@ export class AuthComponent extends UnSubscriber implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private router: Router
   ) {
     super();
   }

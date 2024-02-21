@@ -1,0 +1,17 @@
+<h1 class="page-title header-3">New Project</h1>
+
+<div class="container">
+    <form action="" class="form" [formGroup]="form" (ngSubmit)="createProject()">
+        <app-input type="text" name="title" class="form-group" formControlName="title" [invalid]="isValid('title')"></app-input>
+        <app-input type="text" name="category" class="form-group" formControlName="category" [invalid]="isValid('category')"></app-input>
+        <app-input type="text" name="tags" class="form-group" formControlName="tags" [invalid]="isValid('tags')"></app-input>
+        <app-input type="text" name="description" class="form-group" formControlName="description" [invalid]="isValid('description')"></app-input>
+
+        <button 
+            [disabled]="form.invalid"
+            class="button form-group text-1"
+            type="submit">
+            Create Project
+        </button>
+    </form>
+</div>

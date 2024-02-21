@@ -1,6 +1,6 @@
 :host {
     border-radius: var(--gap-small);
-    border: 1px solid var(--color-primary);
+    border: 1px solid var(--color-secondary);
     background: var(--color-light);
     align-items: center;
     justify-content: space-between;
@@ -24,12 +24,12 @@
     .input, .select {
         background-color: transparent;
         border: none;
-        border: 1px solid var(--color-primary);
+        border: 1px solid var(--color-secondary);
         transition: ease-in-out;
         transition-duration: .5s;
         color: var(--color-dark);
         box-shadow: var(--shadow-elevated);
-        border-radius: var(--XSmall-Gap, 5px);
+        border-radius: var(--gap-small);
 
         &:hover {
             box-shadow: none;

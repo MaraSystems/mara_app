@@ -46,6 +46,7 @@ export class AuthStoreEffect {
                     this.router.navigateByUrl('/profile');
                 }),
                 map((response: DataResponse<Auth>) => {
+                    this.store.dispatch(new GetClientAction(response.data.id, true));               
                     return new LoginAuthActionSuccess(response.data);
                 }),
                 catchError(err => of(new LoginAuthActionFail(err)).pipe(
@@ -65,11 +66,7 @@ export class AuthStoreEffect {
                     this.store.dispatch(new GetClientAction(response.data.id, true));               
                     return new GetAuthActionSuccess(response.data);
                 }),
-                catchError(err => of(new GetAuthActionFail(err)).pipe(
-                    tap(() => {
-                        // this.store.dispatch(new AddToast(new Toast({ isError: true, description: 'Sign In' })));
-                    })
-                ))
+                catchError(err => of(new GetAuthActionFail(err)))
             )
         )
     ));

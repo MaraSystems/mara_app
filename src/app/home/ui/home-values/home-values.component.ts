@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
+import { SliderService } from 'src/app/shared/utils/services/slider.service';
 
 @Component({
   selector: 'app-home-values',
@@ -7,14 +8,6 @@ import { Auth } from 'src/app/auth/utils/models/auth.model';
   styleUrls: ['./home-values.component.scss']
 })
 export class HomeValuesComponent implements OnInit {
-  @Input() auth: Auth | undefined;
-
-  currentSlideIndex = 0;
-  direction = 'normal';
-  animationInterval: any = null;
-  animationPause = 5000;
-  animationDuration = 3000;
-
   slides = [
     {
       title: 'Trustworthy Contracts',
@@ -33,62 +26,14 @@ export class HomeValuesComponent implements OnInit {
     }
   ];
 
-  animations = {
-    normal: {
-      slideIn: 'slider-in 3s ease-in-out both normal',
-      slideOut: 'slider-out 3s ease-in-out both normal',
-    },
-    reverse: {
-      slideIn: 'slider-out 3s ease-in-out both reverse',
-      slideOut: 'slider-in 3s ease-in-out both reverse'
-    }
+  constructor(
+    public sliderService: SliderService
+  ){
+    this.sliderService.name = 'slide'
   }
-
-  getSlides = () => document.getElementsByClassName('slide');
-
-  constructor(){}
 
   ngOnInit(): void {
     // this.animateSliding();
-  }
-
-  nextPostion(currentPositon: number, change: number){ 
-    const newPosition = currentPositon + change;
-    const slideCount = this.getSlides().length;
-
-    const position = newPosition >= slideCount
-      ? 0
-      : newPosition < 0
-          ? slideCount - 1
-          : newPosition;
-          
-    return position;
-  }
-
-  slide(change = 1) {
-    this.direction = change > 0 ? 'normal' : 'reverse';
-    const slides = this.getSlides();
-    const previousSlideIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active-slide') || slide.classList.contains('active-slide-reverse'));
-    this.currentSlideIndex = this.nextPostion(previousSlideIndex, change);    
-    (slides[previousSlideIndex] as HTMLElement).style.zIndex = '1';
-    (slides[this.currentSlideIndex] as HTMLElement).style.zIndex = '1';
-
-    setTimeout(() => {
-      (slides[previousSlideIndex] as HTMLElement).style.zIndex = '0';
-    }, this.animationDuration);
-  }
-
-  public selectSlide($event: any) {
-    clearInterval(this.animationInterval);
-    const change = $event - this.currentSlideIndex;
-    this.slide(change);
-    this.animateSliding();
-  }
-
-  animateSliding() {
-    this.animationInterval = setInterval(() => {
-      this.slide();
-    }, this.animationDuration + this.animationPause);
   }
 
   setBackground(url: string) {

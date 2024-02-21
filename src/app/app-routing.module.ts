@@ -28,7 +28,8 @@ const routes: Routes = [
     path: 'profile', 
     loadChildren: () => import('./profile/features/profile-shell/profile-shell.module').then(
       (m) => m.ProfileShellModule
-    )
+    ),
+    canActivate: [AuthGuard]
   },
   { 
     path: 'clients', 
@@ -40,7 +41,8 @@ const routes: Routes = [
     path: 'projects', 
     loadChildren: () => import('./project/features/project-shell/project-shell.module').then(
       (m) => m.ProjectShellModule
-    )
+    ),
+    canActivate: [AuthGuard]
   },
   { 
     path: '404', 

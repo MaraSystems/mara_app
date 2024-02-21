@@ -3,17 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { 
-    path: 'create', 
-    loadChildren: () => import('../project-create/project-create.module').then(
-      (m) => m.ProjectCreateModule
-    )
-  },
-  { 
-    path: 'list', 
+    path: '', 
     loadChildren: () => import('../project-list/project-list.module').then(
       (m) => m.ProjectListModule
     )
   },
+  { 
+    path: 'create', 
+    loadChildren: () => import('../project-create/project-create.module').then(
+      (m) => m.ProjectCreateModule
+    )
+  }
 ];
 
 @NgModule({

@@ -9,16 +9,5 @@ import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent extends UnSubscriber implements OnInit {
-  auth: Auth | undefined;
-
-  constructor(
-    private store: Store
-  ){
-    super();
-  }
-
-  ngOnInit(): void {
-    this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => this.auth = auth);
-  }
+export class HomeComponent {
 }

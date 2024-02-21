@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileShellComponent } from './profile-shell.component';
+import { RouterModule } from '@angular/router';
+import { TabsComponent } from 'src/app/shared/ui/tabs/tabs.component';
 
 describe('ProfileShellComponent', () => {
   let component: ProfileShellComponent;
@@ -8,7 +10,8 @@ describe('ProfileShellComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ProfileShellComponent]
+      declarations: [ProfileShellComponent, TabsComponent],
+      imports: [RouterModule]
     });
     fixture = TestBed.createComponent(ProfileShellComponent);
     component = fixture.componentInstance;

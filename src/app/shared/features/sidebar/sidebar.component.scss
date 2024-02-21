@@ -21,10 +21,11 @@
     align-items: center;
     gap: var(--gap-small);
     padding: var(--gap-small);
+    cursor: pointer;
 }
 
 .app-name {
-    color: var(--color-secondary);
+    color: var(--color-primary);
 }
 
 .pane {

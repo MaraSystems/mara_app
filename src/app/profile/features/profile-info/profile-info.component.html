@@ -2,14 +2,14 @@
 
     <div class="basic">
         <span class="image">
-            <img [src]="profile.image || '../../../../assets/images/db.png'" alt="">
+            <img [src]="profile?.image || '../../../../assets/images/db.png'" alt="">
             <span class="material-symbols-rounded verification-badge" *ngIf="profile?.verified">
-                {{ profile.business ? 'handshake' : 'done' }}
+                {{ profile?.business ? 'handshake' : 'done' }}
             </span>
         </span>
         <div class="names">
-            <h1 class="fullname header-2">{{ (profile.firstname || '') + ' ' + (profile.lastname || '') }}</h1>
-            <h5 class="username text-1">@{{ profile.username }}</h5>
+            <h1 class="fullname header-2">{{ (profile?.firstname || '') + ' ' + (profile?.lastname || '') }}</h1>
+            <h5 class="username text-1">@{{ profile?.username }}</h5>
         </div>
     </div>
 </div>

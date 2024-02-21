@@ -1,12 +1,21 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ClientAccessService } from './client-access.service';
+import { AccessService } from 'src/app/shared/utils/services/access.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ClientAccessService', () => {
   let service: ClientAccessService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        AccessService
+      ],
+      imports: [
+        HttpClientModule
+      ]
+    });
     service = TestBed.inject(ClientAccessService);
   });
 

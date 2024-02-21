@@ -4,10 +4,10 @@
             class="slide"
             *ngFor="let slide of slides; index as i"
             [ngClass]="{ 
-                'active-slide': (i === currentSlideIndex && direction === 'normal'), 
-                'inactive-slide': (i !== currentSlideIndex && direction === 'normal'),
-                'active-slide-reverse': (i === currentSlideIndex && direction === 'reverse'), 
-                'inactive-slide-reverse': (i !== currentSlideIndex && direction === 'reverse')
+                'active-slide': (i === sliderService.currentSlideIndex && sliderService.direction === 'normal'), 
+                'inactive-slide': (i !== sliderService.currentSlideIndex && sliderService.direction === 'normal'),
+                'active-slide-reverse': (i === sliderService.currentSlideIndex && sliderService.direction === 'reverse'), 
+                'inactive-slide-reverse': (i !== sliderService.currentSlideIndex && sliderService.direction === 'reverse')
             }"
             [ngStyle]="setBackground(slide.image)"
             >
@@ -32,5 +32,5 @@
             </div>
         </div>
     </div>
-    <app-switcher [current]="currentSlideIndex" [totalItems]="slides.length" (selected)="selectSlide($event)"></app-switcher>
+    <app-switcher [current]="sliderService.currentSlideIndex" [totalItems]="slides.length" (selected)="sliderService.selectSlide($event)"></app-switcher>
 </section>
