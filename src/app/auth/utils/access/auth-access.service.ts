@@ -23,10 +23,10 @@ export class AuthAccessService extends UnSubscriber {
     super();
   }
 
-  login(auth: Login) {  
+  login(auth: Login) {              
     return this.accessService.get<Client>('clients', { email: auth.email }).pipe(
       map(({ data: client, success }) => {
-        const response: DataResponse<Auth>  = { success, data: { id: client._id, token: 'This is token' }};
+        const response: DataResponse<Auth>  = { success, data: { id: client._id, token: 'This is token' }};        
         return response;
       })
     )

@@ -11,5 +11,5 @@
         </span>
     </div>
 </div>
-<app-switcher class="switcher" [current]="current" [totalItems]="testimonials.length" (selected)="setCurrent($event)">
+<app-switcher class="switcher" [active]="current" [totalItems]="testimonials.length" (select)="setCurrent($event)">
 </app-switcher>

@@ -1,13 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../client/utils/models/client';
 import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { phonePattern, usernamePattern } from 'src/app/shared/utils/patterns';
+import { phonePattern, usernamePattern } from 'src/app/shared/utils/lib/patterns';
 import { UpdateClientAction } from '../../../client/utils/store/client-store.action';
-import * as addressUtil from 'src/app/shared/utils/address';
+import * as addressUtil from 'src/app/shared/utils/lib/address';
 import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
 
 @Component({
@@ -20,10 +20,10 @@ export class ProfileInfoComponent extends UnSubscriber implements OnInit {
   edit = false;
   form!: FormGroup;
   updateData!: Partial<Client>;
-  address: addressUtil.IAddress = { countries: addressUtil.listCountries, states: [], cities: [] }
+  address: addressUtil.IAddress = { countries: addressUtil.listCountries, states: [], cities: [] };
 
   constructor (
-    private store: Store<AppState>,
+    public store: Store<AppState>,
     private activatedRoute: ActivatedRoute
   ) {
     super();
@@ -67,7 +67,7 @@ export class ProfileInfoComponent extends UnSubscriber implements OnInit {
     return flag;
   }
 
-  saveChanges() {    
+  updateClient() {    
     this.store.dispatch(new UpdateClientAction({ id: this.profile._id, changes: this.updateData }));
   }
 

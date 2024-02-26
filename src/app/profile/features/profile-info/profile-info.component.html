@@ -51,6 +51,6 @@
 </div>
 
 <div class="update-controls">
-    <button class="button text-1" *ngIf="edit" routerLink="/profiles/profile/info">Cancel</button>
-    <button class="button text-1" *ngIf="edit" (click)="saveChanges()" [disabled]="!updateData || form.invalid">Update</button>
+    <button id="cancel" class="button text-1" *ngIf="edit" routerLink="/profiles/profile/info">Cancel</button>
+    <button id="update" class="button text-1" *ngIf="edit" (click)="updateClient()" [disabled]="!updateData || form.invalid">Update</button>
 </div>

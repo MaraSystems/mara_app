@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
 import { LoginAuthAction } from '../utils/store/auth-store.action';
+import { Login } from '../utils/models/login.model';
 
 @Component({
   selector: 'app-auth',
@@ -13,14 +14,22 @@ import { LoginAuthAction } from '../utils/store/auth-store.action';
 export class AuthComponent extends UnSubscriber implements OnInit {
   form!: FormGroup;
   completed = false;
+  loginData!: Login;
 
   constructor(
-    private store: Store<AppState>,
+    public store: Store<AppState>,
   ) {
     super();
   }
 
   ngOnInit(): void {
+    this.initForm();
+    this.newSubscription = this.form.valueChanges.subscribe(data => {
+      this.loginData = data;
+    });
+  }
+
+  initForm() {
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.email, Validators.required]),
       password: new FormControl(null, Validators.required),
@@ -28,8 +37,6 @@ export class AuthComponent extends UnSubscriber implements OnInit {
   }
 
   login() {    
-    const email = this.form.controls['email'].value;
-    const password = this.form.controls['password'].value;
-    this.store.dispatch(new LoginAuthAction({ email, password }));
+    this.store.dispatch(new LoginAuthAction(this.loginData));
   }
 }

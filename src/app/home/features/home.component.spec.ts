@@ -9,6 +9,7 @@ import { HomeWorksComponent } from '../ui/home-works/home-works.component';
 import { HomeValuesComponent } from '../ui/home-values/home-values.component';
 import { SwitcherModule } from 'src/app/shared/ui/switcher/switcher.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Store, StoreModule } from '@ngrx/store';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -25,9 +26,13 @@ describe('HomeComponent', () => {
         HomeBenefitsComponent,
         HomeFooterComponent,
       ],
+      providers: [
+        Store
+      ],
       imports: [
         SwitcherModule,
-        RouterTestingModule
+        RouterTestingModule,
+        StoreModule.forRoot()
       ]
     });
     fixture = TestBed.createComponent(HomeComponent);

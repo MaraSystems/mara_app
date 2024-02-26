@@ -7,16 +7,16 @@ import { Client } from "../models/client";
 import { Store } from "@ngrx/store";
 import { AddToast } from "src/app/toast/utils/store/toast.action";
 import { Toast } from "src/app/toast/features/toast.model";
-import { Router } from "@angular/router";
 import { DataResponse } from "src/app/shared/utils/models/data-response";
+import { RouterService } from "src/app/router/utils/router.service";
 
 @Injectable()
-export class ClientStoreEffect {
+export class ClientStoreEffect {    
     constructor(
         private actions$: Actions,
         private clientAccessService: ClientAccessService,
         private store: Store,
-        private router: Router
+        private routerService: RouterService
     ){}
 
     registerClient$ = createEffect(() => this.actions$.pipe(
@@ -25,7 +25,7 @@ export class ClientStoreEffect {
             this.clientAccessService.registerClient(action.payload).pipe(
                 tap(() => {
                     this.store.dispatch(new AddToast(new Toast({ description: 'User Registration' })));
-                    this.router.navigateByUrl('/auth');
+                    this.routerService.navigate('/auth');
                 }),
                 map((response: DataResponse<Client>) => {
                     return new RegisterClientActionSuccess(response.data);
@@ -45,7 +45,7 @@ export class ClientStoreEffect {
             this.clientAccessService.updateClient(action.payload).pipe(
                 tap(() => {
                     this.store.dispatch(new AddToast(new Toast({ description: 'User update' })));
-                    this.router.navigateByUrl('/clients/profile');
+                    this.routerService.navigate('/profile/info');
                 }),
                 map((response: DataResponse<Client>) => {
                     console.log(response);

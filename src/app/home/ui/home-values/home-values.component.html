@@ -2,7 +2,7 @@
     <div class="slider">
         <div
             class="slide"
-            *ngFor="let slide of slides; index as i"
+            *ngFor="let slide of list; index as i"
             [ngClass]="{ 
                 'active-slide': (i === sliderService.currentSlideIndex && sliderService.direction === 'normal'), 
                 'inactive-slide': (i !== sliderService.currentSlideIndex && sliderService.direction === 'normal'),
@@ -32,5 +32,5 @@
             </div>
         </div>
     </div>
-    <app-switcher [current]="sliderService.currentSlideIndex" [totalItems]="slides.length" (selected)="sliderService.selectSlide($event)"></app-switcher>
+    <app-switcher [active]="sliderService.currentSlideIndex" [totalItems]="slides.length" (select)="sliderService.selectSlide($event)"></app-switcher>
 </section>

@@ -4,11 +4,11 @@ import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AddToast } from "src/app/toast/utils/store/toast.action";
 import { Toast } from "src/app/toast/features/toast.model";
-import { Router } from "@angular/router";
 import { DataResponse } from "src/app/shared/utils/models/data-response";
 import { KinAccessService } from "../access/kin-access.service";
 import { CreateKinAction, CreateKinActionFail, CreateKinActionSuccess, GetKinAction, GetKinActionFail, GetKinActionSuccess, KinActionsType, UpdateKinAction, UpdateKinActionFail, UpdateKinActionSuccess } from "./kin-store.action";
 import { Kin } from "src/app/client/utils/models/kin";
+import { RouterService } from "src/app/router/utils/router.service";
 
 @Injectable()
 export class KinStoreEffect {
@@ -16,16 +16,16 @@ export class KinStoreEffect {
         private actions$: Actions,
         private kinAccessService: KinAccessService,
         private store: Store,
-        private router: Router
+        private routerService: RouterService
     ){}
 
     createKin$ = createEffect(() => this.actions$.pipe(
         ofType<CreateKinAction>(KinActionsType.CREATE_KIN),
         mergeMap((action: CreateKinAction) => 
             this.kinAccessService.createKin(action.payload).pipe(
-                tap(() => {
+                tap(() => {                    
                     this.store.dispatch(new AddToast(new Toast({ description: 'Kin Creation' })));
-                    this.router.navigateByUrl('/clients/profile/kin');
+                    this.routerService.navigate('/profile/kin');
                 }),
                 map((response: DataResponse<Kin>) => {
                     return new CreateKinActionSuccess(response.data);
@@ -45,7 +45,7 @@ export class KinStoreEffect {
             this.kinAccessService.updateKin(action.payload).pipe(
                 tap(() => {
                     this.store.dispatch(new AddToast(new Toast({ description: 'Kin Update' })));
-                    this.router.navigateByUrl('/clients/profile/kin');
+                    this.routerService.navigate('/profile/kin');
                 }),
                 map((response: DataResponse<Kin>) => {                    
                     return new UpdateKinActionSuccess({ id: action.payload.id as string, changes: response.data});

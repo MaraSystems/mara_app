@@ -14,10 +14,14 @@ export class Toast {
         public data: Partial<IToast>
     ){
         this.id = uuid();
-        this.data.duration = 5;
+        this.data.duration = this.data.duration 
+            ? this.data.duration
+            : 5;
+
         this.data.isError = this.data.isError 
             ? this.data.isError
             : false;
+
         this.data.title = this.data.title
             ? this.data.title
             : this.data.isError

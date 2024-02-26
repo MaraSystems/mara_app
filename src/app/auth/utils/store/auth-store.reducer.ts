@@ -1,7 +1,7 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { Action } from "@ngrx/store";
 import { Auth } from "../models/auth.model";
-import { AuthActionsType, GetAuthActionSuccess, LoginAuthActionSuccess, LogoutAuthActionSuccess } from "./auth-store.action";
+import { AuthActionsType, GetAuthActionSuccess, LoginAuthActionFail, LoginAuthActionSuccess, LogoutAuthActionSuccess } from "./auth-store.action";
 
 export interface AuthState extends EntityState<Auth>  {
     selectedId: string | null;
@@ -44,7 +44,8 @@ export function authReducer(state = initialState, action: Action): AuthState {
             return authAdapter.addOne(loginPayload, { ...state, loading: false, loaded: true, selectedId: loginPayload.id });
             
         case AuthActionsType.LOGIN_AUTH_FAIL:
-            return { ...state, loading: false, loaded: true }
+            const loginError = (action as LoginAuthActionFail).payload;            
+            return { ...state, loading: false, loaded: true, error: loginError }
 
 
         case AuthActionsType.GET_AUTH:

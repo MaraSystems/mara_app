@@ -17,7 +17,7 @@ export class ClientAccessService {
     private accessService: AccessService
   ) {}
 
-  registerClient(data: NewClient) {    
+  registerClient(data: NewClient) {        
     const response = this.accessService.insert<Client>('clients', data);
     return of(response);
   }

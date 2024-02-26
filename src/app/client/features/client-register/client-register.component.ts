@@ -2,13 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { ClientActionsType, RegisterClientAction } from '../../utils/store/client-store.action';
+import { RegisterClientAction } from '../../utils/store/client-store.action';
 import { NewClient } from '../../utils/models/new-client';
-import { phonePattern, usernamePattern } from 'src/app/shared/utils/patterns';
+import { phonePattern, usernamePattern } from 'src/app/shared/utils/lib/patterns';
 import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
-import { selectAllClients } from '../../utils/store/client-store.selector';
-import { AddToast } from 'src/app/toast/utils/store/toast.action';
-import { Toast } from 'src/app/toast/features/toast.model';
 
 @Component({
   selector: 'app-client-register',
@@ -18,18 +15,18 @@ import { Toast } from 'src/app/toast/features/toast.model';
 export class ClientRegisterComponent extends UnSubscriber implements OnInit {
   form!: FormGroup;
   completed = false;
+  registerData!: NewClient;
 
   constructor(
-    private store: Store<AppState>
+    public store: Store<AppState>
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      email: new FormControl(null, [Validators.email, Validators.required]),
-      phone: new FormControl(null, [Validators.pattern(phonePattern), Validators.required]),
-      username: new FormControl(null, [Validators.pattern(usernamePattern), Validators.required])
+    this.initForm();
+    this.newSubscription = this.form.valueChanges.subscribe(data => {
+      this.registerData = data;
     });
   }
 
@@ -38,11 +35,15 @@ export class ClientRegisterComponent extends UnSubscriber implements OnInit {
     return invalid && touched;
   }
 
+  initForm() {
+    this.form = new FormGroup({
+      email: new FormControl(null, [Validators.email, Validators.required]),
+      phone: new FormControl(null, [Validators.pattern(phonePattern), Validators.required]),
+      username: new FormControl(null, [Validators.pattern(usernamePattern), Validators.required])
+    });
+  }
+
   register() {    
-    const email = this.form.controls['email'].value;
-    const phone = this.form.controls['phone'].value;
-    const username = this.form.controls['username'].value;
-    const newClient = new NewClient(email, phone, username);
-    this.store.dispatch(new RegisterClientAction(newClient));
+    this.store.dispatch(new RegisterClientAction(this.registerData));
   }
 }

@@ -25,7 +25,7 @@ export class InputComponent implements ControlValueAccessor {
   onTouched: any = () => {};
 
   writeValue(obj: any): void {  
-    this.value = obj;
+    this.value = obj;    
   }
 
   registerOnChange(fn: any): void {        

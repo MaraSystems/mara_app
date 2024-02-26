@@ -7,8 +7,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class SwitcherComponent implements OnInit {
   @Input() totalItems = 0;
-  @Input() current = 0;
-  @Output() selected = new EventEmitter<Number>();
+  @Input() active = 0;
+  @Output() select = new EventEmitter<Number>();
   
   initial = 0;
   items: number[] = [];
@@ -17,8 +17,11 @@ export class SwitcherComponent implements OnInit {
     this.items = Array(this.totalItems).fill(0);
   }
 
-  select(i: number) {
-    this.current = i;
-    this.selected.emit(i);
+  switch(i: number) {    
+    if (i < 0 || i > this.totalItems - 1) {
+      throw new Error('Not in range');
+    }
+    this.active = i;    
+    this.select.emit(i);
   }
 }

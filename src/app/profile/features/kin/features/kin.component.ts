@@ -5,12 +5,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { Client } from 'src/app/client/utils/models/client';
-import { phonePattern } from 'src/app/shared/utils/patterns';
+import { phonePattern } from 'src/app/shared/utils/lib/patterns';
 import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
 import { Kin } from 'src/app/client/utils/models/kin';
 import { selectKinByUserId } from '../utils/store/kin-store.selector';
-import * as addressUtil from 'src/app/shared/utils/address';
+import * as addressUtil from 'src/app/shared/utils/lib/address';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
+import { Auth } from 'src/app/auth/utils/models/auth.model';
 
 @Component({
   selector: 'app-kin',
@@ -19,13 +20,14 @@ import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 })
 export class KinComponent extends UnSubscriber implements OnInit {
   kin!: Kin;
+  userId!: string;
   edit = false;
   form!: FormGroup;
   updateData!: Partial<Kin>;
   address: addressUtil.IAddress = { countries: addressUtil.listCountries, states: [], cities: [] };
 
   constructor (
-    private store: Store<AppState>,
+    public store: Store<AppState>,
     private activatedRoute: ActivatedRoute
   ) {
     super();
@@ -34,11 +36,12 @@ export class KinComponent extends UnSubscriber implements OnInit {
   ngOnInit(): void {    
     this.initForm();
     this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
+      this.userId = auth?.id as string;
       this.store.dispatch(new GetKinAction(auth?.id as string));
 
       this.newSubscription = this.store.select(selectKinByUserId(auth?.id as string)).subscribe(kin => {
-        this.kin = { ...kin, userId: auth?.id as string };
-        this.updateAddress(this.kin);
+        this.kin = kin;
+        this.updateAddress(kin);
         this.initForm();
 
         this.newSubscription = this.form.valueChanges.subscribe(data => {              
@@ -72,9 +75,9 @@ export class KinComponent extends UnSubscriber implements OnInit {
     return flag;
   }
 
-  saveChanges() {    
+  saveChanges() {        
     if (!this.kin) {
-      this.store.dispatch(new CreateKinAction(this.updateData as Kin));
+      this.store.dispatch(new CreateKinAction({ ...this.updateData as Kin, userId: this.userId }));
     }
     else {
       this.store.dispatch(new UpdateKinAction({ id: this.kin._id, changes: this.updateData }));

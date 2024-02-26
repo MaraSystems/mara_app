@@ -1,4 +1,7 @@
+import { ENVEnum } from "src/app/shared/utils/models/env.enum";
+
 export const environment = {
-    production: true,
-    apiUrl: 'http://localhost:3000'
+    env: ENVEnum.STAGING,
+    apiUrl: 'http://localhost:3000',
+    appName: 'Contractor'
 };

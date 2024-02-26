@@ -11,6 +11,7 @@ import { DataResponse } from "src/app/shared/utils/models/data-response";
 import { Auth } from "../models/auth.model";
 import { AppState } from "src/app/app.state";
 import { GetClientAction } from "src/app/client/utils/store/client-store.action";
+import { RouterService } from "src/app/router/utils/router.service";
 
 @Injectable()
 export class AuthStoreEffect {
@@ -18,7 +19,7 @@ export class AuthStoreEffect {
         private actions$: Actions,
         private authAccessService: AuthAccessService,
         private store: Store<AppState>,
-        private router: Router
+        private routerService: RouterService
     ){}
 
     getPasswordAuth$ = createEffect(() => this.actions$.pipe(
@@ -41,16 +42,16 @@ export class AuthStoreEffect {
         ofType<LoginAuthAction>(AuthActionsType.LOGIN_AUTH),
         mergeMap((action: LoginAuthAction) => 
             this.authAccessService.login(action.payload).pipe(
-                tap(() => {
+                tap(() => {                    
                     this.store.dispatch(new AddToast(new Toast({ description: 'Sign In' })));
-                    this.router.navigateByUrl('/profile');
+                    this.routerService.navigate('/profile');
                 }),
-                map((response: DataResponse<Auth>) => {
+                map((response: DataResponse<Auth>) => {                    
                     this.store.dispatch(new GetClientAction(response.data.id, true));               
                     return new LoginAuthActionSuccess(response.data);
                 }),
                 catchError(err => of(new LoginAuthActionFail(err)).pipe(
-                    tap(() => {
+                    tap(() => {                                                
                         this.store.dispatch(new AddToast(new Toast({ isError: true, description: 'Sign In' })));
                     })
                 ))
@@ -77,7 +78,7 @@ export class AuthStoreEffect {
             this.authAccessService.logout().pipe(
                 tap(() => {
                     this.store.dispatch(new AddToast(new Toast({ description: 'Sign Out' })));
-                    this.router.navigateByUrl('/auth');
+                    this.routerService.navigate('/auth');
                 }),
                 map(() => {
                     return new LogoutAuthActionSuccess();

@@ -15,9 +15,10 @@ import { RemoveToast } from '../utils/store/toast.action';
 export class ToastComponent extends UnSubscriber implements OnInit {
   toasts!: Observable<Toast[]>
   element!: Element;
+  timeout = 1000;
 
   constructor(
-    private store: Store<AppState>,
+    public store: Store<AppState>,
     el: ElementRef
   ) { 
     super();
@@ -31,7 +32,7 @@ export class ToastComponent extends UnSubscriber implements OnInit {
         if (data.duration) {          
           setTimeout(() => {
             this.closeToast(id);
-          }, data.duration * 1000);
+          }, data.duration * this.timeout);
         }
       }   
     });
@@ -40,13 +41,13 @@ export class ToastComponent extends UnSubscriber implements OnInit {
   closeToast(id: string) {   
     const list = this.element.getElementsByClassName('toast');
     const item = Array.from(list).find(listItem => listItem.id === id);
-
+    
     if (item) {
       item.classList.remove('active-toast');
       item.classList.add('inactive-toast');
       setTimeout(() => {
         this.store.dispatch(new RemoveToast(id));
-      }, 1000);
+      }, this.timeout);
     }
   }
 }

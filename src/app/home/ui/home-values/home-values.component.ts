@@ -8,7 +8,8 @@ import { SliderService } from 'src/app/shared/utils/services/slider.service';
   styleUrls: ['./home-values.component.scss']
 })
 export class HomeValuesComponent implements OnInit {
-  slides = [
+  @Input() auth: Auth | undefined;
+  list = [
     {
       title: 'Trustworthy Contracts',
       descripton: 'Trust Contractor for secure and safe contracts. With Escrow, experience peaceful and seamless transactions.',
@@ -26,14 +27,19 @@ export class HomeValuesComponent implements OnInit {
     }
   ];
 
+  get slides () {
+    return Array.from(document.getElementsByClassName('slide')) as HTMLElement[];
+  }
+
   constructor(
     public sliderService: SliderService
   ){
-    this.sliderService.name = 'slide'
+    this.sliderService.slides = this.slides;
   }
 
   ngOnInit(): void {
     // this.animateSliding();
+
   }
 
   setBackground(url: string) {

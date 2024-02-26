@@ -2,7 +2,7 @@
     <span 
         *ngFor="let item of items; index as i" 
         class="switcher-item" 
-        (click)="select(i)">
-        <span *ngIf="current === i" class="switcher-item-hole"></span>
+        (click)="switch(i)">
+        <span *ngIf="active === i" class="switcher-item-hole"></span>
     </span>
 </div>

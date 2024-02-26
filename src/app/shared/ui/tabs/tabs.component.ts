@@ -5,17 +5,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss']
 })
-export class TabsComponent implements OnInit {
+export class TabsComponent {
   @Input() list: string[] = [];
   @Output() select = new EventEmitter<string>();
-  @Input() selected = 0;
+  @Input() active = 0;
 
-  ngOnInit(): void {
-    
-  }
-
-  public selectTab(i: number) {
+  tab(i: number) {
+    if (i < 0 || i > this.list.length - 1) {
+      throw new Error('Not in range');
+    }
     this.select.emit(this.list[i]);
-    this.selected = i;
+    this.active = i;
   }
 }

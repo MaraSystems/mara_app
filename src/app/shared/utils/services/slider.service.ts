@@ -9,16 +9,9 @@ export class SliderService {
   animationInterval: any = null;
   animationPause = 5000;
   animationDuration = 3000;
-  name = ''
+  slides: HTMLElement[] = [];
 
-  get slides(){
-    return document.getElementsByClassName(this.name);
-  }
-
-  constructor(
-  ) { }
-
-  nextPostion(currentPositon: number, change: number){ 
+  nextPostion(change: number, currentPositon = this.currentSlideIndex){ 
     const newPosition = currentPositon + change;
     const slideCount = this.slides.length;
 
@@ -34,14 +27,13 @@ export class SliderService {
   slide(change = 1) {
     this.direction = change > 0 ? 'normal' : 'reverse';
     const previousSlideIndex = Array.from(this.slides).findIndex(slide => slide.classList.contains('active-slide') || slide.classList.contains('active-slide-reverse'));
-    this.currentSlideIndex = this.nextPostion(previousSlideIndex, change);    
-    console.log(this.slides, this.name);
+    this.currentSlideIndex = this.nextPostion(change);    
     
-    (this.slides[previousSlideIndex] as HTMLElement).style.zIndex = '1';
-    (this.slides[this.currentSlideIndex] as HTMLElement).style.zIndex = '1';
+    this.slides[previousSlideIndex].style.zIndex = '1';
+    this.slides[this.currentSlideIndex].style.zIndex = '1';
 
     setTimeout(() => {
-      (this.slides[previousSlideIndex] as HTMLElement).style.zIndex = '0';
+      this.slides[previousSlideIndex].style.zIndex = '0';
     }, this.animationDuration);
   }
 
@@ -51,7 +43,7 @@ export class SliderService {
     }, this.animationDuration + this.animationPause);
   }
 
-  public selectSlide($event: any) {
+  selectSlide($event: any) {
     clearInterval(this.animationInterval);
     const change = $event - this.currentSlideIndex;
     this.slide(change);
