@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectListComponent } from './project-list.component';
 import { ProjectListRoutingModule } from './project-list-routing.module';
+import { ProjectItemModule } from '../../ui/project-item/project-item.module';
 
 
 
@@ -11,7 +12,8 @@ import { ProjectListRoutingModule } from './project-list-routing.module';
   ],
   imports: [
     CommonModule,
-    ProjectListRoutingModule
+    ProjectListRoutingModule,
+    ProjectItemModule
   ]
 })
 export class ProjectListModule { }

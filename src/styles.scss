@@ -27,6 +27,10 @@
 * {
     margin: 0px;
     padding: 0px;
+    -ms-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
 }
 
 html, body {
@@ -56,11 +60,11 @@ app-root {
     align-self: stretch;
 
     &-group {
-        width: 100%;
+        width: -webkit-fill-available;
     }
 
     &-control {
-        width: 100%;
+        width: -webkit-fill-available;
     }
 }
 
@@ -155,6 +159,21 @@ app-root {
     color: var(--color-secondary);
     text-align: center;
     width: 100%;
+}
+
+.unit-container {
+    display: flex;
+    gap: var(--gap-x-small);
+    align-items: center;
+}
+
+.unit {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    border-radius: var(--gap-x-small);
+    padding: 3px;
 }
 
 @media only screen and (min-width: 700px){

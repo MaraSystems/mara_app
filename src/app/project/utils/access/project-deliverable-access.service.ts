@@ -12,7 +12,6 @@ import { ProjectDeliverable } from '../models/project-deliverable.model';
 })
 export class ProjectDeliverableAccessService {
   domain = 'project-deliverables';
-  collection = new Collection<ProjectDeliverable>(this.domain);
 
   constructor(
     private accessService: AccessService
@@ -29,7 +28,7 @@ export class ProjectDeliverableAccessService {
   }
 
   listProjectDeliverables(projectId: string, limit = 10, skip = 0) {
-    const response = this.accessService.get<[ProjectDeliverable]>(this.domain, { projectId });
+    const response = this.accessService.list<[ProjectDeliverable]>(this.domain, { projectId });
     return response;
   }
 

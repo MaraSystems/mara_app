@@ -47,9 +47,7 @@ export class ProjectStoreEffect {
                     this.store.dispatch(new AddToast(new Toast({ description: 'User update' })));
                     this.router.navigate(['/project', action.payload.id]);
                 }),
-                map((response: DataResponse<Project>) => {
-                    console.log(response);
-                    
+                map((response: DataResponse<Project>) => {                    
                     return new UpdateProjectActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateProjectActionFail(err)).pipe(

@@ -12,7 +12,6 @@ import { ListPayload } from 'src/app/shared/utils/models/list-payload';
 })
 export class ProjectAccessService {
   domain = 'projects';
-  collection = new Collection<Project>(this.domain);
 
   constructor(
     private accessService: AccessService
@@ -29,7 +28,7 @@ export class ProjectAccessService {
   }
 
   listProjects(data: ListPayload) {
-    const response = this.accessService.get<[Project]>(this.domain, {});
+    const response = this.accessService.list<[Project]>(this.domain, null);
     return response;
   }
 

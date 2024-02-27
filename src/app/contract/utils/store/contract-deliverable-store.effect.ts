@@ -47,9 +47,7 @@ export class ContractDeliverableStoreEffect {
                     this.store.dispatch(new AddToast(new Toast({ description: 'User update' })));
                     this.router.navigate(['/contracts', action.contractId, 'deliverables', action.payload.id]);
                 }),
-                map((response: DataResponse<ContractDeliverable>) => {
-                    console.log(response);
-                    
+                map((response: DataResponse<ContractDeliverable>) => {                    
                     return new UpdateContractDeliverableActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateContractDeliverableActionFail(err)).pipe(

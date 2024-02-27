@@ -6,7 +6,6 @@
     gap: var(--gap-big);
     height: 100%;
     width: 100%;
-    background-color: var(--color-light);
 }
 
 @media only screen and (min-width: 700px){
@@ -19,5 +18,6 @@
         margin: auto;
         box-shadow: var(--shadow-elevated);
         border-radius: var(--gap-x-small);
+        background-color: var(--color-light);
     }
 }

@@ -3,5 +3,11 @@
         <label [for]="name" class="input-label text-1">{{name}}</label>
         <h1 *ngIf="unit" class="input-unit">{{unit}}</h1>
     </span>
-    <input [type]="type" [name]="name" class="form-control input-data text-1" [(ngModel)]="value" [disabled]="disabled" (input)="onChange(value)" (blur)="onTouched()" [ngClass]="{ invalid }">
+
+    <input [type]="type" [name]="name" class="form-control input-data text-1" *ngIf="!list" [(ngModel)]="value" [disabled]="disabled" (input)="onChange(value)" (blur)="onTouched()" [ngClass]="{ invalid }">
+
+    <select class="form-control input-data text-1" [name]="name" *ngIf="list" [(ngModel)]="value" [disabled]="disabled" (blur)="onTouched()" [ngClass]="{ invalid }" (ngModelChange)="onChange($event)">
+        <option disabled value="">Select {{name}}</option>
+        <option *ngFor="let item of list" [selected]="item === value" [ngValue]="item">{{ item }}</option>
+    </select>
 </div>

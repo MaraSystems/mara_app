@@ -1,6 +1,6 @@
 export enum ENVEnum {
-    PRODUCTION,
-    STAGING,
-    DEVELOPMENT,
-    TESTING
+    PRODUCTION = 'production',
+    STAGING = 'staging',
+    DEVELOPMENT = 'development',
+    TESTING = 'testing'
 }

@@ -8,5 +8,5 @@
 </div>
 
 <div class="list">
-    List here
+    <app-project-item *ngFor="let item of projects" [project]="item" [routerLink]="'/projects/' + item._id"></app-project-item>
 </div>

@@ -11,7 +11,6 @@ import { ContractDeliverable } from '../models/contract-deliverable.model';
 })
 export class ContractDeliverableAccessService {
   domain = 'contract-deliverables';
-  collection = new Collection<ContractDeliverable>(this.domain);
 
   constructor(
     private accessService: AccessService

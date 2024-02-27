@@ -47,9 +47,7 @@ export class ClientStoreEffect {
                     this.store.dispatch(new AddToast(new Toast({ description: 'User update' })));
                     this.routerService.navigate('/profile/info');
                 }),
-                map((response: DataResponse<Client>) => {
-                    console.log(response);
-                    
+                map((response: DataResponse<Client>) => {                    
                     return new UpdateClientActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateClientActionFail(err)).pipe(

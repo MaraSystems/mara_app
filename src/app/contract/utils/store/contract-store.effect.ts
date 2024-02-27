@@ -47,9 +47,7 @@ export class ContractStoreEffect {
                     this.store.dispatch(new AddToast(new Toast({ description: 'User update' })));
                     this.router.navigate(['/contract', action.payload.id]);
                 }),
-                map((response: DataResponse<Contract>) => {
-                    console.log(response);
-                    
+                map((response: DataResponse<Contract>) => {                    
                     return new UpdateContractActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateContractActionFail(err)).pipe(

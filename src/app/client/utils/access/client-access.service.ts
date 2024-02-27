@@ -11,26 +11,24 @@ import { Update } from '@ngrx/entity';
   providedIn: 'root'
 })
 export class ClientAccessService {
-  collection = new Collection<Client>('clients');
+  domain = 'clients';
 
   constructor(
     private accessService: AccessService
   ) {}
 
   registerClient(data: NewClient) {        
-    const response = this.accessService.insert<Client>('clients', data);
+    const response = this.accessService.insert<Client>(this.domain, data);
     return of(response);
   }
 
   getClient(id: string) {    
-    const response = this.accessService.get<Client>('clients', { _id: id });
+    const response = this.accessService.get<Client>(this.domain, { _id: id });
     return response;
   }
 
   updateClient(data: Update<Client>) {    
-    const response = this.accessService.update<Client>('clients', { _id: data.id }, data.changes);
-    console.log(response);
-    
+    const response = this.accessService.update<Client>(this.domain, { _id: data.id }, data.changes);    
     return of(response);
   }
 }

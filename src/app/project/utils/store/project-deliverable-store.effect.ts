@@ -47,9 +47,7 @@ export class ProjectDeliverableStoreEffect {
                     this.store.dispatch(new AddToast(new Toast({ description: 'User update' })));
                     this.router.navigate(['/projects', action.projectId, 'deliverables', action.payload.id]);
                 }),
-                map((response: DataResponse<ProjectDeliverable>) => {
-                    console.log(response);
-                    
+                map((response: DataResponse<ProjectDeliverable>) => {                    
                     return new UpdateProjectDeliverableActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateProjectDeliverableActionFail(err)).pipe(

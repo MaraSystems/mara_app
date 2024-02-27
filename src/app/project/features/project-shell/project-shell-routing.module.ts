@@ -13,7 +13,13 @@ const routes: Routes = [
     loadChildren: () => import('../project-create/project-create.module').then(
       (m) => m.ProjectCreateModule
     )
-  }
+  },
+  { 
+    path: ':id', 
+    loadChildren: () => import('../project-view/project-view.module').then(
+      (m) => m.ProjectViewModule
+    )
+  },
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FootbarComponent } from './footbar.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('FootbarComponent', () => {
   let component: FootbarComponent;
@@ -8,7 +9,10 @@ describe('FootbarComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FootbarComponent]
+      declarations: [FootbarComponent],
+      imports: [
+        RouterTestingModule
+      ]
     });
     fixture = TestBed.createComponent(FootbarComponent);
     component = fixture.componentInstance;

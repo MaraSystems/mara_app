@@ -12,7 +12,6 @@ import { Contract } from '../models/contract.model';
 })
 export class ContractAccessService {
   domain = 'contracts';
-  collection = new Collection<Contract>(this.domain);
 
   constructor(
     private accessService: AccessService

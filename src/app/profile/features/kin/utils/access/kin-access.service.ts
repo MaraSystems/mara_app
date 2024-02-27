@@ -9,24 +9,24 @@ import { Kin } from 'src/app/client/utils/models/kin';
   providedIn: 'root'
 })
 export class KinAccessService {
-  collection = new Collection<Kin>('clients');
+  domain = 'kins';
 
   constructor(
     private accessService: AccessService
   ) {}
 
   createKin(data: Kin) {    
-    const response = this.accessService.insert<Kin>('kins', data);
+    const response = this.accessService.insert<Kin>(this.domain, data);
     return of(response);
   }
 
   getKin(userId: string) {    
-    const response = this.accessService.get<Kin>('kins', { userId });
+    const response = this.accessService.get<Kin>(this.domain, { userId });
     return response;
   }
 
   updateKin(data: Update<Kin>) {    
-    const response = this.accessService.update<Kin>('kins', { _id: data.id }, data.changes);    
+    const response = this.accessService.update<Kin>(this.domain, { _id: data.id }, data.changes);    
     return of(response);
   }
 }

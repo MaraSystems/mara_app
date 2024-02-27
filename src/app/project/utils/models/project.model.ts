@@ -5,6 +5,8 @@ export class Project {
     userId!: string;
     title!: string;
     description!: string;
+    category!: string;
+    tags!: string;
     status!: ProjectStatus;
     createdAt!: Date;
     updatedAt!: Date;

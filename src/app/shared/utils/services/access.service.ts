@@ -43,6 +43,7 @@ export class AccessService {
   public list<T>(endpoint: string, query: any) {
     const collection = this.db.createCollection<T>(endpoint);
     const data = collection.find(query);
+    
     const response: DataResponse<T> = { success: true, data: data as T };
     return of(response);
   }

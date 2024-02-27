@@ -48,9 +48,7 @@ export function clientReducer(state = initialState, action: Action): ClientState
             return { ...state, loading: true, loaded: false };
 
         case ClientActionsType.UPDATE_CLIENT_SUCCESS:
-            const updatePayload = (action as UpdateClientActionSuccess).payload;
-            console.log(updatePayload);
-            
+            const updatePayload = (action as UpdateClientActionSuccess).payload;            
             return clientAdapter.updateOne(updatePayload, { ...state, loading: false, loaded: true })
             
         case ClientActionsType.UPDATE_CLIENT_FAIL:

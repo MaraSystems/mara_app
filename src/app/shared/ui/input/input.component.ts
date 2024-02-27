@@ -20,6 +20,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() type: string = '';
   @Input() disabled = false;
   @Input() invalid = false;
+  @Input() list!: string[];
 
   onChange: any = (value: any) => {};
   onTouched: any = () => {};
