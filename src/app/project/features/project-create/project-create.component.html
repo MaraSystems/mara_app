@@ -2,10 +2,11 @@
 
 <div class="container">
     <form action="" class="form" [formGroup]="form" (ngSubmit)="createProject()">
-        <app-input type="text" name="title" class="form-group" formControlName="title" [invalid]="isValid('title')"></app-input>
-        <app-input type="text" name="category" class="form-group" formControlName="category" [invalid]="isValid('category')" [list]="categories"></app-input>
-        <app-input type="text" name="tags" class="form-group" formControlName="tags" [invalid]="isValid('tags')"></app-input>
-        <app-input type="text" name="description" class="form-group" formControlName="description" [invalid]="isValid('description')"></app-input>
+        <app-input type="text" name="title" class="form-group" [control]="getControl('title')"></app-input>
+        <app-select name="category" class="form-group" [control]="getControl('category')" [list]="categories"></app-select>
+        <app-input type="text" name="tags" class="form-group" [control]="getControl('tags')"></app-input>
+        <app-text-area name="description" class="form-group" [control]="getControl('description')"></app-text-area>
+        <app-file-input name="image" class="form-group" [control]="getControl('image')"></app-file-input>
 
         <button 
             [disabled]="form.invalid"

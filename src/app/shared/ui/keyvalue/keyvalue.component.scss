@@ -18,7 +18,9 @@
     }
 
     .value {
-        text-align: right;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
     }
 
     .input, .select {
@@ -38,5 +40,9 @@
 
     .invalid {
         border: 1px solid var(--color-error) !important;
+    }
+
+    .icon {
+        cursor: pointer;
     }
 }

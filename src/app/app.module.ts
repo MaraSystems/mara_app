@@ -8,11 +8,12 @@ import { appEffects, appReducers } from './app.state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
-import { ToastModule } from './toast/features/toast.module';
+import { ToastModule } from './shared/features/toast/features/toast.module';
 import { SidebarModule } from './shared/features/sidebar/sidebar.module';
 import { NavbarModule } from './shared/features/navbar/navbar.module';
 import { FootbarModule } from './shared/features/footbar/footbar.module';
 import { NotfoundModule } from './notfound/notfound.module';
+import { PopupModule } from './shared/features/popup/features/popup.module';
 
 
 @NgModule({
@@ -30,9 +31,9 @@ import { NotfoundModule } from './notfound/notfound.module';
     SidebarModule,
     NavbarModule,
     FootbarModule,
-    NotfoundModule
+    NotfoundModule,
+    PopupModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

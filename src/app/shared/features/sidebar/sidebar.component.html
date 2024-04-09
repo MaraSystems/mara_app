@@ -8,27 +8,27 @@
     
     <div class="pane">
         <div class="pane-item" routerLink="/dashboard" [ngClass]="{ 'pane-item-active': active === 'dashboard' }">
-            <span class="material-symbols-rounded pane-icon">dashboard</span>
+            <span class="material-symbols-outlined pane-icon">dashboard</span>
             <h1 *ngIf="openSidebar" class="pane-title text-1">Dashboard</h1>
         </div>
     
         <div class="pane-item" routerLink="/projects" [ngClass]="{ 'pane-item-active': active === 'projects' }">
-            <span class="material-symbols-rounded pane-icon">cases</span>
+            <span class="material-symbols-outlined pane-icon">cases</span>
             <h1 *ngIf="openSidebar" class="pane-title text-1">Projects</h1>
         </div>
     
         <div class="pane-item"routerLink="/contracts" [ngClass]="{ 'pane-item-active': active === 'contracts' }">
-            <span class="material-symbols-rounded pane-icon">checkbook</span>
+            <span class="material-symbols-outlined pane-icon">checkbook</span>
             <h1 *ngIf="openSidebar" class="pane-title text-1">Contracts</h1>
         </div>
     
         <div class="pane-item" routerLink="/wallet" [ngClass]="{ 'pane-item-active': active === 'wallet' }">
-            <span class="material-symbols-rounded pane-icon">wallet</span>
+            <span class="material-symbols-outlined pane-icon">wallet</span>
             <h1 *ngIf="openSidebar" class="pane-title text-1">Wallet</h1>
         </div>
     
         <div class="pane-item" routerLink="/settings" [ngClass]="{ 'pane-item-active': active === 'settings' }">
-            <span class="material-symbols-rounded pane-icon">settings</span>
+            <span class="material-symbols-outlined pane-icon">settings</span>
             <h1 *ngIf="openSidebar" class="pane-title text-1">Settings</h1>
         </div>
     </div>
@@ -36,10 +36,10 @@
 
 <div class="pane">
     <div class="pane-item" (click)="logout()">
-        <span class="material-symbols-rounded pane-icon">logout</span>
+        <span class="material-symbols-outlined pane-icon">logout</span>
         <h1 *ngIf="openSidebar" class="pane-title text-1">Logout</h1>
     </div>
 </div>
 <br>
 <br>
-<span class="material-symbols-rounded sidebar-toggle" (click)="openSidebar = !openSidebar">{{ openSidebar ? 'close_fullscreen' : 'open_in_full'}}</span>
+<span class="material-symbols-outlined sidebar-toggle" (click)="openSidebar = !openSidebar">{{ openSidebar ? 'close_fullscreen' : 'open_in_full'}}</span>

@@ -3,5 +3,5 @@
 }" [id]="toast.id">
     <h4 class="toast-title text-1">{{toast.data.title}}</h4>
     <p *ngIf="toast.data.description" class="toast-description text-2">{{toast.data.description}}</p>
-    <span class="material-symbols-rounded toast-close" (click)="closeToast(toast.id)">close</span>
+    <span class="material-symbols-outlined toast-close" (click)="closeToast(toast.id)">close</span>
 </span>

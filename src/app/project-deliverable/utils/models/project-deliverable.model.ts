@@ -1,10 +1,10 @@
 export class ProjectDeliverable {
     _id!: string;
     projectId!: string;
-    name!: string;
+    title!: string;
     description!: string;
     duration!: number;
-    cost!: number;
+    price!: number;
     files!: string[];
     image!: string;
     likes!: string[];

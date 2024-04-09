@@ -1,0 +1,37 @@
+:host {
+    display: flex;
+    padding: var(--gap-x-big) var(--gap-normal);
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-big);
+    height: calc(100% - calc(var(--gap-x-big) * 2));
+    width: calc(100% - calc(var(--gap-normal) * 2));
+    overflow: auto;
+
+    .form-collection {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-normal);
+        align-self: stretch;
+    }
+}
+
+@media only screen and (min-width: 760px){
+    :host {
+        padding: var(--gap-x-big);
+        gap: var(--gap-big);
+        max-width: var(--enclosed-tiny);
+        height: min-content;
+        width: calc(50% + calc(var(--gap-x-big) * 2));
+        margin: auto;
+        box-shadow: var(--shadow-elevated);
+        border-radius: var(--gap-x-small);
+        background-color: var(--color-light);
+
+        .form-collection {
+            display: flex;
+            flex-direction: row;
+            gap: var(--gap-normal);
+        }
+    }
+}

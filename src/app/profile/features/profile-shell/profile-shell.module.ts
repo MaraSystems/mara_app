@@ -4,6 +4,7 @@ import { ProfileShellComponent } from './profile-shell.component';
 import { ProfileShellRoutingModule } from './profile-shell-routing.module';
 import { TabsModule } from 'src/app/shared/ui/tabs/tabs.module';
 import { RouterModule } from '@angular/router';
+import { MoreModule } from 'src/app/shared/ui/more/more.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     ProfileShellRoutingModule,
     TabsModule,
-    RouterModule
+    RouterModule,
+    MoreModule
   ]
 })
 export class ProfileShellModule { }

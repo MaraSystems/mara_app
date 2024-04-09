@@ -1,13 +1,8 @@
-<div class="input">
-    <span class="input-info">
-        <label [for]="name" class="input-label text-1">{{name}}</label>
-        <h1 *ngIf="unit" class="input-unit">{{unit}}</h1>
-    </span>
+<span class="info">
+    <label [for]="name" class="label text-1">{{name}}</label>
+    <h1 *ngIf="measure" class="text-2 unit">{{measure}}</h1>
+</span>
 
-    <input [type]="type" [name]="name" class="form-control input-data text-1" *ngIf="!list" [(ngModel)]="value" [disabled]="disabled" (input)="onChange(value)" (blur)="onTouched()" [ngClass]="{ invalid }">
+<input [type]="type" [name]="name" class="form-control text-1" [formControl]="control" [ngClass]="{ invalid: (control.invalid && control.touched)}">
 
-    <select class="form-control input-data text-1" [name]="name" *ngIf="list" [(ngModel)]="value" [disabled]="disabled" (blur)="onTouched()" [ngClass]="{ invalid }" (ngModelChange)="onChange($event)">
-        <option disabled value="">Select {{name}}</option>
-        <option *ngFor="let item of list" [selected]="item === value" [ngValue]="item">{{ item }}</option>
-    </select>
-</div>
+<app-form-errors [control]="control" [name]="name"></app-form-errors>

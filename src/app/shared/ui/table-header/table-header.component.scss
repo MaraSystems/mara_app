@@ -1,0 +1,17 @@
+:host {
+    display: grid;
+
+    .header {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        gap: var(--gap-small);
+
+        &-title {
+            text-transform: capitalize;
+        }
+
+        &-sorter {
+            cursor: pointer;
+        }
+    }
+}

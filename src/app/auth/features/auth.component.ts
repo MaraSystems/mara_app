@@ -36,6 +36,10 @@ export class AuthComponent extends UnSubscriber implements OnInit {
     });
   }
 
+  getControl(name: string){
+    return this.form.controls[name] as FormControl;
+  }
+
   login() {    
     this.store.dispatch(new LoginAuthAction(this.loginData));
   }

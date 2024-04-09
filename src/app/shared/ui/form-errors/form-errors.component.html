@@ -1,0 +1,20 @@
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['required']">{{name}} is required</small>
+
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['email']">Email is invalid</small>
+
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['phone']">Phone is invalid</small>
+
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['maxlength']">{{name}} exceeds length {{control.errors['maxlength'].requiredLength}}</small>
+
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['minlength']">{{name}} not up to length {{control.errors['minlength'].requiredLength}}</small>
+
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['pattern']">{{name}} is invalid</small>
+
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['min']">{{name}} must be at least {{control.errors['min'].min}}</small>
+
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['max']">{{name}} must be at most {{control.errors['max'].max}}</small>
+
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['minfiles']">{{name}} must have at least {{control.errors['minfiles'].min}} files</small>
+
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['maxfiles']">{{name}} must have at most {{control.errors['maxfiles'].min}} files</small>
+

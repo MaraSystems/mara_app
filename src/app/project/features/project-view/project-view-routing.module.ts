@@ -6,6 +6,10 @@ const routes: Routes = [
   { 
     path: '', 
     component: ProjectViewComponent
+  },
+  {
+    path: 'deliverables',
+    loadChildren: () => import('../../../project-deliverable/features/project-deliverable-shell/project-deliverable-shell.module').then((m) => m.ProjectDeliverableShellModule)
   }
 ];
 

@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputComponent } from './input.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UnitDirective } from '../../utils/directives/unit.directive';
+import { DirectivesModule } from '../../utils/directives/directives.module';
+import { FormErrorsModule } from '../form-errors/form-errors.module';
 
 
 @NgModule({
@@ -10,10 +13,16 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    DirectivesModule,
+    FormErrorsModule
   ],
   exports: [
-    InputComponent
+    InputComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DirectivesModule
   ]
 })
 export class InputModule { }

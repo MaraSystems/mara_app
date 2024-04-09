@@ -1,29 +1,5 @@
 <app-tabs [list]="tabs" (select)="navigate($event)" [active]="selectedTab"></app-tabs>
 
-<div class="more">
-    <span class="options elevated" *ngIf="showMore">
-        <span class="options-item" [routerLink]="['info', { edit: 1 }]" (click)="showMore = false">
-            <span class="material-symbols-rounded option-icon">grid_view</span>
-            <h1 class="text-1 options-title">Update Profile</h1>
-        </span>
-
-        <span class="options-item" [routerLink]="['kin', { edit: 1 }]" (click)="showMore = false">
-            <span class="material-symbols-rounded option-icon">grid_view</span>
-            <h1 class="text-1 options-title">Update Kin</h1>
-        </span>
-
-        <span class="options-item" (click)="showMore = false">
-            <span class="material-symbols-rounded option-icon">grid_view</span>
-            <h1 class="text-1 options-title">Update Image</h1>
-        </span>
-
-        <span class="options-item" (click)="showMore = false">
-            <span class="material-symbols-rounded option-icon">grid_view</span>
-            <h1 class="text-1 options-title">Dashboard</h1>
-        </span>
-    </span>
-
-    <span class="material-symbols-rounded more-icon" (click)="showMore = !showMore">grid_view</span>
-</div>
+<app-more class="more" [list]="moreList"></app-more>
 
 <router-outlet></router-outlet>

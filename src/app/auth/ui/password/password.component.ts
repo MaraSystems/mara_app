@@ -9,17 +9,10 @@ import { GetPasswordAuthAction } from '../../utils/store/auth-store.action';
 @Component({
   selector: 'app-password',
   templateUrl: './password.component.html',
-  styleUrls: ['./password.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => PasswordComponent),
-      multi: true
-    }
-  ]
+  styleUrls: ['./password.component.scss']
 })
 export class PasswordComponent extends InputComponent {
-  @Input() clientEmail: string = '';
+  @Input() email: string = '';
   duration = 120;
   running = false;
 
@@ -37,7 +30,7 @@ export class PasswordComponent extends InputComponent {
 
   public request() {    
     this.running = true;
-    this.store.dispatch(new GetPasswordAuthAction(this.clientEmail));
+    this.store.dispatch(new GetPasswordAuthAction(this.email));
 
     const interval = setInterval(() => {
       this.duration--;

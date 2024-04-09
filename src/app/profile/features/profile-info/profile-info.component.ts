@@ -55,9 +55,9 @@ export class ProfileInfoComponent extends UnSubscriber implements OnInit {
     });
   }
 
-  isValid(name: string) {
-    const { invalid, touched } = this.form.controls[name];
-    return invalid && touched;
+  getControl(name: string) {
+    const control = this.form.controls[name] as FormControl;
+    return control;
   }
 
   isRequired(name: string) {

@@ -1,0 +1,105 @@
+:host {
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    grid-template-areas: 
+        "image image"
+        "details controls"
+        "button button"
+    ;
+    overflow: auto;
+    justify-content: center;
+    gap: var(--gap-normal) var(--gap-small);
+    padding: var(--gap-small);
+    position: relative;
+    width: -webkit-fill-available;
+
+    .image {
+        grid-area: image;
+        height: 200px;
+        width: -webkit-fill-available;
+        border-radius: var(--gap-normal);
+        box-shadow: var(--shadow-elevated);
+    }
+
+    .details {
+        grid-area: details;
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-small);
+        padding: var(--gap-small);
+        height: -webkit-fill-available;
+        box-shadow: var(--shadow-elevated);
+        border-radius: var(--gap-normal);
+
+        .title {
+            color: var(--color-black);
+        }
+
+        .summery {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-small);
+            border-radius: var(--gap-normal);
+            height: -webkit-fill-available;
+        }
+    }
+
+    .description {
+        display: none;
+    }
+
+    .controls {
+        grid-area: controls;
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-normal);
+        align-self: flex-end;
+        box-shadow: var(--shadow-elevated);
+        padding: var(--gap-x-small);
+        border-radius: var(--gap-normal);
+        height: -webkit-fill-available;
+        justify-content: space-around;
+
+        .more {
+            position: relative;
+        }
+    }
+
+    .button {
+        grid-area: button;
+        width: --webkit-fill-available;
+    }
+}
+
+@media only screen and (min-width: 760px){
+    :host {
+        padding: var(--gap-normal);
+        gap: var(--gap-normal);
+        grid-template-columns: repeat(7, 1fr) min-content;
+        grid-template-areas: 
+            "image image image details details details details details"
+            "description description description description description description description controls"
+            ". . . button button . . ."
+        ;
+
+        .image {
+            height: -webkit-fill-available;
+        }
+
+        .header {
+            box-shadow: var(--shadow-elevated);
+            border-radius: var(--gap-small);
+        }
+        
+        .description {
+            grid-area: description;
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-small);
+            padding: var(--gap-small);
+            height: -webkit-fill-available;
+            box-shadow: var(--shadow-elevated);
+            border-radius: var(--gap-normal);
+        }
+    }
+}

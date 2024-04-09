@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PasswordComponent } from './password.component';
 import { FormsModule } from '@angular/forms';
+import { InputModule } from 'src/app/shared/ui/input/input.module';
 
 
 @NgModule({
@@ -10,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    InputModule
   ],
   exports: [
     PasswordComponent

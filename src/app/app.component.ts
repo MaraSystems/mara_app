@@ -23,7 +23,7 @@ export class AppComponent  extends UnSubscriber implements OnInit {
     private store: Store<AppState>,
     private authAccessService: AuthAccessService,
     @Inject(DOCUMENT) private document: Document,
-    private router: Router
+    private router: Router,
   ) {
     super();
   }

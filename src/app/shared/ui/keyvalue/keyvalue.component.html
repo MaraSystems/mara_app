@@ -1,10 +1,16 @@
 <h5 class="text-1 key">{{ name }}</h5>
-<h5 class="text-1 value" *ngIf="!edit && type !== 'date'">{{ value }}</h5>
-<h5 class="text-1 value" *ngIf="!edit && type === 'date'">{{ value | date:'dd/mm/yy' }}</h5>
 
-<input class="text-1 input" [type]="type" [name]="name" [value]="value" *ngIf="edit && !list" [(ngModel)]="value" [disabled]="disabled" (input)="onChange(value)" (blur)="onTouched()" [ngClass]="{ invalid }">
+<h5 class="text-1 value" *ngIf="!edit && type !== 'date' && !measure">{{ getValue() || value }}</h5>
 
-<select class="text-1 select" [name]="name" *ngIf="edit && list" [(ngModel)]="value" [disabled]="disabled" (blur)="onTouched()" [ngClass]="{ invalid }" (ngModelChange)="onChange($event)">
+<h5 class="text-1 value" *ngIf="!edit && type !== 'date' && measure" [unit]="measure">{{ getValue() || value }}</h5>
+
+<h5 class="text-1 value" *ngIf="!edit && type === 'date' && !icon">{{ getValue() | date:'dd/mm/yy' }}</h5>
+
+<span class="material-symbols-outlined icon" *ngIf="icon" (click)="clickEvent.emit()">{{icon}}</span>
+
+<input class="text-1 input" [type]="type" [name]="name" *ngIf="edit && !list" [formControl]="control" [ngClass]="{ invalid: control.invalid }">
+
+<select class="text-1 select" [name]="name" *ngIf="edit && list" [ngClass]="{ invalid: control.invalid }" [formControl]="control">
     <option disabled value="">Select {{name}}</option>
-    <option *ngFor="let item of list" [selected]="item === value" [ngValue]="item">{{ item }}</option>
+    <option *ngFor="let item of list" [selected]="item === control.value" [ngValue]="item">{{ item }}</option>
 </select>

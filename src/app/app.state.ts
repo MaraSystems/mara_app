@@ -1,7 +1,7 @@
 import { ActionReducerMap } from "@ngrx/store";
 import { ClientState, clientReducer } from "./client/utils/store/client-store.reducer";
 import { ClientStoreEffect } from "./client/utils/store/client-store.effect";
-import { ToastState, toastReducer } from "./toast/utils/store/toast.reducer";
+import { ToastState, toastReducer } from "./shared/features/toast/utils/store/toast.reducer";
 import { AuthState, authReducer } from "./auth/utils/store/auth-store.reducer";
 import { AuthStoreEffect } from "./auth/utils/store/auth-store.effect";
 import { KinStoreEffect } from "./profile/features/kin/utils/store/kin-store.effect";
@@ -9,9 +9,9 @@ import { KinState, kinReducer } from "./profile/features/kin/utils/store/kin-sto
 import { routerReducer } from "@ngrx/router-store";
 import { RouterState } from "./router/store/router.reducer";
 import { ProjectStoreEffect } from "./project/utils/store/project-store.effect";
-import { ProjectDeliverableStoreEffect } from "./project/utils/store/project-deliverable-store.effect";
+import { ProjectDeliverableStoreEffect } from "./project-deliverable/utils/store/project-deliverable-store.effect";
 import { ProjectState, projectReducer } from "./project/utils/store/project-store.reducer";
-import { ProjectDeliverableState, projectDeliverableReducer } from "./project/utils/store/project-deliverable-store.reducer";
+import { ProjectDeliverableState, projectDeliverableReducer } from "./project-deliverable/utils/store/project-deliverable-store.reducer";
 
 export const appEffects = [
     ClientStoreEffect,
@@ -28,7 +28,7 @@ export interface AppState {
     kins: KinState,
     router: RouterState,
     projects: ProjectState,
-    'project-deliverables': ProjectDeliverableState
+    projectDeliverables: ProjectDeliverableState
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -38,5 +38,5 @@ export const appReducers: ActionReducerMap<AppState> = {
     kins: kinReducer,
     router: routerReducer,
     projects: projectReducer,
-    'project-deliverables': projectDeliverableReducer
+    projectDeliverables: projectDeliverableReducer
 }

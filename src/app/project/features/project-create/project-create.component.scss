@@ -4,17 +4,18 @@
     flex-direction: column;
     align-items: center;
     gap: var(--gap-big);
-    height: 100%;
-    width: 100%;
+    height: calc(100% - calc(var(--gap-x-big) * 2));
+    width: calc(100% - calc(var(--gap-normal) * 2));
+    overflow: auto;
 }
 
-@media only screen and (min-width: 700px){
+@media only screen and (min-width: 760px){
     :host {
         padding: var(--gap-x-big);
         gap: var(--gap-big);
         max-width: var(--enclosed-tiny);
-        height: 50%;
-        width: 50%;
+        height: min-content;
+        width: calc(50% + calc(var(--gap-x-big) * 2));
         margin: auto;
         box-shadow: var(--shadow-elevated);
         border-radius: var(--gap-x-small);

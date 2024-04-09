@@ -1,1 +1,40 @@
-<p>project-view works!</p>
+<img class="image" [src]="project.image || '../../../../assets/images/db.png'" alt="" srcset="">
+<div class="details">
+    <span class="header-3 title">{{project.title}}</span>
+    <div class="summery">
+        <app-keyvalue name="category" [value]="project.category"></app-keyvalue>
+        <app-keyvalue name="duration" [value]="'2'" unit="days"></app-keyvalue>
+        <app-keyvalue name="price" [value]="'30'" unit="NGN"></app-keyvalue>
+        <app-keyvalue name="status" [value]="project.status"></app-keyvalue>
+        <app-keyvalue name="description" icon="arrow_outward" (clickEvent)="popupService.open('project-description')"></app-keyvalue>
+        <app-keyvalue name="deliverables" icon="arrow_outward" (clickEvent)="popupService.open('project-deliverables')"></app-keyvalue>
+    </div>
+</div>
+
+<div class="description">
+    <h1 class="header-3">Description</h1>
+    <p class="description-text text-1">{{project.description}}</p>
+</div>
+
+<div class="controls">
+    <app-icon-counter icon="thumb_up" [value]="10"></app-icon-counter>
+    <app-icon-counter icon="comment" [value]="10"></app-icon-counter>
+    <app-icon-counter icon="share" [value]="10"></app-icon-counter>
+    <app-icon-counter icon="bookmark" [value]="10"></app-icon-counter>
+    <app-more class="more" [list]="moreList"></app-more>
+</div>
+
+<button class="button text-1">Initiate Contract</button>
+
+<app-popup name="project-deliverables">
+    <app-project-deliverable-list></app-project-deliverable-list>
+</app-popup>
+
+<app-popup name="project-description">
+    <h1 class="header-3">Description</h1>
+    <p class="description-text text-1">{{project.description}}</p>
+</app-popup>
+
+<app-popup name="project-update">
+    <app-project-update></app-project-update>
+</app-popup>

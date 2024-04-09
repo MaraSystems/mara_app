@@ -2,9 +2,9 @@
 
 <div class="container">
     <form action="" class="form" [formGroup]="form" (ngSubmit)="register()">
-        <app-input type="email" name="email" class="form-group" formControlName="email" [invalid]="isValid('email')"></app-input>
-        <app-input type="phone" name="phone" class="form-group" formControlName="phone" [invalid]="isValid('phone')"></app-input>
-        <app-input type="text" name="username" class="form-group" formControlName="username" [invalid]="isValid('username')"></app-input>
+        <app-input type="email" name="email" class="form-group" [control]="getControl('email')"></app-input>
+        <app-input type="phone" name="phone" class="form-group" [control]="getControl('phone')"></app-input>
+        <app-input type="text" name="username" class="form-group" [control]="getControl('username')"></app-input>
 
         <button 
             [disabled]="form.invalid"
@@ -16,7 +16,7 @@
 
     <app-alt-auth></app-alt-auth>
     
-    <span class="login-option text-2">
+    <span class="login-option text-1">
         Already have an account? <a [routerLink]="'/auth'">Login</a>
     </span>
 </div>

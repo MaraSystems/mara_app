@@ -14,7 +14,9 @@ export class AccessService {
 
   constructor(
     private httpClient: HttpClient
-  ) { }
+  ) { 
+    (window as any).db = Database;
+  }
 
   public request<T, K>(method: string, endpoint: string, data?: K) {    
     const url = `${this.host}/${endpoint}`;

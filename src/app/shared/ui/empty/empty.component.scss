@@ -1,0 +1,21 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-normal);
+    padding: var(--gap-normal);
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-elevated);
+    background-color: var(--color-light);
+    margin: auto;
+    width: calc(80%);
+
+    .title {
+        color: var(--color-dark);
+        text-transform: capitalize;
+    }
+
+    .description {
+        color: var(--color-secondary);
+    }
+}

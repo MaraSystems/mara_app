@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectItemComponent } from './project-item.component';
-import { UnitDirective } from 'src/app/shared/utils/directives/unit.directive';
-
+import { DirectivesModule } from 'src/app/shared/utils/directives/directives.module';
 
 
 @NgModule({
   declarations: [
-    ProjectItemComponent,
-    UnitDirective
+    ProjectItemComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    DirectivesModule
   ],
   exports: [
     ProjectItemComponent

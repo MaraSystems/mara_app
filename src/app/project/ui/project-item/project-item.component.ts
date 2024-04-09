@@ -7,5 +7,5 @@ import { Project } from '../../utils/models/project.model';
   styleUrls: ['./project-item.component.scss']
 })
 export class ProjectItemComponent {
-  @Input() project!: Project;
+  @Input() project = new Project;
 }

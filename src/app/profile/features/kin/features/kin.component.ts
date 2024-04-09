@@ -63,9 +63,8 @@ export class KinComponent extends UnSubscriber implements OnInit {
     });
   }
 
-  isValid(name: string) {
-    const { invalid, touched } = this.form.controls[name];
-    return invalid && touched;
+  getControl(name: string){
+    return this.form.controls[name] as FormControl;
   }
 
   isRequired(name: string) {
