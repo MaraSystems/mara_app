@@ -25,6 +25,13 @@
                 </button>
                 <button 
                     class="button text-1 bordered"
+                    routerLink="/profile"
+                    *ngIf="auth"
+                    [ngStyle]="{ color: 'var(--color-primary)', backgroundColor: 'var(--color-light)', borderColor: 'var(--color-primary)' }">
+                    Profile
+                </button>
+                <button 
+                    class="button text-1 bordered"
                     routerLink="/showcase"
                     [ngStyle]="{ color: 'var(--color-primary)', backgroundColor: 'var(--color-black)', borderColor: 'var(--color-primary)' }">
                     Explore
