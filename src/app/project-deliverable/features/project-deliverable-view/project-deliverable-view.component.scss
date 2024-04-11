@@ -4,16 +4,14 @@
     grid-template-areas: 
         "image image"
         "details controls"
-        "description description"
-        "deliverables deliverables"
         "button button"
     ;
+    overflow: auto;
     justify-content: center;
     gap: var(--gap-normal) var(--gap-small);
     padding: var(--gap-small);
     position: relative;
     width: -webkit-fill-available;
-    height: max-content;
 
     .image {
         grid-area: image;
@@ -47,42 +45,7 @@
     }
 
     .description {
-        grid-area: description;
-        display: flex;
-        flex-direction: column;
-        gap: var(--gap-small);
-        padding: var(--gap-normal);
-        height: -webkit-fill-available;
-        box-shadow: var(--shadow-elevated);
-        border-radius: var(--gap-normal);
-
-        &-title {
-            border-bottom: 1px solid var(--color-black);
-        }
-    }
-
-    .deliverables {
-        grid-area: deliverables;
-        display: flex;
-        flex-direction: column;
-        gap: var(--gap-small);
-        padding: var(--gap-normal);
-        height: -webkit-fill-available;
-        box-shadow: var(--shadow-elevated);
-        border-radius: var(--gap-normal);
-
-        &-title {
-            border-bottom: 1px solid var(--color-black);
-        }
-
-        &-list {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--gap-normal);
-            width: -webkit-fill-available;
-            padding: var(--gap-normal) var(--gap-none);
-        }
+        display: none;
     }
 
     .controls {
@@ -106,13 +69,6 @@
         grid-area: button;
         width: --webkit-fill-available;
     }
-
-    .delete {
-        display: flex;
-        flex-direction: column;
-        gap: var(--gap-small);
-        padding: var(--gap-normal);
-    }
 }
 
 @media only screen and (min-width: 760px){
@@ -123,10 +79,8 @@
         grid-template-areas: 
             "image image image details details details details details"
             "description description description description description description description controls"
-            "deliverables deliverables deliverables deliverables deliverables deliverables deliverables deliverables"
-            ". . button button button button . ."
+            ". . . button button . . ."
         ;
-        max-width: 1000px;
 
         .image {
             height: -webkit-fill-available;
@@ -135,6 +89,17 @@
         .header {
             box-shadow: var(--shadow-elevated);
             border-radius: var(--gap-small);
+        }
+        
+        .description {
+            grid-area: description;
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-small);
+            padding: var(--gap-small);
+            height: -webkit-fill-available;
+            box-shadow: var(--shadow-elevated);
+            border-radius: var(--gap-normal);
         }
     }
 }

@@ -19,7 +19,7 @@ export class ClientAccessService {
 
   registerClient(data: NewClient) {        
     const response = this.accessService.insert<Client>(this.domain, data);
-    return of(response);
+    return response;
   }
 
   getClient(id: string) {    
@@ -29,6 +29,6 @@ export class ClientAccessService {
 
   updateClient(data: Update<Client>) {    
     const response = this.accessService.update<Client>(this.domain, { _id: data.id }, data.changes);    
-    return of(response);
+    return response;
   }
 }

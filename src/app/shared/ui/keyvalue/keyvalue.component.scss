@@ -6,6 +6,7 @@
     justify-content: space-between;
     align-self: stretch;
     display: flex;
+    padding: 0em var(--gap-x-small);
 
     .key, .value, .input, .select{
         color: var(--color-dark);

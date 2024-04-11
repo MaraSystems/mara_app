@@ -29,7 +29,7 @@ export class AccessService {
     const collection = this.db.createCollection<T>(endpoint);
     const data = collection.insertOne(entry as T);
     const response: DataResponse<T> = { success: true, data };
-    return response;
+    return of(response);
   }
 
   public get<T>(endpoint: string, query: any) {
@@ -37,13 +37,13 @@ export class AccessService {
     const data = collection.findOne(query);
     if (!data) {
       return throwError(() => 'Not found');
-    }
+    }    
     const response: DataResponse<T> = { success: true, data: data as T };
     return of(response);
   }
 
   public list<T>(endpoint: string, query: any) {
-    const collection = this.db.createCollection<T>(endpoint);
+    const collection = this.db.createCollection<T>(endpoint);    
     const data = collection.find(query);
     
     const response: DataResponse<T> = { success: true, data: data as T };
@@ -54,6 +54,16 @@ export class AccessService {
     const collection = this.db.createCollection<T>(endpoint);
     const data = collection.updateOne(query, changes) as T;
     const response: DataResponse<T> = { success: true, data };
-    return response;
+    return of(response);
+  }
+
+  public remove<T>(endpoint: string, query: any) {
+    const collection = this.db.createCollection<T>(endpoint);
+    const data = collection.removeOne(query);
+    if (!data) {
+      return throwError(() => 'Not found');
+    }
+    const response: DataResponse<T> = { success: true, data: data as T };
+    return of(response);
   }
 }

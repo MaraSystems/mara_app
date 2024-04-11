@@ -1,0 +1,35 @@
+<img class="image" [src]="projectDeliverable.image || '../../../../assets/images/db.png'" alt="" srcset="">
+<div class="details">
+    <span class="header-3 title">{{projectDeliverable.title}}</span>
+    <div class="summery">
+        <app-keyvalue name="duration" [value]="projectDeliverable.duration" unit="days"></app-keyvalue>
+        <app-keyvalue name="price" [value]="projectDeliverable.price" unit="NGN"></app-keyvalue>
+        <app-keyvalue name="description" icon="arrow_outward" (clickEvent)="popupService.open('project-deliverable-description')"></app-keyvalue>
+        <app-keyvalue name="Files" icon="arrow_outward" (clickEvent)="popupService.open('project-deliverable-files')"></app-keyvalue>
+    </div>
+</div>
+
+<div class="description">
+    <h1 class="header-3">Description</h1>
+    <p class="description-text text-1">{{projectDeliverable.description}}</p>
+</div>
+
+<div class="controls">
+    <app-icon-counter icon="thumb_up" [value]="10"></app-icon-counter>
+    <app-icon-counter icon="comment" [value]="10"></app-icon-counter>
+    <app-icon-counter icon="share" [value]="10"></app-icon-counter>
+    <app-more class="more" [list]="moreList"></app-more>
+</div>
+
+<app-popup name="project-deliverable-files">
+    <app-project-deliverable-files></app-project-deliverable-files>
+</app-popup>
+
+<app-popup name="project-deliverable-description">
+    <h1 class="header-3">Description</h1>
+    <p class="description-text text-1">{{projectDeliverable.description}}</p>
+</app-popup>
+
+<app-popup name="project-deliverable-update">
+    <app-project-deliverable-update></app-project-deliverable-update>
+</app-popup>

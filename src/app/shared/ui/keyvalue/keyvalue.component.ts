@@ -10,7 +10,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 export class KeyvalueComponent extends InputComponent {
   @Input() edit = false;
   @Input() icon!: string;
-  @Input() value!: string;
+  @Input() value!: string | null | number;
   @Input() list!: string[];
 
   @Output() clickEvent = new EventEmitter<string>();

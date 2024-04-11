@@ -26,7 +26,7 @@ export class ProjectDeliverableListComponent extends UnSubscriber implements OnI
     this.id = this.activatedRoute.snapshot.paramMap.get('id') as string;    
     this.store.dispatch(new ListProjectDeliverablesAction(this.id, { limit: 10, skip: 1 }));
 
-    this.newSubscription = this.store.select(selectAllProjectDeliverables).subscribe(deliverables => {      
+    this.newSubscription = this.store.select(selectAllProjectDeliverables(this.id)).subscribe(deliverables => {      
       this.deliverables = deliverables;      
     });
   }

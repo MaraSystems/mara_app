@@ -7,7 +7,7 @@ import { Toast } from "src/app/shared/features/toast/features/toast.model";
 import { Router } from "@angular/router";
 import { DataResponse } from "src/app/shared/utils/models/data-response";
 import { ProjectAccessService } from "../access/project-access.service";
-import { CreateProjectAction, CreateProjectActionFail, CreateProjectActionSuccess, GetProjectAction, GetProjectActionFail, GetProjectActionSuccess, ListProjectsAction, ListProjectsActionFail, ListProjectsActionSuccess, ProjectActionsType, UpdateProjectAction, UpdateProjectActionFail, UpdateProjectActionSuccess } from "./project-store.action";
+import { CreateProjectAction, CreateProjectActionFail, CreateProjectActionSuccess, DeleteProjectAction, DeleteProjectActionFail, DeleteProjectActionSuccess, GetProjectAction, GetProjectActionFail, GetProjectActionSuccess, ListProjectsAction, ListProjectsActionFail, ListProjectsActionSuccess, ProjectActionsType, UpdateProjectAction, UpdateProjectActionFail, UpdateProjectActionSuccess } from "./project-store.action";
 import { Project } from "../models/project.model";
 
 @Injectable()
@@ -23,11 +23,9 @@ export class ProjectStoreEffect {
         ofType<CreateProjectAction>(ProjectActionsType.CREATE_PROJECT),
         mergeMap((action: CreateProjectAction) => 
             this.projectAccessService.createProject(action.payload).pipe(
-                tap(() => {
+                map((response: DataResponse<Project>) => {
                     this.store.dispatch(new AddToast(new Toast({ description: 'Project Creation' })));
                     this.router.navigateByUrl('/projects');
-                }),
-                map((response: DataResponse<Project>) => {
                     return new CreateProjectActionSuccess(response.data);
                 }),
                 catchError(err => of(new CreateProjectActionFail(err)).pipe(
@@ -43,10 +41,6 @@ export class ProjectStoreEffect {
         ofType<UpdateProjectAction>(ProjectActionsType.UPDATE_PROJECT),
         mergeMap((action: UpdateProjectAction) => 
             this.projectAccessService.updateProject(action.payload).pipe(
-                tap(() => {
-                    this.store.dispatch(new AddToast(new Toast({ description: 'User update' })));
-                    this.router.navigate(['/project', action.payload.id]);
-                }),
                 map((response: DataResponse<Project>) => {                    
                     return new UpdateProjectActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
@@ -63,7 +57,7 @@ export class ProjectStoreEffect {
         ofType<GetProjectAction>(ProjectActionsType.GET_PROJECT),
         mergeMap((action: GetProjectAction) => 
             this.projectAccessService.getProject(action.payload).pipe(
-                map((response: DataResponse<Project>) => {                    
+                map((response: DataResponse<Project>) => {                                        
                     return new GetProjectActionSuccess(response.data);
                 }),
                 catchError(err => of(new GetProjectActionFail(err))
@@ -79,6 +73,20 @@ export class ProjectStoreEffect {
                     return new ListProjectsActionSuccess(response.data);
                 }),
                 catchError(err => of(new ListProjectsActionFail(err))
+            )
+        )
+    )));
+
+    deleteProject$ = createEffect(() => this.actions$.pipe(
+        ofType<DeleteProjectAction>(ProjectActionsType.DELETE_PROJECT),
+        mergeMap((action: DeleteProjectAction) => 
+            this.projectAccessService.deleteProject(action.payload).pipe(
+                map((response: DataResponse<Project>) => {         
+                    this.store.dispatch(new AddToast(new Toast({ description: 'Project Deleted' })));
+                    this.router.navigateByUrl('/projects');           
+                    return new DeleteProjectActionSuccess(response.data);
+                }),
+                catchError(err => of(new DeleteProjectActionFail(err))
             )
         )
     )));

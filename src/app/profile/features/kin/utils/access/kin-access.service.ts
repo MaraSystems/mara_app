@@ -17,7 +17,7 @@ export class KinAccessService {
 
   createKin(data: Kin) {    
     const response = this.accessService.insert<Kin>(this.domain, data);
-    return of(response);
+    return response;
   }
 
   getKin(userId: string) {    
@@ -27,6 +27,6 @@ export class KinAccessService {
 
   updateKin(data: Update<Kin>) {    
     const response = this.accessService.update<Kin>(this.domain, { _id: data.id }, data.changes);    
-    return of(response);
+    return response;
   }
 }

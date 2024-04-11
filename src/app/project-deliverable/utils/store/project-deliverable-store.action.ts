@@ -68,7 +68,7 @@ export class GetProjectDeliverableActionFail implements Action {
 
 export class ListProjectDeliverablesAction implements Action {
     readonly type = ProjectDeliverableActionsType.LIST_PROJECT_DELIVERABLES;
-    constructor(public projectId: string, public payload: ListPayload){}
+    constructor(public projectId: string, public payload?: ListPayload){}
 }
 
 export class ListProjectDeliverablesActionSuccess implements Action {

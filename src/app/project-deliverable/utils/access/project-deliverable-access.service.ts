@@ -16,7 +16,7 @@ export class ProjectDeliverableAccessService {
 
   createProjectDeliverable(data: ProjectDeliverable) {        
     const response = this.accessService.insert<ProjectDeliverable>(this.domain, data);    
-    return of(response);
+    return response;
   }
 
   getProjectDeliverable(id: string) {    
@@ -31,6 +31,6 @@ export class ProjectDeliverableAccessService {
 
   updateProjectDeliverable(data: Update<ProjectDeliverable>) {    
     const response = this.accessService.update<ProjectDeliverable>(this.domain, { _id: data.id }, data.changes);
-    return of(response);
+    return response;
   }
 }

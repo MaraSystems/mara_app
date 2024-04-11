@@ -1,7 +1,7 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { Action } from "@ngrx/store";
 import { Project } from "../models/project.model";
-import { CreateProjectActionFail, CreateProjectActionSuccess, GetProjectActionSuccess, ListProjectsActionFail, ListProjectsActionSuccess, ProjectActionsType, UpdateProjectActionFail, UpdateProjectActionSuccess } from "./project-store.action";
+import { CreateProjectActionFail, CreateProjectActionSuccess, DeleteProjectActionFail, DeleteProjectActionSuccess, GetProjectActionFail, GetProjectActionSuccess, ListProjectsActionFail, ListProjectsActionSuccess, ProjectActionsType, UpdateProjectActionFail, UpdateProjectActionSuccess } from "./project-store.action";
 
 export interface ProjectState extends EntityState<Project> {
     selectedId: string | null;
@@ -61,7 +61,7 @@ export function projectReducer(state = initialState, action: Action): ProjectSta
             return { ...state, loading: true, loaded: false };
 
         case ProjectActionsType.GET_PROJECT_SUCCESS:
-            const { payload: getPayload } = (action as GetProjectActionSuccess);
+            const { payload: getPayload } = (action as GetProjectActionSuccess);            
             return projectAdapter.addOne(
                 getPayload, { ...state, loading: false, loaded: true }
             )
@@ -71,7 +71,7 @@ export function projectReducer(state = initialState, action: Action): ProjectSta
                 ...state,
                 loading: false,
                 loaded: true,
-                error: (action as UpdateProjectActionFail).payload
+                error: (action as GetProjectActionFail).payload
             } 
 
         case ProjectActionsType.LIST_PROJECTS:
@@ -89,6 +89,23 @@ export function projectReducer(state = initialState, action: Action): ProjectSta
                 loading: false,
                 loaded: true,
                 error: (action as ListProjectsActionFail).payload
+            } 
+        
+        case ProjectActionsType.DELETE_PROJECT:
+            return { ...state, loading: true, loaded: false };
+
+        case ProjectActionsType.DELETE_PROJECT_SUCCESS:
+            const { payload: deletePayload } = (action as DeleteProjectActionSuccess);
+            return projectAdapter.removeOne(
+                deletePayload._id, { ...state, loading: false, loaded: true }
+            )
+            
+        case ProjectActionsType.DELETE_PROJECT_FAIL:
+            return {
+                ...state,
+                loading: false,
+                loaded: true,
+                error: (action as DeleteProjectActionFail).payload
             } 
     
         

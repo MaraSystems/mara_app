@@ -18,7 +18,11 @@ export enum ProjectActionsType {
 
     LIST_PROJECTS = "[PROJECT] List Projects",
     LIST_PROJECTS_SUCCESS = "[PROJECT] List Projects Success",
-    LIST_PROJECTS_FAIL = "[PROJECT] List Projects Fail"
+    LIST_PROJECTS_FAIL = "[PROJECT] List Projects Fail",
+
+    DELETE_PROJECT = "[PROJECT] Delete Project",
+    DELETE_PROJECT_SUCCESS = "[PROJECT] Delete Project Success",
+    DELETE_PROJECT_FAIL = "[PROJECT] Delete Project Fail",
 }
 
 export class CreateProjectAction implements Action {
@@ -81,6 +85,21 @@ export class ListProjectsActionFail implements Action {
     constructor(public payload: string){}
 }
 
+export class DeleteProjectAction implements Action {
+    readonly type = ProjectActionsType.DELETE_PROJECT;
+    constructor(public payload: string){}
+}
+
+export class DeleteProjectActionSuccess implements Action {
+    readonly type = ProjectActionsType.DELETE_PROJECT_SUCCESS;
+    constructor(public payload: Project){}
+}
+
+export class DeleteProjectActionFail implements Action {
+    readonly type = ProjectActionsType.DELETE_PROJECT_FAIL;
+    constructor(public payload: string){}
+}
+
 export type ProjectAction = 
 CreateProjectAction |
 CreateProjectActionSuccess |
@@ -90,4 +109,10 @@ UpdateProjectActionSuccess |
 UpdateProjectActionFail |
 GetProjectAction |
 GetProjectActionSuccess |
-GetProjectActionFail;
+GetProjectActionFail |
+ListProjectsAction |
+ListProjectsActionSuccess |
+ListProjectsActionFail |
+DeleteProjectAction |
+DeleteProjectActionSuccess |
+DeleteProjectActionFail;

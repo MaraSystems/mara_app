@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 import { Update } from '@ngrx/entity';
 import { Project } from '../models/project.model';
 import { ListPayload } from 'src/app/shared/utils/models/list-payload';
+import { ProjectStatus } from '../models/project-status.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class ProjectAccessService {
 
   createProject(data: Project) {    
     const response = this.accessService.insert<Project>(this.domain, data);
-    return of(response);
+    return response;
   }
 
   getProject(id: string) {    
@@ -28,12 +29,17 @@ export class ProjectAccessService {
   }
 
   listProjects(data: ListPayload) {
-    const response = this.accessService.list<[Project]>(this.domain, null);
+    const response = this.accessService.list<[Project]>(this.domain, { status: ProjectStatus.DRAFT });
     return response;
   }
 
   updateProject(data: Update<Project>) {    
     const response = this.accessService.update<Project>(this.domain, { _id: data.id }, data.changes);
-    return of(response);
+    return response;
+  }
+
+  deleteProject(id: string) {    
+    const response = this.accessService.update<Project>(this.domain, { _id: id }, { status: ProjectStatus.DELETED });
+    return response;
   }
 }

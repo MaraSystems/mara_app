@@ -7,6 +7,7 @@ import { AppState } from 'src/app/app.state';
 import { CreateProjectAction } from '../../utils/store/project-store.action';
 import { projectCategories } from 'src/app/shared/utils/models/project-categories';
 import { upload } from 'src/app/shared/utils/lib/upload';
+import { ProjectStatus } from '../../utils/models/project-status.enum';
 
 @Component({
   selector: 'app-project-create',
@@ -14,7 +15,7 @@ import { upload } from 'src/app/shared/utils/lib/upload';
   styleUrls: ['./project-create.component.scss']
 })
 export class ProjectCreateComponent extends UnSubscriber implements OnInit {
-  projectData!: Project;
+  project!: Project;
   form!: FormGroup;
   categories = projectCategories;
 
@@ -28,7 +29,7 @@ export class ProjectCreateComponent extends UnSubscriber implements OnInit {
     this.initForm();
 
     this.newSubscription = this.form.valueChanges.subscribe(data => {      
-      this.projectData = data;
+      this.project = data;
     });
   }
 
@@ -37,7 +38,7 @@ export class ProjectCreateComponent extends UnSubscriber implements OnInit {
       title: new FormControl(null, [Validators.minLength(3), Validators.required]),
       category: new FormControl(null, [Validators.required]),
       tags: new FormControl(null, [Validators.required]),
-      description: new FormControl(null, [Validators.maxLength(1000)]),
+      description: new FormControl(null, [Validators.maxLength(5000)]),
       image: new FormControl(null),
     });
   }
@@ -53,6 +54,6 @@ export class ProjectCreateComponent extends UnSubscriber implements OnInit {
   }
 
   createProject() {    
-    this.store.dispatch(new CreateProjectAction(this.projectData));
+    this.store.dispatch(new CreateProjectAction({ ...this.project, status: ProjectStatus.DRAFT }));
   }
 }

@@ -8,6 +8,9 @@ import { MoreModule } from 'src/app/shared/ui/more/more.module';
 import { PopupModule } from 'src/app/shared/features/popup/features/popup.module';
 import { ProjectDeliverableListModule } from '../../../project-deliverable/features/project-deliverable-list/project-deliverable-list.module';
 import { ProjectUpdateModule } from '../project-update/project-update.module';
+import { DirectivesModule } from 'src/app/shared/utils/directives/directives.module';
+import { EmptyModule } from 'src/app/shared/ui/empty/empty.module';
+import { ProjectDeliverableItemModule } from 'src/app/project-deliverable/ui/project-deliverable-item/project-deliverable-item.module';
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import { ProjectUpdateModule } from '../project-update/project-update.module';
     MoreModule,
     PopupModule,
     ProjectDeliverableListModule,
-    ProjectUpdateModule
+    ProjectUpdateModule,
+    ProjectDeliverableItemModule,
+    DirectivesModule,
+    EmptyModule
   ]
 })
 export class ProjectViewModule { }

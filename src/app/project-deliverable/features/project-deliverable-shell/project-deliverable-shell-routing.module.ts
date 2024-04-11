@@ -14,12 +14,12 @@ const routes: Routes = [
       (m) => m.ProjectDeliverableCreateModule
     )
   },
-  // { 
-  //   path: ':id', 
-  //   loadChildren: () => import('../project-view/project-view.module').then(
-  //     (m) => m.ProjectViewModule
-  //   )
-  // },
+  { 
+    path: ':id', 
+    loadChildren: () => import('../project-deliverable-view/project-deliverable-view.module').then(
+      (m) => m.ProjectDeliverableViewModule
+    )
+  },
 ];
 
 @NgModule({
