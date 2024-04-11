@@ -19,7 +19,8 @@ const initialState = toastAdapter.getInitialState(defualtIssue);
 export function toastReducer(state = initialState, action: ToastActions): ToastState {
     switch (action.type) {
         case ToastActionTypes.ADD_TOAST:
-            return toastAdapter.addOne((action as AddToast).payload, { ...state })
+            const toast = new Toast((action as AddToast).payload);
+            return toastAdapter.addOne(toast, { ...state })
         case ToastActionTypes.REMOVE_TOAST:
             return toastAdapter.removeOne((action as RemoveToast).payload, { ...state })
         default:

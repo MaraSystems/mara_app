@@ -9,7 +9,7 @@
         <app-file-input name="image" class="form-group" [control]="getControl('image')"></app-file-input>
 
         <button 
-            [disabled]="form.invalid"
+            [disabled]="!updateData || form.invalid"
             class="button form-group text-1"
             type="submit">
             Save Project

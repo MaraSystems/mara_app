@@ -1,31 +1,28 @@
 import { v4 as uuid } from 'uuid';
 
-interface IToast {
-    title: string;
-    isError: boolean;
-    description: string;
-    duration: number;
+export interface IToast {
+    isError?: boolean;
+    description?: string;
+    duration?: number;
 }
 
 export class Toast {
     id: string = '';
+    title = '';
+    duration = 5;
+    description = '';
+    isError = false;
 
     constructor(
         public data: Partial<IToast>
-    ){
+    ){        
+        const { duration, isError, description } = data;
         this.id = uuid();
-        this.data.duration = this.data.duration 
-            ? this.data.duration
-            : 5;
-
-        this.data.isError = this.data.isError 
-            ? this.data.isError
-            : false;
-
-        this.data.title = this.data.title
-            ? this.data.title
-            : this.data.isError
-                ? 'Failed'
-                : 'Successful'
+        this.duration = duration || 5;
+        this.isError = isError || false;
+        this.description = description || '';
+        this.title = isError
+            ? 'Failed'
+            : 'Successful'
     }
 }

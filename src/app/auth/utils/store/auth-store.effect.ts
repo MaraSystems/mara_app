@@ -31,7 +31,7 @@ export class AuthStoreEffect {
                 }),
                 catchError(err => of(new GetPasswordAuthActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast({ isError: true, description: 'Password Request' })));
+                        this.store.dispatch(new AddToast({ isError: true, description: 'Password Request' }));
                     })
                 ))
             )
@@ -43,7 +43,7 @@ export class AuthStoreEffect {
         mergeMap((action: LoginAuthAction) => 
             this.authAccessService.login(action.payload).pipe(
                 tap(() => {                    
-                    this.store.dispatch(new AddToast(new Toast({ description: 'Sign In' })));
+                    this.store.dispatch(new AddToast({ description: 'Sign In' }));
                     this.routerService.navigate('/profile');
                 }),
                 map((response: DataResponse<Auth>) => {                    
@@ -52,7 +52,7 @@ export class AuthStoreEffect {
                 }),
                 catchError(err => of(new LoginAuthActionFail(err)).pipe(
                     tap(() => {                                                
-                        this.store.dispatch(new AddToast(new Toast({ isError: true, description: 'Sign In' })));
+                        this.store.dispatch(new AddToast({ isError: true, description: 'Sign In' }));
                     })
                 ))
             )
@@ -77,7 +77,7 @@ export class AuthStoreEffect {
         mergeMap((action: LogoutAuthAction) => 
             this.authAccessService.logout().pipe(
                 tap(() => {
-                    this.store.dispatch(new AddToast(new Toast({ description: 'Sign Out' })));
+                    this.store.dispatch(new AddToast({ description: 'Sign Out' }));
                     this.routerService.navigate('/auth');
                 }),
                 map(() => {
@@ -85,7 +85,7 @@ export class AuthStoreEffect {
                 }),
                 catchError(err => of(new LogoutAuthActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast({ isError: true, description: 'Sign Out' })));
+                        this.store.dispatch(new AddToast({ isError: true, description: 'Sign Out' }));
                     })
                 ))
             )

@@ -5,12 +5,11 @@ import { PopupComponent } from './popup.component';
   providedIn: 'root'
 })
 export class PopupService {
-
-  private popups: PopupComponent[] = [];
+  public popups: PopupComponent[] = [];
 
   constructor() { }
 
-  add(popup: PopupComponent) {    
+  add(popup: PopupComponent) {        
     if (this.popups.find(m => m.name == popup.name)) {
       console.error(`${popup.name} is already taken by another pop-up`);
       return;
@@ -25,7 +24,7 @@ export class PopupService {
 
   open(name: string, data?: any) {    
     const popup = this.popups.find(x => x.name === name) as PopupComponent;
-    popup.open(data);
+    popup.open(data);    
   }
 
   close(name: string) {

@@ -24,7 +24,7 @@ export class ClientStoreEffect {
         mergeMap((action: RegisterClientAction) => 
             this.clientAccessService.registerClient(action.payload).pipe(
                 tap(() => {
-                    this.store.dispatch(new AddToast(new Toast({ description: 'User Registration' })));
+                    this.store.dispatch(new AddToast({ description: 'User Registration' }));
                     this.routerService.navigate('/auth');
                 }),
                 map((response: DataResponse<Client>) => {
@@ -32,7 +32,7 @@ export class ClientStoreEffect {
                 }),
                 catchError(err => of(new RegisterClientActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast({ isError: true, description: 'User Registration' })));
+                        this.store.dispatch(new AddToast({ isError: true, description: 'User Registration' }));
                     })
                 ))
             )
@@ -44,7 +44,7 @@ export class ClientStoreEffect {
         mergeMap((action: UpdateClientAction) => 
             this.clientAccessService.updateClient(action.payload).pipe(
                 tap(() => {
-                    this.store.dispatch(new AddToast(new Toast({ description: 'User update' })));
+                    this.store.dispatch(new AddToast({ description: 'User update' }));
                     this.routerService.navigate('/profile/info');
                 }),
                 map((response: DataResponse<Client>) => {                    
@@ -52,7 +52,7 @@ export class ClientStoreEffect {
                 }),
                 catchError(err => of(new UpdateClientActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast({ description: 'User update', isError: true })));
+                        this.store.dispatch(new AddToast({ description: 'User update', isError: true }));
                     })
                 ))
             )
@@ -68,7 +68,7 @@ export class ClientStoreEffect {
                 }),
                 catchError(err => of(new GetClientActionFail(err)).pipe(
                     tap(() => {
-                        // this.store.dispatch(new AddToast(new Toast({ description: 'User update', isError: true })));
+                        // this.store.dispatch(new AddToast({ description: 'User update', isError: true }));
                     })
                 ))
             )

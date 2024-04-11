@@ -25,13 +25,13 @@ export class ProjectDeliverableStoreEffect {
         mergeMap((action: CreateProjectDeliverableAction) => 
             this.projectDeliverableAccessService.createProjectDeliverable(action.payload).pipe(
                 map((response: DataResponse<ProjectDeliverable>) => {
-                    this.store.dispatch(new AddToast(new Toast({ description: 'Project Deliverable Creation' })));
+                    this.store.dispatch(new AddToast({ description: 'Project Deliverable Creation' }));
                     this.routerService.navigate(`/projects/${action.payload.projectId}/deliverables`);
                     return new CreateProjectDeliverableActionSuccess(response.data);
                 }),
                 catchError(err => of(new CreateProjectDeliverableActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast({ isError: true, description: 'Project Deliverable Creation' })));
+                        this.store.dispatch(new AddToast({ isError: true, description: 'Project Deliverable Creation' }));
                     })
                 ))
             )
@@ -43,7 +43,7 @@ export class ProjectDeliverableStoreEffect {
         mergeMap((action: UpdateProjectDeliverableAction) => 
             this.projectDeliverableAccessService.updateProjectDeliverable(action.payload).pipe(
                 tap(() => {
-                    this.store.dispatch(new AddToast(new Toast({ description: 'User update' })));
+                    this.store.dispatch(new AddToast({ description: 'User update' }));
                     this.routerService.navigate(`/projects/${action.projectId}/deliverables/${action.payload.id}`);
                 }),
                 map((response: DataResponse<ProjectDeliverable>) => {                    
@@ -51,7 +51,7 @@ export class ProjectDeliverableStoreEffect {
                 }),
                 catchError(err => of(new UpdateProjectDeliverableActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast({ description: 'User update', isError: true })));
+                        this.store.dispatch(new AddToast({ description: 'User update', isError: true }));
                     })
                 ))
             )

@@ -39,9 +39,13 @@
 </app-popup>
 
 <app-popup name="project-delete">
-    <div class="delete">
-        <h2 class="header-3">Delete Project</h2>
-        <span class="text-1">This project will be deleted. Click 'Delete Project' to continue</span>
-        <button class="button text-1" (click)="deleteProject()">Delete Project</button>
-    </div>
+    <app-warn title="Delete Project" description="This project will be deleted. Click 'Continue' to proceed." (proceed)="deleteProject()"></app-warn>
+</app-popup>
+
+<app-popup name="project-publish">
+    <app-warn title="Pubhlish Project" description="This project will be published. Click 'Continue' to proceed." (proceed)="publishProject()"></app-warn>
+</app-popup>
+
+<app-popup name="project-draft">
+    <app-warn title="Draft Project" description="This project will be drafted. Click 'Continue' to proceed." (proceed)="draftProject()"></app-warn>
 </app-popup>

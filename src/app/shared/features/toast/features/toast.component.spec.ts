@@ -38,7 +38,7 @@ describe('ToastComponent', () => {
   });
 
   it('should have 1 toasts', (done: any) => {
-    component.store.dispatch(new AddToast(new Toast({ title: 'Sample toast' })));
+    component.store.dispatch(new AddToast(new Toast({ description: 'Sample toast' })));
     component.store.select(selectToasts).subscribe(toasts => {
       expect(toasts.length).toBe(1);
       done();
@@ -46,7 +46,7 @@ describe('ToastComponent', () => {
   });
 
   it('should remove toast when closeToast is called', fakeAsync(() => {
-    const toast = new Toast({ title: 'Sample toast' });
+    const toast = new Toast({ description: 'Sample toast' });
     component.store.dispatch(new AddToast(toast));
     fixture.detectChanges();
     component.closeToast(toast.id);
@@ -59,10 +59,10 @@ describe('ToastComponent', () => {
 
   it('should call closeToast automatically', fakeAsync(() => {
     const closeSpy = spyOn(component, 'closeToast');
-    const toast = new Toast({ title: 'Sample toast' });
+    const toast = new Toast({ description: 'Sample toast' });
     component.store.dispatch(new AddToast(toast));
     fixture.detectChanges();    
-    tick(component.timeout * (toast.data.duration as number));
+    tick(component.timeout * (toast.duration as number));
     expect(closeSpy).toHaveBeenCalledWith(toast.id);
     flush();
   }));

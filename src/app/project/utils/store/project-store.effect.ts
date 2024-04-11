@@ -9,6 +9,7 @@ import { DataResponse } from "src/app/shared/utils/models/data-response";
 import { ProjectAccessService } from "../access/project-access.service";
 import { CreateProjectAction, CreateProjectActionFail, CreateProjectActionSuccess, DeleteProjectAction, DeleteProjectActionFail, DeleteProjectActionSuccess, GetProjectAction, GetProjectActionFail, GetProjectActionSuccess, ListProjectsAction, ListProjectsActionFail, ListProjectsActionSuccess, ProjectActionsType, UpdateProjectAction, UpdateProjectActionFail, UpdateProjectActionSuccess } from "./project-store.action";
 import { Project } from "../models/project.model";
+import { PopupService } from "src/app/shared/features/popup/features/popup.service";
 
 @Injectable()
 export class ProjectStoreEffect {
@@ -16,7 +17,8 @@ export class ProjectStoreEffect {
         private actions$: Actions,
         private projectAccessService: ProjectAccessService,
         private store: Store,
-        private router: Router
+        private router: Router,
+        private popupService: PopupService
     ){}
 
     createProject$ = createEffect(() => this.actions$.pipe(
@@ -24,13 +26,13 @@ export class ProjectStoreEffect {
         mergeMap((action: CreateProjectAction) => 
             this.projectAccessService.createProject(action.payload).pipe(
                 map((response: DataResponse<Project>) => {
-                    this.store.dispatch(new AddToast(new Toast({ description: 'Project Creation' })));
+                    this.store.dispatch(new AddToast({ description: 'Project Creation' }));
                     this.router.navigateByUrl('/projects');
                     return new CreateProjectActionSuccess(response.data);
                 }),
                 catchError(err => of(new CreateProjectActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast({ isError: true, description: 'Project Creation' })));
+                        this.store.dispatch(new AddToast({ isError: true, description: 'Project Creation' }));
                     })
                 ))
             )
@@ -41,12 +43,13 @@ export class ProjectStoreEffect {
         ofType<UpdateProjectAction>(ProjectActionsType.UPDATE_PROJECT),
         mergeMap((action: UpdateProjectAction) => 
             this.projectAccessService.updateProject(action.payload).pipe(
-                map((response: DataResponse<Project>) => {                    
+                map((response: DataResponse<Project>) => {              
+                    this.store.dispatch(new AddToast({ description: 'Project Updated' }));
                     return new UpdateProjectActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateProjectActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast({ description: 'User update', isError: true })));
+                        this.store.dispatch(new AddToast({ description: 'User update', isError: true }));
                     })
                 ))
             )
@@ -82,7 +85,7 @@ export class ProjectStoreEffect {
         mergeMap((action: DeleteProjectAction) => 
             this.projectAccessService.deleteProject(action.payload).pipe(
                 map((response: DataResponse<Project>) => {         
-                    this.store.dispatch(new AddToast(new Toast({ description: 'Project Deleted' })));
+                    this.store.dispatch(new AddToast({ description: 'Project Deleted' }));
                     this.router.navigateByUrl('/projects');           
                     return new DeleteProjectActionSuccess(response.data);
                 }),

@@ -106,13 +106,6 @@
         grid-area: button;
         width: --webkit-fill-available;
     }
-
-    .delete {
-        display: flex;
-        flex-direction: column;
-        gap: var(--gap-small);
-        padding: var(--gap-normal);
-    }
 }
 
 @media only screen and (min-width: 760px){

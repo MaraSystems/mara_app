@@ -12,6 +12,8 @@ import { selectAllProjectDeliverables } from 'src/app/project-deliverable/utils/
 import { ProjectDeliverable } from 'src/app/project-deliverable/utils/models/project-deliverable.model';
 import { ListProjectDeliverablesAction } from 'src/app/project-deliverable/utils/store/project-deliverable-store.action';
 import { ProjectStatus } from '../../utils/models/project-status.enum';
+import { AddToast } from 'src/app/shared/features/toast/utils/store/toast.action';
+import { Toast } from 'src/app/shared/features/toast/features/toast.model';
 
 @Component({
   selector: 'app-project-view',
@@ -27,8 +29,8 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
 
   moreList: More[] = [
     { name: 'Update Project', icon: '', popup: 'project-update' },
-    { name: 'Publish Project', icon: '' },
-    { name: 'Unpublish Project', icon: '' },
+    { name: 'Publish Project', icon: '', popup: 'project-publish' },
+    { name: 'Unpublish Project', icon: '', popup: 'project-draft' },
     { name: 'Delete Project', icon: '', popup: 'project-delete' }
   ]
 
@@ -67,5 +69,18 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
 
   deleteProject() {
     this.store.dispatch(new DeleteProjectAction(this.id));
+  }
+
+  publishProject() {
+    if (this.deliverables.length === 0) {
+      this.store.dispatch(new AddToast({ description: 'You can not publish a project with no deliverables', isError: true }));
+      return;
+    }
+
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.PUBLISHED, publishedAt: new Date() }}));
+  }
+
+  draftProject() {
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.DRAFT, publishedAt: null }}));
   }
 }

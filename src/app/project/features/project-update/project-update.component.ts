@@ -4,11 +4,11 @@ import { Project } from '../../utils/models/project.model';
 import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { CreateProjectAction, GetProjectAction, UpdateProjectAction } from '../../utils/store/project-store.action';
+import {  GetProjectAction, UpdateProjectAction } from '../../utils/store/project-store.action';
 import { projectCategories } from 'src/app/shared/utils/models/project-categories';
-import { upload } from 'src/app/shared/utils/lib/upload';
 import { ActivatedRoute } from '@angular/router';
 import { selectProjectById } from '../../utils/store/project-store.selector';
+import { PopupService } from 'src/app/shared/features/popup/features/popup.service';
 
 @Component({
   selector: 'app-project-update',
@@ -18,13 +18,14 @@ import { selectProjectById } from '../../utils/store/project-store.selector';
 export class ProjectUpdateComponent extends UnSubscriber implements OnInit {
   id!: string;
   project!: Project;
-  update!: Partial<Project>;
+  updateData!: Partial<Project>;
   form!: FormGroup;
   categories = projectCategories;
 
   constructor(
     public store: Store<AppState>,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private popupService: PopupService
   ){
     super();
   }
@@ -39,17 +40,17 @@ export class ProjectUpdateComponent extends UnSubscriber implements OnInit {
     });
    
     this.newSubscription = this.form.valueChanges.subscribe(data => {      
-      this.update = data;
+      this.updateData = data;
     });
   }
 
   initForm() {
     this.form = new FormGroup({
-      title: new FormControl(this.project.title, [Validators.minLength(3), Validators.required]),
-      category: new FormControl(this.project.category, [Validators.required]),
-      tags: new FormControl(this.project.tags, [Validators.required]),
-      description: new FormControl(this.project.description, [Validators.maxLength(1000)]),
-      image: new FormControl(this.project.image),
+      title: new FormControl(this.project?.title, [Validators.minLength(3), Validators.required]),
+      category: new FormControl(this.project?.category, [Validators.required]),
+      tags: new FormControl(this.project?.tags, [Validators.required]),
+      description: new FormControl(this.project?.description, [Validators.maxLength(5000)]),
+      image: new FormControl(this.project?.image),
     });
   }
 
@@ -64,6 +65,7 @@ export class ProjectUpdateComponent extends UnSubscriber implements OnInit {
   }
 
   saveProject() {    
-    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: this.update }));
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: this.updateData }));
+    this.popupService.close('project-update');
   }
 }

@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { Toast } from "../../features/toast.model";
+import { IToast, Toast } from "../../features/toast.model";
 
 export enum ToastActionTypes{
     ADD_TOAST = '[TOAST] Add Toast',
@@ -8,7 +8,7 @@ export enum ToastActionTypes{
 
 export class AddToast implements Action{
     readonly type = ToastActionTypes.ADD_TOAST;
-    constructor(public payload: Toast){}
+    constructor(public payload: IToast){}
 }
 
 export class RemoveToast implements Action{

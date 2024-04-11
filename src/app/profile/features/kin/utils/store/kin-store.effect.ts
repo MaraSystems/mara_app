@@ -24,7 +24,7 @@ export class KinStoreEffect {
         mergeMap((action: CreateKinAction) => 
             this.kinAccessService.createKin(action.payload).pipe(
                 tap(() => {                    
-                    this.store.dispatch(new AddToast(new Toast({ description: 'Kin Creation' })));
+                    this.store.dispatch(new AddToast({ description: 'Kin Creation' }));
                     this.routerService.navigate('/profile/kin');
                 }),
                 map((response: DataResponse<Kin>) => {
@@ -32,7 +32,7 @@ export class KinStoreEffect {
                 }),
                 catchError(err => of(new CreateKinActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast({ isError: true, description: 'Kin Creation' })));
+                        this.store.dispatch(new AddToast({ isError: true, description: 'Kin Creation' }));
                     })
                 ))
             )
@@ -44,7 +44,7 @@ export class KinStoreEffect {
         mergeMap((action: UpdateKinAction) => 
             this.kinAccessService.updateKin(action.payload).pipe(
                 tap(() => {
-                    this.store.dispatch(new AddToast(new Toast({ description: 'Kin Update' })));
+                    this.store.dispatch(new AddToast({ description: 'Kin Update' }));
                     this.routerService.navigate('/profile/kin');
                 }),
                 map((response: DataResponse<Kin>) => {                    
@@ -52,7 +52,7 @@ export class KinStoreEffect {
                 }),
                 catchError(err => of(new UpdateKinActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast({ description: 'Kin Update', isError: true })));
+                        this.store.dispatch(new AddToast({ description: 'Kin Update', isError: true }));
                     })
                 ))
             )
@@ -68,7 +68,7 @@ export class KinStoreEffect {
                 }),
                 catchError(err => of(new GetKinActionFail(err)).pipe(
                     tap(() => {
-                        // this.store.dispatch(new AddToast(new Toast({ description: 'User update', isError: true })));
+                        // this.store.dispatch(new AddToast({ description: 'User update', isError: true }));
                     })
                 ))
             )

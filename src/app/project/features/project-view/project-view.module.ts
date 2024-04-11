@@ -11,6 +11,7 @@ import { ProjectUpdateModule } from '../project-update/project-update.module';
 import { DirectivesModule } from 'src/app/shared/utils/directives/directives.module';
 import { EmptyModule } from 'src/app/shared/ui/empty/empty.module';
 import { ProjectDeliverableItemModule } from 'src/app/project-deliverable/ui/project-deliverable-item/project-deliverable-item.module';
+import { WarnModule } from 'src/app/shared/ui/warn/warn.module';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ProjectDeliverableItemModule } from 'src/app/project-deliverable/ui/pro
     ProjectUpdateModule,
     ProjectDeliverableItemModule,
     DirectivesModule,
-    EmptyModule
+    EmptyModule,
+    WarnModule
   ]
 })
 export class ProjectViewModule { }
