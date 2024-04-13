@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ComponentFactoryResolver, ComponentRef, ElementRef, Input, OnDestroy, OnInit, Type, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ComponentFactoryResolver, ComponentRef, ElementRef, Input, OnDestroy, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { PopupService } from './popup.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class PopupComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private popupService: PopupService,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private el: ElementRef,
+    private el: ElementRef
   ) { }
 
   ngOnInit(): void {

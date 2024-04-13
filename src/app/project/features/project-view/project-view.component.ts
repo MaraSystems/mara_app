@@ -28,10 +28,10 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
   duration!: number;
 
   moreList: More[] = [
-    { name: 'Update Project', icon: '', popup: 'project-update' },
-    { name: 'Publish Project', icon: '', popup: 'project-publish' },
-    { name: 'Unpublish Project', icon: '', popup: 'project-draft' },
-    { name: 'Delete Project', icon: '', popup: 'project-delete' }
+    { name: 'Update', icon: 'update', popup: 'project-update' },
+    { name: 'Publish', icon: 'publish', popup: 'project-publish' },
+    { name: 'Draft', icon: 'unpublished', popup: 'project-draft' },
+    { name: 'Delete', icon: 'Delete', popup: 'project-delete' }
   ]
 
   constructor(
@@ -44,7 +44,7 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.paramMap.get('id') as string;   
+    this.id = this.activatedRoute.snapshot.paramMap.get('project_id') as string;   
     this.store.dispatch(new GetProjectAction(this.id)); 
     this.store.dispatch(new ListProjectDeliverablesAction(this.id));
 
@@ -77,10 +77,10 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
       return;
     }
 
-    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.PUBLISHED, publishedAt: new Date() }}));
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.PUBLISHED, publishedAt: new Date() }}, 'project-publish'));
   }
 
   draftProject() {
-    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.DRAFT, publishedAt: null }}));
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.DRAFT, publishedAt: null }}, 'project-draft'));
   }
 }

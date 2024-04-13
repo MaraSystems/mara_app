@@ -1,15 +1,34 @@
 import { Injectable } from '@angular/core';
 import { PopupComponent } from './popup.component';
+import { Store } from '@ngrx/store';
+import { selectPopupAction } from '../utils/store/popup.selector';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PopupService {
-  public popups: PopupComponent[] = [];
+  private popups: PopupComponent[] = [];
 
-  constructor() { }
+  constructor(
+    private store: Store
+  ) { 
+    this.store.select(selectPopupAction).subscribe(popup => {
+      if (popup) {
+        const { id, action, data } = popup;
+        if (action === 'close') {
+          this.close(id);
+        }
+        else if (action == 'open') {
+          this.open(id, data);
+        }
+        else if (action == 'remove'){
+          this.remove(id);
+        }
+      }
+    });
+  }
 
-  add(popup: PopupComponent) {        
+  add(popup: PopupComponent) {  
     if (this.popups.find(m => m.name == popup.name)) {
       console.error(`${popup.name} is already taken by another pop-up`);
       return;
@@ -24,12 +43,16 @@ export class PopupService {
 
   open(name: string, data?: any) {    
     const popup = this.popups.find(x => x.name === name) as PopupComponent;
-    popup.open(data);    
+    if (popup) {
+      popup.open(data); 
+    }   
   }
 
   close(name: string) {
-    const popup = this.popups.find(x => x.name === name) as PopupComponent;
-    popup.close();
+    const popup = this.popups.find(x => x.name === name) as PopupComponent;    
+    if (popup) {
+      popup.close();
+    }
   }
 
   delete(name: string) {

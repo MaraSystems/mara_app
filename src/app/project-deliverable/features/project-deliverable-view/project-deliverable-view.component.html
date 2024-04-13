@@ -2,16 +2,30 @@
 <div class="details">
     <span class="header-3 title">{{projectDeliverable.title}}</span>
     <div class="summery">
-        <app-keyvalue name="duration" [value]="projectDeliverable.duration" unit="days"></app-keyvalue>
+        <app-keyvalue name="duration" [value]="projectDeliverable.duration" unit="Days"></app-keyvalue>
         <app-keyvalue name="price" [value]="projectDeliverable.price" unit="NGN"></app-keyvalue>
-        <app-keyvalue name="description" icon="arrow_outward" (clickEvent)="popupService.open('project-deliverable-description')"></app-keyvalue>
-        <app-keyvalue name="Files" icon="arrow_outward" (clickEvent)="popupService.open('project-deliverable-files')"></app-keyvalue>
     </div>
 </div>
 
 <div class="description">
-    <h1 class="header-3">Description</h1>
+    <h1 class="text-1 description-title">Description</h1>
     <p class="description-text text-1">{{projectDeliverable.description}}</p>
+</div>
+
+<div class="files">
+    <div class="files-header">
+        <h1 class="text-1 files-title">Files</h1>
+        <span class="files-icons">
+            <span class="material-symbols-outlined" [routerLink]="'/projects/' + id + '/deliverables/create' ">add</span>
+            <span class="material-symbols-outlined" [routerLink]="'/projects/' + id + '/deliverables' ">arrow_outward</span>
+        </span>
+    </div>
+
+    <div class="files-list" *ngIf="projectDeliverable.documents.length">
+        <!-- <app-project-deliverable-files *ngFor="let item of projectDeliverable.documents" [deliverable]="item" [routerLink]="'/projects/' + item.projectId + '/deliverables/' + item._id"></app-project-deliverable-files> -->
+    </div>
+    
+    <app-empty *ngIf="!projectDeliverable.documents.length" name="project deliverable"></app-empty>
 </div>
 
 <div class="controls">
@@ -21,15 +35,10 @@
     <app-more class="more" [list]="moreList"></app-more>
 </div>
 
-<app-popup name="project-deliverable-files">
-    <app-project-deliverable-files></app-project-deliverable-files>
-</app-popup>
-
-<app-popup name="project-deliverable-description">
-    <h1 class="header-3">Description</h1>
-    <p class="description-text text-1">{{projectDeliverable.description}}</p>
-</app-popup>
-
 <app-popup name="project-deliverable-update">
     <app-project-deliverable-update></app-project-deliverable-update>
+</app-popup>
+
+<app-popup name="project-deliverable-delete">
+    <app-warn title="Delete Project" description="This project deliverable will be deleted. Click 'Continue' to proceed." (proceed)="deleteProjectDeliverable()"></app-warn>
 </app-popup>

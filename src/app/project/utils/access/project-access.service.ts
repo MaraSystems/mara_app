@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AccessService } from 'src/app/shared/utils/services/access.service';
-import { Collection } from '@black-ink/lonedb';
-import { DataResponse } from 'src/app/shared/utils/models/data-response';
-import { of } from 'rxjs';
 import { Update } from '@ngrx/entity';
 import { Project } from '../models/project.model';
 import { ListPayload } from 'src/app/shared/utils/models/list-payload';
@@ -19,7 +16,7 @@ export class ProjectAccessService {
   ) {}
 
   createProject(data: Project) {    
-    const response = this.accessService.insert<Project>(this.domain, data);
+    const response = this.accessService.insert<Project>(this.domain, { ...data, status: ProjectStatus.DRAFT, hidden: false });
     return response;
   }
 
@@ -29,7 +26,7 @@ export class ProjectAccessService {
   }
 
   listProjects(data: ListPayload) {
-    const response = this.accessService.list<[Project]>(this.domain, { status: ProjectStatus.DRAFT });
+    const response = this.accessService.list<[Project]>(this.domain, { hidden: false });
     return response;
   }
 
@@ -39,7 +36,7 @@ export class ProjectAccessService {
   }
 
   deleteProject(id: string) {    
-    const response = this.accessService.update<Project>(this.domain, { _id: id }, { status: ProjectStatus.DELETED });
+    const response = this.accessService.update<Project>(this.domain, { _id: id }, { hidden: true });
     return response;
   }
 }

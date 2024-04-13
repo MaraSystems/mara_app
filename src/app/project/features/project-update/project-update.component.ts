@@ -31,7 +31,7 @@ export class ProjectUpdateComponent extends UnSubscriber implements OnInit {
   }
   
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.paramMap.get('id') as string;
+    this.id = this.activatedRoute.snapshot.paramMap.get('project_id') as string;
     this.store.dispatch(new GetProjectAction(this.id)); 
 
     this.newSubscription = this.store.select(selectProjectById(this.id)).subscribe(project => {
@@ -65,7 +65,6 @@ export class ProjectUpdateComponent extends UnSubscriber implements OnInit {
   }
 
   saveProject() {    
-    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: this.updateData }));
-    this.popupService.close('project-update');
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: this.updateData }, 'project-update'));
   }
 }

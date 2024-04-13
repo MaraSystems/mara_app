@@ -16,6 +16,10 @@ export enum ProjectDeliverableActionsType {
     GET_PROJECT_DELIVERABLE_SUCCESS = "[PROJECT_DELIVERABLE] Get ProjectDeliverable Success",
     GET_PROJECT_DELIVERABLE_FAIL = "[PROJECT_DELIVERABLE] Get ProjectDeliverable Fail",
 
+    DELETE_PROJECT_DELIVERABLE = "[PROJECT_DELIVERABLE] Delete ProjectDeliverable",
+    DELETE_PROJECT_DELIVERABLE_SUCCESS = "[PROJECT_DELIVERABLE] Delete ProjectDeliverable Success",
+    DELETE_PROJECT_DELIVERABLE_FAIL = "[PROJECT_DELIVERABLE] Delete ProjectDeliverable Fail",
+
     LIST_PROJECT_DELIVERABLES = "[PROJECT_DELIVERABLE] List ProjectDeliverables",
     LIST_PROJECT_DELIVERABLES_SUCCESS = "[PROJECT_DELIVERABLE] List ProjectDeliverables Success",
     LIST_PROJECT_DELIVERABLES_FAIL = "[PROJECT_DELIVERABLE] List ProjectDeliverables Fail"
@@ -38,7 +42,7 @@ export class CreateProjectDeliverableActionFail implements Action {
 
 export class UpdateProjectDeliverableAction implements Action {
     readonly type = ProjectDeliverableActionsType.UPDATE_PROJECT_DELIVERABLE;
-    constructor(public payload: Update<ProjectDeliverable>, public projectId: string){}
+    constructor(public payload: Update<ProjectDeliverable>, public popup: string){}
 }
 
 export class UpdateProjectDeliverableActionSuccess implements Action {
@@ -81,6 +85,22 @@ export class ListProjectDeliverablesActionFail implements Action {
     constructor(public payload: string){}
 }
 
+
+export class DeleteProjectDeliverableAction implements Action {
+    readonly type = ProjectDeliverableActionsType.DELETE_PROJECT_DELIVERABLE;
+    constructor(public payload: string){}
+}
+
+export class DeleteProjectDeliverableActionSuccess implements Action {
+    readonly type = ProjectDeliverableActionsType.DELETE_PROJECT_DELIVERABLE_SUCCESS;
+    constructor(public payload: ProjectDeliverable){}
+}
+
+export class DeleteProjectDeliverableActionFail implements Action {
+    readonly type = ProjectDeliverableActionsType.DELETE_PROJECT_DELIVERABLE_FAIL;
+    constructor(public payload: string){}
+}
+
 export type ProjectDeliverableAction = 
 CreateProjectDeliverableAction |
 CreateProjectDeliverableActionSuccess |
@@ -90,4 +110,7 @@ UpdateProjectDeliverableActionSuccess |
 UpdateProjectDeliverableActionFail |
 GetProjectDeliverableAction |
 GetProjectDeliverableActionSuccess |
-GetProjectDeliverableActionFail;
+GetProjectDeliverableActionFail |
+DeleteProjectDeliverableAction |
+DeleteProjectDeliverableActionSuccess |
+DeleteProjectDeliverableActionFail;

@@ -15,7 +15,7 @@ export class ProjectDeliverableAccessService {
   ) {}
 
   createProjectDeliverable(data: ProjectDeliverable) {        
-    const response = this.accessService.insert<ProjectDeliverable>(this.domain, data);    
+    const response = this.accessService.insert<ProjectDeliverable>(this.domain, { ...data, hidden: false });    
     return response;
   }
 
@@ -25,12 +25,17 @@ export class ProjectDeliverableAccessService {
   }
 
   listProjectDeliverables(projectId: string, limit = 10, skip = 0) {
-    const response = this.accessService.list<[ProjectDeliverable]>(this.domain, { projectId });    
+    const response = this.accessService.list<[ProjectDeliverable]>(this.domain, { projectId, hidden: false });    
     return response;
   }
 
-  updateProjectDeliverable(data: Update<ProjectDeliverable>) {    
+  updateProjectDeliverable(data: Update<ProjectDeliverable>) {        
     const response = this.accessService.update<ProjectDeliverable>(this.domain, { _id: data.id }, data.changes);
+    return response;
+  }
+
+  deleteProjectDeliverable(id: string) {    
+    const response = this.accessService.update<ProjectDeliverable>(this.domain, { _id: id }, { hidden: true });
     return response;
   }
 }

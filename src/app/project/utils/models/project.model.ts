@@ -15,4 +15,5 @@ export class Project {
     bookmarks!: string[];
     shares!: string[];
     image!: string;
+    hidden!: boolean;
 }

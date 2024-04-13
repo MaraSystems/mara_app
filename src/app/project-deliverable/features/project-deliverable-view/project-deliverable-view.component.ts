@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { More } from 'src/app/shared/utils/models/more.model';
 import { PopupService } from 'src/app/shared/features/popup/features/popup.service';
 import { ProjectDeliverable } from '../../utils/models/project-deliverable.model';
-import { GetProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
+import { DeleteProjectDeliverableAction, GetProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
 import { selectProjectDeliverableById } from '../../utils/store/project-deliverable-store.selector';
 
 @Component({
@@ -19,8 +19,8 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
   id!: string;
 
   moreList: More[] = [
-    { name: 'Update Project Deliverable', icon: '', popup: 'project-deliverable-update' },
-    { name: 'Delete Project Deliverable', icon: '' }
+    { name: 'Update', icon: 'update', popup: 'project-deliverable-update' },
+    { name: 'Delete', icon: 'delete', popup: 'project-deliverable-delete' }
   ]
 
   constructor(
@@ -32,11 +32,15 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
   }
 
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.paramMap.get('id') as string;   
+    this.id = this.activatedRoute.snapshot.paramMap.get('deliverable_id') as string;   
     this.store.dispatch(new GetProjectDeliverableAction(this.id)); 
     
     this.newSubscription = this.store.select(selectProjectDeliverableById(this.id)).subscribe(projectDeliverable => {
-      this.projectDeliverable = projectDeliverable;      
+      this.projectDeliverable = projectDeliverable;            
     });
+  }
+
+  deleteProjectDeliverable() {
+    this.store.dispatch(new DeleteProjectDeliverableAction(this.id));
   }
 }

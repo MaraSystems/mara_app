@@ -15,7 +15,7 @@ const routes: Routes = [
     )
   },
   { 
-    path: ':id', 
+    path: ':deliverable_id', 
     loadChildren: () => import('../project-deliverable-view/project-deliverable-view.module').then(
       (m) => m.ProjectDeliverableViewModule
     )

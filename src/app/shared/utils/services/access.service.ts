@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
-import { Database } from '@black-ink/lonedb';
+import { Database, EngineTypes } from '@black-ink/lonedb';
 import { DataResponse } from '../models/data-response';
 import { of, throwError } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { of, throwError } from 'rxjs';
 })
 export class AccessService {
   host = environment.apiUrl;
-  db = new Database(`${environment.env}-${environment.appName}`);
+  db = new Database(`${environment.env}-${environment.appName}`, EngineTypes.LOCALSTORAGE);
 
   constructor(
     private httpClient: HttpClient
@@ -42,11 +42,10 @@ export class AccessService {
     return of(response);
   }
 
-  public list<T>(endpoint: string, query: any) {
+  public list<T>(endpoint: string, query?: any) {
     const collection = this.db.createCollection<T>(endpoint);    
-    const data = collection.find(query);
-    
-    const response: DataResponse<T> = { success: true, data: data as T };
+    const data = collection.find(query);    
+    const response: DataResponse<T> = { success: true, data: data as T };    
     return of(response);
   }
 

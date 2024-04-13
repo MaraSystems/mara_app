@@ -5,7 +5,8 @@ export class ProjectDeliverable {
     description!: string;
     duration!: number;
     price!: number;
-    files!: string[];
+    documents!: string[];
     image!: string;
     likes!: string[];
+    hidden!: boolean;
 }

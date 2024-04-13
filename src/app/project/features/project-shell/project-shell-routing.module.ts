@@ -15,7 +15,7 @@ const routes: Routes = [
     )
   },
   { 
-    path: ':id', 
+    path: ':project_id', 
     loadChildren: () => import('../project-view/project-view.module').then(
       (m) => m.ProjectViewModule
     )

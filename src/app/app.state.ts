@@ -12,6 +12,7 @@ import { ProjectStoreEffect } from "./project/utils/store/project-store.effect";
 import { ProjectDeliverableStoreEffect } from "./project-deliverable/utils/store/project-deliverable-store.effect";
 import { ProjectState, projectReducer } from "./project/utils/store/project-store.reducer";
 import { ProjectDeliverableState, projectDeliverableReducer } from "./project-deliverable/utils/store/project-deliverable-store.reducer";
+import { PopupState, popupReducer } from "./shared/features/popup/utils/store/popup.reducer";
 
 export const appEffects = [
     ClientStoreEffect,
@@ -24,6 +25,7 @@ export const appEffects = [
 export interface AppState {
     clients: ClientState,
     toasts: ToastState,
+    popups: PopupState,
     auth: AuthState,
     kins: KinState,
     router: RouterState,
@@ -34,6 +36,7 @@ export interface AppState {
 export const appReducers: ActionReducerMap<AppState> = {
     clients: clientReducer,
     toasts: toastReducer,
+    popups: popupReducer,
     auth: authReducer,
     kins: kinReducer,
     router: routerReducer,

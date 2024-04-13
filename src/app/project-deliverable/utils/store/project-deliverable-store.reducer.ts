@@ -1,7 +1,7 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { Action } from "@ngrx/store";
 import { ProjectDeliverable } from "../models/project-deliverable.model";
-import { CreateProjectDeliverableActionFail, CreateProjectDeliverableActionSuccess, GetProjectDeliverableActionSuccess, ListProjectDeliverablesActionFail, ListProjectDeliverablesActionSuccess, ProjectDeliverableActionsType, UpdateProjectDeliverableActionFail, UpdateProjectDeliverableActionSuccess } from "./project-deliverable-store.action";
+import { CreateProjectDeliverableActionFail, CreateProjectDeliverableActionSuccess, DeleteProjectDeliverableActionFail, DeleteProjectDeliverableActionSuccess, GetProjectDeliverableActionFail, GetProjectDeliverableActionSuccess, ListProjectDeliverablesActionFail, ListProjectDeliverablesActionSuccess, ProjectDeliverableActionsType, UpdateProjectDeliverableActionFail, UpdateProjectDeliverableActionSuccess } from "./project-deliverable-store.action";
 
 export interface ProjectDeliverableState extends EntityState<ProjectDeliverable> {
     selectedId: string | null;
@@ -71,7 +71,7 @@ export function projectDeliverableReducer(state = initialState, action: Action):
                 ...state,
                 loading: false,
                 loaded: true,
-                error: (action as UpdateProjectDeliverableActionFail).payload
+                error: (action as GetProjectDeliverableActionFail).payload
             } 
 
         case ProjectDeliverableActionsType.LIST_PROJECT_DELIVERABLES:
@@ -91,7 +91,23 @@ export function projectDeliverableReducer(state = initialState, action: Action):
                 error: (action as ListProjectDeliverablesActionFail).payload
             } 
     
-        
+        case ProjectDeliverableActionsType.DELETE_PROJECT_DELIVERABLE:
+            return { ...state, loading: true, loaded: false };
+
+        case ProjectDeliverableActionsType.DELETE_PROJECT_DELIVERABLE_SUCCESS:
+            const { payload: deletePayload } = (action as DeleteProjectDeliverableActionSuccess);
+            return projectDeliverableAdapter.removeOne(
+                deletePayload._id, { ...state, loading: false, loaded: true }
+            )
+            
+        case ProjectDeliverableActionsType.DELETE_PROJECT_DELIVERABLE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                loaded: true,
+                error: (action as DeleteProjectDeliverableActionFail).payload
+            } 
+    
         default:
             return state;
     }

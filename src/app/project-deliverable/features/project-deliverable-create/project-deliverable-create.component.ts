@@ -32,7 +32,7 @@ export class ProjectDeliverableCreateComponent extends UnSubscriber implements O
       this.deliverableData = data;
     });
 
-    this.projectId = this.activatedRoute.snapshot.paramMap.get('id') as string;    
+    this.projectId = this.activatedRoute.snapshot.paramMap.get('project_id') as string;    
   }
 
   initForm() {
@@ -56,7 +56,7 @@ export class ProjectDeliverableCreateComponent extends UnSubscriber implements O
     return control;
   }
 
-  createProject() {    
+  createDeliverable() {    
     this.store.dispatch(new CreateProjectDeliverableAction({ ...this.deliverableData, projectId: this.projectId }));
   }
 }

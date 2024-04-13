@@ -14,7 +14,7 @@ export class Toast {
     isError = false;
 
     constructor(
-        public data: Partial<IToast>
+        data: Partial<IToast>
     ){        
         const { duration, isError, description } = data;
         this.id = uuid();

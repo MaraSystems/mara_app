@@ -9,7 +9,7 @@
         "button button"
     ;
     justify-content: center;
-    gap: var(--gap-normal) var(--gap-small);
+    gap: var(--gap-big);
     padding: var(--gap-small);
     position: relative;
     width: -webkit-fill-available;
@@ -71,8 +71,20 @@
         box-shadow: var(--shadow-elevated);
         border-radius: var(--gap-normal);
 
-        &-title {
+        &-header {
+            display: flex;
+            justify-content: space-between;
             border-bottom: 1px solid var(--color-black);
+            padding: 0% var(--gap-small);
+        }
+
+        &-icons {
+            display: flex;
+            gap: var(--gap-small);
+
+            span {
+                cursor: pointer;
+            }
         }
 
         &-list {
@@ -111,7 +123,7 @@
 @media only screen and (min-width: 760px){
     :host {
         padding: var(--gap-normal);
-        gap: var(--gap-normal);
+        gap: var(--gap-x-big);
         grid-template-columns: repeat(7, 1fr) min-content;
         grid-template-areas: 
             "image image image details details details details details"
@@ -128,6 +140,22 @@
         .header {
             box-shadow: var(--shadow-elevated);
             border-radius: var(--gap-small);
+        }
+
+        .description {
+            gap: var(--gap-normal);
+
+            &-title {
+                padding: var(--gap-small) 0px;
+            }
+        }
+
+        .deliverables {
+            gap: var(--gap-normal);
+
+            &-header {
+                padding: var(--gap-small) 0px;
+            }
         }
     }
 }

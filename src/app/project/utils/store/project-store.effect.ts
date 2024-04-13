@@ -10,6 +10,7 @@ import { ProjectAccessService } from "../access/project-access.service";
 import { CreateProjectAction, CreateProjectActionFail, CreateProjectActionSuccess, DeleteProjectAction, DeleteProjectActionFail, DeleteProjectActionSuccess, GetProjectAction, GetProjectActionFail, GetProjectActionSuccess, ListProjectsAction, ListProjectsActionFail, ListProjectsActionSuccess, ProjectActionsType, UpdateProjectAction, UpdateProjectActionFail, UpdateProjectActionSuccess } from "./project-store.action";
 import { Project } from "../models/project.model";
 import { PopupService } from "src/app/shared/features/popup/features/popup.service";
+import { SetPopup } from "src/app/shared/features/popup/utils/store/popup.action";
 
 @Injectable()
 export class ProjectStoreEffect {
@@ -45,6 +46,8 @@ export class ProjectStoreEffect {
             this.projectAccessService.updateProject(action.payload).pipe(
                 map((response: DataResponse<Project>) => {              
                     this.store.dispatch(new AddToast({ description: 'Project Updated' }));
+                    const popup = (action as UpdateProjectAction).popup as string;
+                    this.store.dispatch(new SetPopup({ id: popup, action: 'close'}));
                     return new UpdateProjectActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateProjectActionFail(err)).pipe(

@@ -54,6 +54,6 @@ export class ProjectCreateComponent extends UnSubscriber implements OnInit {
   }
 
   createProject() {    
-    this.store.dispatch(new CreateProjectAction({ ...this.project, status: ProjectStatus.DRAFT }));
+    this.store.dispatch(new CreateProjectAction(this.project));
   }
 }
