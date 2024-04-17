@@ -17,10 +17,16 @@
 
     .image {
         grid-area: image;
-        height: 200px;
-        width: -webkit-fill-available;
         border-radius: var(--gap-normal);
         box-shadow: var(--shadow-elevated);
+        padding: var(--gap-small);
+        display: flex;
+        align-items: center;
+
+        img {
+            height: 200px;
+            width: 200px;
+        }
     }
 
     .details {
@@ -126,7 +132,7 @@
         gap: var(--gap-x-big);
         grid-template-columns: repeat(7, 1fr) min-content;
         grid-template-areas: 
-            "image image image details details details details details"
+            "image image details details details details details details"
             "description description description description description description description controls"
             "deliverables deliverables deliverables deliverables deliverables deliverables deliverables deliverables"
             ". . button button button button . ."

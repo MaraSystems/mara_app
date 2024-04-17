@@ -1,4 +1,6 @@
-<img class="image" [src]="project.image || '../../../../assets/images/db.png'" alt="" srcset="">
+<span class="image">
+    <img [src]="project.image || '../../../../assets/images/db.png'" alt="" srcset="">
+</span>
 <div class="details">
     <span class="header-3 title">{{project.title}}</span>
     <div class="summery">
@@ -7,7 +9,6 @@
         <app-keyvalue name="price" [value]="price" unit="NGN"></app-keyvalue>
         <app-keyvalue name="status" [value]="project.status"></app-keyvalue>
     </div>
-    <button class="button text-1">Initiate Contract</button>
 </div>
 
 <div class="description">

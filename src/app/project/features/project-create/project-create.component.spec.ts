@@ -58,7 +58,7 @@ describe('ProjectCreateComponent', () => {
   it('should update project data on form update', () => {
     component.form.controls['title'].setValue('sample');
     fixture.detectChanges();
-    expect(component.projectData).toEqual(jasmine.objectContaining({ title: 'sample' }));
+    expect(component.project).toEqual(jasmine.objectContaining({ title: 'sample' }));
   });
 
   it('should disable project button when form is invalid', () => {

@@ -49,10 +49,6 @@ export class ProfileInfoComponent extends UnSubscriber implements OnInit {
         });
       });
     });
-
-    this.newSubscription = this.activatedRoute.paramMap.subscribe(param => {
-      this.edit = param.has('edit');
-    });
   }
 
   getControl(name: string) {

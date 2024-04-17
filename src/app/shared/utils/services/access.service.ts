@@ -4,6 +4,10 @@ import { environment } from 'src/environments/environment';
 import { Database, EngineTypes } from '@black-ink/lonedb';
 import { DataResponse } from '../models/data-response';
 import { of, throwError } from 'rxjs';
+import { DocumentData } from '../models/document-data';
+import { IQueryOption } from '@black-ink/lonedb/lib/models/query-option.interface';
+import { UploadData } from '../models/upload-data';
+import { DownloadData } from '../models/download-data';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +29,28 @@ export class AccessService {
     });
   }
 
+  public upload(entry: UploadData) {
+    const { name, model, url } = entry;
+    const collection = this.db.createCollection<DocumentData>('documents');
+    const { version: latest = -1 } = collection.findOne({ name, model }, { sort: { version: 'desc' } } as IQueryOption);
+    const version = latest + 1;
+    localStorage.setItem(`${model}/${name}/${version}`, url);
+
+    const document: Partial<DocumentData> = { name, model, version };
+    const data = collection.insertOne(document as DocumentData);
+    const response: DataResponse<DocumentData> = { success: true, data };
+    return of(response);
+  }
+
+  public download(query: DownloadData){
+    const collection = this.db.createCollection<DocumentData>('documents');    
+    const document = collection.findOne(query, { sort: { version: 'desc' } } as IQueryOption);
+    const { model, name, version } = document;
+    const url = localStorage.getItem(`${model}/${name}/${version}`) as string;
+    const response: DataResponse<string> = { success: true, data: url as string };
+    return of(response);
+  }
+
   public insert<T>(endpoint: string, entry: Partial<T>) {
     const collection = this.db.createCollection<T>(endpoint);
     const data = collection.insertOne(entry as T);
@@ -32,9 +58,9 @@ export class AccessService {
     return of(response);
   }
 
-  public get<T>(endpoint: string, query: any) {
+  public get<T>(endpoint: string, query: any, options?: IQueryOption) {
     const collection = this.db.createCollection<T>(endpoint);
-    const data = collection.findOne(query);
+    const data = collection.findOne(query, options);
     if (!data) {
       return throwError(() => 'Not found');
     }    
@@ -42,23 +68,23 @@ export class AccessService {
     return of(response);
   }
 
-  public list<T>(endpoint: string, query?: any) {
+  public list<T>(endpoint: string, query?: any, options?: IQueryOption) {
     const collection = this.db.createCollection<T>(endpoint);    
-    const data = collection.find(query);    
+    const data = collection.find(query, options);    
     const response: DataResponse<T> = { success: true, data: data as T };    
     return of(response);
   }
 
-  public update<T>(endpoint: string, query: any, changes: Partial<T>) {
+  public update<T>(endpoint: string, query: any, changes: Partial<T>, options?: IQueryOption) {
     const collection = this.db.createCollection<T>(endpoint);
-    const data = collection.updateOne(query, changes) as T;
+    const data = collection.updateOne(query, changes, options) as T;
     const response: DataResponse<T> = { success: true, data };
     return of(response);
   }
 
-  public remove<T>(endpoint: string, query: any) {
+  public remove<T>(endpoint: string, query: any, options?: IQueryOption) {
     const collection = this.db.createCollection<T>(endpoint);
-    const data = collection.removeOne(query);
+    const data = collection.removeOne(query, options);
     if (!data) {
       return throwError(() => 'Not found');
     }

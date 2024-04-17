@@ -1,4 +1,6 @@
-<img class="image" [src]="projectDeliverable.image || '../../../../assets/images/db.png'" alt="" srcset="">
+<span class="image">
+    <img [src]="projectDeliverable.image || '../../../../assets/images/db.png'" alt="" srcset="">
+</span>
 <div class="details">
     <span class="header-3 title">{{projectDeliverable.title}}</span>
     <div class="summery">
@@ -12,20 +14,20 @@
     <p class="description-text text-1">{{projectDeliverable.description}}</p>
 </div>
 
-<div class="files">
-    <div class="files-header">
-        <h1 class="text-1 files-title">Files</h1>
-        <span class="files-icons">
+<div class="documents">
+    <div class="documents-header">
+        <h1 class="text-1 documents-title">Files</h1>
+        <span class="documents-icons">
             <span class="material-symbols-outlined" [routerLink]="'/projects/' + id + '/deliverables/create' ">add</span>
             <span class="material-symbols-outlined" [routerLink]="'/projects/' + id + '/deliverables' ">arrow_outward</span>
         </span>
     </div>
 
-    <div class="files-list" *ngIf="projectDeliverable.documents.length">
-        <!-- <app-project-deliverable-files *ngFor="let item of projectDeliverable.documents" [deliverable]="item" [routerLink]="'/projects/' + item.projectId + '/deliverables/' + item._id"></app-project-deliverable-files> -->
+    <div class="documents-list" *ngIf="projectDeliverable.documents.length">
+        <app-project-document-item *ngFor="let item of projectDeliverable.documents" [id]="item"></app-project-document-item>
     </div>
     
-    <app-empty *ngIf="!projectDeliverable.documents.length" name="project deliverable"></app-empty>
+    <app-empty *ngIf="!projectDeliverable.documents.length" name="project deliverable documents"></app-empty>
 </div>
 
 <div class="controls">

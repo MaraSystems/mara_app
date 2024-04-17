@@ -13,13 +13,16 @@ import { ProjectDeliverableStoreEffect } from "./project-deliverable/utils/store
 import { ProjectState, projectReducer } from "./project/utils/store/project-store.reducer";
 import { ProjectDeliverableState, projectDeliverableReducer } from "./project-deliverable/utils/store/project-deliverable-store.reducer";
 import { PopupState, popupReducer } from "./shared/features/popup/utils/store/popup.reducer";
+import { DocumentStoreEffect } from "./shared/utils/store/document/document-store.effect";
+import { DocumentState, documentReducer } from "./shared/utils/store/document/document-store.reducer";
 
 export const appEffects = [
     ClientStoreEffect,
     AuthStoreEffect,
     KinStoreEffect,
     ProjectStoreEffect,
-    ProjectDeliverableStoreEffect
+    ProjectDeliverableStoreEffect,
+    DocumentStoreEffect
 ];
 
 export interface AppState {
@@ -30,7 +33,8 @@ export interface AppState {
     kins: KinState,
     router: RouterState,
     projects: ProjectState,
-    projectDeliverables: ProjectDeliverableState
+    projectDeliverables: ProjectDeliverableState,
+    documents: DocumentState
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -41,5 +45,6 @@ export const appReducers: ActionReducerMap<AppState> = {
     kins: kinReducer,
     router: routerReducer,
     projects: projectReducer,
-    projectDeliverables: projectDeliverableReducer
+    projectDeliverables: projectDeliverableReducer,
+    documents: documentReducer
 }

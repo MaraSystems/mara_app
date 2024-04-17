@@ -15,7 +15,7 @@ export class ProjectDeliverableAccessService {
   ) {}
 
   createProjectDeliverable(data: ProjectDeliverable) {        
-    const response = this.accessService.insert<ProjectDeliverable>(this.domain, { ...data, hidden: false });    
+    const response = this.accessService.insert<ProjectDeliverable>(this.domain, { ...data, hidden: false, documents: [] });    
     return response;
   }
 

@@ -40,9 +40,7 @@ export class ProjectDeliverableCreateComponent extends UnSubscriber implements O
       title: new FormControl(null, [Validators.minLength(3), Validators.required]),
       price: new FormControl(null, [Validators.required, Validators.min(1)]),
       duration: new FormControl(null, [Validators.required, Validators.min(1)]),
-      description: new FormControl(null, [Validators.maxLength(1000)]),
-      documents: new FormControl(null, [fileValidator({ min: 1 })]),
-      image: new FormControl(null),
+      description: new FormControl(null, [Validators.maxLength(1000)])
     });
   }
 

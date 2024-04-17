@@ -6,7 +6,6 @@
         <app-select name="category" class="form-group" [control]="getControl('category')" [list]="categories"></app-select>
         <app-input type="text" name="tags" class="form-group" [control]="getControl('tags')"></app-input>
         <app-text-area name="description" class="form-group" [control]="getControl('description')"></app-text-area>
-        <app-file-input name="image" class="form-group" [control]="getControl('image')"></app-file-input>
 
         <button 
             [disabled]="form.invalid"

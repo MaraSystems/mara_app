@@ -17,10 +17,8 @@
 
     --shadow-elevated: 0px 3px 8px 0px rgba(92, 94, 96, 0.25);
 
-    --enclosed-tiny: 600px;
-    --enclosed-small: 1000px;
-    --enclosed-normal: 1500px;
-    --enclosed-big: 2000px;
+    --enclosed-500: 500px;
+    --enclosed-1000: 1000px;
 
     --index-base: 0;
     --index-more: 1;
@@ -62,13 +60,6 @@ html, body {
 
     &-group {
         width: -webkit-fill-available;
-    }
-
-    &-collection {
-        display: flex;
-        flex-direction: column;
-        gap: var(--gap-normal);
-        align-self: stretch;
     }
 
     &-control {
@@ -243,11 +234,5 @@ html, body {
     
     .button {
         padding: var(--gap-small) var(--gap-x-big);
-    }
-
-    .form-collection {
-        display: flex;
-        flex-direction: row;
-        gap: var(--gap-normal);
     }
 }

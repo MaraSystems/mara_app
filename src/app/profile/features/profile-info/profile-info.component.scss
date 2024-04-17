@@ -4,7 +4,6 @@
     flex-direction: column;
     align-items: center;
     gap: var(--gap-normal);
-    overflow-y: auto;
     width: calc(100% - calc(var(--gap-normal) * 2));
     height: calc(100% - calc(var(--gap-normal) * 2));
 
@@ -91,15 +90,11 @@
 
 @media only screen and (min-width: 760px){
     :host {
-        width: calc(100% - calc(var(--gap-x-big) * 2));
-        height: calc(100% - calc(var(--gap-x-big) * 2));
-        padding: var(--gap-x-big);
         gap: var(--gap-x-big);
         
         .details {
             grid-template-columns: repeat(2, 1fr);
             gap: var(--gap-x-big);
-            max-width: var(--enclosed-small);
         }
     }
 }
