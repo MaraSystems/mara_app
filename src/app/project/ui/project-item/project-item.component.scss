@@ -11,9 +11,9 @@
     gap: var(--gap-small);
     padding: var(--gap-small);
     border-radius: var(--gap-small);
-    border: 1px solid var(--color-secondary);
     align-items: center;
     cursor: pointer;
+    box-shadow: var(--shadow-low);
 
     .image {
         grid-area: image;

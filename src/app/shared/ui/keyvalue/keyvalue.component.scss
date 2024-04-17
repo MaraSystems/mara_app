@@ -1,12 +1,10 @@
 :host {
     border-radius: var(--gap-small);
-    border: 1px solid var(--color-secondary);
-    background: var(--color-light);
+    border: 1px solid var(--color-light);
     align-items: center;
     justify-content: space-between;
     align-self: stretch;
     display: flex;
-    padding: 0em var(--gap-x-small);
 
     .key, .value, .input, .select{
         color: var(--color-dark);
@@ -27,11 +25,11 @@
     .input, .select {
         background-color: transparent;
         border: none;
-        border: 1px solid var(--color-secondary);
+        border: 1px solid var(--color-light);
         transition: ease-in-out;
         transition-duration: .5s;
         color: var(--color-dark);
-        box-shadow: var(--shadow-elevated);
+        box-shadow: var(--shadow-high);
         border-radius: var(--gap-small);
 
         &:hover {

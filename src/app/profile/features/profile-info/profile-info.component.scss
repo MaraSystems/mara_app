@@ -26,7 +26,7 @@
             position: absolute;
             bottom: 0;
             right: 0;
-            box-shadow: var(--shadow-elevated);
+            box-shadow: var(--shadow-high);
         }
     }
 
@@ -71,7 +71,7 @@
             width: calc(100% - calc(var(--gap-normal))*2);
             height: calc(100% - calc(var(--gap-normal))*2);
             padding: var(--gap-normal);
-            box-shadow: var(--shadow-elevated);
+            box-shadow: var(--shadow-high);
             border-radius: var(--gap-normal);
         }
 

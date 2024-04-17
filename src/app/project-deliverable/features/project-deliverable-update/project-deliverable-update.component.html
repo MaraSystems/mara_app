@@ -6,8 +6,6 @@
         <app-input type="number" name="price" class="form-group" [control]="getControl('price')" measure="NGN"></app-input>
         <app-input type="number" name="duration" class="form-group" [control]="getControl('duration')" measure="Days"></app-input>
         <app-text-area type="text" name="description" class="form-group" [control]="getControl('description')"></app-text-area>
-        <app-file-input [multiple]="true" name="documents" class="form-group" [control]="getControl('documents')"></app-file-input>
-        <app-file-input name="image" class="form-group" [control]="getControl('image')"></app-file-input>
         <button 
             [disabled]="!updateData || form.invalid"
             class="button form-group text-1"

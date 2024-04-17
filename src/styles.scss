@@ -15,15 +15,15 @@
     --gap-x-big: 50px;
     --gap-max: 100px;
 
-    --shadow-elevated: 0px 3px 8px 0px rgba(92, 94, 96, 0.25);
+    --shadow-high: 0px 3px 8px 0px rgba(92, 94, 96, 0.25);
+    --shadow-low: 0px 2px 5px 0px rgba(92, 94, 96, 0.25);
 
     --enclosed-500: 500px;
     --enclosed-1000: 1000px;
 
     --index-base: 0;
-    --index-more: 1;
-    --index-cover: 2;
-    --index-pop: 3;
+    --index-app: 1;
+    --index-pop: 2;
 }
 
 * {
@@ -88,7 +88,7 @@ html, body {
 }
 
 .elevated {
-    box-shadow: var(--shadow-elevated);
+    box-shadow: var(--shadow-high);
 }
 
 .header-1 {
@@ -165,13 +165,13 @@ html, body {
 
     &:hover {
         transition-duration: .5s;
-        box-shadow: var(--shadow-elevated);
+        box-shadow: var(--shadow-high);
     }
 }
 
 .page-title {
     color: var(--color-secondary);
-    text-align: center;
+    text-align: left;
     width: 100%;
 }
 

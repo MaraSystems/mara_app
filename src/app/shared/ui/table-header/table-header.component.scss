@@ -1,5 +1,8 @@
 :host {
     display: none;
+    box-shadow: var(--shadow-high);
+    background-color: var(--color-white);
+    border-radius: var(--gap-small);
 
     .header {
         display: flex;
@@ -14,5 +17,9 @@
 @media only screen and (min-width: 760px){
     :host {
         display: grid;
+
+        .header {
+            padding: var(--gap-normal);
+        }
     }
 }

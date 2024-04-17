@@ -6,7 +6,10 @@ export const clientSelector = createFeatureSelector<Readonly<DocumentState>>('do
 
 export const selectDocumentByModelId = (model: string, id: string) => createSelector(
     clientSelector,
-    state => documentAdapter.getSelectors().selectAll(state).filter(document => (document.model === model && document.modelId === id))
+    state => {
+        const documents = Object.values(state.entities) as DocumentData[];        
+        return documents.filter(document => (document.model === model && document.modelId === id));
+    }
 );
 
 export const selectDocumentById = (id: string) => createSelector(

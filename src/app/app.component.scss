@@ -12,6 +12,7 @@
         overflow: hidden;
         height: 100%;
         width: 100%;
+        z-index: var(--index-app);
     }
 
     .app-content {

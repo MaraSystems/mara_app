@@ -8,6 +8,9 @@ import { PopupService } from 'src/app/shared/features/popup/features/popup.servi
 import { ProjectDeliverable } from '../../utils/models/project-deliverable.model';
 import { DeleteProjectDeliverableAction, GetProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
 import { selectProjectDeliverableById } from '../../utils/store/project-deliverable-store.selector';
+import { DocumentData } from 'src/app/shared/utils/models/document-data';
+import { ListDocumentsAction } from 'src/app/shared/utils/store/document/document-store.action';
+import { selectDocumentByModelId } from 'src/app/shared/utils/store/document/document-store.selector';
 
 @Component({
   selector: 'app-project-deliverable-view',
@@ -16,6 +19,7 @@ import { selectProjectDeliverableById } from '../../utils/store/project-delivera
 })
 export class ProjectDeliverableViewComponent extends UnSubscriber implements OnInit {
   projectDeliverable = new ProjectDeliverable();
+  documents: DocumentData[] = [];
   id!: string;
 
   moreList: More[] = [
@@ -31,12 +35,17 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
     super();
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.id = this.activatedRoute.snapshot.paramMap.get('deliverable_id') as string;   
     this.store.dispatch(new GetProjectDeliverableAction(this.id)); 
+    this.store.dispatch(new ListDocumentsAction('project-document', this.id));
     
     this.newSubscription = this.store.select(selectProjectDeliverableById(this.id)).subscribe(projectDeliverable => {
       this.projectDeliverable = projectDeliverable;            
+    });
+
+    this.newSubscription = this.store.select(selectDocumentByModelId('project-document', this.id)).subscribe(documents => {
+      this.documents = documents;      
     });
   }
 

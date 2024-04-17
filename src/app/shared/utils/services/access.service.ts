@@ -30,13 +30,13 @@ export class AccessService {
   }
 
   public upload(entry: UploadData) {
-    const { name, model, url } = entry;
+    const { name, model, modelId, data: url } = entry;
     const collection = this.db.createCollection<DocumentData>('documents');
-    const { version: latest = -1 } = collection.findOne({ name, model }, { sort: { version: 'desc' } } as IQueryOption);
+    const { version: latest = -1 } = collection.findOne({ name, model, modelId }, { sort: { version: 'desc' } } as IQueryOption) || {};
     const version = latest + 1;
     localStorage.setItem(`${model}/${name}/${version}`, url);
 
-    const document: Partial<DocumentData> = { name, model, version };
+    const document: Partial<DocumentData> = { name, model, modelId, version };
     const data = collection.insertOne(document as DocumentData);
     const response: DataResponse<DocumentData> = { success: true, data };
     return of(response);

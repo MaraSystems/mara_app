@@ -1,0 +1,5 @@
+<span class="row" *ngFor="let item of values; index as i">
+    <img class="image" *ngIf="keys[i] == 'image' && item" [src]="item" alt="">
+    <span class="material-symbols-outlined" *ngIf="keys[i] == 'image' && !item">{{icon}}</span>
+    <span class="row-title text-1" *ngIf="keys[i] !== 'image'">{{item}}</span>
+</span>

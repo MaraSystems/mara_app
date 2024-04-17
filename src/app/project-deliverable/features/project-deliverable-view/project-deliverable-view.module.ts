@@ -11,6 +11,7 @@ import { EmptyModule } from 'src/app/shared/ui/empty/empty.module';
 import { DirectivesModule } from 'src/app/shared/utils/directives/directives.module';
 import { WarnModule } from 'src/app/shared/ui/warn/warn.module';
 import { ProjectDocumentItemModule } from '../../../project-document/ui/project-document-item/project-document-item.module';
+import { ProjectDocumentCreateModule } from 'src/app/project-document/features/project-document-create/project-document-create.module';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ProjectDocumentItemModule } from '../../../project-document/ui/project-
     DirectivesModule,
     WarnModule,
     ProjectDeliverableUpdateModule,
-    ProjectDocumentItemModule
+    ProjectDocumentItemModule,
+    ProjectDocumentCreateModule
   ]
 })
 export class ProjectDeliverableViewModule { }

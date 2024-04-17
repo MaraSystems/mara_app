@@ -18,16 +18,15 @@
     <div class="documents-header">
         <h1 class="text-1 documents-title">Files</h1>
         <span class="documents-icons">
-            <span class="material-symbols-outlined" [routerLink]="'/projects/' + id + '/deliverables/create' ">add</span>
-            <span class="material-symbols-outlined" [routerLink]="'/projects/' + id + '/deliverables' ">arrow_outward</span>
+            <span class="material-symbols-outlined" (click)="popupService.open('project-document-create')" >add</span>
         </span>
     </div>
 
-    <div class="documents-list" *ngIf="projectDeliverable.documents.length">
-        <app-project-document-item *ngFor="let item of projectDeliverable.documents" [id]="item"></app-project-document-item>
+    <div class="documents-list" *ngIf="documents.length">
+        <app-project-document-item *ngFor="let item of documents" [id]="item._id"></app-project-document-item>
     </div>
     
-    <app-empty *ngIf="!projectDeliverable.documents.length" name="project deliverable documents"></app-empty>
+    <app-empty *ngIf="!documents.length" name="project deliverable documents"></app-empty>
 </div>
 
 <div class="controls">
@@ -43,4 +42,8 @@
 
 <app-popup name="project-deliverable-delete">
     <app-warn title="Delete Project" description="This project deliverable will be deleted. Click 'Continue' to proceed." (proceed)="deleteProjectDeliverable()"></app-warn>
+</app-popup>
+
+<app-popup name="project-document-create">
+    <app-project-document-create [modelId]="projectDeliverable._id"></app-project-document-create>
 </app-popup>

@@ -7,9 +7,11 @@
     </span>
 </div>
 
-<div class="list" *ngIf="projects.length">
-    <app-table-header class="table-header" [list]="['', 'title', 'category', 'duration', 'price']"></app-table-header>
-    <app-project-item *ngFor="let item of projects" [project]="item" [routerLink]="'/projects/' + item._id"></app-project-item>
+<div class="projects" *ngIf="projects.length">
+    <app-table-header [list]="['', 'title', 'category', 'duration', 'price']"></app-table-header>
+    <div class="projects-list">
+        <app-project-item *ngFor="let item of projects" [project]="item" [routerLink]="'/projects/' + item._id"></app-project-item>
+    </div>
 </div>
 
 <app-empty *ngIf="!projects.length" name="project"></app-empty>

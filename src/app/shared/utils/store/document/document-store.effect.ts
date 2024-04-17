@@ -25,8 +25,10 @@ export class DocumentStoreEffect {
         ofType<UploadDocumentAction>(DocumentActionsType.UPLOAD_DOCUMENT),
         mergeMap((action: UploadDocumentAction) => 
             this.documentAccessService.uploadDocument(action.payload).pipe(
-                map((response: DataResponse<DocumentData>) => {
+                map((response: DataResponse<DocumentData>) => {                    
                     this.store.dispatch(new AddToast({ description: 'Document Upload' }));
+                    const popup = (action as UploadDocumentAction).popup as string;
+                    this.store.dispatch(new SetPopup({ id: popup, action: 'close'}));   
                     return new UploadDocumentActionSuccess(response.data);
                 }),
                 catchError(err => of(new UploadDocumentActionFail(err)).pipe(

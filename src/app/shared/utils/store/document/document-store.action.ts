@@ -29,7 +29,7 @@ export enum DocumentActionsType {
 
 export class UploadDocumentAction implements Action {
     readonly type = DocumentActionsType.UPLOAD_DOCUMENT;
-    constructor(public payload: UploadData){}
+    constructor(public payload: UploadData, public popup: string){}
 }
 
 export class UploadDocumentActionSuccess implements Action {

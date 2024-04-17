@@ -5,6 +5,7 @@
     gap: var(--gap-normal);
     width: -webkit-fill-available;
     padding: var(--gap-normal) var(--gap-none);
+    max-width: var(--enclosed-1000);
 
     .header {
         width: inherit;
@@ -33,14 +34,26 @@
         }
     }
 
-    .list {
+    .deliverables {
         display: flex;
         flex-direction: column;
         gap: var(--gap-small);
         padding: var(--gap-none) var(--gap-normal);
         width: -webkit-fill-available;
+
+        &-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-small);
+            width: -webkit-fill-available;
+        }
     }
 }
 
 @media only screen and (min-width: 760px){
+    :host {
+        .deliverables-list {
+            gap: var(--gap-big);
+        }
+    }
 }
