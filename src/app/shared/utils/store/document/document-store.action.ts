@@ -34,7 +34,7 @@ export class UploadDocumentAction implements Action {
 
 export class UploadDocumentActionSuccess implements Action {
     readonly type = DocumentActionsType.UPLOAD_DOCUMENT_SUCCESS;
-    constructor(public payload: DocumentData){}
+    constructor(public payload: DocumentData, public id?: string){}
 }
 
 export class UploadDocumentActionFail implements Action {

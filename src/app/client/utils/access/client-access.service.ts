@@ -18,17 +18,17 @@ export class ClientAccessService {
   ) {}
 
   registerClient(data: NewClient) {        
-    const response = this.accessService.insert<Client>(this.domain, data);
+    const response = this.accessService.insertOne<Client>(this.domain, data);
     return response;
   }
 
   getClient(id: string) {    
-    const response = this.accessService.get<Client>(this.domain, { _id: id });
+    const response = this.accessService.findOne<Client>(this.domain, { _id: id });
     return response;
   }
 
   updateClient(data: Update<Client>) {    
-    const response = this.accessService.update<Client>(this.domain, { _id: data.id }, data.changes);    
+    const response = this.accessService.updateOne<Client>(this.domain, { _id: data.id }, data.changes);    
     return response;
   }
 }

@@ -31,8 +31,10 @@ export function documentReducer(state = initialState, action: Action): DocumentS
             return { ...state, loading: true, loaded: false };
 
         case DocumentActionsType.UPLOAD_DOCUMENT_SUCCESS:
-            const createPayload = (action as UploadDocumentActionSuccess).payload;
-            return documentAdapter.addOne(createPayload, { ...state, loading: false, loaded: true })
+            const { payload: createPayload, id } = (action as UploadDocumentActionSuccess);
+            return id 
+                ? documentAdapter.updateOne({ id, changes: createPayload }, { ...state, loading: false, loaded: true })
+                : documentAdapter.addOne(createPayload, { ...state, loading: false, loaded: true });
             
         case DocumentActionsType.UPLOAD_DOCUMENT_FAIL:
             return {

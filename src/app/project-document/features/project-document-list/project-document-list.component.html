@@ -1,3 +1,12 @@
-<!-- <span class="image"><img [src]="file.name || '../../../../assets/images/db.png'" alt=""></span>
-<span class="title text-1">{{file.version}}</span>
-<span class="duration text-2" unit="Days">{{file.createdAt}}</span> -->
+<div class="header">
+    <h1 class="text-1 title">Files</h1>
+    <span class="icons">
+        <span class="material-symbols-outlined" (click)="popupService.open('project-document-upload')" >add</span>
+    </span>
+</div>
+
+<div class="list" *ngIf="documents.length">
+    <app-project-document-item *ngFor="let item of documents" [id]="item._id"></app-project-document-item>
+</div>
+
+<app-empty *ngIf="!documents.length" name="project deliverable documents"></app-empty>

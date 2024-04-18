@@ -25,17 +25,17 @@ export class DocumentAccessService {
   }
 
   getDocument(id: string) {    
-    const response = this.accessService.get<DocumentData>(this.domain, { _id: id });
+    const response = this.accessService.findOne<DocumentData>(this.domain, { _id: id });
     return response;
   }
 
   listDocuments(model: string, modelId: string, limit = 10, skip = 0) {
-    const response = this.accessService.list<[DocumentData]>(this.domain, { model, modelId });    
+    const response = this.accessService.find<[DocumentData]>(this.domain, { model, modelId });    
     return response;
   }
 
   deleteDocument(id: string) {    
-    const response = this.accessService.remove<DocumentData>(this.domain, { _id: id });
+    const response = this.accessService.removeOne<DocumentData>(this.domain, { _id: id });
     return response;
   }
 }

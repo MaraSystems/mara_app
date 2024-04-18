@@ -4,6 +4,7 @@ import { ProjectDocumentListComponent } from './project-document-list.component'
 import { ProjectDocumentListRoutingModule } from './project-document-list-routing.module';
 import { EmptyModule } from 'src/app/shared/ui/empty/empty.module';
 import { TableHeaderModule } from 'src/app/shared/ui/table-header/table-header.module';
+import { ProjectDocumentItemModule } from '../../ui/project-document-item/project-document-item.module';
 
 
 
@@ -15,7 +16,8 @@ import { TableHeaderModule } from 'src/app/shared/ui/table-header/table-header.m
     CommonModule,
     ProjectDocumentListRoutingModule,
     EmptyModule,
-    TableHeaderModule
+    TableHeaderModule,
+    ProjectDocumentItemModule,
   ],
   exports: [
     ProjectDocumentListComponent

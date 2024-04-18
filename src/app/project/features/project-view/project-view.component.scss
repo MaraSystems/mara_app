@@ -11,7 +11,6 @@
     justify-content: center;
     gap: var(--gap-big);
     padding: var(--gap-small);
-    position: relative;
     width: -webkit-fill-available;
     height: max-content;
 
@@ -114,10 +113,6 @@
         border-radius: var(--gap-normal);
         height: -webkit-fill-available;
         justify-content: space-around;
-
-        .more {
-            position: relative;
-        }
     }
 
     .button {

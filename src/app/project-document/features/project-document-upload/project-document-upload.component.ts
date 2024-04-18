@@ -7,17 +7,19 @@ import { ActivatedRoute } from '@angular/router';
 import { UploadDocumentAction } from 'src/app/shared/utils/store/document/document-store.action';
 import { UploadData } from 'src/app/shared/utils/models/upload-data';
 import { fileValidator } from 'src/app/shared/utils/validators/fileValidator';
+import { DocumentData } from 'src/app/shared/utils/models/document-data';
 
 @Component({
-  selector: 'app-project-document-create',
-  templateUrl: './project-document-create.component.html',
-  styleUrls: ['./project-document-create.component.scss']
+  selector: 'app-project-document-upload',
+  templateUrl: './project-document-upload.component.html',
+  styleUrls: ['./project-document-upload.component.scss']
 })
-export class ProjectDocumentCreateComponent extends UnSubscriber implements OnInit {
+export class ProjectDocumentUploadComponent extends UnSubscriber implements OnInit {
   @Input () multiple = false;
-  @Input () modelId!: string;
+  @Input () modelId = '';
+  @Input() documentData!: DocumentData;
 
-  documentData!: UploadData;
+  uploadData!: UploadData;
   form!: FormGroup;
 
   constructor(
@@ -27,20 +29,20 @@ export class ProjectDocumentCreateComponent extends UnSubscriber implements OnIn
   }
   
   ngOnInit(): void {    
-    this.initForm();    
+    this.initForm(); 
 
     this.newSubscription = this.form.valueChanges.subscribe(data => {      
-      this.documentData = data;
+      this.uploadData = data;
     });
   }
 
   initForm() {
     this.form = new FormGroup({
-      data: new FormControl(null, [fileValidator({ min: 1 })]),
+      data: new FormControl(null, [fileValidator({ min: this.documentData ? 0 : 1 })]),
     });
 
     if (!this.multiple) {
-      this.form.addControl('name', new FormControl(null, [Validators.minLength(3)]));
+      this.form.addControl('name', new FormControl(this.documentData?.name, [Validators.minLength(3)]));
     }
   }
 
@@ -54,7 +56,7 @@ export class ProjectDocumentCreateComponent extends UnSubscriber implements OnIn
     return control;
   }
 
-  createDocument() {    
-    this.store.dispatch(new UploadDocumentAction({ ...this.documentData, model: 'project-document', modelId: this.modelId }, 'project-document-create'));
+  uploadDocument() {    
+    this.store.dispatch(new UploadDocumentAction({ ...this.uploadData, model: 'project-document', modelId: this.modelId, _id: this.documentData?._id }, `project-document-upload-${this.documentData?._id}`));
   }
 }

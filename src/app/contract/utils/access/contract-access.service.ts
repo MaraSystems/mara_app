@@ -18,22 +18,22 @@ export class ContractAccessService {
   ) {}
 
   createContract(data: Contract) {    
-    const response = this.accessService.insert<Contract>(this.domain, data);
+    const response = this.accessService.insertOne<Contract>(this.domain, data);
     return of(response);
   }
 
   getContract(id: string) {    
-    const response = this.accessService.get<Contract>(this.domain, { _id: id });
+    const response = this.accessService.findOne<Contract>(this.domain, { _id: id });
     return response;
   }
 
   listContracts(data: ListPayload) {
-    const response = this.accessService.get<[Contract]>(this.domain, {});
+    const response = this.accessService.findOne<[Contract]>(this.domain, {});
     return response;
   }
 
   updateContract(data: Update<Contract>) {    
-    const response = this.accessService.update<Contract>(this.domain, { _id: data.id }, data.changes);
+    const response = this.accessService.updateOne<Contract>(this.domain, { _id: data.id }, data.changes);
     return of(response);
   }
 }

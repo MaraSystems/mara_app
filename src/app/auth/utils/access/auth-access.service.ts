@@ -24,7 +24,7 @@ export class AuthAccessService extends UnSubscriber {
   }
 
   login(auth: Login) {              
-    return this.accessService.get<Client>('clients', { email: auth.email }).pipe(
+    return this.accessService.findOne<Client>('clients', { email: auth.email }).pipe(
       map(({ data: client, success }) => {
         const response: DataResponse<Auth>  = { success, data: { id: client._id, token: 'This is token' }};        
         return response;

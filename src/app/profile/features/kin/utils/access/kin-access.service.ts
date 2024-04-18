@@ -16,17 +16,17 @@ export class KinAccessService {
   ) {}
 
   createKin(data: Kin) {    
-    const response = this.accessService.insert<Kin>(this.domain, data);
+    const response = this.accessService.insertOne<Kin>(this.domain, data);
     return response;
   }
 
   getKin(userId: string) {    
-    const response = this.accessService.get<Kin>(this.domain, { userId });
+    const response = this.accessService.findOne<Kin>(this.domain, { userId });
     return response;
   }
 
   updateKin(data: Update<Kin>) {    
-    const response = this.accessService.update<Kin>(this.domain, { _id: data.id }, data.changes);    
+    const response = this.accessService.updateOne<Kin>(this.domain, { _id: data.id }, data.changes);    
     return response;
   }
 }

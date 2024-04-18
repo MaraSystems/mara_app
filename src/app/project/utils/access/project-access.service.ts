@@ -16,27 +16,27 @@ export class ProjectAccessService {
   ) {}
 
   createProject(data: Project) {    
-    const response = this.accessService.insert<Project>(this.domain, { ...data, status: ProjectStatus.DRAFT, hidden: false });
+    const response = this.accessService.insertOne<Project>(this.domain, { ...data, status: ProjectStatus.DRAFT, hidden: false });
     return response;
   }
 
   getProject(id: string) {    
-    const response = this.accessService.get<Project>(this.domain, { _id: id });
+    const response = this.accessService.findOne<Project>(this.domain, { _id: id });
     return response;
   }
 
   listProjects(data: ListPayload) {
-    const response = this.accessService.list<[Project]>(this.domain, { hidden: false });
+    const response = this.accessService.find<[Project]>(this.domain, { hidden: false });
     return response;
   }
 
   updateProject(data: Update<Project>) {    
-    const response = this.accessService.update<Project>(this.domain, { _id: data.id }, data.changes);
+    const response = this.accessService.updateOne<Project>(this.domain, { _id: data.id }, data.changes);
     return response;
   }
 
   deleteProject(id: string) {    
-    const response = this.accessService.update<Project>(this.domain, { _id: id }, { hidden: true });
+    const response = this.accessService.updateOne<Project>(this.domain, { _id: id }, { hidden: true });
     return response;
   }
 }

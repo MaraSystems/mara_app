@@ -11,7 +11,6 @@
     justify-content: center;
     gap: var(--gap-big);
     padding: var(--gap-small);
-    position: relative;
     width: -webkit-fill-available;
     height: max-content;
 
@@ -69,11 +68,6 @@
 
     .documents {
         grid-area: files;
-        display: flex;
-        flex-direction: column;
-        gap: var(--gap-small);
-        padding: var(--gap-normal);
-        height: -webkit-fill-available;
         box-shadow: var(--shadow-high);
         border-radius: var(--gap-normal);
 
@@ -114,10 +108,6 @@
         border-radius: var(--gap-normal);
         height: -webkit-fill-available;
         justify-content: space-around;
-
-        .more {
-            position: relative;
-        }
     }
 
     .button {
@@ -152,14 +142,6 @@
             gap: var(--gap-normal);
 
             &-title {
-                padding: var(--gap-small) 0px;
-            }
-        }
-
-        .documents {
-            gap: var(--gap-normal);
-
-            &-header {
                 padding: var(--gap-small) 0px;
             }
         }

@@ -7,4 +7,4 @@
 
 <span class="cover" *ngIf="show" (click)="show = false"></span>
 
-<span class="material-symbols-outlined icon" (click)="show = !show">more_horiz</span>
+<span class="material-symbols-outlined icon" [ngClass]="{elevated}" (click)="show = !show">{{ icon }}</span>

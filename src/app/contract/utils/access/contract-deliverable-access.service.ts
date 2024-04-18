@@ -17,22 +17,22 @@ export class ContractDeliverableAccessService {
   ) {}
 
   createContractDeliverable(data: ContractDeliverable) {    
-    const response = this.accessService.insert<ContractDeliverable>(this.domain, data);
+    const response = this.accessService.insertOne<ContractDeliverable>(this.domain, data);
     return of(response);
   }
 
   getContractDeliverable(id: string) {    
-    const response = this.accessService.get<ContractDeliverable>(this.domain, { _id: id });
+    const response = this.accessService.findOne<ContractDeliverable>(this.domain, { _id: id });
     return response;
   }
 
   listContractDeliverables(projectId: string, limit = 10, skip = 0) {
-    const response = this.accessService.get<[ContractDeliverable]>(this.domain, { projectId });
+    const response = this.accessService.findOne<[ContractDeliverable]>(this.domain, { projectId });
     return response;
   }
 
   updateContractDeliverable(data: Update<ContractDeliverable>) {    
-    const response = this.accessService.update<ContractDeliverable>(this.domain, { _id: data.id }, data.changes);
+    const response = this.accessService.updateOne<ContractDeliverable>(this.domain, { _id: data.id }, data.changes);
     return of(response);
   }
 }

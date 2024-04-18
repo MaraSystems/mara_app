@@ -15,27 +15,27 @@ export class ProjectDeliverableAccessService {
   ) {}
 
   createProjectDeliverable(data: ProjectDeliverable) {        
-    const response = this.accessService.insert<ProjectDeliverable>(this.domain, { ...data, hidden: false, documents: [] });    
+    const response = this.accessService.insertOne<ProjectDeliverable>(this.domain, { ...data, hidden: false, documents: [] });    
     return response;
   }
 
   getProjectDeliverable(id: string) {    
-    const response = this.accessService.get<ProjectDeliverable>(this.domain, { _id: id });
+    const response = this.accessService.findOne<ProjectDeliverable>(this.domain, { _id: id });
     return response;
   }
 
   listProjectDeliverables(projectId: string, limit = 10, skip = 0) {
-    const response = this.accessService.list<[ProjectDeliverable]>(this.domain, { projectId, hidden: false });    
+    const response = this.accessService.find<[ProjectDeliverable]>(this.domain, { projectId, hidden: false });    
     return response;
   }
 
   updateProjectDeliverable(data: Update<ProjectDeliverable>) {        
-    const response = this.accessService.update<ProjectDeliverable>(this.domain, { _id: data.id }, data.changes);
+    const response = this.accessService.updateOne<ProjectDeliverable>(this.domain, { _id: data.id }, data.changes);
     return response;
   }
 
   deleteProjectDeliverable(id: string) {    
-    const response = this.accessService.update<ProjectDeliverable>(this.domain, { _id: id }, { hidden: true });
+    const response = this.accessService.updateOne<ProjectDeliverable>(this.domain, { _id: id }, { hidden: true });
     return response;
   }
 }

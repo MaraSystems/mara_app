@@ -50,7 +50,7 @@
     </div>
 </div>
 
-<div class="update-controls">
+<div class="controls">
     <button id="edit" class="button text-1" *ngIf="!edit" (click)="edit = true">Edit</button>
     <button id="cancel" class="button text-1" *ngIf="edit" (click)="edit = false">Cancel</button>
     <button id="update" class="button text-1" *ngIf="edit" (click)="updateClient()" [disabled]="!updateData || form.invalid">Update</button>

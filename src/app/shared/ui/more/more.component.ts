@@ -7,17 +7,24 @@ import { PopupService } from '../../features/popup/features/popup.service';
   templateUrl: './more.component.html',
   styleUrls: ['./more.component.scss']
 })
-export class MoreComponent {
+export class MoreComponent implements OnInit {
   @Input() list: More[] = [];
+  @Input() flat = true;
+  @Input() elevated = true;
   show = false;
+  icon = '';
 
   constructor(
     private popupService: PopupService
   ){}
 
+  ngOnInit(): void {
+    this.icon = this.flat ? 'more_horiz' : 'more_vert';    
+  }
+
   clicked(i: number): void {
     this.show = false;
-    const item = this.list[i];
+    const item = this.list[i];    
 
     if (item.action) {
       item.action();

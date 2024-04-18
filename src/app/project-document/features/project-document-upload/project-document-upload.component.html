@@ -1,7 +1,7 @@
 <h1 class="page-title header-3">Upload</h1>
 
 <div class="container">
-    <form action="" class="form" [formGroup]="form" (ngSubmit)="createDocument()">
+    <form action="" class="form" [formGroup]="form" (ngSubmit)="uploadDocument()">
         <app-file-input [multiple]="true" name="data" class="form-group" [control]="getControl('data')" [multiple]="multiple"></app-file-input>
         <app-input *ngIf="!multiple" type="text" name="name" class="form-group" [control]="getControl('name')"></app-input>
         <button 

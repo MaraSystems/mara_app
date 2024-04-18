@@ -43,10 +43,6 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
     this.newSubscription = this.store.select(selectProjectDeliverableById(this.id)).subscribe(projectDeliverable => {
       this.projectDeliverable = projectDeliverable;            
     });
-
-    this.newSubscription = this.store.select(selectDocumentByModelId('project-document', this.id)).subscribe(documents => {
-      this.documents = documents;      
-    });
   }
 
   deleteProjectDeliverable() {

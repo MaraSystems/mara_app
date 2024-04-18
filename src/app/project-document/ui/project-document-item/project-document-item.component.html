@@ -1,4 +1,12 @@
 <span class="image"><img src="../../../../assets/images/db.png" alt=""></span>
-<span class="title text-1">{{documentData.name}}</span>
-<span class="duration text-2">{{documentData.version}}</span>
-<span class="price text-2">{{documentData.updatedAt}}</span>
+<span class="name text-1">{{documentData.name}}</span>
+<span class="version text-2">{{ 'V.' + documentData.version}}</span>
+<app-more class="more" [elevated]="false" [list]="moreList"></app-more>
+
+<app-popup [name]="'project-document-delete-' + id">
+    <app-warn title="Delete Document" description="This project document will be deleted. Click 'Continue' to proceed." (proceed)="deleteDocument()"></app-warn>
+</app-popup>
+
+<app-popup [name]="'project-document-upload-' + id">
+    <app-project-document-upload [modelId]="documentData.modelId" [documentData]="documentData"></app-project-document-upload>
+</app-popup>

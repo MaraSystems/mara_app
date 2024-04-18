@@ -15,18 +15,7 @@
 </div>
 
 <div class="documents">
-    <div class="documents-header">
-        <h1 class="text-1 documents-title">Files</h1>
-        <span class="documents-icons">
-            <span class="material-symbols-outlined" (click)="popupService.open('project-document-create')" >add</span>
-        </span>
-    </div>
-
-    <div class="documents-list" *ngIf="documents.length">
-        <app-project-document-item *ngFor="let item of documents" [id]="item._id"></app-project-document-item>
-    </div>
-    
-    <app-empty *ngIf="!documents.length" name="project deliverable documents"></app-empty>
+    <app-project-document-list [modelId]="this.id"></app-project-document-list>
 </div>
 
 <div class="controls">
@@ -44,6 +33,6 @@
     <app-warn title="Delete Project" description="This project deliverable will be deleted. Click 'Continue' to proceed." (proceed)="deleteProjectDeliverable()"></app-warn>
 </app-popup>
 
-<app-popup name="project-document-create">
-    <app-project-document-create [modelId]="projectDeliverable._id"></app-project-document-create>
+<app-popup name="project-document-upload">
+    <app-project-document-upload [modelId]="projectDeliverable._id"></app-project-document-upload>
 </app-popup>

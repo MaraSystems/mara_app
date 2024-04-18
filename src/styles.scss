@@ -5,6 +5,7 @@
     --color-dark: #1B1E38;
     --color-white: #FFFFFF;
     --color-black: #000000;
+    --color-overlay: #1b1e387b;
     --color-error: red;
     
     --gap-none: 0px;
@@ -21,9 +22,8 @@
     --enclosed-500: 500px;
     --enclosed-1000: 1000px;
 
-    --index-base: 0;
-    --index-app: 1;
-    --index-pop: 2;
+    --index-base: auto;
+    --index-elevated: 1;
 }
 
 * {

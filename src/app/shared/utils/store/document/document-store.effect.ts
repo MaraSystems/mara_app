@@ -29,7 +29,7 @@ export class DocumentStoreEffect {
                     this.store.dispatch(new AddToast({ description: 'Document Upload' }));
                     const popup = (action as UploadDocumentAction).popup as string;
                     this.store.dispatch(new SetPopup({ id: popup, action: 'close'}));   
-                    return new UploadDocumentActionSuccess(response.data);
+                    return new UploadDocumentActionSuccess(response.data, action.payload._id);
                 }),
                 catchError(err => of(new UploadDocumentActionFail(err)).pipe(
                     tap(() => {

@@ -6,7 +6,7 @@
 
     .header {
         display: flex;
-        padding: var(--gap-small);
+        padding: var(--gap-normal) 0px;
 
         &-title {
             text-transform: capitalize;
@@ -17,9 +17,5 @@
 @media only screen and (min-width: 760px){
     :host {
         display: grid;
-
-        .header {
-            padding: var(--gap-normal);
-        }
     }
 }

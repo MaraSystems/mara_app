@@ -30,14 +30,16 @@ export class AccessService {
   }
 
   public upload(entry: UploadData) {
-    const { name, model, modelId, data: url } = entry;
+    const { _id, name, model, modelId, data: url } = entry;
     const collection = this.db.createCollection<DocumentData>('documents');
-    const { version: latest = -1 } = collection.findOne({ name, model, modelId }, { sort: { version: 'desc' } } as IQueryOption) || {};
+    const { version: latest } = collection.findOne({ _id }) || { version: -1 };
     const version = latest + 1;
     localStorage.setItem(`${model}/${name}/${version}`, url);
 
     const document: Partial<DocumentData> = { name, model, modelId, version };
-    const data = collection.insertOne(document as DocumentData);
+    const data = version 
+      ? collection.updateOne({ _id }, document as DocumentData)
+      : collection.insertOne(document as DocumentData);
     const response: DataResponse<DocumentData> = { success: true, data };
     return of(response);
   }
@@ -51,14 +53,14 @@ export class AccessService {
     return of(response);
   }
 
-  public insert<T>(endpoint: string, entry: Partial<T>) {
+  public insertOne<T>(endpoint: string, entry: Partial<T>) {
     const collection = this.db.createCollection<T>(endpoint);
     const data = collection.insertOne(entry as T);
     const response: DataResponse<T> = { success: true, data };
     return of(response);
   }
 
-  public get<T>(endpoint: string, query: any, options?: IQueryOption) {
+  public findOne<T>(endpoint: string, query: any, options?: IQueryOption) {
     const collection = this.db.createCollection<T>(endpoint);
     const data = collection.findOne(query, options);
     if (!data) {
@@ -68,21 +70,21 @@ export class AccessService {
     return of(response);
   }
 
-  public list<T>(endpoint: string, query?: any, options?: IQueryOption) {
+  public find<T>(endpoint: string, query?: any, options?: IQueryOption) {
     const collection = this.db.createCollection<T>(endpoint);    
     const data = collection.find(query, options);    
     const response: DataResponse<T> = { success: true, data: data as T };    
     return of(response);
   }
 
-  public update<T>(endpoint: string, query: any, changes: Partial<T>, options?: IQueryOption) {
+  public updateOne<T>(endpoint: string, query: any, changes: Partial<T>, options?: IQueryOption) {
     const collection = this.db.createCollection<T>(endpoint);
     const data = collection.updateOne(query, changes, options) as T;
     const response: DataResponse<T> = { success: true, data };
     return of(response);
   }
 
-  public remove<T>(endpoint: string, query: any, options?: IQueryOption) {
+  public removeOne<T>(endpoint: string, query: any, options?: IQueryOption) {
     const collection = this.db.createCollection<T>(endpoint);
     const data = collection.removeOne(query, options);
     if (!data) {
