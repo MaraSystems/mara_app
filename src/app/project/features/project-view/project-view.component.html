@@ -1,9 +1,26 @@
-<span class="image">
-    <img [src]="project.image || '../../../../assets/images/db.png'" alt="" srcset="">
-</span>
-<div class="details">
+<div class="header">
+    <span class="image">
+        <img [src]="project.image || '../../../../assets/images/db.png'" alt="" srcset="">
+    </span>
+
+    <span class="text-2 tag">Project</span>
+
     <span class="header-3 title">{{project.title}}</span>
-    <div class="summery">
+
+    <div class="controls">
+        <span class="stats">
+            <app-icon-counter icon="thumb_up" [value]="10"></app-icon-counter>
+            <app-icon-counter icon="comment" [value]="10"></app-icon-counter>
+            <app-icon-counter icon="share" [value]="10"></app-icon-counter>
+            <app-icon-counter icon="bookmark" [value]="10"></app-icon-counter>
+        </span>
+        <app-more class="more" [list]="moreList"></app-more>
+    </div>
+</div>
+
+<div class="section details">
+    <h1 class="text-1 section-title">Details</h1>
+    <div class="details-list">
         <app-keyvalue name="category" [value]="project.category"></app-keyvalue>
         <app-keyvalue name="duration" [value]="duration" unit="Days"></app-keyvalue>
         <app-keyvalue name="price" [value]="price" unit="NGN"></app-keyvalue>
@@ -11,15 +28,10 @@
     </div>
 </div>
 
-<div class="description">
-    <h1 class="text-1 description-title">Description</h1>
-    <p class="description-text text-1">{{project.description}}</p>
-</div>
-
-<div class="deliverables">
-    <div class="deliverables-header">
-        <h1 class="text-1 deliverables-title">Deliverables</h1>
-        <span class="deliverables-icons">
+<div class="section deliverables">
+    <div class="section-title">
+        <h1 class="text-1 section-title-text">Deliverables</h1>
+        <span class="section-icons">
             <span class="material-symbols-outlined" [routerLink]="'/projects/' + id + '/deliverables/create' ">add</span>
             <span class="material-symbols-outlined" [routerLink]="'/projects/' + id + '/deliverables' ">arrow_outward</span>
         </span>
@@ -32,17 +44,14 @@
     <app-empty *ngIf="!deliverables.length" name="project deliverable"></app-empty>
 </div>
 
-<div class="controls">
-    <app-icon-counter icon="thumb_up" [value]="10"></app-icon-counter>
-    <app-icon-counter icon="comment" [value]="10"></app-icon-counter>
-    <app-icon-counter icon="share" [value]="10"></app-icon-counter>
-    <app-icon-counter icon="bookmark" [value]="10"></app-icon-counter>
-    <app-more class="more" [list]="moreList"></app-more>
+<div class="section description">
+    <h1 class="text-1 section-title">Description</h1>
+    <p class="description-text text-1">{{project.description}}</p>
 </div>
 
 <button class="button text-1">Initiate Contract</button>
 
-<app-popup name="project-update">
+<!-- <app-popup name="project-update">
     <app-project-update></app-project-update>
 </app-popup>
 
@@ -56,4 +65,4 @@
 
 <app-popup name="project-draft">
     <app-warn title="Draft Project" description="This project will be drafted. Click 'Continue' to proceed." (proceed)="draftProject()"></app-warn>
-</app-popup>
+</app-popup> -->

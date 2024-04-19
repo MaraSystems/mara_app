@@ -1,12 +1,12 @@
 :host {
     display: grid;
-    grid-template-columns: 1fr min-content;
+    grid-template-columns: 1fr;
     grid-template-areas: 
-        "image image"
-        "details controls"
-        "description description"
-        "deliverables deliverables"
-        "button button"
+        "header"
+        "details"
+        "description"
+        "deliverables"
+        "button"
     ;
     justify-content: center;
     gap: var(--gap-big);
@@ -14,45 +14,51 @@
     width: -webkit-fill-available;
     height: max-content;
 
-    .image {
-        grid-area: image;
-        border-radius: var(--gap-normal);
-        box-shadow: var(--shadow-high);
-        padding: var(--gap-small);
-        display: flex;
-        align-items: center;
-
-        img {
-            height: 200px;
-            width: 200px;
-        }
-    }
-
-    .details {
-        grid-area: details;
+    .header {
+        grid-area: header;
         display: flex;
         flex-direction: column;
+        align-items: center;
+        width: -webkit-fill-available;
         gap: var(--gap-small);
-        padding: var(--gap-small);
-        height: -webkit-fill-available;
-        box-shadow: var(--shadow-high);
-        border-radius: var(--gap-normal);
+        justify-self: center;
 
-        .title {
-            color: var(--color-black);
+        .image {
+            border-radius: var(--gap-normal);
+            box-shadow: var(--shadow-high);
+            padding: var(--gap-small);
+            display: flex;
+            align-items: center;
+    
+            img {
+                height: 200px;
+                width: 200px;
+            }
         }
 
-        .summery {
+        .controls {
             display: flex;
-            flex-direction: column;
-            gap: var(--gap-small);
+            box-shadow: var(--shadow-high);
+            padding: var(--gap-small);
             border-radius: var(--gap-normal);
-            height: -webkit-fill-available;
+            width: -webkit-fill-available;
+            justify-content: space-around;
+            align-items: center;
+            gap: var(--gap-small);
+
+            .stats {
+                display: flex;
+                padding: var(--gap-x-small);
+                border-radius: var(--gap-normal);
+                border: 1px solid var(--color-light);
+                width: -webkit-fill-available;
+                justify-content: space-around;
+                align-items: center;
+            }
         }
     }
 
-    .description {
-        grid-area: description;
+    .section {
         display: flex;
         flex-direction: column;
         gap: var(--gap-small);
@@ -62,26 +68,11 @@
         border-radius: var(--gap-normal);
 
         &-title {
-            border-bottom: 1px solid var(--color-black);
-        }
-    }
-
-    .deliverables {
-        grid-area: deliverables;
-        display: flex;
-        flex-direction: column;
-        gap: var(--gap-small);
-        padding: var(--gap-normal);
-        height: -webkit-fill-available;
-        box-shadow: var(--shadow-high);
-        border-radius: var(--gap-normal);
-
-        &-header {
             display: flex;
             justify-content: space-between;
             border-bottom: 1px solid var(--color-black);
-            padding: 0% var(--gap-small);
-        }
+            padding: var(--gap-small);
+        } 
 
         &-icons {
             display: flex;
@@ -91,6 +82,22 @@
                 cursor: pointer;
             }
         }
+    }
+
+    .details {
+        grid-area: details;
+
+        &-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-small);
+            border-radius: var(--gap-normal);
+            height: -webkit-fill-available;
+        }
+    }
+
+    .deliverables {
+        grid-area: deliverables;
 
         &-list {
             display: flex;
@@ -102,17 +109,8 @@
         }
     }
 
-    .controls {
-        grid-area: controls;
-        display: flex;
-        flex-direction: column;
-        gap: var(--gap-normal);
-        align-self: flex-end;
-        box-shadow: var(--shadow-high);
-        padding: var(--gap-x-small);
-        border-radius: var(--gap-normal);
-        height: -webkit-fill-available;
-        justify-content: space-around;
+    .description {
+        grid-area: description;
     }
 
     .button {
@@ -125,25 +123,35 @@
     :host {
         padding: var(--gap-x-big);
         gap: var(--gap-x-big);
-        grid-template-columns: repeat(7, 1fr) min-content;
+        grid-template-columns: repeat(2, 1fr);
         grid-template-areas: 
-            "image image details details details details details details"
-            "description description description description description description description controls"
-            "deliverables deliverables deliverables deliverables deliverables deliverables deliverables deliverables"
-            ". . button button button button . ."
+            "header header"
+            "details description"
+            "deliverables deliverables"
+            "button button"
         ;
         max-width: 1000px;
 
-        .image {
-            height: -webkit-fill-available;
-        }
-
         .header {
-            box-shadow: var(--shadow-high);
-            border-radius: var(--gap-small);
+            width: min-content;
+
+            .image {
+                height: -webkit-fill-available;
+            }
+
+            .controls {
+                gap: var(--gap-x-big);
+                padding: var(--gap-small);
+
+                .stats {
+                    gap: var(--gap-x-big);
+                    padding: var(--gap-small);
+                    width: -webkit-fill-available;
+                }
+            }
         }
 
-        .description {
+        .section {
             gap: var(--gap-normal);
 
             &-title {
@@ -151,12 +159,9 @@
             }
         }
 
-        .deliverables {
-            gap: var(--gap-normal);
-
-            &-header {
-                padding: var(--gap-small) 0px;
-            }
+        .button {
+            width: min-content;
+            justify-self: center;
         }
     }
 }

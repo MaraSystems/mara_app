@@ -1,28 +1,37 @@
-<span class="image">
-    <img [src]="projectDeliverable.image || '../../../../assets/images/db.png'" alt="" srcset="">
-</span>
-<div class="details">
+<div class="header">
+    <span class="image">
+        <img [src]="projectDeliverable.image || '../../../../assets/images/db.png'" alt="" srcset="">
+    </span>
+
+    <span class="text-2 tag">Project - Deliverable</span>
+
     <span class="header-3 title">{{projectDeliverable.title}}</span>
+
+    <div class="controls">
+        <span class="stats">
+            <app-icon-counter icon="thumb_up" [value]="10"></app-icon-counter>
+            <app-icon-counter icon="comment" [value]="10"></app-icon-counter>
+            <app-icon-counter icon="share" [value]="10"></app-icon-counter>
+        </span>
+        <app-more class="more" [list]="moreList"></app-more>
+    </div>
+</div>
+
+<div class="section details">
+    <h1 class="text-1 section-title">Details</h1>
     <div class="summery">
         <app-keyvalue name="duration" [value]="projectDeliverable.duration" unit="Days"></app-keyvalue>
         <app-keyvalue name="price" [value]="projectDeliverable.price" unit="NGN"></app-keyvalue>
     </div>
 </div>
 
-<div class="description">
-    <h1 class="text-1 description-title">Description</h1>
+<div class="section description">
+    <h1 class="text-1 section-title">Description</h1>
     <p class="description-text text-1">{{projectDeliverable.description}}</p>
 </div>
 
-<div class="documents">
+<div class="section documents">
     <app-project-document-list [modelId]="this.id"></app-project-document-list>
-</div>
-
-<div class="controls">
-    <app-icon-counter icon="thumb_up" [value]="10"></app-icon-counter>
-    <app-icon-counter icon="comment" [value]="10"></app-icon-counter>
-    <app-icon-counter icon="share" [value]="10"></app-icon-counter>
-    <app-more class="more" [list]="moreList"></app-more>
 </div>
 
 <app-popup name="project-deliverable-update">

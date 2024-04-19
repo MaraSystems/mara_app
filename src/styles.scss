@@ -195,6 +195,14 @@ html, body {
     color: var(--color-secondary);
 }
 
+.tag {
+    background-color: var(--color-primary);
+    padding: var(--gap-small);
+    box-shadow: var(--shadow-low);
+    color: var(--color-light);
+    border-radius: var(--gap-small);
+}
+
 @media only screen and (min-width: 760px){
     .header-1 {
         font-size: 3.4375rem;
