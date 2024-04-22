@@ -10,10 +10,10 @@ export class Project {
     status!: ProjectStatus;
     createdAt!: Date;
     updatedAt!: Date;
-    publishedAt!: Date | null;
-    likes!: string[];
-    bookmarks!: string[];
-    shares!: string[];
+    likes: string[] = [];
+    bookmarks: string[] = [];
+    shares: number = 0;
     image!: string;
-    hidden!: boolean;
+    hidden = false;
+    active = false
 }

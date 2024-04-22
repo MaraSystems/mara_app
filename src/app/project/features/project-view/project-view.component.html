@@ -9,10 +9,10 @@
 
     <div class="controls">
         <span class="stats">
-            <app-icon-counter icon="thumb_up" [value]="10"></app-icon-counter>
-            <app-icon-counter icon="comment" [value]="10"></app-icon-counter>
-            <app-icon-counter icon="share" [value]="10"></app-icon-counter>
-            <app-icon-counter icon="bookmark" [value]="10"></app-icon-counter>
+            <app-icon-counter [active]="liked" icon="thumb_up" [value]="project.likes.length" (click)="likeToggle()"></app-icon-counter>
+            <app-icon-counter [active]="bookmarked" icon="bookmark" [value]="project.bookmarks.length" (click)="bookmarkToggle()"></app-icon-counter>
+            <app-icon-counter icon="share" [value]="project.shares"></app-icon-counter>
+            <app-icon-counter icon="comment" [value]="10" (click)="popupService.open('project-comment-' + id)"></app-icon-counter>
         </span>
         <app-more class="more" [list]="moreList"></app-more>
     </div>
@@ -51,18 +51,22 @@
 
 <button class="button text-1">Initiate Contract</button>
 
-<!-- <app-popup name="project-update">
+<app-popup [name]="'project-update-' + id">
     <app-project-update></app-project-update>
 </app-popup>
 
-<app-popup name="project-delete">
+<app-popup [name]="'project-delete-' + id">
     <app-warn title="Delete Project" description="This project will be deleted. Click 'Continue' to proceed." (proceed)="deleteProject()"></app-warn>
 </app-popup>
 
-<app-popup name="project-publish">
-    <app-warn title="Pubhlish Project" description="This project will be published. Click 'Continue' to proceed." (proceed)="publishProject()"></app-warn>
+<app-popup [name]="'project-activate-' + id">
+    <app-warn title="Activate Project" description="This project will be activated. Click 'Continue' to proceed." (proceed)="activate()"></app-warn>
 </app-popup>
 
-<app-popup name="project-draft">
-    <app-warn title="Draft Project" description="This project will be drafted. Click 'Continue' to proceed." (proceed)="draftProject()"></app-warn>
-</app-popup> -->
+<app-popup [name]="'project-deactivate-' + id">
+    <app-warn title="De-Activate Project" description="This project will be deactivated. Click 'Continue' to proceed." (proceed)="deactivate()"></app-warn>
+</app-popup>
+
+<app-popup [name]="'project-comment-' + id">
+    <app-comment></app-comment>
+</app-popup>

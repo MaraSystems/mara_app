@@ -10,7 +10,7 @@
     ;
     justify-content: center;
     gap: var(--gap-big);
-    padding: var(--gap-small);
+    padding: var(--gap-x-big) var(--gap-normal);
     width: -webkit-fill-available;
     height: max-content;
 
@@ -49,8 +49,6 @@
             .stats {
                 display: flex;
                 padding: var(--gap-x-small);
-                border-radius: var(--gap-normal);
-                border: 1px solid var(--color-light);
                 width: -webkit-fill-available;
                 justify-content: space-around;
                 align-items: center;

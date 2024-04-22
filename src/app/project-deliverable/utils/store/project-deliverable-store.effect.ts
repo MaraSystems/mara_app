@@ -46,7 +46,7 @@ export class ProjectDeliverableStoreEffect {
                 map((response: DataResponse<ProjectDeliverable>) => {         
                     this.store.dispatch(new AddToast({ description: 'Project Deliverable Update' }));
                     const popup = (action as UpdateProjectDeliverableAction).popup as string;
-                    this.store.dispatch(new SetPopup({ id: popup, action: 'close'}));           
+                    this.store.dispatch(new SetPopup({ tag: popup, action: 'close'}));           
                     return new UpdateProjectDeliverableActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateProjectDeliverableActionFail(err)).pipe(

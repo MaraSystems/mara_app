@@ -12,6 +12,7 @@ import { DirectivesModule } from 'src/app/shared/utils/directives/directives.mod
 import { EmptyModule } from 'src/app/shared/ui/empty/empty.module';
 import { ProjectDeliverableItemModule } from 'src/app/project-deliverable/ui/project-deliverable-item/project-deliverable-item.module';
 import { WarnModule } from 'src/app/shared/ui/warn/warn.module';
+import { CommentModule } from 'src/app/shared/features/comment/features/comment.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { WarnModule } from 'src/app/shared/ui/warn/warn.module';
     ProjectDeliverableItemModule,
     DirectivesModule,
     EmptyModule,
-    WarnModule
+    WarnModule,
+    CommentModule
   ]
 })
 export class ProjectViewModule { }

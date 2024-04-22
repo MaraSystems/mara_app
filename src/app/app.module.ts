@@ -14,6 +14,7 @@ import { NavbarModule } from './shared/features/navbar/navbar.module';
 import { FootbarModule } from './shared/features/footbar/footbar.module';
 import { NotfoundModule } from './notfound/notfound.module';
 import { PopupModule } from './shared/features/popup/features/popup.module';
+import { PopupService } from './shared/features/popup/features/popup.service';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { PopupModule } from './shared/features/popup/features/popup.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    PopupModule,
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({ name: 'Contractor' }),
     EffectsModule.forRoot(appEffects),
@@ -31,8 +33,7 @@ import { PopupModule } from './shared/features/popup/features/popup.module';
     SidebarModule,
     NavbarModule,
     FootbarModule,
-    NotfoundModule,
-    PopupModule
+    NotfoundModule
   ],
   bootstrap: [AppComponent]
 })

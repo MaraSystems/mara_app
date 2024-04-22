@@ -65,6 +65,6 @@ export class ProjectUpdateComponent extends UnSubscriber implements OnInit {
   }
 
   saveProject() {    
-    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: this.updateData }, 'project-update'));
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: this.updateData }, { modal: `project-update-${this.id}`}));
   }
 }

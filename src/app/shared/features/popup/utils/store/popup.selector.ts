@@ -7,5 +7,5 @@ export const popupSelector = createFeatureSelector<Readonly<PopupState>>('popups
 
 export const selectPopupAction = createSelector(
     popupSelector,
-    state => Object.values(state.entities)[0]
+    state => Object.values(state.entities).pop()
 );

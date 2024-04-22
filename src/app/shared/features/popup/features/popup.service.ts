@@ -7,22 +7,24 @@ import { selectPopupAction } from '../utils/store/popup.selector';
   providedIn: 'root'
 })
 export class PopupService {
-  private popups: PopupComponent[] = [];
+  public popups: PopupComponent[] = [];
 
   constructor(
     private store: Store
   ) { 
     this.store.select(selectPopupAction).subscribe(popup => {
       if (popup) {
-        const { id, action, data } = popup;
+        const { tag, action, data } = popup;
+        // console.log(popup);
+        
         if (action === 'close') {
-          this.close(id);
+          this.close(tag);
         }
         else if (action == 'open') {
-          this.open(id, data);
+          this.open(tag, data);
         }
         else if (action == 'remove'){
-          this.remove(id);
+          this.remove(tag);
         }
       }
     });

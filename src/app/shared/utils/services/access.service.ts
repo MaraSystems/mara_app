@@ -4,10 +4,10 @@ import { environment } from 'src/environments/environment';
 import { Database, EngineTypes } from '@black-ink/lonedb';
 import { DataResponse } from '../models/data-response';
 import { of, throwError } from 'rxjs';
-import { DocumentData } from '../models/document-data';
 import { IQueryOption } from '@black-ink/lonedb/lib/models/query-option.interface';
-import { UploadData } from '../models/upload-data';
-import { DownloadData } from '../models/download-data';
+import { UploadData } from '../../features/attatchment/utils/models/upload-data';
+import { Attatchment } from '../../features/attatchment/utils/models/attatchment.model';
+import { DownloadData } from '../../features/attatchment/utils/models/download-data';
 
 @Injectable({
   providedIn: 'root'
@@ -31,21 +31,22 @@ export class AccessService {
 
   public upload(entry: UploadData) {
     const { _id, name, model, modelId, data: url } = entry;
-    const collection = this.db.createCollection<DocumentData>('documents');
+    const collection = this.db.createCollection<Attatchment>('attatchments');
     const { version: latest } = collection.findOne({ _id }) || { version: -1 };
     const version = latest + 1;
     localStorage.setItem(`${model}/${name}/${version}`, url);
 
-    const document: Partial<DocumentData> = { name, model, modelId, version };
+    const document: Partial<Attatchment> = { name, model, modelId, version };
     const data = version 
-      ? collection.updateOne({ _id }, document as DocumentData)
-      : collection.insertOne(document as DocumentData);
-    const response: DataResponse<DocumentData> = { success: true, data };
+      ? collection.updateOne({ _id }, document as Attatchment)
+      : collection.insertOne(document as Attatchment);
+    
+    const response: DataResponse<Attatchment> = { success: true, data };
     return of(response);
   }
 
   public download(query: DownloadData){
-    const collection = this.db.createCollection<DocumentData>('documents');    
+    const collection = this.db.createCollection<Attatchment>('attatchments');    
     const document = collection.findOne(query, { sort: { version: 'desc' } } as IQueryOption);
     const { model, name, version } = document;
     const url = localStorage.getItem(`${model}/${name}/${version}`) as string;

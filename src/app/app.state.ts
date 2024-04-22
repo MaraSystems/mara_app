@@ -13,8 +13,10 @@ import { ProjectDeliverableStoreEffect } from "./project-deliverable/utils/store
 import { ProjectState, projectReducer } from "./project/utils/store/project-store.reducer";
 import { ProjectDeliverableState, projectDeliverableReducer } from "./project-deliverable/utils/store/project-deliverable-store.reducer";
 import { PopupState, popupReducer } from "./shared/features/popup/utils/store/popup.reducer";
-import { DocumentStoreEffect } from "./shared/utils/store/document/document-store.effect";
-import { DocumentState, documentReducer } from "./shared/utils/store/document/document-store.reducer";
+import { AttatchmentStoreEffect } from "./shared/features/attatchment/utils/store/attatchment-store.effect";
+import { AttatchmentState, attatchmentReducer } from "./shared/features/attatchment/utils/store/attatchment-store.reducer";
+import { CommentStoreEffect } from "./shared/features/comment/utils/store/comment-store.effect";
+import { CommentState, commentReducer } from "./shared/features/comment/utils/store/comment-store.reducer";
 
 export const appEffects = [
     ClientStoreEffect,
@@ -22,7 +24,8 @@ export const appEffects = [
     KinStoreEffect,
     ProjectStoreEffect,
     ProjectDeliverableStoreEffect,
-    DocumentStoreEffect
+    AttatchmentStoreEffect,
+    CommentStoreEffect
 ];
 
 export interface AppState {
@@ -34,7 +37,8 @@ export interface AppState {
     router: RouterState,
     projects: ProjectState,
     projectDeliverables: ProjectDeliverableState,
-    documents: DocumentState
+    attatchments: AttatchmentState,
+    comments: CommentState
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -46,5 +50,6 @@ export const appReducers: ActionReducerMap<AppState> = {
     router: routerReducer,
     projects: projectReducer,
     projectDeliverables: projectDeliverableReducer,
-    documents: documentReducer
+    attatchments: attatchmentReducer,
+    comments: commentReducer
 }

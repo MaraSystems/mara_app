@@ -10,8 +10,8 @@ import { ProjectDeliverableUpdateModule } from '../project-deliverable-update/pr
 import { EmptyModule } from 'src/app/shared/ui/empty/empty.module';
 import { DirectivesModule } from 'src/app/shared/utils/directives/directives.module';
 import { WarnModule } from 'src/app/shared/ui/warn/warn.module';
-import { ProjectDocumentUploadModule } from 'src/app/project-document/features/project-document-upload/project-document-upload.module';
-import { ProjectDocumentListModule } from 'src/app/project-document/features/project-document-list/project-document-list.module';
+import { AttatchmentListModule } from 'src/app/shared/features/attatchment/features/attatchment-list/attatchment-list.module';
+import { AttatchmentUploadModule } from 'src/app/shared/features/attatchment/features/attatchment-upload/attatchment-upload.module';
 
 
 @NgModule({
@@ -30,8 +30,8 @@ import { ProjectDocumentListModule } from 'src/app/project-document/features/pro
     DirectivesModule,
     WarnModule,
     ProjectDeliverableUpdateModule,
-    ProjectDocumentListModule,
-    ProjectDocumentUploadModule
+    AttatchmentListModule,
+    AttatchmentUploadModule
   ]
 })
 export class ProjectDeliverableViewModule { }

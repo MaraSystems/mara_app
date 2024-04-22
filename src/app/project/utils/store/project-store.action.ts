@@ -2,6 +2,7 @@ import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
 import { Project } from "../models/project.model";
 import { ListPayload } from "src/app/shared/utils/models/list-payload";
+import { SideEffects } from "src/app/shared/utils/models/side.effects";
 
 export enum ProjectActionsType {
     CREATE_PROJECT = "[PROJECT] Create Project",
@@ -42,7 +43,7 @@ export class CreateProjectActionFail implements Action {
 
 export class UpdateProjectAction implements Action {
     readonly type = ProjectActionsType.UPDATE_PROJECT;
-    constructor(public payload: Update<Project>, public popup?: string){}
+    constructor(public payload: Update<Project>, public sideEffect?: SideEffects){}
 }
 
 export class UpdateProjectActionSuccess implements Action {

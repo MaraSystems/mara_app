@@ -1,5 +1,6 @@
 export interface IPopup {
-    id: string,
     data?: any;
-    action: 'open' | 'close' | 'remove'
+    action: 'open' | 'close' | 'remove';
+    tag: string;
+    id?: number;
 }

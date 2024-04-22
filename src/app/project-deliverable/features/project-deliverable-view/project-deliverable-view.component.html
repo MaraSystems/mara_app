@@ -31,17 +31,13 @@
 </div>
 
 <div class="section documents">
-    <app-project-document-list [modelId]="this.id"></app-project-document-list>
+    <app-attatchment-list [modelId]="this.id" model="project deliverable"></app-attatchment-list>
 </div>
 
-<app-popup name="project-deliverable-update">
+<app-popup [name]="'project-deliverable-update-' + id">
     <app-project-deliverable-update></app-project-deliverable-update>
 </app-popup>
 
-<app-popup name="project-deliverable-delete">
+<app-popup [name]="'project-deliverable-delete-' + id">
     <app-warn title="Delete Project" description="This project deliverable will be deleted. Click 'Continue' to proceed." (proceed)="deleteProjectDeliverable()"></app-warn>
-</app-popup>
-
-<app-popup name="project-document-upload">
-    <app-project-document-upload [modelId]="projectDeliverable._id"></app-project-document-upload>
 </app-popup>

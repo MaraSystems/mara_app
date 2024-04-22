@@ -8,9 +8,8 @@ import { PopupService } from 'src/app/shared/features/popup/features/popup.servi
 import { ProjectDeliverable } from '../../utils/models/project-deliverable.model';
 import { DeleteProjectDeliverableAction, GetProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
 import { selectProjectDeliverableById } from '../../utils/store/project-deliverable-store.selector';
-import { DocumentData } from 'src/app/shared/utils/models/document-data';
-import { ListDocumentsAction } from 'src/app/shared/utils/store/document/document-store.action';
-import { selectDocumentByModelId } from 'src/app/shared/utils/store/document/document-store.selector';
+import { Attatchment } from 'src/app/shared/features/attatchment/utils/models/attatchment.model';
+import { ListAttatchmentsAction } from 'src/app/shared/features/attatchment/utils/store/attatchment-store.action';
 
 @Component({
   selector: 'app-project-deliverable-view',
@@ -19,13 +18,10 @@ import { selectDocumentByModelId } from 'src/app/shared/utils/store/document/doc
 })
 export class ProjectDeliverableViewComponent extends UnSubscriber implements OnInit {
   projectDeliverable = new ProjectDeliverable();
-  documents: DocumentData[] = [];
+  attatchment: Attatchment[] = [];
   id!: string;
 
-  moreList: More[] = [
-    { name: 'Update', icon: 'update', popup: 'project-deliverable-update' },
-    { name: 'Delete', icon: 'delete', popup: 'project-deliverable-delete' }
-  ]
+  moreList: More[] = [];
 
   constructor(
     public store: Store<AppState>,
@@ -38,11 +34,16 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
   ngOnInit(): void {    
     this.id = this.activatedRoute.snapshot.paramMap.get('deliverable_id') as string;   
     this.store.dispatch(new GetProjectDeliverableAction(this.id)); 
-    this.store.dispatch(new ListDocumentsAction('project-document', this.id));
+    this.store.dispatch(new ListAttatchmentsAction('project-document', this.id));
     
     this.newSubscription = this.store.select(selectProjectDeliverableById(this.id)).subscribe(projectDeliverable => {
       this.projectDeliverable = projectDeliverable;            
     });
+
+    this.moreList = [
+      { name: 'Update', icon: 'update', popup: `project-deliverable-update-${this.id}` },
+      { name: 'Delete', icon: 'Delete', popup: `project-deliverable-delete-${this.id}` }
+    ];
   }
 
   deleteProjectDeliverable() {

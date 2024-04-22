@@ -19,8 +19,9 @@ const initialState = popupAdapter.getInitialState(defualtIssue);
 export function popupReducer(state = initialState, action: PopupActions): PopupState {
     switch (action.type) {
         case PopupActionTypes.SET_POPUP:
-            const popup = (action as SetPopup).payload;
-            return popupAdapter.addOne(popup, { ...state });
+            const id = Object.values(state.entities).length + 1;
+            const payload = { ... (action as SetPopup).payload, id };  
+            return popupAdapter.addOne(payload, { ...state })
             
         default:
             return state;
