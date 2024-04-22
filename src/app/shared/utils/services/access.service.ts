@@ -5,9 +5,9 @@ import { Database, EngineTypes } from '@black-ink/lonedb';
 import { DataResponse } from '../models/data-response';
 import { of, throwError } from 'rxjs';
 import { IQueryOption } from '@black-ink/lonedb/lib/models/query-option.interface';
-import { UploadData } from '../../features/attatchment/utils/models/upload-data';
-import { Attatchment } from '../../features/attatchment/utils/models/attatchment.model';
-import { DownloadData } from '../../features/attatchment/utils/models/download-data';
+import { UploadData } from '../../features/attachment/utils/models/upload-data';
+import { Attachment } from '../../features/attachment/utils/models/attatchment.model';
+import { DownloadData } from '../../features/attachment/utils/models/download-data';
 
 @Injectable({
   providedIn: 'root'
@@ -31,22 +31,22 @@ export class AccessService {
 
   public upload(entry: UploadData) {
     const { _id, name, model, modelId, data: url } = entry;
-    const collection = this.db.createCollection<Attatchment>('attatchments');
+    const collection = this.db.createCollection<Attachment>('attachments', { timestamp: true });
     const { version: latest } = collection.findOne({ _id }) || { version: -1 };
     const version = latest + 1;
     localStorage.setItem(`${model}/${name}/${version}`, url);
 
-    const document: Partial<Attatchment> = { name, model, modelId, version };
+    const document: Partial<Attachment> = { name, model, modelId, version };
     const data = version 
-      ? collection.updateOne({ _id }, document as Attatchment)
-      : collection.insertOne(document as Attatchment);
+      ? collection.updateOne({ _id }, document as Attachment)
+      : collection.insertOne(document as Attachment);
     
-    const response: DataResponse<Attatchment> = { success: true, data };
+    const response: DataResponse<Attachment> = { success: true, data };
     return of(response);
   }
 
   public download(query: DownloadData){
-    const collection = this.db.createCollection<Attatchment>('attatchments');    
+    const collection = this.db.createCollection<Attachment>('attachments', { timestamp: true });    
     const document = collection.findOne(query, { sort: { version: 'desc' } } as IQueryOption);
     const { model, name, version } = document;
     const url = localStorage.getItem(`${model}/${name}/${version}`) as string;
@@ -55,14 +55,14 @@ export class AccessService {
   }
 
   public insertOne<T>(endpoint: string, entry: Partial<T>) {
-    const collection = this.db.createCollection<T>(endpoint);
+    const collection = this.db.createCollection<T>(endpoint, { timestamp: true });
     const data = collection.insertOne(entry as T);
     const response: DataResponse<T> = { success: true, data };
     return of(response);
   }
 
   public findOne<T>(endpoint: string, query: any, options?: IQueryOption) {
-    const collection = this.db.createCollection<T>(endpoint);
+    const collection = this.db.createCollection<T>(endpoint, { timestamp: true });
     const data = collection.findOne(query, options);
     if (!data) {
       return throwError(() => 'Not found');
@@ -72,21 +72,21 @@ export class AccessService {
   }
 
   public find<T>(endpoint: string, query?: any, options?: IQueryOption) {
-    const collection = this.db.createCollection<T>(endpoint);    
+    const collection = this.db.createCollection<T>(endpoint, { timestamp: true });    
     const data = collection.find(query, options);    
     const response: DataResponse<T> = { success: true, data: data as T };    
     return of(response);
   }
 
   public updateOne<T>(endpoint: string, query: any, changes: Partial<T>, options?: IQueryOption) {
-    const collection = this.db.createCollection<T>(endpoint);
+    const collection = this.db.createCollection<T>(endpoint, { timestamp: true });
     const data = collection.updateOne(query, changes, options) as T;
     const response: DataResponse<T> = { success: true, data };
     return of(response);
   }
 
   public removeOne<T>(endpoint: string, query: any, options?: IQueryOption) {
-    const collection = this.db.createCollection<T>(endpoint);
+    const collection = this.db.createCollection<T>(endpoint, { timestamp: true });
     const data = collection.removeOne(query, options);
     if (!data) {
       return throwError(() => 'Not found');

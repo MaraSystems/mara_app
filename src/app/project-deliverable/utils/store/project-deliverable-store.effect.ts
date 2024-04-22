@@ -44,9 +44,11 @@ export class ProjectDeliverableStoreEffect {
         mergeMap((action: UpdateProjectDeliverableAction) => 
             this.projectDeliverableAccessService.updateProjectDeliverable(action.payload).pipe(
                 map((response: DataResponse<ProjectDeliverable>) => {         
-                    this.store.dispatch(new AddToast({ description: 'Project Deliverable Update' }));
-                    const popup = (action as UpdateProjectDeliverableAction).popup as string;
-                    this.store.dispatch(new SetPopup({ tag: popup, action: 'close'}));           
+                    const { sideEffects } = action as UpdateProjectDeliverableAction;
+                    if (sideEffects.loud) {
+                        this.store.dispatch(new AddToast({ description: 'Project Deliverable Update' }));
+                    }
+                    this.store.dispatch(new SetPopup({ tag: sideEffects.modal as string, action: 'close'}));           
                     return new UpdateProjectDeliverableActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateProjectDeliverableActionFail(err)).pipe(

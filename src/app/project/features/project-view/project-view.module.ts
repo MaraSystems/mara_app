@@ -12,7 +12,7 @@ import { DirectivesModule } from 'src/app/shared/utils/directives/directives.mod
 import { EmptyModule } from 'src/app/shared/ui/empty/empty.module';
 import { ProjectDeliverableItemModule } from 'src/app/project-deliverable/ui/project-deliverable-item/project-deliverable-item.module';
 import { WarnModule } from 'src/app/shared/ui/warn/warn.module';
-import { CommentModule } from 'src/app/shared/features/comment/features/comment.module';
+import { CommentListModule } from 'src/app/shared/features/comment/features/comment-list/comment-list.module';
 
 
 @NgModule({
@@ -32,7 +32,7 @@ import { CommentModule } from 'src/app/shared/features/comment/features/comment.
     DirectivesModule,
     EmptyModule,
     WarnModule,
-    CommentModule
+    CommentListModule
   ]
 })
 export class ProjectViewModule { }

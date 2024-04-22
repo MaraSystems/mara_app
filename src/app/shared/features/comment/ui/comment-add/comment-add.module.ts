@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CommentAddComponent } from './comment-add.component';
+import { InputModule } from 'src/app/shared/ui/input/input.module';
 
 
 
@@ -9,7 +10,11 @@ import { CommentAddComponent } from './comment-add.component';
     CommentAddComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    InputModule
+  ],
+  exports: [
+    CommentAddComponent
   ]
 })
 export class CommentAddModule { }

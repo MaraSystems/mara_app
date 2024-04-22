@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
 })
 export class InputComponent {
   @Input() name: string = '';
+  @Input() label = true;
   @Input() measure: string = '';
   @Input() type: 'text' | 'email' | 'date' | 'phone' | 'number' = 'text';
   @Input() control!: FormControl;

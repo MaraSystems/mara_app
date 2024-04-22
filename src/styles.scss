@@ -17,7 +17,8 @@
     --gap-max: 100px;
 
     --shadow-high: 0px 3px 8px 0px rgba(92, 94, 96, 0.25);
-    --shadow-low: 0px 2px 5px 0px rgba(92, 94, 96, 0.25);
+    --shadow-medium: 0px 2px 5px 0px rgba(92, 94, 96, 0.25);
+    --shadow-low: 0px 1px 3px 0px rgba(92, 94, 96, 0.25);
 
     --enclosed-500: 500px;
     --enclosed-1000: 1000px;
@@ -171,7 +172,7 @@ html, body {
 
 .page-title {
     color: var(--color-secondary);
-    text-align: left;
+    text-align: center;
     width: 100%;
 }
 
@@ -198,9 +199,13 @@ html, body {
 .tag {
     background-color: var(--color-primary);
     padding: var(--gap-small);
-    box-shadow: var(--shadow-low);
+    box-shadow: var(--shadow-medium);
     color: var(--color-light);
     border-radius: var(--gap-small);
+}
+
+.badge {
+    color: var(--color-primary);
 }
 
 @media only screen and (min-width: 760px){

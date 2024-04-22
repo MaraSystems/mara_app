@@ -44,7 +44,7 @@ export class ProjectStoreEffect {
             this.projectAccessService.updateProject(action.payload).pipe(
                 map((response: DataResponse<Project>) => {     
                     const { sideEffect }  = (action as UpdateProjectAction);
-                    if (sideEffect?.toastFlag) {
+                    if (!sideEffect?.loud) {
                         this.store.dispatch(new AddToast({ description: 'Project Updated' }));
                     }
                     this.store.dispatch(new SetPopup({ tag: sideEffect?.modal as string, action: 'close' }));                    

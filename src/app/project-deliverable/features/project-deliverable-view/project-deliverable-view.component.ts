@@ -6,10 +6,13 @@ import { ActivatedRoute } from '@angular/router';
 import { More } from 'src/app/shared/utils/models/more.model';
 import { PopupService } from 'src/app/shared/features/popup/features/popup.service';
 import { ProjectDeliverable } from '../../utils/models/project-deliverable.model';
-import { DeleteProjectDeliverableAction, GetProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
+import { DeleteProjectDeliverableAction, GetProjectDeliverableAction, UpdateProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
 import { selectProjectDeliverableById } from '../../utils/store/project-deliverable-store.selector';
-import { Attatchment } from 'src/app/shared/features/attatchment/utils/models/attatchment.model';
-import { ListAttatchmentsAction } from 'src/app/shared/features/attatchment/utils/store/attatchment-store.action';
+import { Attachment } from 'src/app/shared/features/attachment/utils/models/attatchment.model';
+import { ListAttachmentsAction } from 'src/app/shared/features/attachment/utils/store/attatchment-store.action';
+import { toggleList } from 'src/app/shared/utils/lib/toggleList';
+import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
+import { Auth } from 'src/app/auth/utils/models/auth.model';
 
 @Component({
   selector: 'app-project-deliverable-view',
@@ -17,10 +20,11 @@ import { ListAttatchmentsAction } from 'src/app/shared/features/attatchment/util
   styleUrls: ['./project-deliverable-view.component.scss']
 })
 export class ProjectDeliverableViewComponent extends UnSubscriber implements OnInit {
-  projectDeliverable = new ProjectDeliverable();
-  attatchment: Attatchment[] = [];
+  auth!: Auth;
+  deliverable = new ProjectDeliverable();
+  attachment: Attachment[] = [];
   id!: string;
-
+  liked = false;
   moreList: More[] = [];
 
   constructor(
@@ -34,10 +38,15 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
   ngOnInit(): void {    
     this.id = this.activatedRoute.snapshot.paramMap.get('deliverable_id') as string;   
     this.store.dispatch(new GetProjectDeliverableAction(this.id)); 
-    this.store.dispatch(new ListAttatchmentsAction('project-document', this.id));
+    this.store.dispatch(new ListAttachmentsAction('project-document', this.id));
     
-    this.newSubscription = this.store.select(selectProjectDeliverableById(this.id)).subscribe(projectDeliverable => {
-      this.projectDeliverable = projectDeliverable;            
+    this.newSubscription = this.store.select(selectProjectDeliverableById(this.id)).subscribe(deliverable => {
+      this.deliverable = deliverable;  
+      
+      this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
+        this.auth = auth;
+        this.liked = this.deliverable.likes.includes(this.auth.id);      
+      }); 
     });
 
     this.moreList = [
@@ -46,7 +55,12 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
     ];
   }
 
-  deleteProjectDeliverable() {
+  delete() {
     this.store.dispatch(new DeleteProjectDeliverableAction(this.id));
+  }
+
+  likeToggle(){
+    const likes = toggleList([...this.deliverable.likes], this.auth.id);    
+    this.store.dispatch(new UpdateProjectDeliverableAction({ id: this.id, changes: { likes } }, { loud: false }));
   }
 }

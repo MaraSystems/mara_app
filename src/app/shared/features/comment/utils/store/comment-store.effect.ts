@@ -25,15 +25,9 @@ export class CommentStoreEffect {
         mergeMap((action: CreateCommentAction) => 
             this.commentAccessService.createComment(action.payload).pipe(
                 map((response: DataResponse<Comment>) => {
-                    this.store.dispatch(new AddToast({ description: 'Comment Creation' }));
-                    this.router.navigateByUrl('/comments');
                     return new CreateCommentActionSuccess(response.data);
                 }),
-                catchError(err => of(new CreateCommentActionFail(err)).pipe(
-                    tap(() => {
-                        this.store.dispatch(new AddToast({ isError: true, description: 'Comment Creation' }));
-                    })
-                ))
+                catchError(err => of(new CreateCommentActionFail(err)))
             )
         )
     ));
@@ -53,7 +47,7 @@ export class CommentStoreEffect {
     listComments$ = createEffect(() => this.actions$.pipe(
         ofType<ListCommentsAction>(CommentActionsType.LIST_COMMENTS),
         mergeMap((action: ListCommentsAction) => 
-            this.commentAccessService.listComments(action.payload).pipe(
+            this.commentAccessService.listComments(action.model, action.modelId, action.payload).pipe(
                 map((response: DataResponse<[Comment]>) => {                    
                     return new ListCommentsActionSuccess(response.data);
                 }),

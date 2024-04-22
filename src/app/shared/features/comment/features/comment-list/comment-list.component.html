@@ -1,0 +1,7 @@
+<span class="header-3 title">Comments</span>
+
+<div class="list">
+    <app-comment-item *ngFor="let item of comments" [comment]="item"></app-comment-item>
+</div>
+
+<app-comment-add [model]="model" [modelId]="modelId"></app-comment-add>

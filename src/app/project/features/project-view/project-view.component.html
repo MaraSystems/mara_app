@@ -68,5 +68,5 @@
 </app-popup>
 
 <app-popup [name]="'project-comment-' + id">
-    <app-comment></app-comment>
+    <app-comment-list [model]="commentModel" [modelId]="id"></app-comment-list>
 </app-popup>

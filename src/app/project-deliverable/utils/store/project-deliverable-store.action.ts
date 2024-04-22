@@ -2,6 +2,7 @@ import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
 import { ProjectDeliverable } from "../models/project-deliverable.model";
 import { ListPayload } from "src/app/shared/utils/models/list-payload";
+import { SideEffects } from "src/app/shared/utils/models/side.effects";
 
 export enum ProjectDeliverableActionsType {
     CREATE_PROJECT_DELIVERABLE = "[PROJECT_DELIVERABLE] Create ProjectDeliverable",
@@ -42,7 +43,7 @@ export class CreateProjectDeliverableActionFail implements Action {
 
 export class UpdateProjectDeliverableAction implements Action {
     readonly type = ProjectDeliverableActionsType.UPDATE_PROJECT_DELIVERABLE;
-    constructor(public payload: Update<ProjectDeliverable>, public popup: string){}
+    constructor(public payload: Update<ProjectDeliverable>, public sideEffects: SideEffects){}
 }
 
 export class UpdateProjectDeliverableActionSuccess implements Action {

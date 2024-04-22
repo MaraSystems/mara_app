@@ -1,0 +1,53 @@
+:host {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: var(--gap-small);
+    padding: var(--gap-small);
+    width: -webkit-fill-available;
+    box-shadow: var(--shadow-medium);
+    border-radius: var(--gap-small);
+
+    .image {
+        width: 40px;
+        height: 40px;
+    }
+
+    .details {
+        display: grid;
+        grid-template-columns: 1fr max-content;
+        grid-template-areas: 
+            "name name"
+            "statement statement"  
+            "attachment attachment"      
+            "stats time"
+        ;
+        gap: var(--gap-x-small);
+
+        .name {
+            grid-area: name;
+            display: flex;
+            align-items: center;
+
+            .verification-badge {
+                font-size: var(--gap-normal);
+            }
+        }
+
+        .time {
+            grid-area: time;
+            align-self: flex-end;
+        }
+
+        .statement {
+            grid-area: statement;
+            padding: var(--gap-small);
+        }
+
+        .stats {
+            grid-area: stats;
+            display: flex;
+            align-items: center;
+            gap: var(--gap-normal);
+        }
+    }
+}

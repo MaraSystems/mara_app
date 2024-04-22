@@ -1,0 +1,21 @@
+:host {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content 1fr max-content;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    overflow: hidden;
+
+    .title {
+        padding: 0px var(--gap-small);
+    }
+
+    .list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-normal);
+        height: -webkit-fill-available;
+        padding: var(--gap-normal);
+        overflow: auto;
+    }
+}

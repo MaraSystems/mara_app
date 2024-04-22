@@ -17,6 +17,7 @@ import { Toast } from 'src/app/shared/features/toast/features/toast.model';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
 import { toggleList } from 'src/app/shared/utils/lib/toggleList';
+import { CommentEnum } from 'src/app/shared/features/comment/utils/models/comment.enum';
 
 @Component({
   selector: 'app-project-view',
@@ -34,7 +35,8 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
   moreList: More[] = [];
 
   liked = false;
-  bookmarked = false
+  bookmarked = false;
+  commentModel = CommentEnum.PROJECT;
 
   constructor(
     public store: Store<AppState>,
@@ -82,6 +84,8 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
       { name: 'De-Activate', icon: 'unpublished', popup: `project-deactivate-${this.id}` },
       { name: 'Delete', icon: 'Delete', popup: `project-delete-${this.id}` }
     ];
+
+    this.popupService.open('project-comment-' + this.id)
   }
 
   deleteProject() {
@@ -103,11 +107,11 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
 
   likeToggle(){
     const likes = toggleList([...this.project.likes], this.auth.id);    
-    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { likes } }, { toastFlag: false }));
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { likes } }, { loud: false }));
   }
 
   bookmarkToggle(){
     const bookmarks = toggleList([...this.project.bookmarks], this.auth.id);    
-    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { bookmarks } }, { toastFlag: false }));
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { bookmarks } }, { loud: false }));
   }
 }

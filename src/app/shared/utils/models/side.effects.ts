@@ -1,4 +1,4 @@
 export interface SideEffects {
     modal?: string;
-    toastFlag?: boolean;
+    loud?: boolean;
 }

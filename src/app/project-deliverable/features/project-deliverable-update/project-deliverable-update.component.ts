@@ -17,7 +17,7 @@ import { selectProjectDeliverableById } from '../../utils/store/project-delivera
 export class ProjectDeliverableUpdateComponent extends UnSubscriber implements OnInit {
   deliverable!: ProjectDeliverable;
   updateData!: Partial<ProjectDeliverable>;
-  deliverableId!: string;
+  id!: string;
   form!: FormGroup;
 
   constructor(
@@ -28,9 +28,9 @@ export class ProjectDeliverableUpdateComponent extends UnSubscriber implements O
   }
   
   ngOnInit(): void {    
-    this.deliverableId = this.activatedRoute.snapshot.paramMap.get('deliverable_id') as string;    
+    this.id = this.activatedRoute.snapshot.paramMap.get('deliverable_id') as string;    
 
-    this.newSubscription = this.store.select(selectProjectDeliverableById(this.deliverableId)).subscribe(deliverable => {
+    this.newSubscription = this.store.select(selectProjectDeliverableById(this.id)).subscribe(deliverable => {
       this.deliverable = deliverable;      
       this.initForm();
     });
@@ -60,6 +60,6 @@ export class ProjectDeliverableUpdateComponent extends UnSubscriber implements O
   }
 
   updateDeliverable() {    
-    this.store.dispatch(new UpdateProjectDeliverableAction({ id: this.deliverableId, changes: this.updateData}, 'project-deliverable-update'));
+    this.store.dispatch(new UpdateProjectDeliverableAction({ id: this.id, changes: this.updateData}, { modal: `project-deliverable-update-${this.id}` }));
   }
 }

@@ -6,7 +6,7 @@ export interface Comment {
     model: CommentEnum;
     modelId: string;
     statement: string;
-    documents: string[];
+    attachments: string[];
     createdAt: Date;
     updatedAt: Date;
     likes: string[];

@@ -1,11 +1,11 @@
 <div class="header">
     <span class="image">
-        <img [src]="projectDeliverable.image || '../../../../assets/images/db.png'" alt="" srcset="">
+        <img [src]="deliverable.image || '../../../../assets/images/db.png'" alt="" srcset="">
     </span>
 
     <span class="text-2 tag">Project - Deliverable</span>
 
-    <span class="header-3 title">{{projectDeliverable.title}}</span>
+    <span class="header-3 title">{{deliverable.title}}</span>
 
     <div class="controls">
         <span class="stats">
@@ -20,18 +20,18 @@
 <div class="section details">
     <h1 class="text-1 section-title">Details</h1>
     <div class="summery">
-        <app-keyvalue name="duration" [value]="projectDeliverable.duration" unit="Days"></app-keyvalue>
-        <app-keyvalue name="price" [value]="projectDeliverable.price" unit="NGN"></app-keyvalue>
+        <app-keyvalue name="duration" [value]="deliverable.duration" unit="Days"></app-keyvalue>
+        <app-keyvalue name="price" [value]="deliverable.price" unit="NGN"></app-keyvalue>
     </div>
 </div>
 
 <div class="section description">
     <h1 class="text-1 section-title">Description</h1>
-    <p class="description-text text-1">{{projectDeliverable.description}}</p>
+    <p class="description-text text-1">{{deliverable.description}}</p>
 </div>
 
 <div class="section documents">
-    <app-attatchment-list [modelId]="this.id" model="project deliverable"></app-attatchment-list>
+    <app-attachment-list [modelId]="this.id" model="project deliverable"></app-attachment-list>
 </div>
 
 <app-popup [name]="'project-deliverable-update-' + id">
@@ -39,5 +39,5 @@
 </app-popup>
 
 <app-popup [name]="'project-deliverable-delete-' + id">
-    <app-warn title="Delete Project" description="This project deliverable will be deleted. Click 'Continue' to proceed." (proceed)="deleteProjectDeliverable()"></app-warn>
+    <app-warn title="Delete Project" description="This project deliverable will be deleted. Click 'Continue' to proceed." (proceed)="delete()"></app-warn>
 </app-popup>

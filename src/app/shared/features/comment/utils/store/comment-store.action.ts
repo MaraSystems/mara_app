@@ -54,7 +54,7 @@ export class GetCommentActionFail implements Action {
 
 export class ListCommentsAction implements Action {
     readonly type = CommentActionsType.LIST_COMMENTS;
-    constructor(public payload: ListPayload){}
+    constructor(public model: string, public modelId: string, public payload?: ListPayload){}
 }
 
 export class ListCommentsActionSuccess implements Action {

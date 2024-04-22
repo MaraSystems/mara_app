@@ -18,6 +18,7 @@ export class CommentAccessService {
     const response = this.accessService.insertOne<Comment>(this.domain, { 
       ...data, 
       likes: [],
+      attachments: []
     });
     return response;
   }
@@ -27,8 +28,8 @@ export class CommentAccessService {
     return response;
   }
 
-  listComments(data: ListPayload) {
-    const response = this.accessService.find<[Comment]>(this.domain, { hidden: false });
+  listComments(model: string, modelId: string, data?: ListPayload) {
+    const response = this.accessService.find<[Comment]>(this.domain, { model, modelId, hidden: false });
     return response;
   }
 

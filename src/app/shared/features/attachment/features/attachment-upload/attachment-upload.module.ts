@@ -1,0 +1,26 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AttachmentUploadComponent } from './attachment-upload.component';
+import { InputModule } from 'src/app/shared/ui/input/input.module';
+import { FileInputModule } from 'src/app/shared/ui/file-input/file-input.module';
+import { TextAreaModule } from 'src/app/shared/ui/text-area/text-area.module';
+
+
+
+@NgModule({
+  declarations: [
+    AttachmentUploadComponent
+  ],
+  imports: [
+    CommonModule,
+    InputModule,
+    FileInputModule,
+    TextAreaModule
+  ],
+  exports: [
+    AttachmentUploadComponent,
+    InputModule,
+    FileInputModule
+  ]
+})
+export class AttachmentUploadModule { }
