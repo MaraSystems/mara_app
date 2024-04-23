@@ -1,4 +1,4 @@
-export interface SideEffects {
-    modal?: string;
-    loud?: boolean;
+export class SideEffects {
+    success? = () => {};
+    failure? = () => {};
 }

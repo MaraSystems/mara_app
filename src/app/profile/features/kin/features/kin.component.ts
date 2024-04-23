@@ -79,7 +79,11 @@ export class KinComponent extends UnSubscriber implements OnInit {
       this.store.dispatch(new CreateKinAction({ ...this.updateData as Kin, userId: this.userId }));
     }
     else {
-      this.store.dispatch(new UpdateKinAction({ id: this.kin._id, changes: this.updateData }));
+      this.store.dispatch(new UpdateKinAction({ id: this.kin._id, changes: this.updateData }, {
+        success: () => {
+          this.edit = false;
+        }
+      }));
     }
   }
 

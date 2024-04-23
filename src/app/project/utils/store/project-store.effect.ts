@@ -9,7 +9,6 @@ import { DataResponse } from "src/app/shared/utils/models/data-response";
 import { ProjectAccessService } from "../access/project-access.service";
 import { CreateProjectAction, CreateProjectActionFail, CreateProjectActionSuccess, DeleteProjectAction, DeleteProjectActionFail, DeleteProjectActionSuccess, GetProjectAction, GetProjectActionFail, GetProjectActionSuccess, ListProjectsAction, ListProjectsActionFail, ListProjectsActionSuccess, ProjectActionsType, UpdateProjectAction, UpdateProjectActionFail, UpdateProjectActionSuccess } from "./project-store.action";
 import { Project } from "../models/project.model";
-import { SetPopup } from "src/app/shared/features/popup/utils/store/popup.action";
 
 @Injectable()
 export class ProjectStoreEffect {
@@ -43,16 +42,18 @@ export class ProjectStoreEffect {
         mergeMap((action: UpdateProjectAction) => 
             this.projectAccessService.updateProject(action.payload).pipe(
                 map((response: DataResponse<Project>) => {     
-                    const { sideEffect }  = (action as UpdateProjectAction);
-                    if (!sideEffect?.loud) {
-                        this.store.dispatch(new AddToast({ description: 'Project Updated' }));
+                    const { sideEffects }  = (action as UpdateProjectAction);
+                    if (sideEffects.success) {
+                        sideEffects.success();
                     }
-                    this.store.dispatch(new SetPopup({ tag: sideEffect?.modal as string, action: 'close' }));                    
                     return new UpdateProjectActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateProjectActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ description: 'User update', isError: true }));
+                        const { sideEffects }  = (action as UpdateProjectAction);
+                        if (sideEffects?.failure) {
+                            sideEffects.failure();
+                        }
                     })
                 ))
             )

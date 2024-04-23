@@ -12,6 +12,7 @@ import { DirectivesModule } from 'src/app/shared/utils/directives/directives.mod
 import { WarnModule } from 'src/app/shared/ui/warn/warn.module';
 import { AttachmentListModule } from 'src/app/shared/features/attachment/features/attachment-list/attachment-list.module';
 import { AttachmentUploadModule } from 'src/app/shared/features/attachment/features/attachment-upload/attachment-upload.module';
+import { CommentListModule } from 'src/app/shared/features/comment/features/comment-list/comment-list.module';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AttachmentUploadModule } from 'src/app/shared/features/attachment/featu
     WarnModule,
     ProjectDeliverableUpdateModule,
     AttachmentListModule,
-    AttachmentUploadModule
+    AttachmentUploadModule,
+    CommentListModule
   ]
 })
 export class ProjectDeliverableViewModule { }

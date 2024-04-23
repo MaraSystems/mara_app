@@ -10,7 +10,6 @@ import { ProjectDeliverableAccessService } from "../access/project-deliverable-a
 import { CreateProjectDeliverableAction, CreateProjectDeliverableActionFail, CreateProjectDeliverableActionSuccess, DeleteProjectDeliverableAction, DeleteProjectDeliverableActionFail, DeleteProjectDeliverableActionSuccess, GetProjectDeliverableAction, GetProjectDeliverableActionFail, GetProjectDeliverableActionSuccess, ListProjectDeliverablesAction, ListProjectDeliverablesActionFail, ListProjectDeliverablesActionSuccess, ProjectDeliverableActionsType, UpdateProjectDeliverableAction, UpdateProjectDeliverableActionFail, UpdateProjectDeliverableActionSuccess } from "./project-deliverable-store.action";
 import { ProjectDeliverable } from "../models/project-deliverable.model";
 import { RouterService } from "src/app/router/utils/router.service";
-import { SetPopup } from "src/app/shared/features/popup/utils/store/popup.action";
 
 @Injectable()
 export class ProjectDeliverableStoreEffect {
@@ -45,15 +44,17 @@ export class ProjectDeliverableStoreEffect {
             this.projectDeliverableAccessService.updateProjectDeliverable(action.payload).pipe(
                 map((response: DataResponse<ProjectDeliverable>) => {         
                     const { sideEffects } = action as UpdateProjectDeliverableAction;
-                    if (sideEffects.loud) {
-                        this.store.dispatch(new AddToast({ description: 'Project Deliverable Update' }));
+                    if (sideEffects.success) {
+                        sideEffects.success();
                     }
-                    this.store.dispatch(new SetPopup({ tag: sideEffects.modal as string, action: 'close'}));           
                     return new UpdateProjectDeliverableActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateProjectDeliverableActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ description: 'Project Deliverable Update', isError: true }));
+                        const { sideEffects } = action as UpdateProjectDeliverableAction;
+                        if (sideEffects.failure) {
+                            sideEffects.failure();
+                        }
                     })
                 ))
             )

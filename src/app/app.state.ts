@@ -12,7 +12,6 @@ import { ProjectStoreEffect } from "./project/utils/store/project-store.effect";
 import { ProjectDeliverableStoreEffect } from "./project-deliverable/utils/store/project-deliverable-store.effect";
 import { ProjectState, projectReducer } from "./project/utils/store/project-store.reducer";
 import { ProjectDeliverableState, projectDeliverableReducer } from "./project-deliverable/utils/store/project-deliverable-store.reducer";
-import { PopupState, popupReducer } from "./shared/features/popup/utils/store/popup.reducer";
 import { AttachmentStoreEffect } from "./shared/features/attachment/utils/store/attatchment-store.effect";
 import { AttachmentState, attachmentReducer } from "./shared/features/attachment/utils/store/attatchment-store.reducer";
 import { CommentStoreEffect } from "./shared/features/comment/utils/store/comment-store.effect";
@@ -31,7 +30,6 @@ export const appEffects = [
 export interface AppState {
     clients: ClientState,
     toasts: ToastState,
-    popups: PopupState,
     auth: AuthState,
     kins: KinState,
     router: RouterState,
@@ -44,7 +42,6 @@ export interface AppState {
 export const appReducers: ActionReducerMap<AppState> = {
     clients: clientReducer,
     toasts: toastReducer,
-    popups: popupReducer,
     auth: authReducer,
     kins: kinReducer,
     router: routerReducer,

@@ -2,12 +2,15 @@ import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
 import { Comment } from "../models/comment.model";
 import { ListPayload } from "src/app/shared/utils/models/list-payload";
-import { SideEffects } from "src/app/shared/utils/models/side.effects";
 
 export enum CommentActionsType {
     CREATE_COMMENT = "[COMMENT] Create Comment",
     CREATE_COMMENT_SUCCESS = "[COMMENT] Create Comment Success",
     CREATE_COMMENT_FAIL = "[COMMENT] Create Comment Fail",
+
+    UPDATE_COMMENT = "[COMMENT] Update Comment",
+    UPDATE_COMMENT_SUCCESS = "[COMMENT] Update Comment Success",
+    UPDATE_COMMENT_FAIL = "[COMMENT] Update Comment Fail",
 
     GET_COMMENT = "[COMMENT] Get Comment",
     GET_COMMENT_SUCCESS = "[COMMENT] Get Comment Success",
@@ -34,6 +37,22 @@ export class CreateCommentActionSuccess implements Action {
 
 export class CreateCommentActionFail implements Action {
     readonly type = CommentActionsType.CREATE_COMMENT_FAIL;
+    constructor(public payload: string){}
+}
+
+
+export class UpdateCommentAction implements Action {
+    readonly type = CommentActionsType.UPDATE_COMMENT;
+    constructor(public payload: Update<Partial<Comment>>){}
+}
+
+export class UpdateCommentActionSuccess implements Action {
+    readonly type = CommentActionsType.UPDATE_COMMENT_SUCCESS;
+    constructor(public payload: Update<Comment>){}
+}
+
+export class UpdateCommentActionFail implements Action {
+    readonly type = CommentActionsType.UPDATE_COMMENT_FAIL;
     constructor(public payload: string){}
 }
 
@@ -94,4 +113,7 @@ ListCommentsActionSuccess |
 ListCommentsActionFail |
 DeleteCommentAction |
 DeleteCommentActionSuccess |
-DeleteCommentActionFail;
+DeleteCommentActionFail |
+UpdateCommentAction |
+UpdateCommentActionSuccess |
+UpdateCommentActionFail;

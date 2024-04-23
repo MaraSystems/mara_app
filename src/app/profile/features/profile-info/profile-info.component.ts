@@ -9,6 +9,8 @@ import { phonePattern, usernamePattern } from 'src/app/shared/utils/lib/patterns
 import { UpdateClientAction } from '../../../client/utils/store/client-store.action';
 import * as addressUtil from 'src/app/shared/utils/lib/address';
 import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
+import { Toast } from 'src/app/shared/features/toast/features/toast.model';
+import { AddToast } from 'src/app/shared/features/toast/utils/store/toast.action';
 
 @Component({
   selector: 'app-profile-info',
@@ -64,7 +66,15 @@ export class ProfileInfoComponent extends UnSubscriber implements OnInit {
   }
 
   updateClient() {    
-    this.store.dispatch(new UpdateClientAction({ id: this.profile._id, changes: this.updateData }));
+    this.store.dispatch(new UpdateClientAction({ id: this.profile._id, changes: this.updateData }, {
+      success: () => {
+        this.edit = false;
+        this.store.dispatch(new AddToast({ description: 'User update' }));
+      },
+      failure: () => {
+        this.store.dispatch(new AddToast({ description: 'User update', isError: true }));
+      }
+    }));
   }
 
   updateAddress(data: any) {

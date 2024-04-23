@@ -11,12 +11,12 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        gap: var(--gap-normal);
+        gap: var(--gap-big);
         width: -webkit-fill-available;
 
         &-item {
             color: var(--Dark-Variant, #292A2B);
-            font-size: var(--gap-normal);
+            font-size: var(--gap-big);
             cursor: pointer;
 
             &:hover {
@@ -30,17 +30,5 @@
     :host {
         padding: var(--gap-normal);
         width: calc(100% - calc(var(--gap-normal) * 2));
-
-        .controls {
-            gap: var(--gap-big);
-    
-            &-item {
-                font-size: var(--gap-big);
-            }
-        }
-    }
-
-    .app-icon {
-        display: none;
     }
 }

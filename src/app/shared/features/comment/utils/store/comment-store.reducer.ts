@@ -1,7 +1,7 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { Action } from "@ngrx/store";
 import { Comment } from "../models/comment.model";
-import { CreateCommentActionFail, CreateCommentActionSuccess, DeleteCommentActionFail, DeleteCommentActionSuccess, GetCommentActionFail, GetCommentActionSuccess, ListCommentsActionFail, ListCommentsActionSuccess, CommentActionsType } from "./comment-store.action";
+import { CreateCommentActionFail, CreateCommentActionSuccess, DeleteCommentActionFail, DeleteCommentActionSuccess, GetCommentActionFail, GetCommentActionSuccess, ListCommentsActionFail, ListCommentsActionSuccess, CommentActionsType, UpdateCommentActionSuccess, UpdateCommentActionFail } from "./comment-store.action";
 
 export interface CommentState extends EntityState<Comment> {
     selectedId: string | null;
@@ -91,6 +91,21 @@ export function commentReducer(state = initialState, action: Action): CommentSta
                 loading: false,
                 loaded: true,
                 error: (action as DeleteCommentActionFail).payload
+            } 
+
+        case CommentActionsType.UPDATE_COMMENT:
+            return { ...state, loading: true, loaded: false };
+
+        case CommentActionsType.UPDATE_COMMENT_SUCCESS:
+            const { payload: updatePayload } = (action as UpdateCommentActionSuccess);
+            return commentAdapter.updateOne(updatePayload , { ...state, loading: false, loaded: true })   
+            
+        case CommentActionsType.UPDATE_COMMENT_FAIL:
+            return {
+                ...state,
+                loading: false,
+                loaded: true,
+                error: (action as UpdateCommentActionFail).payload
             } 
     
         

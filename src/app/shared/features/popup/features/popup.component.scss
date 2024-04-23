@@ -34,7 +34,7 @@
             border-top-left-radius: var(--gap-normal);
             display: flex;
             flex-direction: column;
-            gap: var(--gap-big);
+            gap: var(--gap-normal);
             align-items: center;
         }
 
@@ -55,6 +55,7 @@
             
             &-wrapper {
                 width: var(--enclosed-500);
+                gap: var(--gap-big);
             }
         }
     }

@@ -43,7 +43,7 @@ export class CreateProjectDeliverableActionFail implements Action {
 
 export class UpdateProjectDeliverableAction implements Action {
     readonly type = ProjectDeliverableActionsType.UPDATE_PROJECT_DELIVERABLE;
-    constructor(public payload: Update<ProjectDeliverable>, public sideEffects: SideEffects){}
+    constructor(public payload: Update<ProjectDeliverable>, public sideEffects = new SideEffects()){}
 }
 
 export class UpdateProjectDeliverableActionSuccess implements Action {

@@ -28,8 +28,17 @@
             display: flex;
             align-items: center;
 
-            .verification-badge {
-                font-size: var(--gap-normal);
+            .fullname {
+                font-weight: bold;
+            }
+
+            .badge {
+                font-size: 15px;
+            }
+
+            .username {
+                font-weight: 700;
+                font-style: italic;
             }
         }
 

@@ -9,9 +9,9 @@
 
     <div class="controls">
         <span class="stats">
-            <app-icon-counter icon="thumb_up" [value]="10"></app-icon-counter>
-            <app-icon-counter icon="comment" [value]="10"></app-icon-counter>
-            <app-icon-counter icon="share" [value]="10"></app-icon-counter>
+            <app-icon-counter [active]="liked" icon="thumb_up" [value]="deliverable.likes.length" (click)="likeToggle()"></app-icon-counter>
+            <app-icon-counter icon="share" [value]="0"></app-icon-counter>
+            <app-icon-counter icon="comment" [value]="commentsCount" (click)="popupService.open('project-deliverable-comment-' + id);"></app-icon-counter>
         </span>
         <app-more class="more" [list]="moreList"></app-more>
     </div>
@@ -40,4 +40,8 @@
 
 <app-popup [name]="'project-deliverable-delete-' + id">
     <app-warn title="Delete Project" description="This project deliverable will be deleted. Click 'Continue' to proceed." (proceed)="delete()"></app-warn>
+</app-popup>
+
+<app-popup [name]="'project-deliverable-comment-' + id">
+    <app-comment-list [model]="commentModel" [modelId]="id"></app-comment-list>
 </app-popup>

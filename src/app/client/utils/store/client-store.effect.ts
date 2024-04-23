@@ -23,11 +23,9 @@ export class ClientStoreEffect {
         ofType<RegisterClientAction>(ClientActionsType.REGISTER_CLIENT),
         mergeMap((action: RegisterClientAction) => 
             this.clientAccessService.registerClient(action.payload).pipe(
-                tap(() => {
+                map((response: DataResponse<Client>) => {
                     this.store.dispatch(new AddToast({ description: 'User Registration' }));
                     this.routerService.navigate('/auth');
-                }),
-                map((response: DataResponse<Client>) => {
                     return new RegisterClientActionSuccess(response.data);
                 }),
                 catchError(err => of(new RegisterClientActionFail(err)).pipe(
@@ -43,16 +41,20 @@ export class ClientStoreEffect {
         ofType<UpdateClientAction>(ClientActionsType.UPDATE_CLIENT),
         mergeMap((action: UpdateClientAction) => 
             this.clientAccessService.updateClient(action.payload).pipe(
-                tap(() => {
-                    this.store.dispatch(new AddToast({ description: 'User update' }));
-                    this.routerService.navigate('/profile/info');
-                }),
-                map((response: DataResponse<Client>) => {                    
+                map((response: DataResponse<Client>) => { 
+                    const { sideEffects } = (action as UpdateClientAction);
+                    if (sideEffects.success) {
+                        sideEffects.success();
+                    }
+                    this.routerService.navigate('/profile/info'); 
                     return new UpdateClientActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateClientActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ description: 'User update', isError: true }));
+                        const { sideEffects } = (action as UpdateClientAction);
+                        if (sideEffects.failure) {
+                            sideEffects.failure();
+                        }
                     })
                 ))
             )

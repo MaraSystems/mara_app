@@ -43,11 +43,13 @@ export class KinStoreEffect {
         ofType<UpdateKinAction>(KinActionsType.UPDATE_KIN),
         mergeMap((action: UpdateKinAction) => 
             this.kinAccessService.updateKin(action.payload).pipe(
-                tap(() => {
+                map((response: DataResponse<Kin>) => {   
+                    const { sideEffects } = (action as UpdateKinAction);
+                    if (sideEffects.success) {
+                        sideEffects.success();
+                    }
                     this.store.dispatch(new AddToast({ description: 'Kin Update' }));
-                    this.routerService.navigate('/profile/kin');
-                }),
-                map((response: DataResponse<Kin>) => {                    
+                    this.routerService.navigate('/profile/kin');                 
                     return new UpdateKinActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateKinActionFail(err)).pipe(
@@ -66,11 +68,7 @@ export class KinStoreEffect {
                 map((response: DataResponse<Kin>) => {                    
                     return new GetKinActionSuccess(response.data);
                 }),
-                catchError(err => of(new GetKinActionFail(err)).pipe(
-                    tap(() => {
-                        // this.store.dispatch(new AddToast({ description: 'User update', isError: true }));
-                    })
-                ))
+                catchError(err => of(new GetKinActionFail(err)))
             )
         )
     ));

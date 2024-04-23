@@ -7,6 +7,8 @@ import { UploadAttachmentAction } from 'src/app/shared/features/attachment/utils
 import { fileValidator } from 'src/app/shared/utils/validators/fileValidator';
 import { Attachment } from '../../utils/models/attatchment.model';
 import { UploadData } from '../../utils/models/upload-data';
+import { AddToast } from '../../../toast/utils/store/toast.action';
+import { PopupService } from '../../../popup/features/popup.service';
 
 @Component({
   selector: 'app-attachment-upload',
@@ -24,7 +26,8 @@ export class AttachmentUploadComponent extends UnSubscriber implements OnInit {
   form!: FormGroup;
 
   constructor(
-    public store: Store<AppState>
+    public store: Store<AppState>,
+    public popupService: PopupService
   ){
     super();
   }
@@ -58,6 +61,10 @@ export class AttachmentUploadComponent extends UnSubscriber implements OnInit {
   }
 
   uploadAttachment() {    
-    this.store.dispatch(new UploadAttachmentAction({ ...this.uploadData, model: this.model, modelId: this.modelId, _id: this.attachment?._id }, this.popupId));
+    this.store.dispatch(new UploadAttachmentAction({ ...this.uploadData, model: this.model, modelId: this.modelId, _id: this.attachment?._id }, {
+      success: () => {
+        this.popupService.close(this.popupId);
+      }
+    }));
   }
 }

@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { PopupComponent } from './popup.component';
-import { Store } from '@ngrx/store';
-import { selectPopupAction } from '../utils/store/popup.selector';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -10,25 +7,7 @@ export class PopupService {
   public popups: PopupComponent[] = [];
 
   constructor(
-    private store: Store
-  ) { 
-    this.store.select(selectPopupAction).subscribe(popup => {
-      if (popup) {
-        const { tag, action, data } = popup;
-        // console.log(popup);
-        
-        if (action === 'close') {
-          this.close(tag);
-        }
-        else if (action == 'open') {
-          this.open(tag, data);
-        }
-        else if (action == 'remove'){
-          this.remove(tag);
-        }
-      }
-    });
-  }
+  ) { }
 
   add(popup: PopupComponent) {  
     if (this.popups.find(m => m.name == popup.name)) {

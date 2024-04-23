@@ -4,6 +4,7 @@ import { Update } from "@ngrx/entity";
 import { Attachment } from "../models/attatchment.model";
 import { UploadData } from "../models/upload-data";
 import { DownloadData } from "../models/download-data";
+import { SideEffects } from "src/app/shared/utils/models/side.effects";
 
 export enum AttachmentActionsType {
     UPLOAD_ATTACHMENT = "[ATTACHMENT] Upload Attachment",
@@ -29,7 +30,7 @@ export enum AttachmentActionsType {
 
 export class UploadAttachmentAction implements Action {
     readonly type = AttachmentActionsType.UPLOAD_ATTACHMENT;
-    constructor(public payload: UploadData, public popup: string){}
+    constructor(public payload: UploadData, public sideEffects = new SideEffects()){}
 }
 
 export class UploadAttachmentActionSuccess implements Action {

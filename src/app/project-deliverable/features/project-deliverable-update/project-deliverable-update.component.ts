@@ -8,6 +8,8 @@ import { CreateProjectDeliverableAction, UpdateProjectDeliverableAction } from '
 import { fileValidator } from 'src/app/shared/utils/validators/fileValidator';
 import { ActivatedRoute } from '@angular/router';
 import { selectProjectDeliverableById } from '../../utils/store/project-deliverable-store.selector';
+import { AddToast } from 'src/app/shared/features/toast/utils/store/toast.action';
+import { PopupService } from 'src/app/shared/features/popup/features/popup.service';
 
 @Component({
   selector: 'app-project-deliverable-update',
@@ -22,7 +24,8 @@ export class ProjectDeliverableUpdateComponent extends UnSubscriber implements O
 
   constructor(
     public store: Store<AppState>,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private popupService: PopupService
   ){
     super();
   }
@@ -36,7 +39,7 @@ export class ProjectDeliverableUpdateComponent extends UnSubscriber implements O
     });
 
     this.newSubscription = this.form.valueChanges.subscribe(data => {      
-      this.updateData = data;
+      this.updateData = data;      
     });
   }
 
@@ -60,6 +63,14 @@ export class ProjectDeliverableUpdateComponent extends UnSubscriber implements O
   }
 
   updateDeliverable() {    
-    this.store.dispatch(new UpdateProjectDeliverableAction({ id: this.id, changes: this.updateData}, { modal: `project-deliverable-update-${this.id}` }));
+    this.store.dispatch(new UpdateProjectDeliverableAction({ id: this.id, changes: this.updateData}, {
+      success: () => {
+        this.store.dispatch(new AddToast({ description: 'Project Deliverable Update' }));
+        this.popupService.close(`project-deliverable-update-${this.id}`);
+      },
+      failure: () => {
+        this.store.dispatch(new AddToast({ description: 'Project Deliverable Update', isError: true }));
+      }
+    }));
   }
 }

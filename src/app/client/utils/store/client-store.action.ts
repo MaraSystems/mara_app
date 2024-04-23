@@ -3,6 +3,7 @@ import { Client } from "../models/client";
 import { NewClient } from "../models/new-client";
 import { Update } from "@ngrx/entity";
 import { Kin } from "../models/kin";
+import { SideEffects } from "src/app/shared/utils/models/side.effects";
 
 export enum ClientActionsType {
     REGISTER_CLIENT = "[CLIENT] Register Client",
@@ -39,7 +40,7 @@ export class RegisterClientActionFail implements Action {
 
 export class UpdateClientAction implements Action {
     readonly type = ClientActionsType.UPDATE_CLIENT;
-    constructor(public payload: Update<Client>){}
+    constructor(public payload: Update<Client>, public sideEffects = new SideEffects()){}
 }
 
 export class UpdateClientActionSuccess implements Action {

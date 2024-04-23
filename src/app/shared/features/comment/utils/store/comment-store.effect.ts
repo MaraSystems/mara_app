@@ -7,9 +7,8 @@ import { Toast } from "src/app/shared/features/toast/features/toast.model";
 import { Router } from "@angular/router";
 import { DataResponse } from "src/app/shared/utils/models/data-response";
 import { CommentAccessService } from "../access/comment-access.service";
-import { CreateCommentAction, CreateCommentActionFail, CreateCommentActionSuccess, DeleteCommentAction, DeleteCommentActionFail, DeleteCommentActionSuccess, GetCommentAction, GetCommentActionFail, GetCommentActionSuccess, ListCommentsAction, ListCommentsActionFail, ListCommentsActionSuccess, CommentActionsType } from "./comment-store.action";
+import { CreateCommentAction, CreateCommentActionFail, CreateCommentActionSuccess, DeleteCommentAction, DeleteCommentActionFail, DeleteCommentActionSuccess, GetCommentAction, GetCommentActionFail, GetCommentActionSuccess, ListCommentsAction, ListCommentsActionFail, ListCommentsActionSuccess, CommentActionsType, UpdateCommentAction, UpdateCommentActionSuccess, UpdateCommentActionFail } from "./comment-store.action";
 import { Comment } from "../models/comment.model";
-import { SetPopup } from "src/app/shared/features/popup/utils/store/popup.action";
 
 @Injectable()
 export class CommentStoreEffect {
@@ -28,6 +27,18 @@ export class CommentStoreEffect {
                     return new CreateCommentActionSuccess(response.data);
                 }),
                 catchError(err => of(new CreateCommentActionFail(err)))
+            )
+        )
+    ));
+
+    updateComment$ = createEffect(() => this.actions$.pipe(
+        ofType<UpdateCommentAction>(CommentActionsType.UPDATE_COMMENT),
+        mergeMap((action: UpdateCommentAction) => 
+            this.commentAccessService.updateComment(action.payload).pipe(
+                map((response: DataResponse<Comment>) => {
+                    return new UpdateCommentActionSuccess({ id: action.payload.id as string, changes: response.data });
+                }),
+                catchError(err => of(new UpdateCommentActionFail(err)))
             )
         )
     ));
@@ -61,8 +72,6 @@ export class CommentStoreEffect {
         mergeMap((action: DeleteCommentAction) => 
             this.commentAccessService.deleteComment(action.payload).pipe(
                 map((response: DataResponse<Comment>) => {         
-                    this.store.dispatch(new AddToast({ description: 'Comment Deleted' }));
-                    this.router.navigateByUrl('/comments');           
                     return new DeleteCommentActionSuccess(response.data);
                 }),
                 catchError(err => of(new DeleteCommentActionFail(err))

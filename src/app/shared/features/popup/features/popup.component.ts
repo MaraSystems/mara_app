@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ComponentFactoryResolver, ComponentRef, ElementRef, Input, OnDestroy, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, ComponentFactoryResolver, ComponentRef, ElementRef, Input, OnDestroy, OnInit, Type } from '@angular/core';
 import { PopupService } from './popup.service';
 
 @Component({
@@ -11,15 +11,12 @@ export class PopupComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() component!: Type<any>;
   @Input() data!: any;
 
-  @ViewChild("body", { read: ViewContainerRef }) bodyRef!: ViewContainerRef;
-
   componentHolder!: ComponentRef<any>;
   element!: HTMLElement;
 
   constructor(
     private popupService: PopupService,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private el: ElementRef
+    private el: ElementRef,
   ) { }
 
   ngOnInit(): void {
@@ -39,12 +36,6 @@ export class PopupComponent implements OnInit, OnDestroy, AfterViewInit {
   open(data: any = {}) {
     this.element.style.display = "flex";
     this.data = { ...this.data, ...data };
-
-    if (this.component) {
-      const c = this.componentFactoryResolver.resolveComponentFactory(this.component);
-      this.componentHolder = this.bodyRef.createComponent(c);
-      this.componentHolder.instance.data = data;
-    }
   }
 
   close() {

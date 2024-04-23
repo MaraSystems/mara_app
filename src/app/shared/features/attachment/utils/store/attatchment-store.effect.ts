@@ -7,7 +7,6 @@ import { Toast } from "src/app/shared/features/toast/features/toast.model";
 import { Router } from "@angular/router";
 import { DataResponse } from "src/app/shared/utils/models/data-response";
 import { UploadAttachmentAction, UploadAttachmentActionFail, UploadAttachmentActionSuccess, DeleteAttachmentAction, DeleteAttachmentActionFail, DeleteAttachmentActionSuccess, GetAttachmentAction, GetAttachmentActionFail, GetAttachmentActionSuccess, ListAttachmentsAction, ListAttachmentsActionFail, ListAttachmentsActionSuccess, AttachmentActionsType, DownloadAttachmentAction, DownloadAttachmentActionFail, DownloadAttachmentActionSuccess } from "./attatchment-store.action";
-import { SetPopup } from "src/app/shared/features/popup/utils/store/popup.action";
 import { AttachmentAccessService } from "../access/attatchment-access.service";
 import { Attachment } from "../models/attatchment.model";
 
@@ -23,10 +22,12 @@ export class AttachmentStoreEffect {
         ofType<UploadAttachmentAction>(AttachmentActionsType.UPLOAD_ATTACHMENT),
         mergeMap((action: UploadAttachmentAction) => 
             this.attachmentAccessService.uploadAttachment(action.payload).pipe(
-                map((response: DataResponse<Attachment>) => {                    
+                map((response: DataResponse<Attachment>) => {            
+                    const { sideEffects } = action;
+                    if (sideEffects.success) {
+                        sideEffects.success();
+                    }
                     this.store.dispatch(new AddToast({ description: 'Attachment Upload' }));
-                    const popup = (action as UploadAttachmentAction).popup as string;
-                    this.store.dispatch(new SetPopup({ tag: popup, action: 'close'}));   
                     return new UploadAttachmentActionSuccess(response.data, action.payload._id);
                 }),
                 catchError(err => of(new UploadAttachmentActionFail(err)).pipe(

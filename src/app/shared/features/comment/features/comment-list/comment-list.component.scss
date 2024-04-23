@@ -6,8 +6,11 @@
     width: -webkit-fill-available;
     overflow: hidden;
 
-    .title {
+    .header {
         padding: 0px var(--gap-small);
+        display: flex;
+        gap: var(--gap-small);
+        align-items: center;
     }
 
     .list {

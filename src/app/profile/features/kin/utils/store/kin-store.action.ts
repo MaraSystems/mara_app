@@ -1,6 +1,7 @@
 import { Kin } from "src/app/client/utils/models/kin";
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
+import { SideEffects } from "src/app/shared/utils/models/side.effects";
 
 
 export enum KinActionsType {
@@ -34,7 +35,7 @@ export class CreateKinActionFail implements Action {
 
 export class UpdateKinAction implements Action {
     readonly type = KinActionsType.UPDATE_KIN;
-    constructor(public payload: Update<Kin>){}
+    constructor(public payload: Update<Kin>, public sideEffects = new SideEffects()){}
 }
 
 export class UpdateKinActionSuccess implements Action {

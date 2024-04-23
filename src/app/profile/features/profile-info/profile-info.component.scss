@@ -91,7 +91,7 @@
 
 @media only screen and (min-width: 760px){
     :host {
-        gap: var(--gap-x-big);
+        gap: var(--gap-max);
         
         .details {
             grid-template-columns: repeat(2, 1fr);

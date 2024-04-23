@@ -9,6 +9,7 @@ import { projectCategories } from 'src/app/shared/utils/models/project-categorie
 import { ActivatedRoute } from '@angular/router';
 import { selectProjectById } from '../../utils/store/project-store.selector';
 import { PopupService } from 'src/app/shared/features/popup/features/popup.service';
+import { AddToast } from 'src/app/shared/features/toast/utils/store/toast.action';
 
 @Component({
   selector: 'app-project-update',
@@ -65,6 +66,14 @@ export class ProjectUpdateComponent extends UnSubscriber implements OnInit {
   }
 
   saveProject() {    
-    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: this.updateData }, { modal: `project-update-${this.id}`}));
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: this.updateData }, {
+      success: () => {
+        this.store.dispatch(new AddToast({ description: 'Project Update' }));
+        this.popupService.close(`project-update-${this.id}`);
+      },
+      failure: () => {
+        this.store.dispatch(new AddToast({ description: 'Project Update', isError: true }));
+      }
+    }));
   }
 }

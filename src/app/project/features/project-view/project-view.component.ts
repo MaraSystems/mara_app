@@ -18,6 +18,8 @@ import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
 import { toggleList } from 'src/app/shared/utils/lib/toggleList';
 import { CommentEnum } from 'src/app/shared/features/comment/utils/models/comment.enum';
+import { ListCommentsAction } from 'src/app/shared/features/comment/utils/store/comment-store.action';
+import { selectCommentsByModelId } from 'src/app/shared/features/comment/utils/store/comment-store.selector';
 
 @Component({
   selector: 'app-project-view',
@@ -37,6 +39,7 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
   liked = false;
   bookmarked = false;
   commentModel = CommentEnum.PROJECT;
+  commentsCount = 0;
 
   constructor(
     public store: Store<AppState>,
@@ -85,7 +88,11 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
       { name: 'Delete', icon: 'Delete', popup: `project-delete-${this.id}` }
     ];
 
-    this.popupService.open('project-comment-' + this.id)
+    this.store.dispatch(new ListCommentsAction(this.commentModel, this.id));
+
+    this.newSubscription = this.store.select(selectCommentsByModelId(this.commentModel, this.id)).subscribe(comments => {
+      this.commentsCount = comments.length;
+    });
   }
 
   deleteProject() {
@@ -98,20 +105,36 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
       return;
     }
 
-    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.PUBLISHED, active: true }}, { modal: 'project-publish' }));
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.PUBLISHED, active: true }}, {
+      success: () => {
+        this.store.dispatch(new AddToast({ description: 'Project Activation' }));
+        this.popupService.close(`project-activate-${this.id}`);
+      },
+      failure: () => {
+        this.store.dispatch(new AddToast({ description: 'Project Activation', isError: true }));
+      }
+    }));
   }
 
   deactivate() {
-    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.DRAFT, active: false }}, { modal: 'project-draft'}));
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.DRAFT, active: false }}, {
+      success: () => {
+        this.store.dispatch(new AddToast({ description: 'Project Deactivation' }));
+        this.popupService.close(`project-deactivate-${this.id}`);
+      },
+      failure: () => {
+        this.store.dispatch(new AddToast({ description: 'Project Deactivation', isError: true }));
+      }
+    }));
   }
 
   likeToggle(){
     const likes = toggleList([...this.project.likes], this.auth.id);    
-    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { likes } }, { loud: false }));
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { likes } }));
   }
 
   bookmarkToggle(){
     const bookmarks = toggleList([...this.project.bookmarks], this.auth.id);    
-    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { bookmarks } }, { loud: false }));
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { bookmarks } }));
   }
 }

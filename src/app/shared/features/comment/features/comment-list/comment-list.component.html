@@ -1,7 +1,10 @@
-<span class="header-3 title">Comments</span>
+<div class="header">
+    <span *ngIf="pages.length > 1" class="material-symbols-outlined back" (click)="removePage()">arrow_back</span>
+    <span class="header-3 title">Comments</span>
+</div>
 
 <div class="list">
-    <app-comment-item *ngFor="let item of comments" [comment]="item"></app-comment-item>
+    <app-comment-item *ngFor="let item of comments" [comment]="item" (open)="addPage(commentModel, item._id)"></app-comment-item>
 </div>
 
 <app-comment-add [model]="model" [modelId]="modelId"></app-comment-add>

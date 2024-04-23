@@ -13,6 +13,9 @@ import { ListAttachmentsAction } from 'src/app/shared/features/attachment/utils/
 import { toggleList } from 'src/app/shared/utils/lib/toggleList';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
+import { selectCommentsByModelId } from 'src/app/shared/features/comment/utils/store/comment-store.selector';
+import { ListCommentsAction } from 'src/app/shared/features/comment/utils/store/comment-store.action';
+import { CommentEnum } from 'src/app/shared/features/comment/utils/models/comment.enum';
 
 @Component({
   selector: 'app-project-deliverable-view',
@@ -26,6 +29,8 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
   id!: string;
   liked = false;
   moreList: More[] = [];
+  commentModel = CommentEnum.PROJECT;
+  commentsCount = 0;
 
   constructor(
     public store: Store<AppState>,
@@ -43,16 +48,23 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
     this.newSubscription = this.store.select(selectProjectDeliverableById(this.id)).subscribe(deliverable => {
       this.deliverable = deliverable;  
       
-      this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
-        this.auth = auth;
-        this.liked = this.deliverable.likes.includes(this.auth.id);      
-      }); 
+      if (this.deliverable) {
+        this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
+          this.auth = auth;
+          this.liked = this.deliverable.likes.includes(this.auth.id);      
+        }); 
+      }
     });
 
     this.moreList = [
       { name: 'Update', icon: 'update', popup: `project-deliverable-update-${this.id}` },
       { name: 'Delete', icon: 'Delete', popup: `project-deliverable-delete-${this.id}` }
     ];
+    this.store.dispatch(new ListCommentsAction(this.commentModel, this.id));
+
+    this.newSubscription = this.store.select(selectCommentsByModelId(this.commentModel, this.id)).subscribe(comments => {
+      this.commentsCount = comments.length;
+    });
   }
 
   delete() {
@@ -61,6 +73,6 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
 
   likeToggle(){
     const likes = toggleList([...this.deliverable.likes], this.auth.id);    
-    this.store.dispatch(new UpdateProjectDeliverableAction({ id: this.id, changes: { likes } }, { loud: false }));
+    this.store.dispatch(new UpdateProjectDeliverableAction({ id: this.id, changes: { likes } }));
   }
 }

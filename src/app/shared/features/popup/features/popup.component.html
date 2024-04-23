@@ -1,10 +1,7 @@
 <div class="popup">
     <div class="popup-cover" (click)="close()"></div>
     <div class="popup-wrapper">
-        <span class="popup-line"></span>
-        <ng-container class="popup-content" *ngIf="component" #body>
-        </ng-container>
-    
-        <ng-content class="popup-content" *ngIf="!component"></ng-content>
+        <span class="popup-line"></span>    
+        <ng-content class="popup-content"></ng-content>
     </div>
 </div>
