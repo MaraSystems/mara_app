@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { Store, StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
-import { ToastModule } from './shared/features/toast/features/toast.module';
+import { ToastModule } from './general/features/toast/features/toast.module';
 import { appReducers } from './app.state';
 
 describe('AppComponent', () => {

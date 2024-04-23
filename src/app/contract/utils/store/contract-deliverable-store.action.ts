@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
 import { ContractDeliverable } from "../models/contract-deliverable.model";
-import { ListPayload } from "src/app/shared/utils/models/list-payload";
+import { ListPayload } from "src/app/general/utils/models/list-payload";
 
 export enum ContractDeliverableActionsType {
     CREATE_CONTRACT_DELIVERABLE = "[CONTRACT_DELIVERABLE] Create Contract Deliverable",

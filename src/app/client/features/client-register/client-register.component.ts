@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { RegisterClientAction } from '../../utils/store/client-store.action';
 import { NewClient } from '../../utils/models/new-client';
-import { phonePattern, usernamePattern } from 'src/app/shared/utils/lib/patterns';
-import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
+import { phonePattern, usernamePattern } from 'src/app/general/utils/lib/patterns';
+import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 
 @Component({
   selector: 'app-client-register',

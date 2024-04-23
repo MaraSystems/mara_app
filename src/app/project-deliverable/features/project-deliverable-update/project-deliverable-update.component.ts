@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
+import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { ProjectDeliverable } from '../../utils/models/project-deliverable.model';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { CreateProjectDeliverableAction, UpdateProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
-import { fileValidator } from 'src/app/shared/utils/validators/fileValidator';
+import { fileValidator } from 'src/app/general/utils/validators/fileValidator';
 import { ActivatedRoute } from '@angular/router';
 import { selectProjectDeliverableById } from '../../utils/store/project-deliverable-store.selector';
-import { AddToast } from 'src/app/shared/features/toast/utils/store/toast.action';
-import { PopupService } from 'src/app/shared/features/popup/features/popup.service';
+import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
+import { PopupService } from 'src/app/general/features/popup/features/popup.service';
 
 @Component({
   selector: 'app-project-deliverable-update',

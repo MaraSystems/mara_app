@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProjectCreateComponent } from './project-create.component';
 import { Store, StoreModule } from '@ngrx/store';
-import { InputComponent } from 'src/app/shared/ui/input/input.component';
+import { InputComponent } from 'src/app/general/ui/input/input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { appEffects, appReducers } from 'src/app/app.state';
 import { EffectsModule } from '@ngrx/effects';

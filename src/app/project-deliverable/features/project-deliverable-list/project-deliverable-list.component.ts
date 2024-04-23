@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
+import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectDeliverable } from '../../utils/models/project-deliverable.model';

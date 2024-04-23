@@ -1,7 +1,7 @@
 import { ActionReducerMap } from "@ngrx/store";
 import { ClientState, clientReducer } from "./client/utils/store/client-store.reducer";
 import { ClientStoreEffect } from "./client/utils/store/client-store.effect";
-import { ToastState, toastReducer } from "./shared/features/toast/utils/store/toast.reducer";
+import { ToastState, toastReducer } from "./general/features/toast/utils/store/toast.reducer";
 import { AuthState, authReducer } from "./auth/utils/store/auth-store.reducer";
 import { AuthStoreEffect } from "./auth/utils/store/auth-store.effect";
 import { KinStoreEffect } from "./profile/features/kin/utils/store/kin-store.effect";
@@ -12,10 +12,10 @@ import { ProjectStoreEffect } from "./project/utils/store/project-store.effect";
 import { ProjectDeliverableStoreEffect } from "./project-deliverable/utils/store/project-deliverable-store.effect";
 import { ProjectState, projectReducer } from "./project/utils/store/project-store.reducer";
 import { ProjectDeliverableState, projectDeliverableReducer } from "./project-deliverable/utils/store/project-deliverable-store.reducer";
-import { AttachmentStoreEffect } from "./shared/features/attachment/utils/store/attatchment-store.effect";
-import { AttachmentState, attachmentReducer } from "./shared/features/attachment/utils/store/attatchment-store.reducer";
-import { CommentStoreEffect } from "./shared/features/comment/utils/store/comment-store.effect";
-import { CommentState, commentReducer } from "./shared/features/comment/utils/store/comment-store.reducer";
+import { AttachmentStoreEffect } from "./general/features/attachment/utils/store/attatchment-store.effect";
+import { AttachmentState, attachmentReducer } from "./general/features/attachment/utils/store/attatchment-store.reducer";
+import { CommentStoreEffect } from "./general/features/comment/utils/store/comment-store.effect";
+import { CommentState, commentReducer } from "./general/features/comment/utils/store/comment-store.reducer";
 
 export const appEffects = [
     ClientStoreEffect,

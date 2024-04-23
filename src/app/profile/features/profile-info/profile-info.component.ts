@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../client/utils/models/client';
-import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
+import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { phonePattern, usernamePattern } from 'src/app/shared/utils/lib/patterns';
+import { phonePattern, usernamePattern } from 'src/app/general/utils/lib/patterns';
 import { UpdateClientAction } from '../../../client/utils/store/client-store.action';
-import * as addressUtil from 'src/app/shared/utils/lib/address';
+import * as addressUtil from 'src/app/general/utils/lib/address';
 import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
-import { Toast } from 'src/app/shared/features/toast/features/toast.model';
-import { AddToast } from 'src/app/shared/features/toast/utils/store/toast.action';
+import { Toast } from 'src/app/general/features/toast/features/toast.model';
+import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 
 @Component({
   selector: 'app-profile-info',

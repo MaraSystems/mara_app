@@ -7,7 +7,7 @@ import { HomeFooterComponent } from '../ui/home-footer/home-footer.component';
 import { HomeTestimonialsComponent } from '../ui/home-testimonials/home-testimonials.component';
 import { HomeWorksComponent } from '../ui/home-works/home-works.component';
 import { HomeValuesComponent } from '../ui/home-values/home-values.component';
-import { SwitcherModule } from 'src/app/shared/ui/switcher/switcher.module';
+import { SwitcherModule } from 'src/app/general/ui/switcher/switcher.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store, StoreModule } from '@ngrx/store';
 

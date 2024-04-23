@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ProjectListComponent } from './project-list.component';
 import { ProjectListRoutingModule } from './project-list-routing.module';
 import { ProjectItemModule } from '../../ui/project-item/project-item.module';
-import { TableHeaderModule } from 'src/app/shared/ui/table-header/table-header.module';
-import { EmptyModule } from 'src/app/shared/ui/empty/empty.module';
+import { TableHeaderModule } from 'src/app/general/ui/table-header/table-header.module';
+import { EmptyModule } from 'src/app/general/ui/empty/empty.module';
 
 
 

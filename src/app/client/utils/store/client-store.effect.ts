@@ -5,9 +5,9 @@ import { ClientAccessService } from "../access/client-access.service";
 import { ClientActionsType, GetClientAction, GetClientActionFail, GetClientActionSuccess, RegisterClientAction, RegisterClientActionFail, RegisterClientActionSuccess, UpdateClientAction, UpdateClientActionFail, UpdateClientActionSuccess } from "./client-store.action";
 import { Client } from "../models/client";
 import { Store } from "@ngrx/store";
-import { AddToast } from "src/app/shared/features/toast/utils/store/toast.action";
-import { Toast } from "src/app/shared/features/toast/features/toast.model";
-import { DataResponse } from "src/app/shared/utils/models/data-response";
+import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
+import { Toast } from "src/app/general/features/toast/features/toast.model";
+import { DataResponse } from "src/app/general/utils/models/data-response";
 import { RouterService } from "src/app/router/utils/router.service";
 
 @Injectable()

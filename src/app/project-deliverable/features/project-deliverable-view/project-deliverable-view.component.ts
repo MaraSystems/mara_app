@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
+import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { ActivatedRoute } from '@angular/router';
-import { More } from 'src/app/shared/utils/models/more.model';
-import { PopupService } from 'src/app/shared/features/popup/features/popup.service';
+import { More } from 'src/app/general/utils/models/more.model';
+import { PopupService } from 'src/app/general/features/popup/features/popup.service';
 import { ProjectDeliverable } from '../../utils/models/project-deliverable.model';
 import { DeleteProjectDeliverableAction, GetProjectDeliverableAction, UpdateProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
 import { selectProjectDeliverableById } from '../../utils/store/project-deliverable-store.selector';
-import { Attachment } from 'src/app/shared/features/attachment/utils/models/attatchment.model';
-import { ListAttachmentsAction } from 'src/app/shared/features/attachment/utils/store/attatchment-store.action';
-import { toggleList } from 'src/app/shared/utils/lib/toggleList';
+import { Attachment } from 'src/app/general/features/attachment/utils/models/attatchment.model';
+import { ListAttachmentsAction } from 'src/app/general/features/attachment/utils/store/attatchment-store.action';
+import { toggleList } from 'src/app/general/utils/lib/toggleList';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
-import { selectCommentsByModelId } from 'src/app/shared/features/comment/utils/store/comment-store.selector';
-import { ListCommentsAction } from 'src/app/shared/features/comment/utils/store/comment-store.action';
-import { CommentEnum } from 'src/app/shared/features/comment/utils/models/comment.enum';
+import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/store/comment-store.selector';
+import { ListCommentsAction } from 'src/app/general/features/comment/utils/store/comment-store.action';
+import { CommentEnum } from 'src/app/general/features/comment/utils/models/comment.enum';
 
 @Component({
   selector: 'app-project-deliverable-view',

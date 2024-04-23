@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AccessService } from 'src/app/shared/utils/services/access.service';
+import { AccessService } from 'src/app/general/utils/services/access.service';
 import { of } from 'rxjs';
 import { Update } from '@ngrx/entity';
 import { ProjectDeliverable } from '../models/project-deliverable.model';

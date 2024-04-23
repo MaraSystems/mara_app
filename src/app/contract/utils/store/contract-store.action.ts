@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
 import { Contract } from "../models/contract.model";
-import { ListPayload } from "src/app/shared/utils/models/list-payload";
+import { ListPayload } from "src/app/general/utils/models/list-payload";
 
 export enum ContractActionsType {
     CREATE_CONTRACT = "[CONTRACT] Create Contract",

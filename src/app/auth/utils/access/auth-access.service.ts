@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { map, of, throwError } from 'rxjs';
-import { AccessService } from 'src/app/shared/utils/services/access.service';
+import { AccessService } from 'src/app/general/utils/services/access.service';
 import { Auth } from '../models/auth.model';
 import { Login } from '../models/login.model';
-import { DataResponse } from 'src/app/shared/utils/models/data-response';
+import { DataResponse } from 'src/app/general/utils/models/data-response';
 import { Client } from 'src/app/client/utils/models/client';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
+import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { LoginAuthActionSuccess } from '../store/auth-store.action';
 
 @Injectable({

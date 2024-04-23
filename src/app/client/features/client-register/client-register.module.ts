@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClientRegisterComponent } from './client-register.component';
-import { InputModule } from 'src/app/shared/ui/input/input.module';
+import { InputModule } from 'src/app/general/ui/input/input.module';
 import { ClientRegisterRoutingModule } from './client-register-routing.module';
 import { AltAuthModule } from 'src/app/auth/ui/alt-auth/alt-auth.module';
 import { ReactiveFormsModule } from '@angular/forms';

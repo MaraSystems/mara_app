@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeValuesComponent } from './home-values.component';
-import { SwitcherModule } from 'src/app/shared/ui/switcher/switcher.module';
+import { SwitcherModule } from 'src/app/general/ui/switcher/switcher.module';
 
 describe('HomeValuesComponent', () => {
   let component: HomeValuesComponent;

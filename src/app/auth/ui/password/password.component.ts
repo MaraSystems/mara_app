@@ -2,7 +2,7 @@ import { Component, Input, OnInit, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { InputComponent } from 'src/app/shared/ui/input/input.component';
+import { InputComponent } from 'src/app/general/ui/input/input.component';
 import { GetPasswordAuthAction } from '../../utils/store/auth-store.action';
 
 

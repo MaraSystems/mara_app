@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AuthComponent } from './auth.component';
 import { Store, StoreModule } from '@ngrx/store';
-import { InputModule } from 'src/app/shared/ui/input/input.module';
+import { InputModule } from 'src/app/general/ui/input/input.module';
 import { PasswordModule } from '../ui/password/password.module';
 import { AltAuthModule } from '../ui/alt-auth/alt-auth.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

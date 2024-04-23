@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ENVEnum } from 'src/app/shared/utils/models/env.enum';
+import { ENVEnum } from 'src/app/general/utils/models/env.enum';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

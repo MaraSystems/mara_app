@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ClientRegisterComponent } from './client-register.component';
 import { Store, StoreModule } from '@ngrx/store';
-import { InputModule } from 'src/app/shared/ui/input/input.module';
+import { InputModule } from 'src/app/general/ui/input/input.module';
 import { AltAuthModule } from 'src/app/auth/ui/alt-auth/alt-auth.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';

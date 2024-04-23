@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { UnSubscriber } from './shared/utils/services/unsubscriber.service';
+import { UnSubscriber } from './general/utils/services/unsubscriber.service';
 import { AppState } from './app.state';
 import { Store } from '@ngrx/store';
 import { selectActiveAuth } from './auth/utils/store/auth-store.selector';

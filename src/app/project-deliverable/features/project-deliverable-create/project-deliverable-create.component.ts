@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
+import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { ProjectDeliverable } from '../../utils/models/project-deliverable.model';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { CreateProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
-import { fileValidator } from 'src/app/shared/utils/validators/fileValidator';
+import { fileValidator } from 'src/app/general/utils/validators/fileValidator';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

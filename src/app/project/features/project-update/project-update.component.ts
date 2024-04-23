@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Project } from '../../utils/models/project.model';
-import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
+import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import {  GetProjectAction, UpdateProjectAction } from '../../utils/store/project-store.action';
-import { projectCategories } from 'src/app/shared/utils/models/project-categories';
+import { projectCategories } from 'src/app/general/utils/models/project-categories';
 import { ActivatedRoute } from '@angular/router';
 import { selectProjectById } from '../../utils/store/project-store.selector';
-import { PopupService } from 'src/app/shared/features/popup/features/popup.service';
-import { AddToast } from 'src/app/shared/features/toast/utils/store/toast.action';
+import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 
 @Component({
   selector: 'app-project-update',

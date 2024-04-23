@@ -1,25 +1,25 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Project } from '../../utils/models/project.model';
-import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
+import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { selectProjectById } from '../../utils/store/project-store.selector';
 import { ActivatedRoute } from '@angular/router';
 import { DeleteProjectAction, GetProjectAction, UpdateProjectAction } from '../../utils/store/project-store.action';
-import { More } from 'src/app/shared/utils/models/more.model';
-import { PopupService } from 'src/app/shared/features/popup/features/popup.service';
+import { More } from 'src/app/general/utils/models/more.model';
+import { PopupService } from 'src/app/general/features/popup/features/popup.service';
 import { selectAllProjectDeliverables } from 'src/app/project-deliverable/utils/store/project-deliverable-store.selector';
 import { ProjectDeliverable } from 'src/app/project-deliverable/utils/models/project-deliverable.model';
 import { ListProjectDeliverablesAction } from 'src/app/project-deliverable/utils/store/project-deliverable-store.action';
 import { ProjectStatus } from '../../utils/models/project-status.enum';
-import { AddToast } from 'src/app/shared/features/toast/utils/store/toast.action';
-import { Toast } from 'src/app/shared/features/toast/features/toast.model';
+import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
+import { Toast } from 'src/app/general/features/toast/features/toast.model';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
-import { toggleList } from 'src/app/shared/utils/lib/toggleList';
-import { CommentEnum } from 'src/app/shared/features/comment/utils/models/comment.enum';
-import { ListCommentsAction } from 'src/app/shared/features/comment/utils/store/comment-store.action';
-import { selectCommentsByModelId } from 'src/app/shared/features/comment/utils/store/comment-store.selector';
+import { toggleList } from 'src/app/general/utils/lib/toggleList';
+import { CommentEnum } from 'src/app/general/features/comment/utils/models/comment.enum';
+import { ListCommentsAction } from 'src/app/general/features/comment/utils/store/comment-store.action';
+import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/store/comment-store.selector';
 
 @Component({
   selector: 'app-project-view',

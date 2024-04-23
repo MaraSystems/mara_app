@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Client } from 'src/app/client/utils/models/client';
-import { More } from 'src/app/shared/utils/models/more.model';
-import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
+import { More } from 'src/app/general/utils/models/more.model';
+import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 
 @Component({
   selector: 'app-profile-shell',

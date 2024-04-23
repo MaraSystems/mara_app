@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
-import { SliderService } from 'src/app/shared/utils/services/slider.service';
+import { SliderService } from 'src/app/general/utils/services/slider.service';
 
 @Component({
   selector: 'app-home-values',

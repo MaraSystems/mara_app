@@ -5,11 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { Client } from 'src/app/client/utils/models/client';
-import { phonePattern } from 'src/app/shared/utils/lib/patterns';
-import { UnSubscriber } from 'src/app/shared/utils/services/unsubscriber.service';
+import { phonePattern } from 'src/app/general/utils/lib/patterns';
+import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Kin } from 'src/app/client/utils/models/kin';
 import { selectKinByUserId } from '../utils/store/kin-store.selector';
-import * as addressUtil from 'src/app/shared/utils/lib/address';
+import * as addressUtil from 'src/app/general/utils/lib/address';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
 
