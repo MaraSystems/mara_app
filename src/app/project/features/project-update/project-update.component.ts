@@ -50,7 +50,7 @@ export class ProjectUpdateComponent extends UnSubscriber implements OnInit {
       title: new FormControl(this.project?.title, [Validators.minLength(3), Validators.required]),
       category: new FormControl(this.project?.category, [Validators.required]),
       tags: new FormControl(this.project?.tags, [Validators.required]),
-      description: new FormControl(this.project?.description, [Validators.maxLength(5000)]),
+      description: new FormControl(this.project?.description, [Validators.maxLength(10000)]),
       image: new FormControl(this.project?.image),
     });
   }

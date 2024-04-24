@@ -70,7 +70,7 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
     });
     
     this.newSubscription = this.store.select(selectProjectById(this.id)).subscribe(project => {
-      this.project = project; 
+      this.project = project;       
 
       if (this.project) {
         this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {

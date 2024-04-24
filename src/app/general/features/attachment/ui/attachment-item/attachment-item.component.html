@@ -1,4 +1,7 @@
-<span class="image"><img src="../../../../assets/images/db.png" alt=""></span>
+<span class="image" (click)="this.popupService.open('attachment-view-' + id)">
+    <img src="../../../../assets/images/db.png" alt="">
+</span>
+
 <span class="name text-1">{{attachment.name}}</span>
 <span class="version text-2">{{ 'V.' + attachment.version}}</span>
 <app-more class="more" [elevated]="false" [list]="moreList"></app-more>
@@ -9,4 +12,9 @@
 
 <app-popup [name]="'attachment-update-' + id">
     <app-attachment-upload [model]="attachment.model" [modelId]="attachment.modelId" [attachment]="attachment" [popupId]="'attachment-update-' + id"></app-attachment-upload>
+</app-popup>
+
+
+<app-popup [name]="'attachment-view-' + id" [style]="{ zIndex: 1 }">
+    <app-attachment-view [id]="id"></app-attachment-view>
 </app-popup>

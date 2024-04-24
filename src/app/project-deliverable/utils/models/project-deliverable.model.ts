@@ -8,5 +8,9 @@ export class ProjectDeliverable {
     documents!: string[];
     image!: string;
     likes!: string[];
+    bookmarks!: string[];
+    shares!: number;
     hidden!: boolean;
+    createdAt!: Date;
+    updatedAt!: Date;
 }

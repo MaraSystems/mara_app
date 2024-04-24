@@ -1,0 +1,36 @@
+:host {
+    display: grid;
+    grid-template-columns: max-content 1fr max-content max-content;
+    width: -webkit-fill-available;
+    padding: var(--gap-normal);
+    align-items: center;
+    gap: var(--gap-normal);
+    box-shadow: var(--shadow-medium);
+    
+    .image {
+        width: 40px;
+        height: 40px;
+    }
+
+    .attachment{
+        &-file {
+            visibility: hidden;
+            width: 0px;
+        }
+
+        &-preview {
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--color-dark);
+        }
+
+        &-icon {
+            cursor: pointer;
+        }
+    }
+
+    .send {
+        color: var(--color-primary);
+        cursor: pointer;
+    }
+}

@@ -4,7 +4,7 @@
 
 <h5 class="text-1 value" *ngIf="!edit && type !== 'date' && measure" [unit]="measure">{{ getValue() || value }}</h5>
 
-<h5 class="text-1 value" *ngIf="!edit && type === 'date' && !icon">{{ getValue() | date:'dd/mm/yy' }}</h5>
+<h5 class="text-1 value" *ngIf="!edit && type === 'date' && !icon">{{ getValue() | date }}</h5>
 
 <span class="material-symbols-outlined icon" *ngIf="icon" (click)="clickEvent.emit()">{{icon}}</span>
 

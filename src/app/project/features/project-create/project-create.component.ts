@@ -37,7 +37,7 @@ export class ProjectCreateComponent extends UnSubscriber implements OnInit {
       title: new FormControl(null, [Validators.minLength(3), Validators.required]),
       category: new FormControl(null, [Validators.required]),
       tags: new FormControl(null, [Validators.required]),
-      description: new FormControl(null, [Validators.maxLength(5000)])
+      description: new FormControl(null, [Validators.maxLength(10000)])
     });
   }
 

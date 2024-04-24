@@ -1,0 +1,13 @@
+<img class="image" [src]="client.image || '../../../../assets/images/db.png'" alt="" srcset="">
+
+<form action="" [formGroup]="form" (ngSubmit)="send()">
+    <app-input [label]="false" type="text" name="tags" class="form-group" [control]="getControl('statement')"></app-input>
+</form>
+
+<span class="material-symbols-outlined send" (click)="send()">send</span>
+
+<span class="attachment">
+    <span class="material-symbols-outlined attachment-icon" (click)="file.click()">attach_file</span>
+    <input class="attachment-file" type="file" #file accept="image/png, image/jpeg" (change)="setAttachment($event)">
+    <img class="attachment-preview" *ngIf="form.get('attachment')?.value" [src]="form.get('attachment')?.value" alt="">
+</span>

@@ -62,8 +62,9 @@ export class AttachmentUploadComponent extends UnSubscriber implements OnInit {
 
   uploadAttachment() {    
     this.store.dispatch(new UploadAttachmentAction({ ...this.uploadData, model: this.model, modelId: this.modelId, _id: this.attachment?._id }, {
-      success: () => {
+      success: () => {        
         this.popupService.close(this.popupId);
+        this.form.reset();
       }
     }));
   }

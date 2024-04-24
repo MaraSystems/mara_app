@@ -45,7 +45,7 @@ export class UploadAttachmentActionFail implements Action {
 
 export class DownloadAttachmentAction implements Action {
     readonly type = AttachmentActionsType.DOWNLOAD_ATTACHMENT;
-    constructor(public payload: DownloadData, public popup: string){}
+    constructor(public payload: DownloadData){}
 }
 
 export class DownloadAttachmentActionSuccess implements Action {

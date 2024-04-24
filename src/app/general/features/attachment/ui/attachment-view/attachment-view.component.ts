@@ -8,12 +8,13 @@ import { Attachment } from '../../utils/models/attatchment.model';
 import { PopupService } from '../../../popup/features/popup.service';
 
 @Component({
-  selector: 'app-attachment-item',
-  templateUrl: './attachment-item.component.html',
-  styleUrls: ['./attachment-item.component.scss']
+  selector: 'app-attachment-view',
+  templateUrl: './attachment-view.component.html',
+  styleUrls: ['./attachment-view.component.scss']
 })
-export class AttachmentItemComponent extends UnSubscriber implements OnInit {
+export class AttachmentViewComponent extends UnSubscriber implements OnInit {
   @Input({ required: true }) id!: string;
+  @Input() small = true;
   attachment!: Attachment;
 
   moreList: More[] = [];
@@ -33,8 +34,8 @@ export class AttachmentItemComponent extends UnSubscriber implements OnInit {
     });
 
     this.moreList = [
-      { name: 'Update', icon: 'update', popup: `attachment-update-${this.id}` },
-      { name: 'Delete', icon: 'delete', popup: `attachment-delete-${this.id}` }
+      { name: 'Update', icon: 'update', popup: `attachment-view-update-${this.id}` },
+      { name: 'Delete', icon: 'delete', popup: `attachment-view-delete-${this.id}` }
     ];
   }
 

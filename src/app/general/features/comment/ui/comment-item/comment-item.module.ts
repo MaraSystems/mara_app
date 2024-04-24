@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CommentItemComponent } from './comment-item.component';
 import { IconCounterModule } from 'src/app/general/ui/icon-counter/icon-counter.module';
+import { MoreModule } from 'src/app/general/ui/more/more.module';
+import { PopupModule } from '../../../popup/features/popup.module';
+import { ShareModule } from '../../../share/features/share.module';
 
 
 
@@ -11,7 +14,10 @@ import { IconCounterModule } from 'src/app/general/ui/icon-counter/icon-counter.
   ],
   imports: [
     CommonModule,
-    IconCounterModule
+    IconCounterModule,
+    MoreModule,
+    PopupModule,
+    ShareModule
   ],
   exports: [
     CommentItemComponent

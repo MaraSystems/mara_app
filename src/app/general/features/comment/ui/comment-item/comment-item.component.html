@@ -6,11 +6,25 @@
         <span class="material-symbols-outlined badge">verified_user</span>
         <span class="text-1 username">@{{client.username}}</span>
     </span>
-    <span class="text-1 statement">{{comment.statement}}</span>
-    <span class="attachment"></span>
+
+    <span class="controls">
+        <span class="text-2 time">{{comment.createdAt | date}}</span>
+        <app-more class="more" [elevated]="false" [list]="moreList"></app-more>
+    </span>
+
+    <span class="message">
+        <span class="text-1 statement">{{comment.statement}}</span>
+        <img *ngIf="comment.attachment" [src]="attachment" class="attachment"/>
+    </span>
+
     <span class="stats">
         <app-icon-counter [flat]="true" icon="comment" [value]="commentsCount" (click)="open.emit()"></app-icon-counter>
         <app-icon-counter [flat]="true" [active]="liked" icon="thumb_up" [value]="comment.likes.length" (click)="likeToggle()"></app-icon-counter>
+        <app-icon-counter [flat]="true" [active]="bookmarked" icon="bookmark" [value]="comment.bookmarks.length" (click)="bookmarkToggle()"></app-icon-counter>
+        <app-icon-counter [flat]="true" icon="share" [value]="0" (click)="popupService.open('comment-share-' + comment._id)"></app-icon-counter>
     </span>
-    <span class="text-2 time">{{comment.createdAt | date}}</span>
 </span>
+
+<app-popup [name]="'comment-share-' + comment._id" [style]="{ zIndex: 1 }">
+    <app-share></app-share>
+</app-popup>

@@ -34,9 +34,10 @@ export class AccessService {
     const collection = this.db.createCollection<Attachment>('attachments', { timestamp: true });
     const { version: latest } = collection.findOne({ _id }) || { version: -1 };
     const version = latest + 1;
-    localStorage.setItem(`${model}/${name}/${version}`, url);
+    const path = `${model}/${modelId}/${ name ? `${name}/` : ''}${version}`;
+    localStorage.setItem(path, url);
 
-    const document: Partial<Attachment> = { name, model, modelId, version };
+    const document: Partial<Attachment> = { name, model, modelId, version, path };
     const data = version 
       ? collection.updateOne({ _id }, document as Attachment)
       : collection.insertOne(document as Attachment);
@@ -48,8 +49,8 @@ export class AccessService {
   public download(query: DownloadData){
     const collection = this.db.createCollection<Attachment>('attachments', { timestamp: true });    
     const document = collection.findOne(query, { sort: { version: 'desc' } } as IQueryOption);
-    const { model, name, version } = document;
-    const url = localStorage.getItem(`${model}/${name}/${version}`) as string;
+    const { path } = document;
+    const url = localStorage.getItem(`${path}`) as string;
     const response: DataResponse<string> = { success: true, data: url as string };
     return of(response);
   }

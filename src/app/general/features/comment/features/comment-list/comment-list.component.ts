@@ -55,7 +55,8 @@ export class CommentListComponent extends UnSubscriber implements OnInit {
     this.store.dispatch(new ListCommentsAction(model, modelId));
 
     this.newSubscription = this.store.select(selectCommentsByModelId(model, modelId)).subscribe(comments => {      
-      this.comments = comments;      
+      this.comments = comments.reverse();     
+      // this.scrollDown(); 
     });
   }
 
@@ -63,5 +64,11 @@ export class CommentListComponent extends UnSubscriber implements OnInit {
     const [{ model, modelId }, ..._] = this.pages;
     this.pages = [];
     this.addPage(model, modelId);
+  }
+
+  scrollDown() {
+    const element: Element = this.elementRef.nativeElement;
+    const [listElement] = Array.from(element.getElementsByClassName('list'));    
+    listElement.scrollTo({ top: listElement.scrollHeight });
   }
 }

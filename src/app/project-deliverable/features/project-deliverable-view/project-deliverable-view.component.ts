@@ -28,6 +28,7 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
   attachment: Attachment[] = [];
   id!: string;
   liked = false;
+  bookmarked = false;
   moreList: More[] = [];
   commentModel = CommentEnum.PROJECT;
   commentsCount = 0;
@@ -52,6 +53,7 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
         this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
           this.auth = auth;
           this.liked = this.deliverable.likes.includes(this.auth.id);      
+          this.bookmarked = this.deliverable.bookmarks.includes(this.auth.id);      
         }); 
       }
     });
@@ -74,5 +76,10 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
   likeToggle(){
     const likes = toggleList([...this.deliverable.likes], this.auth.id);    
     this.store.dispatch(new UpdateProjectDeliverableAction({ id: this.id, changes: { likes } }));
+  }
+
+  bookmarkToggle(){
+    const bookmarks = toggleList([...this.deliverable.bookmarks], this.auth.id);    
+    this.store.dispatch(new UpdateProjectDeliverableAction({ id: this.id, changes: { bookmarks } }));
   }
 }

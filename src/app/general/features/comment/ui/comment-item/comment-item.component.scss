@@ -16,10 +16,9 @@
         display: grid;
         grid-template-columns: 1fr max-content;
         grid-template-areas: 
-            "name name"
-            "statement statement"  
-            "attachment attachment"      
-            "stats time"
+            "name controls"
+            "message message"  
+            "stats stats"
         ;
         gap: var(--gap-x-small);
 
@@ -40,23 +39,44 @@
                 font-weight: 700;
                 font-style: italic;
             }
-        }
-
-        .time {
-            grid-area: time;
-            align-self: flex-end;
-        }
-
-        .statement {
-            grid-area: statement;
-            padding: var(--gap-small);
-        }
+        }    
 
         .stats {
             grid-area: stats;
             display: flex;
             align-items: center;
             gap: var(--gap-normal);
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+
+            .time {
+                grid-area: time;
+                align-self: flex-end;
+            }    
+
+            .more {
+                place-self: flex-end;
+                cursor: pointer;
+            }
+        }
+
+        .message {
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap-x-small);
+            padding: 0px var(--gap-x-small);
+            
+            .statement {
+                grid-area: statement;
+            }
+
+            .attachment {
+                width: 100%;
+                height: 150px;
+            }
         }
     }
 }

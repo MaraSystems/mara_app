@@ -7,6 +7,7 @@ import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.servic
 import { CreateCommentAction } from '../../utils/store/comment-store.action';
 import { Comment } from '../../utils/models/comment.model';
 import { CommentEnum } from '../../utils/models/comment.enum';
+import { upload } from 'src/app/general/utils/lib/upload';
 
 @Component({
   selector: 'app-comment-add',
@@ -41,7 +42,8 @@ export class CommentAddComponent extends UnSubscriber implements OnInit {
 
   initForm() {
     this.form = new FormGroup({
-      statement: new FormControl()
+      statement: new FormControl(),
+      attachment: new FormControl()
     })
   }
 
@@ -55,8 +57,18 @@ export class CommentAddComponent extends UnSubscriber implements OnInit {
     return control;
   }
 
-  send() {        
+  send() {                
+    if(!this.comment?.attachment && !this.comment?.statement) {
+      return;
+    }    
+
     this.store.dispatch(new CreateCommentAction({ ...this.comment, model: this.model, modelId: this.modelId }));
-    this.initForm();
+    this.form.reset();
+  }
+
+  async setAttachment(event: any) {
+    const files = Array.from(event.target.files);
+    const dataList = await Promise.all(files.map(async (file: any) => upload(file)));    
+    this.form.get('attachment')?.setValue(dataList[0]);
   }
 }

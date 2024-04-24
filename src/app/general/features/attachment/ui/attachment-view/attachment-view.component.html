@@ -1,0 +1,17 @@
+<span class="image" (click)="this.popupService.open('attachment-view-' + id)">
+    <img src="../../../../assets/images/db.png" alt="">
+</span>
+
+<span class="name header-3">{{attachment.name}}</span>
+<app-more class="more" [elevated]="false" [list]="moreList"></app-more>
+
+<span class="date text-1">{{attachment.createdAt | date}}</span>
+<span class="version text-1">{{ 'V.' + attachment.version}}</span>
+
+<app-popup [name]="'attachment-view-delete-' + id">
+    <app-warn title="Delete Document" description="This project document will be deleted. Click 'Continue' to proceed." (proceed)="deleteAttachment()"></app-warn>
+</app-popup>
+
+<app-popup [name]="'attachment-view-update-' + id">
+    <app-attachment-upload [model]="attachment.model" [modelId]="attachment.modelId" [attachment]="attachment" [popupId]="'attachment-view-update-' + id"></app-attachment-upload>
+</app-popup>

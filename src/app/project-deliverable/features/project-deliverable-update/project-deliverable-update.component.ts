@@ -48,7 +48,7 @@ export class ProjectDeliverableUpdateComponent extends UnSubscriber implements O
       title: new FormControl(this.deliverable.title, [Validators.minLength(3), Validators.required]),
       price: new FormControl(this.deliverable.price, [Validators.required, Validators.min(1)]),
       duration: new FormControl(this.deliverable.duration, [Validators.required, Validators.min(1)]),
-      description: new FormControl(this.deliverable.description, [Validators.maxLength(1000)])
+      description: new FormControl(this.deliverable.description, [Validators.maxLength(10000)])
     });
   }
 

@@ -64,6 +64,8 @@
         height: -webkit-fill-available;
         box-shadow: var(--shadow-high);
         border-radius: var(--gap-normal);
+        max-height: 400px;
+        overflow: hidden;
 
         &-title {
             display: flex;
@@ -80,6 +82,11 @@
                 cursor: pointer;
             }
         }
+
+        &-container {
+            overflow: auto;
+            height: -webkit-fill-available;
+        }
     }
 
     .details {
@@ -89,7 +96,6 @@
             display: flex;
             flex-direction: column;
             gap: var(--gap-small);
-            border-radius: var(--gap-normal);
             height: -webkit-fill-available;
         }
     }
@@ -103,12 +109,18 @@
             align-items: center;
             gap: var(--gap-normal);
             width: -webkit-fill-available;
-            padding: var(--gap-normal) var(--gap-none);
+            padding: var(--gap-small);
         }
     }
 
     .description {
         grid-area: description;
+
+        &-text {
+            padding: var(--gap-small);
+            text-align: justify;
+            white-space: pre-wrap;
+        }
     }
 
     .button {

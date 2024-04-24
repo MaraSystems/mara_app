@@ -64,6 +64,8 @@
         height: -webkit-fill-available;
         box-shadow: var(--shadow-high);
         border-radius: var(--gap-normal);
+        max-height: 400px;
+        overflow: hidden;
 
         &-title {
             display: flex;
@@ -79,6 +81,11 @@
             span {
                 cursor: pointer;
             }
+        }
+
+        &-container {
+            overflow: auto;
+            height: -webkit-fill-available;
         }
     }
 
@@ -110,6 +117,12 @@
 
     .description {
         grid-area: description;
+
+        &-text {
+            padding: var(--gap-small);
+            text-align: justify;
+            white-space: pre-wrap;
+        }
     }
 
     .button {

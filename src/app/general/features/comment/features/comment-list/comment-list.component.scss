@@ -15,7 +15,7 @@
 
     .list {
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
         gap: var(--gap-normal);
         height: -webkit-fill-available;
         padding: var(--gap-normal);
