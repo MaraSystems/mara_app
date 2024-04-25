@@ -3,8 +3,6 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
-import { Toast } from "src/app/general/features/toast/features/toast.model";
-import { Router } from "@angular/router";
 import { AuthAccessService } from "../access/auth-access.service";
 import { AuthActionsType, GetAuthAction, GetAuthActionFail, GetAuthActionSuccess, GetPasswordAuthAction, GetPasswordAuthActionFail, GetPasswordAuthActionSuccess, LoginAuthAction, LoginAuthActionFail, LoginAuthActionSuccess, LogoutAuthAction, LogoutAuthActionFail, LogoutAuthActionSuccess } from "./auth-store.action";
 import { DataResponse } from "src/app/general/utils/models/data-response";
@@ -12,6 +10,7 @@ import { Auth } from "../models/auth.model";
 import { AppState } from "src/app/app.state";
 import { GetClientAction } from "src/app/client/utils/store/client-store.action";
 import { RouterService } from "src/app/router/utils/router.service";
+import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
 
 @Injectable()
 export class AuthStoreEffect {
@@ -31,7 +30,7 @@ export class AuthStoreEffect {
                 }),
                 catchError(err => of(new GetPasswordAuthActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ isError: true, description: 'Password Request' }));
+                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Password Request' }));
                     })
                 ))
             )
@@ -52,7 +51,7 @@ export class AuthStoreEffect {
                 }),
                 catchError(err => of(new LoginAuthActionFail(err)).pipe(
                     tap(() => {                                                
-                        this.store.dispatch(new AddToast({ isError: true, description: 'Sign In' }));
+                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Sign In' }));
                     })
                 ))
             )
@@ -85,7 +84,7 @@ export class AuthStoreEffect {
                 }),
                 catchError(err => of(new LogoutAuthActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ isError: true, description: 'Sign Out' }));
+                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Sign Out' }));
                     })
                 ))
             )

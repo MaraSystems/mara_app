@@ -11,7 +11,6 @@ import { ProjectUpdateModule } from '../project-update/project-update.module';
 import { DirectivesModule } from 'src/app/general/utils/directives/directives.module';
 import { EmptyModule } from 'src/app/general/ui/empty/empty.module';
 import { ProjectDeliverableItemModule } from 'src/app/project-deliverable/ui/project-deliverable-item/project-deliverable-item.module';
-import { WarnModule } from 'src/app/general/ui/warn/warn.module';
 import { CommentListModule } from 'src/app/general/features/comment/features/comment-list/comment-list.module';
 import { ShareModule } from 'src/app/general/features/share/features/share.module';
 
@@ -32,7 +31,6 @@ import { ShareModule } from 'src/app/general/features/share/features/share.modul
     ProjectDeliverableItemModule,
     DirectivesModule,
     EmptyModule,
-    WarnModule,
     CommentListModule,
     ShareModule
   ]

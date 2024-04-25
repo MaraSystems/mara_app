@@ -33,6 +33,7 @@ export class CommentAddComponent extends UnSubscriber implements OnInit {
 
     this.newSubscription = this.store.select(selectAuthClient).subscribe(client => {
       this.client = client;
+      this.form.get('userId')?.setValue(this.client._id);
     });
 
     this.newSubscription = this.form.valueChanges.subscribe(data => {      
@@ -43,7 +44,8 @@ export class CommentAddComponent extends UnSubscriber implements OnInit {
   initForm() {
     this.form = new FormGroup({
       statement: new FormControl(),
-      attachment: new FormControl()
+      attachment: new FormControl(),
+      userId: new FormControl()
     })
   }
 

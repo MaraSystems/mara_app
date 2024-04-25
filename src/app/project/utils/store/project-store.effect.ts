@@ -3,12 +3,12 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
-import { Toast } from "src/app/general/features/toast/features/toast.model";
 import { Router } from "@angular/router";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { ProjectAccessService } from "../access/project-access.service";
 import { CreateProjectAction, CreateProjectActionFail, CreateProjectActionSuccess, DeleteProjectAction, DeleteProjectActionFail, DeleteProjectActionSuccess, GetProjectAction, GetProjectActionFail, GetProjectActionSuccess, ListProjectsAction, ListProjectsActionFail, ListProjectsActionSuccess, ProjectActionsType, UpdateProjectAction, UpdateProjectActionFail, UpdateProjectActionSuccess } from "./project-store.action";
 import { Project } from "../models/project.model";
+import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
 
 @Injectable()
 export class ProjectStoreEffect {
@@ -30,7 +30,7 @@ export class ProjectStoreEffect {
                 }),
                 catchError(err => of(new CreateProjectActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ isError: true, description: 'Project Creation' }));
+                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Project Creation' }));
                     })
                 ))
             )

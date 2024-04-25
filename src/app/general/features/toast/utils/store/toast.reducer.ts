@@ -1,6 +1,6 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
-import { Toast } from "../../features/toast.model";
-import { AddToast, RemoveToast, ToastActionTypes, ToastActions } from "./toast.action";
+import { AddToastSuccess, RemoveToast, ToastActionTypes, ToastActions, UpdateToast } from "./toast.action";
+import { Toast } from "../models/toast.class";
 
 export interface ToastState extends EntityState<Toast> {
     selectedId: number | null;
@@ -19,10 +19,19 @@ const initialState = toastAdapter.getInitialState(defualtIssue);
 export function toastReducer(state = initialState, action: ToastActions): ToastState {
     switch (action.type) {
         case ToastActionTypes.ADD_TOAST:
-            const toast = new Toast((action as AddToast).payload);
-            return toastAdapter.addOne(toast, { ...state })
+            return { ...state }
+
+        case ToastActionTypes.ADD_TOAST_SUCCESS:
+            const addPayload = (action as AddToastSuccess).payload;
+            return toastAdapter.addOne(addPayload, { ...state });
+
+        case ToastActionTypes.UPDATE_TOAST:
+            const updatePayload = (action as UpdateToast).payload;            
+            return toastAdapter.updateOne(updatePayload, { ...state });
+
         case ToastActionTypes.REMOVE_TOAST:
             return toastAdapter.removeOne((action as RemoveToast).payload, { ...state })
+
         default:
             return state;
     }

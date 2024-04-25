@@ -6,6 +6,7 @@ import { DeleteAttachmentAction, GetAttachmentAction } from 'src/app/general/fea
 import { selectAttachmentById } from 'src/app/general/features/attachment/utils/store/attatchment-store.selector';
 import { Attachment } from '../../utils/models/attatchment.model';
 import { PopupService } from '../../../popup/features/popup.service';
+import { Toast } from '../../../toast/utils/models/toast.class';
 
 @Component({
   selector: 'app-attachment-view',
@@ -35,11 +36,13 @@ export class AttachmentViewComponent extends UnSubscriber implements OnInit {
 
     this.moreList = [
       { name: 'Update', icon: 'update', popup: `attachment-view-update-${this.id}` },
-      { name: 'Delete', icon: 'delete', popup: `attachment-view-delete-${this.id}` }
+      { name: 'Delete', icon: 'delete', action: () => { this.delete() } }
     ];
   }
 
-  deleteAttachment() {
-    this.store.dispatch(new DeleteAttachmentAction(this.id));
+  delete() {
+    Toast.warn(this.store, 'Click continue to delete attachment', ['Continue'], () => {
+      this.store.dispatch(new DeleteAttachmentAction(this.id));
+    });
   }
 }

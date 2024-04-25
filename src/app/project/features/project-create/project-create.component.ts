@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { CreateProjectAction } from '../../utils/store/project-store.action';
 import { projectCategories } from 'src/app/general/utils/models/project-categories';
+import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 
 
 @Component({
@@ -30,6 +31,10 @@ export class ProjectCreateComponent extends UnSubscriber implements OnInit {
     this.newSubscription = this.form.valueChanges.subscribe(data => {      
       this.project = data;
     });
+
+    this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {      
+      this.form.get('userId')?.setValue(auth.id);
+    });
   }
 
   initForm() {
@@ -37,7 +42,8 @@ export class ProjectCreateComponent extends UnSubscriber implements OnInit {
       title: new FormControl(null, [Validators.minLength(3), Validators.required]),
       category: new FormControl(null, [Validators.required]),
       tags: new FormControl(null, [Validators.required]),
-      description: new FormControl(null, [Validators.maxLength(10000)])
+      description: new FormControl(null, [Validators.maxLength(10000)]),
+      userId: new FormControl(null)
     });
   }
 

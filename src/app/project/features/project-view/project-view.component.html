@@ -56,18 +56,6 @@
     <app-project-update></app-project-update>
 </app-popup>
 
-<app-popup [name]="'project-delete-' + id">
-    <app-warn title="Delete Project" description="This project will be deleted. Click 'Continue' to proceed." (proceed)="deleteProject()"></app-warn>
-</app-popup>
-
-<app-popup [name]="'project-activate-' + id">
-    <app-warn title="Activate Project" description="This project will be activated. Click 'Continue' to proceed." (proceed)="activate()"></app-warn>
-</app-popup>
-
-<app-popup [name]="'project-deactivate-' + id">
-    <app-warn title="De-Activate Project" description="This project will be deactivated. Click 'Continue' to proceed." (proceed)="deactivate()"></app-warn>
-</app-popup>
-
 <app-popup [name]="'project-comment-' + id">
     <app-comment-list [model]="commentModel" [modelId]="id"></app-comment-list>
 </app-popup>

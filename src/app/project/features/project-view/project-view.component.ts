@@ -13,13 +13,14 @@ import { ProjectDeliverable } from 'src/app/project-deliverable/utils/models/pro
 import { ListProjectDeliverablesAction } from 'src/app/project-deliverable/utils/store/project-deliverable-store.action';
 import { ProjectStatus } from '../../utils/models/project-status.enum';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
-import { Toast } from 'src/app/general/features/toast/features/toast.model';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
 import { toggleList } from 'src/app/general/utils/lib/toggleList';
 import { CommentEnum } from 'src/app/general/features/comment/utils/models/comment.enum';
 import { ListCommentsAction } from 'src/app/general/features/comment/utils/store/comment-store.action';
 import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/store/comment-store.selector';
+import { ToastEnum } from 'src/app/general/features/toast/utils/models/toast.enum';
+import { Toast } from 'src/app/general/features/toast/utils/models/toast.class';
 
 @Component({
   selector: 'app-project-view',
@@ -81,12 +82,16 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
       }    
     });
 
-    this.moreList = [
-      { name: 'Update', icon: 'update', popup: `project-update-${this.id}` },
-      { name: 'Activate', icon: 'publish', popup: `project-activate-${this.id}` },
-      { name: 'De-Activate', icon: 'unpublished', popup: `project-deactivate-${this.id}` },
-      { name: 'Delete', icon: 'Delete', popup: `project-delete-${this.id}` }
-    ];
+    this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {      
+      this.moreList = auth.id === this.project.userId
+        ? this.moreList = [
+          { name: 'Update', icon: 'update', popup: `project-update-${this.id}` },
+          { name: 'Activate', icon: 'publish', action: () => { this.activate() } },
+          { name: 'De-Activate', icon: 'unpublished',action: () => { this.deactivate() } },
+          { name: 'Delete', icon: 'Delete', action: () => { this.deleteProject() } }
+        ]
+        : [];
+    });
 
     this.store.dispatch(new ListCommentsAction(this.commentModel, this.id));
 
@@ -96,36 +101,42 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
   }
 
   deleteProject() {
-    this.store.dispatch(new DeleteProjectAction(this.id));
+    Toast.warn(this.store, 'Click continue to delete project', ['Continue'], () => {
+      this.store.dispatch(new DeleteProjectAction(this.id));
+    });
   }
 
   activate() {
     if (this.deliverables.length === 0) {
-      this.store.dispatch(new AddToast({ description: 'You can not publish a project with no deliverables', isError: true }));
+      this.store.dispatch(new AddToast({ description: 'You can not publish a project with no deliverables', type: ToastEnum.ERROR }));
       return;
     }
 
-    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.PUBLISHED, active: true }}, {
-      success: () => {
-        this.store.dispatch(new AddToast({ description: 'Project Activation' }));
-        this.popupService.close(`project-activate-${this.id}`);
-      },
-      failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Project Activation', isError: true }));
-      }
-    }));
+    Toast.warn(this.store, 'Click continue to activate project', ['Continue'], () => {
+      this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.PUBLISHED, active: true }}, {
+        success: () => {
+          this.store.dispatch(new AddToast({ description: 'Project Activation' }));
+          this.popupService.close(`project-activate-${this.id}`);
+        },
+        failure: () => {
+          this.store.dispatch(new AddToast({ description: 'Project Activation', type: ToastEnum.ERROR }));
+        }
+      }));
+    });
   }
 
   deactivate() {
-    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.DRAFT, active: false }}, {
-      success: () => {
-        this.store.dispatch(new AddToast({ description: 'Project Deactivation' }));
-        this.popupService.close(`project-deactivate-${this.id}`);
-      },
-      failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Project Deactivation', isError: true }));
-      }
-    }));
+    Toast.warn(this.store, 'Click continue to deactivate project', ['Continue'], () => {
+      this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.DRAFT, active: false }}, {
+        success: () => {
+          this.store.dispatch(new AddToast({ description: 'Project Deactivation' }));
+          this.popupService.close(`project-deactivate-${this.id}`);
+        },
+        failure: () => {
+          this.store.dispatch(new AddToast({ description: 'Project Deactivation', type: ToastEnum.ERROR }));
+        }
+      }));
+    });
   }
 
   likeToggle(){

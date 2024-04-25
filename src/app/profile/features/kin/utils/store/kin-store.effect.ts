@@ -3,12 +3,12 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
-import { Toast } from "src/app/general/features/toast/features/toast.model";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { KinAccessService } from "../access/kin-access.service";
 import { CreateKinAction, CreateKinActionFail, CreateKinActionSuccess, GetKinAction, GetKinActionFail, GetKinActionSuccess, KinActionsType, UpdateKinAction, UpdateKinActionFail, UpdateKinActionSuccess } from "./kin-store.action";
 import { Kin } from "src/app/client/utils/models/kin";
 import { RouterService } from "src/app/router/utils/router.service";
+import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
 
 @Injectable()
 export class KinStoreEffect {
@@ -32,7 +32,7 @@ export class KinStoreEffect {
                 }),
                 catchError(err => of(new CreateKinActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ isError: true, description: 'Kin Creation' }));
+                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Kin Creation' }));
                     })
                 ))
             )
@@ -54,7 +54,7 @@ export class KinStoreEffect {
                 }),
                 catchError(err => of(new UpdateKinActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ description: 'Kin Update', isError: true }));
+                        this.store.dispatch(new AddToast({ description: 'Kin Update', type: ToastEnum.ERROR }));
                     })
                 ))
             )

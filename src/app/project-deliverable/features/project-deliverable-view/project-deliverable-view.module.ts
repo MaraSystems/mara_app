@@ -9,7 +9,6 @@ import { PopupModule } from 'src/app/general/features/popup/features/popup.modul
 import { ProjectDeliverableUpdateModule } from '../project-deliverable-update/project-deliverable-update.module';
 import { EmptyModule } from 'src/app/general/ui/empty/empty.module';
 import { DirectivesModule } from 'src/app/general/utils/directives/directives.module';
-import { WarnModule } from 'src/app/general/ui/warn/warn.module';
 import { AttachmentListModule } from 'src/app/general/features/attachment/features/attachment-list/attachment-list.module';
 import { AttachmentUploadModule } from 'src/app/general/features/attachment/features/attachment-upload/attachment-upload.module';
 import { CommentListModule } from 'src/app/general/features/comment/features/comment-list/comment-list.module';
@@ -30,7 +29,6 @@ import { ShareModule } from 'src/app/general/features/share/features/share.modul
     PopupModule,
     EmptyModule,
     DirectivesModule,
-    WarnModule,
     ProjectDeliverableUpdateModule,
     AttachmentListModule,
     AttachmentUploadModule,

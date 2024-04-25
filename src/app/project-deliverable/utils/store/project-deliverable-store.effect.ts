@@ -3,13 +3,12 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
-import { Toast } from "src/app/general/features/toast/features/toast.model";
-import { Router } from "@angular/router";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { ProjectDeliverableAccessService } from "../access/project-deliverable-access.service";
 import { CreateProjectDeliverableAction, CreateProjectDeliverableActionFail, CreateProjectDeliverableActionSuccess, DeleteProjectDeliverableAction, DeleteProjectDeliverableActionFail, DeleteProjectDeliverableActionSuccess, GetProjectDeliverableAction, GetProjectDeliverableActionFail, GetProjectDeliverableActionSuccess, ListProjectDeliverablesAction, ListProjectDeliverablesActionFail, ListProjectDeliverablesActionSuccess, ProjectDeliverableActionsType, UpdateProjectDeliverableAction, UpdateProjectDeliverableActionFail, UpdateProjectDeliverableActionSuccess } from "./project-deliverable-store.action";
 import { ProjectDeliverable } from "../models/project-deliverable.model";
 import { RouterService } from "src/app/router/utils/router.service";
+import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
 
 @Injectable()
 export class ProjectDeliverableStoreEffect {
@@ -31,7 +30,7 @@ export class ProjectDeliverableStoreEffect {
                 }),
                 catchError(err => of(new CreateProjectDeliverableActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ isError: true, description: 'Project Deliverable Creation' }));
+                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Project Deliverable Creation' }));
                     })
                 ))
             )
@@ -72,7 +71,7 @@ export class ProjectDeliverableStoreEffect {
                 }),
                 catchError(err => of(new DeleteProjectDeliverableActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ description: 'User delete', isError: true }));
+                        this.store.dispatch(new AddToast({ description: 'User delete', type: ToastEnum.ERROR }));
                     })
                 ))
             )

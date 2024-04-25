@@ -40,10 +40,6 @@
     <app-project-deliverable-update></app-project-deliverable-update>
 </app-popup>
 
-<app-popup [name]="'project-deliverable-delete-' + id">
-    <app-warn title="Delete Project" description="This project deliverable will be deleted. Click 'Continue' to proceed." (proceed)="delete()"></app-warn>
-</app-popup>
-
 <app-popup [name]="'project-deliverable-comment-' + id">
     <app-comment-list [model]="commentModel" [modelId]="id"></app-comment-list>
 </app-popup>

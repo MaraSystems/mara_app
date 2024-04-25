@@ -3,12 +3,11 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
-import { Toast } from "src/app/general/features/toast/features/toast.model";
-import { Router } from "@angular/router";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { UploadAttachmentAction, UploadAttachmentActionFail, UploadAttachmentActionSuccess, DeleteAttachmentAction, DeleteAttachmentActionFail, DeleteAttachmentActionSuccess, GetAttachmentAction, GetAttachmentActionFail, GetAttachmentActionSuccess, ListAttachmentsAction, ListAttachmentsActionFail, ListAttachmentsActionSuccess, AttachmentActionsType, DownloadAttachmentAction, DownloadAttachmentActionFail, DownloadAttachmentActionSuccess } from "./attatchment-store.action";
 import { AttachmentAccessService } from "../access/attatchment-access.service";
 import { Attachment } from "../models/attatchment.model";
+import { ToastEnum } from "../../../toast/utils/models/toast.enum";
 
 @Injectable()
 export class AttachmentStoreEffect {
@@ -32,7 +31,7 @@ export class AttachmentStoreEffect {
                 }),
                 catchError(err => of(new UploadAttachmentActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ isError: true, description: 'Attachment Upload' }));
+                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Attachment Upload' }));
                     })
                 ))
             )
@@ -48,7 +47,7 @@ export class AttachmentStoreEffect {
                 }),
                 catchError(err => of(new DownloadAttachmentActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ description: 'Attachment Update', isError: true }));
+                        this.store.dispatch(new AddToast({ description: 'Attachment Update', type: ToastEnum.ERROR }));
                     })
                 ))
             )
@@ -65,7 +64,7 @@ export class AttachmentStoreEffect {
                 }),
                 catchError(err => of(new DeleteAttachmentActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ description: 'Attachment delete', isError: true }));
+                        this.store.dispatch(new AddToast({ description: 'Attachment delete', type: ToastEnum.ERROR }));
                     })
                 ))
             )

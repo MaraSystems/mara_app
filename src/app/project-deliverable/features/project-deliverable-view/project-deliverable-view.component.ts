@@ -16,6 +16,9 @@ import { Auth } from 'src/app/auth/utils/models/auth.model';
 import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/store/comment-store.selector';
 import { ListCommentsAction } from 'src/app/general/features/comment/utils/store/comment-store.action';
 import { CommentEnum } from 'src/app/general/features/comment/utils/models/comment.enum';
+import { GetProjectAction } from 'src/app/project/utils/store/project-store.action';
+import { selectProjectById } from 'src/app/project/utils/store/project-store.selector';
+import { Toast } from 'src/app/general/features/toast/utils/models/toast.class';
 
 @Component({
   selector: 'app-project-deliverable-view',
@@ -47,21 +50,28 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
     this.store.dispatch(new ListAttachmentsAction('project-document', this.id));
     
     this.newSubscription = this.store.select(selectProjectDeliverableById(this.id)).subscribe(deliverable => {
-      this.deliverable = deliverable;  
-      
+      this.deliverable = deliverable;        
       if (this.deliverable) {
+        this.store.dispatch(new GetProjectAction(deliverable.projectId));
+
         this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
           this.auth = auth;
           this.liked = this.deliverable.likes.includes(this.auth.id);      
           this.bookmarked = this.deliverable.bookmarks.includes(this.auth.id);      
+
+          this.newSubscription = this.store.select(selectProjectById(deliverable.projectId)).subscribe(project => {
+            this.moreList = auth.id === project.userId
+            ? this.moreList = [
+              { name: 'Update', icon: 'update', popup: `project-deliverable-update-${this.id}` },
+              { name: 'Delete', icon: 'Delete', action: () => { this.delete() } }
+            ]
+            : [];
+          });
         }); 
       }
     });
 
-    this.moreList = [
-      { name: 'Update', icon: 'update', popup: `project-deliverable-update-${this.id}` },
-      { name: 'Delete', icon: 'Delete', popup: `project-deliverable-delete-${this.id}` }
-    ];
+    
     this.store.dispatch(new ListCommentsAction(this.commentModel, this.id));
 
     this.newSubscription = this.store.select(selectCommentsByModelId(this.commentModel, this.id)).subscribe(comments => {
@@ -70,7 +80,9 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
   }
 
   delete() {
-    this.store.dispatch(new DeleteProjectDeliverableAction(this.id));
+    Toast.warn(this.store, 'Click continue to delete project deliverable', ['Continue'], () => {
+      this.store.dispatch(new DeleteProjectDeliverableAction(this.id));
+    });
   }
 
   likeToggle(){

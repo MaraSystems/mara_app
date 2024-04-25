@@ -16,6 +16,7 @@ import { AttachmentStoreEffect } from "./general/features/attachment/utils/store
 import { AttachmentState, attachmentReducer } from "./general/features/attachment/utils/store/attatchment-store.reducer";
 import { CommentStoreEffect } from "./general/features/comment/utils/store/comment-store.effect";
 import { CommentState, commentReducer } from "./general/features/comment/utils/store/comment-store.reducer";
+import { ToastEffect } from "./general/features/toast/utils/store/toast.effect";
 
 export const appEffects = [
     ClientStoreEffect,
@@ -24,7 +25,8 @@ export const appEffects = [
     ProjectStoreEffect,
     ProjectDeliverableStoreEffect,
     AttachmentStoreEffect,
-    CommentStoreEffect
+    CommentStoreEffect,
+    ToastEffect
 ];
 
 export interface AppState {

@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { selectProjectDeliverableById } from '../../utils/store/project-deliverable-store.selector';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { ToastEnum } from 'src/app/general/features/toast/utils/models/toast.enum';
 
 @Component({
   selector: 'app-project-deliverable-update',
@@ -69,7 +70,7 @@ export class ProjectDeliverableUpdateComponent extends UnSubscriber implements O
         this.popupService.close(`project-deliverable-update-${this.id}`);
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Project Deliverable Update', isError: true }));
+        this.store.dispatch(new AddToast({ description: 'Project Deliverable Update', type: ToastEnum.ERROR }));
       }
     }));
   }

@@ -12,20 +12,20 @@
 
     .toast {
         display: grid;
-        grid-template-rows: repeat(2, max-content);
+        grid-template-rows: repeat(3, max-content);
         padding: var(--gap-small);
         background-color: var(--color-light);
         position: relative;
         color: var(--color-primary);
         border: 1px solid var(--color-primary);
+        padding: var(--gap-small);
+        gap: var(--gap-small);
 
         &-title {
-            padding: var(--gap-x-small);
         }
 
         &-description {
             color: var(--color-dark);
-            padding: var(--gap-x-small);
         }
 
         &-close {
@@ -39,11 +39,27 @@
                 color: var(--color-black);
             }
         }
+
+        .control {
+            display: flex;
+            padding: var(--gap-small);
+            gap: var(--gap-small);
+
+            &-item {
+                padding: var(--gap-small);
+                place-self: end;
+            }
+        }
     }
 
-    .toast.is-error{
+    .toast.error{
         border: 1px solid var(--color-error);
         color: var(--color-error);
+    }
+
+    .toast.warning{
+        border: 1px solid var(--color-secondary);
+        color: var(--color-secondary);
     }
 }
 

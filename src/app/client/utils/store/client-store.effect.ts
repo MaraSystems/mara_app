@@ -6,9 +6,9 @@ import { ClientActionsType, GetClientAction, GetClientActionFail, GetClientActio
 import { Client } from "../models/client";
 import { Store } from "@ngrx/store";
 import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
-import { Toast } from "src/app/general/features/toast/features/toast.model";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { RouterService } from "src/app/router/utils/router.service";
+import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
 
 @Injectable()
 export class ClientStoreEffect {    
@@ -30,7 +30,7 @@ export class ClientStoreEffect {
                 }),
                 catchError(err => of(new RegisterClientActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ isError: true, description: 'User Registration' }));
+                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'User Registration' }));
                     })
                 ))
             )
@@ -68,11 +68,7 @@ export class ClientStoreEffect {
                 map((response: DataResponse<Client>) => {                    
                     return new GetClientActionSuccess(response.data, action.auth);
                 }),
-                catchError(err => of(new GetClientActionFail(err)).pipe(
-                    tap(() => {
-                        // this.store.dispatch(new AddToast({ description: 'User update', isError: true }));
-                    })
-                ))
+                catchError(err => of(new GetClientActionFail(err)))
             )
         )
     ));

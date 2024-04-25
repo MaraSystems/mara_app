@@ -9,8 +9,8 @@ import { phonePattern, usernamePattern } from 'src/app/general/utils/lib/pattern
 import { UpdateClientAction } from '../../../client/utils/store/client-store.action';
 import * as addressUtil from 'src/app/general/utils/lib/address';
 import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
-import { Toast } from 'src/app/general/features/toast/features/toast.model';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
+import { ToastEnum } from 'src/app/general/features/toast/utils/models/toast.enum';
 
 @Component({
   selector: 'app-profile-info',
@@ -72,7 +72,7 @@ export class ProfileInfoComponent extends UnSubscriber implements OnInit {
         this.store.dispatch(new AddToast({ description: 'User update' }));
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'User update', isError: true }));
+        this.store.dispatch(new AddToast({ description: 'User update', type: ToastEnum.ERROR }));
       }
     }));
   }

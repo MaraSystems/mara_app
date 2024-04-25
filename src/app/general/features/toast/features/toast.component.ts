@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Toast } from './toast.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { selectToasts } from '../utils/store/toast.selector';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
-import { RemoveToast } from '../utils/store/toast.action';
+import { RemoveToast, UpdateToast } from '../utils/store/toast.action';
+import { Toast } from '../utils/models/toast.class';
+import { ToastEnum } from '../utils/models/toast.enum';
 
 @Component({
   selector: 'app-toast',
@@ -16,6 +17,7 @@ export class ToastComponent extends UnSubscriber implements OnInit {
   toasts!: Observable<Toast[]>
   element!: Element;
   timeout = 1000;
+  enum = ToastEnum;
 
   constructor(
     public store: Store<AppState>,
@@ -28,7 +30,7 @@ export class ToastComponent extends UnSubscriber implements OnInit {
   ngOnInit(): void {
     this.toasts = this.store.select(selectToasts);
     this.newSubscription = this.toasts.subscribe(toasts => {               
-      for (const { id, duration } of toasts) {
+      for (const { id, duration } of toasts) {        
         if (duration) {          
           setTimeout(() => {
             this.closeToast(id);
@@ -49,5 +51,9 @@ export class ToastComponent extends UnSubscriber implements OnInit {
         this.store.dispatch(new RemoveToast(id));
       }, this.timeout);
     }
+  }
+
+  select(id: string, selected: string) {    
+    this.store.dispatch(new UpdateToast({ id, changes: { selected }}));
   }
 }

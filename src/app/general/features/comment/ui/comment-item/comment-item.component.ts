@@ -28,9 +28,7 @@ export class CommentItemComponent extends UnSubscriber implements OnInit {
   commentsCount = 0;
   attachment = '';
 
-  moreList: More[] = [
-    { name: 'Delete', icon: 'Delete', action: () => { this.deleteComment() } }
-  ];
+  moreList: More[] = [];
 
   constructor(
     public store: Store,
@@ -46,6 +44,12 @@ export class CommentItemComponent extends UnSubscriber implements OnInit {
       this.client = client;
       this.liked = this.comment.likes.includes(this.client._id);
       this.bookmarked = this.comment.bookmarks.includes(this.client._id);
+
+      this.moreList = this.client._id === this.comment.userId
+        ? this.moreList = [
+            { name: 'Delete', icon: 'Delete', action: () => { this.deleteComment() } }
+          ]
+        : [];
     });
 
     this.newSubscription = this.store.select(selectCommentsByModelId(CommentEnum.COMMENT, this.comment._id)).subscribe(comments => {

@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { CreateProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
 import { fileValidator } from 'src/app/general/utils/validators/fileValidator';
 import { ActivatedRoute } from '@angular/router';
+import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 
 @Component({
   selector: 'app-project-deliverable-create',
@@ -14,8 +15,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./project-deliverable-create.component.scss']
 })
 export class ProjectDeliverableCreateComponent extends UnSubscriber implements OnInit {
-  deliverableData!: ProjectDeliverable;
-  projectId!: string;
+  deliverable!: ProjectDeliverable;
   form!: FormGroup;
 
   constructor(
@@ -29,10 +29,14 @@ export class ProjectDeliverableCreateComponent extends UnSubscriber implements O
     this.initForm();
 
     this.newSubscription = this.form.valueChanges.subscribe(data => {      
-      this.deliverableData = data;
+      this.deliverable = data;
     });
 
-    this.projectId = this.activatedRoute.snapshot.paramMap.get('project_id') as string;    
+    this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {      
+      this.form.get('userId')?.setValue(auth.id);
+    });
+
+    this.form.get('projectId')?.setValue(this.activatedRoute.snapshot.paramMap.get('project_id'));
   }
 
   initForm() {
@@ -40,7 +44,8 @@ export class ProjectDeliverableCreateComponent extends UnSubscriber implements O
       title: new FormControl(null, [Validators.minLength(3), Validators.required]),
       price: new FormControl(null, [Validators.required, Validators.min(1)]),
       duration: new FormControl(null, [Validators.required, Validators.min(1)]),
-      description: new FormControl(null, [Validators.maxLength(10000)])
+      description: new FormControl(null, [Validators.maxLength(10000)]),
+      projectId: new FormControl(null)
     });
   }
 
@@ -55,6 +60,6 @@ export class ProjectDeliverableCreateComponent extends UnSubscriber implements O
   }
 
   createDeliverable() {    
-    this.store.dispatch(new CreateProjectDeliverableAction({ ...this.deliverableData, projectId: this.projectId }));
+    this.store.dispatch(new CreateProjectDeliverableAction(this.deliverable));
   }
 }

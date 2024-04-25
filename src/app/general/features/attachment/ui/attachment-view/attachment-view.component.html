@@ -8,10 +8,6 @@
 <span class="date text-1">{{attachment.createdAt | date}}</span>
 <span class="version text-1">{{ 'V.' + attachment.version}}</span>
 
-<app-popup [name]="'attachment-view-delete-' + id">
-    <app-warn title="Delete Document" description="This project document will be deleted. Click 'Continue' to proceed." (proceed)="deleteAttachment()"></app-warn>
-</app-popup>
-
 <app-popup [name]="'attachment-view-update-' + id">
     <app-attachment-upload [model]="attachment.model" [modelId]="attachment.modelId" [attachment]="attachment" [popupId]="'attachment-view-update-' + id"></app-attachment-upload>
 </app-popup>

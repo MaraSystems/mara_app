@@ -3,12 +3,12 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
-import { Toast } from "src/app/general/features/toast/features/toast.model";
 import { Router } from "@angular/router";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { ContractDeliverableAccessService } from "../access/contract-deliverable-access.service";
 import { CreateContractDeliverableAction, CreateContractDeliverableActionFail, CreateContractDeliverableActionSuccess, GetContractDeliverableAction, GetContractDeliverableActionFail, GetContractDeliverableActionSuccess, ListContractDeliverablesAction, ListContractDeliverablesActionFail, ListContractDeliverablesActionSuccess, ContractDeliverableActionsType, UpdateContractDeliverableAction, UpdateContractDeliverableActionFail, UpdateContractDeliverableActionSuccess } from "./contract-deliverable-store.action";
 import { ContractDeliverable } from "../models/contract-deliverable.model";
+import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
 
 @Injectable()
 export class ContractDeliverableStoreEffect {
@@ -23,16 +23,13 @@ export class ContractDeliverableStoreEffect {
         ofType<CreateContractDeliverableAction>(ContractDeliverableActionsType.CREATE_CONTRACT_DELIVERABLE),
         mergeMap((action: CreateContractDeliverableAction) => 
             this.contractDeliverableAccessService.createContractDeliverable(action.payload).pipe(
-                tap(() => {
-                    this.store.dispatch(new AddToast(new Toast({ description: 'Contract Deliverable Creation' })));
-                    this.router.navigate(['/contracts', action.payload.contractId, 'deliverables']);
-                }),
                 map((response: DataResponse<ContractDeliverable>) => {
+                    this.router.navigate(['/contracts', action.payload.contractId, 'deliverables']);
                     return new CreateContractDeliverableActionSuccess(response.data);
                 }),
                 catchError(err => of(new CreateContractDeliverableActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast({ isError: true, description: 'Contract Deliverable Creation' })));
+                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Contract Deliverable Creation' }));
                     })
                 ))
             )
@@ -43,16 +40,13 @@ export class ContractDeliverableStoreEffect {
         ofType<UpdateContractDeliverableAction>(ContractDeliverableActionsType.UPDATE_CONTRACT_DELIVERABLE),
         mergeMap((action: UpdateContractDeliverableAction) => 
             this.contractDeliverableAccessService.updateContractDeliverable(action.payload).pipe(
-                tap(() => {
-                    this.store.dispatch(new AddToast(new Toast({ description: 'User update' })));
-                    this.router.navigate(['/contracts', action.contractId, 'deliverables', action.payload.id]);
-                }),
-                map((response: DataResponse<ContractDeliverable>) => {                    
+                map((response: DataResponse<ContractDeliverable>) => {  
+                    this.router.navigate(['/contracts', action.contractId, 'deliverables', action.payload.id]);                  
                     return new UpdateContractDeliverableActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateContractDeliverableActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast({ description: 'User update', isError: true })));
+                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Contract Deliverable Update' }));
                     })
                 ))
             )
