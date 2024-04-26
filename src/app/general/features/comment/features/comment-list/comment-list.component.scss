@@ -2,8 +2,8 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: max-content 1fr max-content;
-    height: -webkit-fill-available;
-    width: -webkit-fill-available;
+    height: 100%;
+    width: 100%;
     overflow: hidden;
 
     .header {
@@ -17,8 +17,7 @@
         display: flex;
         flex-direction: column-reverse;
         gap: var(--gap-normal);
-        height: -webkit-fill-available;
-        padding: var(--gap-normal);
+        padding: var(--gap-small);
         overflow: auto;
     }
 }

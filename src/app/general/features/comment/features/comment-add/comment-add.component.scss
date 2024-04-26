@@ -1,8 +1,7 @@
 :host {
     display: grid;
-    grid-template-columns: max-content 1fr max-content max-content;
-    width: -webkit-fill-available;
-    padding: var(--gap-normal);
+    grid-template-columns: max-content 1fr max-content;
+    padding: var(--gap-small);
     align-items: center;
     gap: var(--gap-normal);
     box-shadow: var(--shadow-medium);
@@ -12,25 +11,27 @@
         height: 40px;
     }
 
-    .attachment{
+    .form {
+        width: 100%;
+    }
+
+    .controls {
+        display: flex;
+        gap: var(--gap-x-small);
+        align-items: center;
+
         &-file {
-            visibility: hidden;
-            width: 0px;
+            display: none;
         }
 
         &-preview {
-            width: 20px;
-            height: 20px;
-            border: 1px solid var(--color-dark);
+            width: 10px;
+            height: 10px;
         }
 
         &-icon {
             cursor: pointer;
+            color: var(--color-primary);
         }
-    }
-
-    .send {
-        color: var(--color-primary);
-        cursor: pointer;
     }
 }

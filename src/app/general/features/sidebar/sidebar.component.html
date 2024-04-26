@@ -1,36 +1,34 @@
-<div class="sidebar-body closed-sidebar">
-    <span class="app-details" routerLink="/">
-        <svg class="app-icon" xmlns="http://www.w3.org/2000/svg" width="25" height="31" viewBox="0 0 25 31" fill="none">
-            <path d="M2.77816 0.914551C1.23628 0.914551 0 2.15083 0 3.69271V25.918C0 26.6548 0.292698 27.3615 0.813705 27.8825C1.33471 28.4035 2.04135 28.6962 2.77816 28.6962H8.33449V26.043L11.2377 23.1399H2.77816V20.3617H14.0158L16.794 17.5835H2.77816V14.8054H19.5722L22.2253 12.1522V9.24904L13.8908 0.914551H2.77816ZM12.5017 2.99817L20.1417 10.6381H12.5017V2.99817ZM22.4337 16.1945C22.2253 16.1945 22.0308 16.2639 21.878 16.4167L20.4612 17.8336L23.3644 20.7229L24.7812 19.3199C25.0729 19.0143 25.0729 18.5142 24.7812 18.2225L22.9754 16.4167C22.8226 16.2639 22.6281 16.1945 22.4337 16.1945ZM19.6416 18.6531L11.1127 27.196V30.0853H14.0019L22.5448 21.5424L19.6416 18.6531Z" fill="#717CE3"/>
-        </svg>
-        <h1 *ngIf="openSidebar" class="app-name app-title">Contractor</h1>
-    </span>
-    
-    <div class="pane">
-        <div class="pane-item" routerLink="/dashboard" [ngClass]="{ 'pane-item-active': active === 'dashboard' }">
-            <span class="material-symbols-outlined pane-icon">dashboard</span>
-            <h1 *ngIf="openSidebar" class="pane-title text-1">Dashboard</h1>
-        </div>
-    
-        <div class="pane-item" routerLink="/projects" [ngClass]="{ 'pane-item-active': active === 'projects' }">
-            <span class="material-symbols-outlined pane-icon">cases</span>
-            <h1 *ngIf="openSidebar" class="pane-title text-1">Projects</h1>
-        </div>
-    
-        <div class="pane-item"routerLink="/contracts" [ngClass]="{ 'pane-item-active': active === 'contracts' }">
-            <span class="material-symbols-outlined pane-icon">checkbook</span>
-            <h1 *ngIf="openSidebar" class="pane-title text-1">Contracts</h1>
-        </div>
-    
-        <div class="pane-item" routerLink="/wallet" [ngClass]="{ 'pane-item-active': active === 'wallet' }">
-            <span class="material-symbols-outlined pane-icon">wallet</span>
-            <h1 *ngIf="openSidebar" class="pane-title text-1">Wallet</h1>
-        </div>
-    
-        <div class="pane-item" routerLink="/settings" [ngClass]="{ 'pane-item-active': active === 'settings' }">
-            <span class="material-symbols-outlined pane-icon">settings</span>
-            <h1 *ngIf="openSidebar" class="pane-title text-1">Settings</h1>
-        </div>
+<span class="app-details" routerLink="/">
+    <svg class="app-icon" xmlns="http://www.w3.org/2000/svg" width="25" height="31" viewBox="0 0 25 31" fill="none">
+        <path d="M2.77816 0.914551C1.23628 0.914551 0 2.15083 0 3.69271V25.918C0 26.6548 0.292698 27.3615 0.813705 27.8825C1.33471 28.4035 2.04135 28.6962 2.77816 28.6962H8.33449V26.043L11.2377 23.1399H2.77816V20.3617H14.0158L16.794 17.5835H2.77816V14.8054H19.5722L22.2253 12.1522V9.24904L13.8908 0.914551H2.77816ZM12.5017 2.99817L20.1417 10.6381H12.5017V2.99817ZM22.4337 16.1945C22.2253 16.1945 22.0308 16.2639 21.878 16.4167L20.4612 17.8336L23.3644 20.7229L24.7812 19.3199C25.0729 19.0143 25.0729 18.5142 24.7812 18.2225L22.9754 16.4167C22.8226 16.2639 22.6281 16.1945 22.4337 16.1945ZM19.6416 18.6531L11.1127 27.196V30.0853H14.0019L22.5448 21.5424L19.6416 18.6531Z" fill="#717CE3"/>
+    </svg>
+    <h1 *ngIf="openSidebar" class="app-name app-title">Contractor</h1>
+</span>
+
+<div class="pane main">
+    <div class="pane-item" routerLink="/dashboard" [ngClass]="{ 'pane-item-active': active === 'dashboard' }">
+        <span class="material-symbols-outlined pane-icon">dashboard</span>
+        <h1 *ngIf="openSidebar" class="pane-title text-1">Dashboard</h1>
+    </div>
+
+    <div class="pane-item" routerLink="/projects" [ngClass]="{ 'pane-item-active': active === 'projects' }">
+        <span class="material-symbols-outlined pane-icon">cases</span>
+        <h1 *ngIf="openSidebar" class="pane-title text-1">Projects</h1>
+    </div>
+
+    <div class="pane-item"routerLink="/contracts" [ngClass]="{ 'pane-item-active': active === 'contracts' }">
+        <span class="material-symbols-outlined pane-icon">checkbook</span>
+        <h1 *ngIf="openSidebar" class="pane-title text-1">Contracts</h1>
+    </div>
+
+    <div class="pane-item" routerLink="/wallet" [ngClass]="{ 'pane-item-active': active === 'wallet' }">
+        <span class="material-symbols-outlined pane-icon">wallet</span>
+        <h1 *ngIf="openSidebar" class="pane-title text-1">Wallet</h1>
+    </div>
+
+    <div class="pane-item" routerLink="/settings" [ngClass]="{ 'pane-item-active': active === 'settings' }">
+        <span class="material-symbols-outlined pane-icon">settings</span>
+        <h1 *ngIf="openSidebar" class="pane-title text-1">Settings</h1>
     </div>
 </div>
 
@@ -39,7 +37,6 @@
         <span class="material-symbols-outlined pane-icon">logout</span>
         <h1 *ngIf="openSidebar" class="pane-title text-1">Logout</h1>
     </div>
+
+    <span class="material-symbols-outlined sidebar-toggle" (click)="openSidebar = !openSidebar">{{ openSidebar ? 'close_fullscreen' : 'open_in_full'}}</span>
 </div>
-<br>
-<br>
-<span class="material-symbols-outlined sidebar-toggle" (click)="openSidebar = !openSidebar">{{ openSidebar ? 'close_fullscreen' : 'open_in_full'}}</span>
