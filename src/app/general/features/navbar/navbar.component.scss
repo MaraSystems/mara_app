@@ -7,6 +7,18 @@
     width: calc(100% - calc(var(--gap-small) * 2));
     background-color: var(--color-light);
 
+    .app-details {
+        display: flex;
+        align-items: center;
+        gap: var(--gap-small);
+        padding: var(--gap-small);
+        cursor: pointer;
+    }
+    
+    .app-name {
+        display: none;
+    }
+
     .controls {
         display: flex;
         justify-content: flex-end;
@@ -30,5 +42,10 @@
     :host {
         padding: var(--gap-normal);
         width: calc(100% - calc(var(--gap-normal) * 2));
+
+        .app-name {
+            color: var(--color-primary);
+            display: flex;
+        }
     }
 }

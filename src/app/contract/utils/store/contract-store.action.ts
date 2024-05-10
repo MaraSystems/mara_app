@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
 import { Contract } from "../models/contract.model";
-import { ListPayload } from "src/app/general/utils/models/list-payload";
+import { ListOptions } from "src/app/general/utils/models/list-options";
 
 export enum ContractActionsType {
     CREATE_CONTRACT = "[CONTRACT] Create Contract",
@@ -68,7 +68,7 @@ export class GetContractActionFail implements Action {
 
 export class ListContractsAction implements Action {
     readonly type = ContractActionsType.LIST_CONTRACTS;
-    constructor(public payload: ListPayload){}
+    constructor(public payload: ListOptions){}
 }
 
 export class ListContractsActionSuccess implements Action {

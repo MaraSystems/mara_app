@@ -1,7 +1,7 @@
-<app-sidebar *ngIf="notApp && auth"></app-sidebar>
+<app-navbar *ngIf="notApp"></app-navbar>
 
-<div class="app-page">
-    <app-navbar *ngIf="notApp && auth"></app-navbar>
+<div [ngClass]="{ app: notApp }" class="app-page">
+    <app-sidebar *ngIf="notApp"></app-sidebar>
 
     <div class="app-content">
         <app-toast style="z-index: 2;"></app-toast>
@@ -9,4 +9,4 @@
     </div>
 </div>
 
-<app-footbar *ngIf="notApp && auth"></app-footbar>
+<app-footbar *ngIf="notApp"></app-footbar>

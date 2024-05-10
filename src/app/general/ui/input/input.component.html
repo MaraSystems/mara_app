@@ -3,6 +3,11 @@
     <h1 *ngIf="measure" class="text-2 unit">{{measure}}</h1>
 </span>
 
-<input [type]="type" [name]="name" class="form-control text-1" [formControl]="control" [ngClass]="{ invalid: (control.invalid && control.touched)}">
-
+<input 
+    [type]="type" 
+    [name]="name" 
+    class="form-control text-1" 
+    [formControl]="control" 
+    [ngClass]="{ invalid: (control.invalid && control.touched) }"
+    [placeholder]="placeholder">
 <app-form-errors [control]="control" [name]="name"></app-form-errors>

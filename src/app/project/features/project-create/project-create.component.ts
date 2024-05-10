@@ -7,6 +7,9 @@ import { AppState } from 'src/app/app.state';
 import { CreateProjectAction } from '../../utils/store/project-store.action';
 import { projectCategories } from 'src/app/general/utils/models/project-categories';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
+import { SharePrivacyEnum } from 'src/app/general/features/share/utils/models/share.privacy-enum';
+import { ShareAccessEnum } from 'src/app/general/features/share/utils/models/share.access-enum';
+import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
 
 
 @Component({
@@ -43,7 +46,8 @@ export class ProjectCreateComponent extends UnSubscriber implements OnInit {
       category: new FormControl(null, [Validators.required]),
       tags: new FormControl(null, [Validators.required]),
       description: new FormControl(null, [Validators.maxLength(10000)]),
-      userId: new FormControl(null)
+      userId: new FormControl(null),
+      privacy: new FormControl({ type: SharePrivacyEnum.PUBLIC, access: ShareAccessEnum.ENGAGE } as Privacy),
     });
   }
 

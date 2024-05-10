@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
 import { Project } from "../models/project.model";
-import { ListPayload } from "src/app/general/utils/models/list-payload";
+import { ListOptions } from "src/app/general/utils/models/list-options";
 import { SideEffects } from "src/app/general/utils/models/side.effects";
 
 export enum ProjectActionsType {
@@ -73,7 +73,7 @@ export class GetProjectActionFail implements Action {
 
 export class ListProjectsAction implements Action {
     readonly type = ProjectActionsType.LIST_PROJECTS;
-    constructor(public payload: ListPayload){}
+    constructor(public payload: ListOptions){}
 }
 
 export class ListProjectsActionSuccess implements Action {

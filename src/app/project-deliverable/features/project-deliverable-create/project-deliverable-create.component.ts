@@ -5,9 +5,11 @@ import { ProjectDeliverable } from '../../utils/models/project-deliverable.model
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { CreateProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
-import { fileValidator } from 'src/app/general/utils/validators/fileValidator';
 import { ActivatedRoute } from '@angular/router';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
+import { SharePrivacyEnum } from 'src/app/general/features/share/utils/models/share.privacy-enum';
+import { ShareAccessEnum } from 'src/app/general/features/share/utils/models/share.access-enum';
+import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
 
 @Component({
   selector: 'app-project-deliverable-create',
@@ -45,7 +47,7 @@ export class ProjectDeliverableCreateComponent extends UnSubscriber implements O
       price: new FormControl(null, [Validators.required, Validators.min(1)]),
       duration: new FormControl(null, [Validators.required, Validators.min(1)]),
       description: new FormControl(null, [Validators.maxLength(10000)]),
-      projectId: new FormControl(null)
+      projectId: new FormControl(null),
     });
   }
 

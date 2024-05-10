@@ -1,0 +1,21 @@
+<div class="header">
+    <h5 class="header-3">Share</h5>
+    <span class="copy">
+        <span class="text-1">{{text}}</span>
+        <span class="material-symbols-outlined copy-icon" (click)="copy()">content_copy</span>
+    </span>
+</div>
+
+<span class="message">
+    <span class="control">
+        <input placeholder="@username" type="text" class="search" (keyup)="searchUsers(shareSearch.value)" #shareSearch>
+        <span class="material-symbols-outlined clickable" (click)="shareLink(shareSearch)">send</span>
+    </span>
+    
+    <span class="result" *ngIf="clients.length">
+        <span class="result-item" *ngFor="let item of clients" (click)="toggleClient(item._id)" [ngClass]="{ selected: selectedClients.has(item._id) }">
+            <img [src]="item.image || '../../../../../../assets/images/db.png'" alt="" class="image">
+            <span class="text-2">@{{item.username}}</span>
+        </span>
+    </span>
+</span>

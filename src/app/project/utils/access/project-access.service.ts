@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AccessService } from 'src/app/general/utils/services/access.service';
 import { Update } from '@ngrx/entity';
 import { Project } from '../models/project.model';
-import { ListPayload } from 'src/app/general/utils/models/list-payload';
+import { ListOptions } from 'src/app/general/utils/models/list-options';
 import { ProjectStatus } from '../models/project-status.enum';
 
 @Injectable({
@@ -32,7 +32,7 @@ export class ProjectAccessService {
     return response;
   }
 
-  listProjects(data: ListPayload) {
+  listProjects(data: ListOptions) {
     const response = this.accessService.find<[Project]>(this.domain, { hidden: false });
     return response;
   }

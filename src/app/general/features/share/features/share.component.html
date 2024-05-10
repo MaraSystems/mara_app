@@ -1,1 +1,10 @@
-Share coming soon.
+<app-share-link [link]="link" (shareTo)="share($event)"></app-share-link>
+
+<app-share-access *ngIf="privacy" [model]="model" [modelId]="modelId" [privacy]="privacy" [access]="access" (changed)="updatePrivacy($event)"></app-share-access>
+
+<app-share-add *ngIf="privacy" [model]="model" [modelId]="modelId"></app-share-add>
+
+<span class="users" *ngIf="privacy">
+    <h5 class="text-1">Shared With</h5>
+    <app-share-item *ngFor="let item of sharedList" [share]="item"></app-share-item>
+</span>

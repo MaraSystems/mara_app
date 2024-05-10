@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { ListPayload } from "src/app/general/utils/models/list-payload";
+import { ListOptions } from "src/app/general/utils/models/list-options";
 import { Update } from "@ngrx/entity";
 import { Attachment } from "../models/attatchment.model";
 import { UploadData } from "../models/upload-data";
@@ -75,7 +75,7 @@ export class GetAttachmentActionFail implements Action {
 
 export class ListAttachmentsAction implements Action {
     readonly type = AttachmentActionsType.LIST_ATTACHMENTS;
-    constructor(public model: string, public modelId: string, public payload?: ListPayload){}
+    constructor(public model: string, public modelId: string, public payload?: ListOptions){}
 }
 
 export class ListAttachmentsActionSuccess implements Action {

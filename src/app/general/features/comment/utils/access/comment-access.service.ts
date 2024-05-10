@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AccessService } from 'src/app/general/utils/services/access.service';
 import { Update } from '@ngrx/entity';
-import { ListPayload } from 'src/app/general/utils/models/list-payload';
+import { ListOptions } from 'src/app/general/utils/models/list-options';
 import { Comment } from '../models/comment.model';
 import { map, mergeMap, of, tap } from 'rxjs';
 import { DataResponse } from 'src/app/general/utils/models/data-response';
@@ -47,7 +47,7 @@ export class CommentAccessService {
     return response;
   }
 
-  listComments(model: string, modelId: string, data?: ListPayload) {
+  listComments(model: string, modelId: string, data?: ListOptions) {
     const response = this.accessService.find<[Comment]>(this.domain, { model, modelId, hidden: false });
     return response;
   }

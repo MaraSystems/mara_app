@@ -11,7 +11,7 @@
         <span class="stats">
             <app-icon-counter [active]="liked" icon="thumb_up" [value]="deliverable.likes.length" (click)="likeToggle()"></app-icon-counter>
             <app-icon-counter [active]="bookmarked" icon="bookmark" [value]="deliverable.bookmarks.length" (click)="bookmarkToggle()"></app-icon-counter>
-            <app-icon-counter icon="share" [value]="0" (click)="popupService.open('project-deliverable-share-' + id);"></app-icon-counter>
+            <app-icon-counter icon="share" [value]="deliverable.shares" (click)="popupService.open('project-deliverable-share-' + id);"></app-icon-counter>
             <app-icon-counter icon="comment" [value]="commentsCount" (click)="popupService.open('project-deliverable-comment-' + id);"></app-icon-counter>
         </span>
         <app-more class="more" [list]="moreList"></app-more>
@@ -45,5 +45,5 @@
 </app-popup>
 
 <app-popup [name]="'project-deliverable-share-' + id">
-    <app-share></app-share>
+    <app-share [link]="'project/'+deliverable.projectId+'/deliverables/'+deliverable._id" (shareTo)="updateSharedList($event)"></app-share>
 </app-popup>

@@ -1,0 +1,6 @@
+<span class="image"><img [src]="share.image || '../../../../assets/images/db.png'" alt=""></span>
+<span class="fullname text-1">{{share.fullname || share.email}}</span>
+<span class="state unit" *ngIf="share.access !== accessEnum.OWNER">{{share.state}}</span>
+<span class="access unit" *ngIf="share.access === accessEnum.OWNER">{{share.access}}</span>
+<app-select lass="access text-2" [list]="accessList" [control]="control" *ngIf="share.access !== accessEnum.OWNER"></app-select>
+<span class="material-symbols-outlined delete" (click)="revoke()" *ngIf="share.access !== accessEnum.OWNER">delete</span>

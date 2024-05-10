@@ -4,6 +4,7 @@ import { NewClient } from "../models/new-client";
 import { Update } from "@ngrx/entity";
 import { Kin } from "../models/kin";
 import { SideEffects } from "src/app/general/utils/models/side.effects";
+import { ListOptions } from "src/app/general/utils/models/list-options";
 
 export enum ClientActionsType {
     REGISTER_CLIENT = "[CLIENT] Register Client",
@@ -70,11 +71,12 @@ export class GetClientActionFail implements Action {
 
 export class ListClientsAction implements Action {
     readonly type = ClientActionsType.LIST_CLIENTS;
+    constructor(public payload?: any, public aggregation?: any, public options?: ListOptions){}
 }
 
 export class ListClientsActionSuccess implements Action {
     readonly type = ClientActionsType.LIST_CLIENTS_SUCCESS;
-    constructor(public payload: Client[]){}
+    constructor(public payload: Client[], public query: any){}
 }
 
 export class ListClientsActionFail implements Action {
@@ -91,4 +93,7 @@ UpdateClientActionSuccess |
 UpdateClientActionFail |
 GetClientAction |
 GetClientActionSuccess |
-GetClientActionFail;
+GetClientActionFail |
+ListClientsAction |
+ListClientsActionSuccess |
+ListClientsActionFail;

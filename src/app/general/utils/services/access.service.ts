@@ -48,7 +48,7 @@ export class AccessService {
 
   public download(query: DownloadData){
     const collection = this.db.createCollection<Attachment>('attachments', { timestamp: true });    
-    const document = collection.findOne(query, { sort: { version: 'desc' } } as IQueryOption);
+    const document = collection.findOne(query, {}, { sort: { version: 'desc' } } as IQueryOption);
     const { path } = document;
     const url = localStorage.getItem(`${path}`) as string;
     const response: DataResponse<string> = { success: true, data: url as string };
@@ -64,7 +64,7 @@ export class AccessService {
 
   public findOne<T>(endpoint: string, query: any, options?: IQueryOption) {
     const collection = this.db.createCollection<T>(endpoint, { timestamp: true });
-    const data = collection.findOne(query, options);
+    const data = collection.findOne(query, {}, options);
     if (!data) {
       return throwError(() => 'Not found');
     }    
@@ -72,23 +72,23 @@ export class AccessService {
     return of(response);
   }
 
-  public find<T>(endpoint: string, query?: any, options?: IQueryOption) {
+  public find<T>(endpoint: string, query?: any, aggregation?: any, options?: IQueryOption) {    
     const collection = this.db.createCollection<T>(endpoint, { timestamp: true });    
-    const data = collection.find(query, options);    
+    const data = collection.find(query, aggregation, options);     
     const response: DataResponse<T> = { success: true, data: data as T };    
     return of(response);
   }
 
-  public updateOne<T>(endpoint: string, query: any, changes: Partial<T>, options?: IQueryOption) {
+  public updateOne<T>(endpoint: string, query: any, changes: Partial<T>) {
     const collection = this.db.createCollection<T>(endpoint, { timestamp: true });
-    const data = collection.updateOne(query, changes, options) as T;
+    const data = collection.updateOne(query, changes) as T;
     const response: DataResponse<T> = { success: true, data };
     return of(response);
   }
 
-  public removeOne<T>(endpoint: string, query: any, options?: IQueryOption) {
+  public removeOne<T>(endpoint: string, query: any) {
     const collection = this.db.createCollection<T>(endpoint, { timestamp: true });
-    const data = collection.removeOne(query, options);
+    const data = collection.removeOne(query);
     if (!data) {
       return throwError(() => 'Not found');
     }

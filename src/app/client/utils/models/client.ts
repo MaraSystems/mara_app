@@ -17,6 +17,5 @@ export class Client implements NewClient {
     gender!: string;
     business: any; 
     image: string = '../../../../assets//images/db.png';
-
-    constructor () { }
+    searchQuery: Set<string> = new Set();
 }

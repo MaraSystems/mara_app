@@ -1,0 +1,54 @@
+:host {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-auto-rows: auto;
+    grid-template-areas: 
+    "image fullname access"
+    "image state delete"
+    ;
+    width: -webkit-fill-available;
+    gap: var(--gap-small);
+    padding: var(--gap-small);
+    border-radius: var(--gap-small);
+    align-items: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-medium);
+
+    .image {
+        grid-area: image;
+        border: 1px solid var(--color-secondary);
+        border-radius: 50%;
+        padding: var(--gap-small);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--gap-big);
+        height: var(--gap-big);
+
+        img {
+            width: inherit;
+            height: inherit;
+        }
+    }
+
+    .fullname {
+        grid-area: fullname;
+        text-align: left;
+    }
+
+    .access {
+        grid-area: access;
+        text-align: right;
+    }
+
+    .state {
+        grid-area: state;
+        place-self: flex-start;
+        text-transform: uppercase;
+    }
+
+    .delete {
+        grid-area: delete;
+        text-align: right;
+    }
+}

@@ -1,0 +1,12 @@
+<h5 class="text-1">Add Users</h5>
+
+<span class="add-form" [formGroup]="form">
+    <app-list-input [placeholder]="'Email, comma separated'" [control]="getControl(form, 'list')" [label]="false" name="emails"></app-list-input>
+    <app-select [list]="accessList" name="access" [control]="getControl(form, 'access')" [label]="false"></app-select>
+    <span></span>
+    <button 
+    [disabled]="form.invalid"
+    class="button text-1"
+    type="submit"
+    (click)="addUsers()">Invite</button>
+</span>

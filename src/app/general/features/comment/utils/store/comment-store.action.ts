@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
 import { Comment } from "../models/comment.model";
-import { ListPayload } from "src/app/general/utils/models/list-payload";
+import { ListOptions } from "src/app/general/utils/models/list-options";
 
 export enum CommentActionsType {
     CREATE_COMMENT = "[COMMENT] Create Comment",
@@ -73,7 +73,7 @@ export class GetCommentActionFail implements Action {
 
 export class ListCommentsAction implements Action {
     readonly type = CommentActionsType.LIST_COMMENTS;
-    constructor(public model: string, public modelId: string, public payload?: ListPayload){}
+    constructor(public model: string, public modelId: string, public payload?: ListOptions){}
 }
 
 export class ListCommentsActionSuccess implements Action {

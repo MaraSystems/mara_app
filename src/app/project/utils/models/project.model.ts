@@ -1,4 +1,5 @@
 import { ProjectStatus } from "./project-status.enum";
+import { Privacy } from "src/app/general/features/share/utils/models/privacy";
 
 export class Project {
     _id!: string;
@@ -15,5 +16,6 @@ export class Project {
     shares: number = 0;
     image!: string;
     hidden = false;
-    active = false
+    active = false;
+    privacy!: Privacy;  
 }

@@ -21,6 +21,9 @@ import { ListCommentsAction } from 'src/app/general/features/comment/utils/store
 import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/store/comment-store.selector';
 import { ToastEnum } from 'src/app/general/features/toast/utils/models/toast.enum';
 import { Toast } from 'src/app/general/features/toast/utils/models/toast.class';
+import { ShareEnum } from 'src/app/general/features/share/utils/models/share.enum';
+import { Share } from 'src/app/general/features/share/utils/models/share.model';
+import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
 
 @Component({
   selector: 'app-project-view',
@@ -40,6 +43,7 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
   liked = false;
   bookmarked = false;
   commentModel = CommentEnum.PROJECT;
+  shareModel = ShareEnum.PROJECT;
   commentsCount = 0;
 
   constructor(
@@ -78,7 +82,7 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
           this.auth = auth;
           this.liked = this.project.likes.includes(this.auth.id);      
           this.bookmarked = this.project.bookmarks.includes(this.auth.id);      
-        }); 
+        });         
       }    
     });
 
@@ -147,5 +151,14 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
   bookmarkToggle(){
     const bookmarks = toggleList([...this.project.bookmarks], this.auth.id);    
     this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { bookmarks } }));
+  }
+
+  updatePrivacy(data: Privacy) {
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { privacy: data } }));
+  }
+
+  updateSharedList(list: string[]){    
+    const shares = this.project.shares + list.length;
+    this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { shares } }));
   }
 }

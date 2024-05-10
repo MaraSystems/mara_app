@@ -1,0 +1,9 @@
+<span class="privacy">
+    <h5 class="text-1">Set Privacy</h5>
+
+    <span class="privacy-form" [formGroup]="privacyForm">
+        <app-select [list]="privacyList" name="privacy" [control]="getControl(privacyForm, 'type')" [label]="false"></app-select>
+        <app-select *ngIf="public" [list]="accessList" name="access" [control]="getControl(privacyForm, 'access')" [label]="false"></app-select>
+    </span>
+</span>
+

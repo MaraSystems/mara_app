@@ -4,7 +4,7 @@ import { Collection } from '@black-ink/lonedb';
 import { DataResponse } from 'src/app/general/utils/models/data-response';
 import { of } from 'rxjs';
 import { Update } from '@ngrx/entity';
-import { ListPayload } from 'src/app/general/utils/models/list-payload';
+import { ListOptions } from 'src/app/general/utils/models/list-options';
 import { Contract } from '../models/contract.model';
 
 @Injectable({
@@ -27,7 +27,7 @@ export class ContractAccessService {
     return response;
   }
 
-  listContracts(data: ListPayload) {
+  listContracts(data: ListOptions) {
     const response = this.accessService.findOne<[Contract]>(this.domain, {});
     return response;
   }

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { ClientAccessService } from "../access/client-access.service";
-import { ClientActionsType, GetClientAction, GetClientActionFail, GetClientActionSuccess, RegisterClientAction, RegisterClientActionFail, RegisterClientActionSuccess, UpdateClientAction, UpdateClientActionFail, UpdateClientActionSuccess } from "./client-store.action";
+import { ClientActionsType, GetClientAction, GetClientActionFail, GetClientActionSuccess, ListClientsAction, ListClientsActionFail, ListClientsActionSuccess, RegisterClientAction, RegisterClientActionFail, RegisterClientActionSuccess, UpdateClientAction, UpdateClientActionFail, UpdateClientActionSuccess } from "./client-store.action";
 import { Client } from "../models/client";
 import { Store } from "@ngrx/store";
 import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
@@ -72,4 +72,16 @@ export class ClientStoreEffect {
             )
         )
     ));
+
+    listProjects$ = createEffect(() => this.actions$.pipe(
+        ofType<ListClientsAction>(ClientActionsType.LIST_CLIENTS),
+        mergeMap((action: ListClientsAction) => 
+            this.clientAccessService.listClients(action.payload, action.aggregation, action.options).pipe(
+                map((response: DataResponse<[Client]>) => {                    
+                    return new ListClientsActionSuccess(response.data, action.payload);
+                }),
+                catchError(err => of(new ListClientsActionFail(err))
+            )
+        )
+    )));
 }

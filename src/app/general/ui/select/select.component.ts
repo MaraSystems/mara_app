@@ -8,5 +8,4 @@ import { InputComponent } from '../input/input.component';
 })
 export class SelectComponent extends InputComponent {
   @Input() list!: string[];
-
 }

@@ -34,16 +34,21 @@
             border-top-left-radius: var(--gap-normal);
             display: flex;
             flex-direction: column;
-            gap: var(--gap-normal);
             align-items: center;
         }
 
-        &-line {
-            width: 50%;
-            height: var(--gap-small);
-            background-color: var(--color-secondary);
-            margin-top: calc(var(--gap-small) / -2);
-            border-radius: var(--gap-small);
+        &-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: var(--gap-small);
+            background-color: var(--color-dark);
+            width: -webkit-fill-available;
+
+            &-icon {
+                color: var(--color-white);
+                cursor: pointer;
+            }
         }
     }
 }
@@ -55,7 +60,6 @@
             
             &-wrapper {
                 width: var(--enclosed-500);
-                gap: var(--gap-big);
             }
         }
     }

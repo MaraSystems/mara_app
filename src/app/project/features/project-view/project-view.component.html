@@ -11,7 +11,7 @@
         <span class="stats">
             <app-icon-counter [active]="liked" icon="thumb_up" [value]="project.likes.length" (click)="likeToggle()"></app-icon-counter>
             <app-icon-counter [active]="bookmarked" icon="bookmark" [value]="project.bookmarks.length" (click)="bookmarkToggle()"></app-icon-counter>
-            <app-icon-counter icon="share" [value]="0" (click)="popupService.open('project-share-' + id);"></app-icon-counter>
+            <app-icon-counter icon="share" [value]="project.shares" (click)="popupService.open('project-share-' + id);"></app-icon-counter>
             <app-icon-counter icon="comment" [value]="commentsCount" (click)="popupService.open('project-comment-' + id);"></app-icon-counter>
         </span>
         <app-more class="more" [list]="moreList"></app-more>
@@ -61,5 +61,14 @@
 </app-popup>
 
 <app-popup [name]="'project-share-' + id">
-    <app-share></app-share>
+    <app-share 
+        *ngIf="project.privacy" 
+        [model]="shareModel" 
+        [modelId]="project._id" 
+        [privacy]="project.privacy.type" 
+        [access]="project.privacy.access" 
+        [link]="'project/'+project._id" 
+        [ownerId]="project.userId" 
+        (changed)="updatePrivacy($event)"
+        (shareTo)="updateSharedList($event)"></app-share>
 </app-popup>

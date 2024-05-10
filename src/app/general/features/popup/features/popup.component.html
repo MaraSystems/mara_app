@@ -1,7 +1,9 @@
 <div class="popup">
     <div class="popup-cover" (click)="close()"></div>
     <div class="popup-wrapper">
-        <span class="popup-line"></span>    
+        <span class="popup-header">
+            <span class="material-symbols-outlined popup-header-icon" (click)="close()">close</span>
+        </span>    
         <ng-content class="popup-content"></ng-content>
     </div>
 </div>

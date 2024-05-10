@@ -17,6 +17,8 @@ import { AttachmentState, attachmentReducer } from "./general/features/attachmen
 import { CommentStoreEffect } from "./general/features/comment/utils/store/comment-store.effect";
 import { CommentState, commentReducer } from "./general/features/comment/utils/store/comment-store.reducer";
 import { ToastEffect } from "./general/features/toast/utils/store/toast.effect";
+import { ShareStoreEffect } from "./general/features/share/utils/store/share-store.effect";
+import { ShareState, shareReducer } from "./general/features/share/utils/store/share-store.reducer";
 
 export const appEffects = [
     ClientStoreEffect,
@@ -26,7 +28,8 @@ export const appEffects = [
     ProjectDeliverableStoreEffect,
     AttachmentStoreEffect,
     CommentStoreEffect,
-    ToastEffect
+    ToastEffect,
+    ShareStoreEffect
 ];
 
 export interface AppState {
@@ -38,7 +41,8 @@ export interface AppState {
     projects: ProjectState,
     projectDeliverables: ProjectDeliverableState,
     attachments: AttachmentState,
-    comments: CommentState
+    comments: CommentState,
+    shares: ShareState
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -50,5 +54,6 @@ export const appReducers: ActionReducerMap<AppState> = {
     projects: projectReducer,
     projectDeliverables: projectDeliverableReducer,
     attachments: attachmentReducer,
-    comments: commentReducer
+    comments: commentReducer,
+    shares: shareReducer
 }

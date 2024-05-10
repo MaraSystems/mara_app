@@ -1,41 +1,24 @@
 :host {
     display: none;
-
-    .app-details {
-        display: flex;
-        align-items: center;
-        gap: var(--gap-small);
-        padding: var(--gap-small);
-        cursor: pointer;
-    }
-    
-    .app-name {
-        color: var(--color-primary);
-    }
-
-    .main {
-        overflow: auto;
-        height: -webkit-fill-available;
-        width: -webkit-fill-available;
-    }
     
     .pane {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: var(--gap-big);
         padding: var(--gap-small);
-    
+        width: -webkit-fill-available;
+
         &-item {
-            display: flex;
-            justify-content: space-between;
-            width: -webkit-fill-available;
-            padding: var(--gap-small);
+            display: grid;
+            grid-template-columns: max-content 1fr;
             align-items: center;
+            padding: var(--gap-small);
             gap: var(--gap-normal);
             border-radius: var(--gap-small);
-            cursor: pointer;
             color: var(--color-dark);
+            cursor: pointer;
+            width: -webkit-fill-available;
     
             &:hover, &-active {
                 color: var(--color-primary) !important;
@@ -52,7 +35,6 @@
         &-title {
             color: inherit;
             text-align: left;
-            width: 100%;
         }
     }
     
@@ -75,14 +57,13 @@
 
 @media only screen and (min-width: 760px){
     :host {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: max-content 1fr max-content;
+        display: flex;
+        flex-direction: column;
         height: -webkit-fill-available;
         padding: var(--gap-small) var(--gap-normal);
         align-items: flex-start;
         background: var(--color-light);
         gap: var(--gap-big);
-        overflow: hidden;
+        overflow: auto;
     }
 }

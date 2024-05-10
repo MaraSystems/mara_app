@@ -18,3 +18,8 @@
 
 <small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['maxfiles']">{{name}} must have at most {{control.errors['maxfiles'].min}} files</small>
 
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['maxList']">{{name}} must have at most {{control.errors['maxItems'].max}} items</small>
+
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['minList']">{{name}} must have at most {{control.errors['minItems'].min}} items</small>
+
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['list']">{{name}} contain an invalid {{control.errors['list'].type}}</small>

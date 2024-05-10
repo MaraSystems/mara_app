@@ -19,6 +19,7 @@ import { CommentEnum } from 'src/app/general/features/comment/utils/models/comme
 import { GetProjectAction } from 'src/app/project/utils/store/project-store.action';
 import { selectProjectById } from 'src/app/project/utils/store/project-store.selector';
 import { Toast } from 'src/app/general/features/toast/utils/models/toast.class';
+import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
 
 @Component({
   selector: 'app-project-deliverable-view',
@@ -93,5 +94,10 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
   bookmarkToggle(){
     const bookmarks = toggleList([...this.deliverable.bookmarks], this.auth.id);    
     this.store.dispatch(new UpdateProjectDeliverableAction({ id: this.id, changes: { bookmarks } }));
+  }
+
+  updateSharedList(list: string[]){    
+    const shares = this.deliverable.shares + list.length;    
+    this.store.dispatch(new UpdateProjectDeliverableAction({ id: this.id, changes: { shares } }));
   }
 }
