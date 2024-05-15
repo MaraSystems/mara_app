@@ -9,6 +9,7 @@ import { CreateProjectDeliverableAction, CreateProjectDeliverableActionFail, Cre
 import { ProjectDeliverable } from "../models/project-deliverable.model";
 import { RouterService } from "src/app/router/utils/router.service";
 import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
+import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()
 export class ProjectDeliverableStoreEffect {
@@ -24,13 +25,12 @@ export class ProjectDeliverableStoreEffect {
         mergeMap((action: CreateProjectDeliverableAction) => 
             this.projectDeliverableAccessService.createProjectDeliverable(action.payload).pipe(
                 map((response: DataResponse<ProjectDeliverable>) => {
-                    this.store.dispatch(new AddToast({ description: 'Project Deliverable Creation' }));
-                    this.routerService.navigate(`/projects/${action.payload.projectId}/deliverables`);
+                    handleSuccessSideEffects((action as CreateProjectDeliverableAction).sideEffects);
                     return new CreateProjectDeliverableActionSuccess(response.data);
                 }),
                 catchError(err => of(new CreateProjectDeliverableActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Project Deliverable Creation' }));
+                        handleFailureSideEffects((action as CreateProjectDeliverableAction).sideEffects);
                     })
                 ))
             )
@@ -42,18 +42,12 @@ export class ProjectDeliverableStoreEffect {
         mergeMap((action: UpdateProjectDeliverableAction) => 
             this.projectDeliverableAccessService.updateProjectDeliverable(action.payload).pipe(
                 map((response: DataResponse<ProjectDeliverable>) => {         
-                    const { sideEffects } = action as UpdateProjectDeliverableAction;
-                    if (sideEffects.success) {
-                        sideEffects.success();
-                    }
+                    handleSuccessSideEffects((action as UpdateProjectDeliverableAction).sideEffects);
                     return new UpdateProjectDeliverableActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateProjectDeliverableActionFail(err)).pipe(
                     tap(() => {
-                        const { sideEffects } = action as UpdateProjectDeliverableAction;
-                        if (sideEffects.failure) {
-                            sideEffects.failure();
-                        }
+                        handleFailureSideEffects((action as UpdateProjectDeliverableAction).sideEffects);
                     })
                 ))
             )

@@ -15,3 +15,9 @@ export interface IAddress {
     states: string[];
     cities: string[];
 }
+
+export function updateAddress(address: IAddress, data: any) {
+    address.states = listStates(data.country);
+    address.cities = listCities(data.country, data.state);
+    return address;
+}

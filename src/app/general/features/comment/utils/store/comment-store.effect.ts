@@ -7,14 +7,13 @@ import { DataResponse } from "src/app/general/utils/models/data-response";
 import { CommentAccessService } from "../access/comment-access.service";
 import { CreateCommentAction, CreateCommentActionFail, CreateCommentActionSuccess, DeleteCommentAction, DeleteCommentActionFail, DeleteCommentActionSuccess, GetCommentAction, GetCommentActionFail, GetCommentActionSuccess, ListCommentsAction, ListCommentsActionFail, ListCommentsActionSuccess, CommentActionsType, UpdateCommentAction, UpdateCommentActionSuccess, UpdateCommentActionFail } from "./comment-store.action";
 import { Comment } from "../models/comment.model";
+import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()
 export class CommentStoreEffect {
     constructor(
         private actions$: Actions,
-        private commentAccessService: CommentAccessService,
-        private store: Store,
-        private router: Router,
+        private commentAccessService: CommentAccessService
     ){}
 
     createComment$ = createEffect(() => this.actions$.pipe(
@@ -22,9 +21,14 @@ export class CommentStoreEffect {
         mergeMap((action: CreateCommentAction) => 
             this.commentAccessService.createComment(action.payload).pipe(
                 map((response: DataResponse<Comment>) => {
+                    handleSuccessSideEffects((action as CreateCommentAction).sideEffects);
                     return new CreateCommentActionSuccess(response.data);
                 }),
-                catchError(err => of(new CreateCommentActionFail(err)))
+                catchError(err => of(new CreateCommentActionFail(err)).pipe(
+                    tap(() => {
+                        handleFailureSideEffects((action as CreateCommentAction).sideEffects);
+                    })
+                ))
             )
         )
     ));
@@ -34,9 +38,14 @@ export class CommentStoreEffect {
         mergeMap((action: UpdateCommentAction) => 
             this.commentAccessService.updateComment(action.payload).pipe(
                 map((response: DataResponse<Comment>) => {
+                    handleSuccessSideEffects((action as UpdateCommentAction).sideEffects);
                     return new UpdateCommentActionSuccess({ id: action.payload.id as string, changes: response.data });
                 }),
-                catchError(err => of(new UpdateCommentActionFail(err)))
+                catchError(err => of(new UpdateCommentActionFail(err)).pipe(
+                    tap(() => {
+                        handleFailureSideEffects((action as UpdateCommentAction).sideEffects);
+                    })
+                ))
             )
         )
     ));

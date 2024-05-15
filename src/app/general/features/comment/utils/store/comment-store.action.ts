@@ -2,6 +2,7 @@ import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
 import { Comment } from "../models/comment.model";
 import { ListOptions } from "src/app/general/utils/models/list-options";
+import { SideEffects } from "src/app/general/utils/models/side.effects";
 
 export enum CommentActionsType {
     CREATE_COMMENT = "[COMMENT] Create Comment",
@@ -27,7 +28,7 @@ export enum CommentActionsType {
 
 export class CreateCommentAction implements Action {
     readonly type = CommentActionsType.CREATE_COMMENT;
-    constructor(public payload: Comment){}
+    constructor(public payload: Comment, public sideEffects = new SideEffects()){}
 }
 
 export class CreateCommentActionSuccess implements Action {
@@ -43,7 +44,7 @@ export class CreateCommentActionFail implements Action {
 
 export class UpdateCommentAction implements Action {
     readonly type = CommentActionsType.UPDATE_COMMENT;
-    constructor(public payload: Update<Partial<Comment>>){}
+    constructor(public payload: Update<Partial<Comment>>, public sideEffects = new SideEffects()){}
 }
 
 export class UpdateCommentActionSuccess implements Action {

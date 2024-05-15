@@ -8,6 +8,7 @@ import { UploadAttachmentAction, UploadAttachmentActionFail, UploadAttachmentAct
 import { AttachmentAccessService } from "../access/attatchment-access.service";
 import { Attachment } from "../models/attatchment.model";
 import { ToastEnum } from "../../../toast/utils/models/toast.enum";
+import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()
 export class AttachmentStoreEffect {
@@ -22,16 +23,12 @@ export class AttachmentStoreEffect {
         mergeMap((action: UploadAttachmentAction) => 
             this.attachmentAccessService.uploadAttachment(action.payload).pipe(
                 map((response: DataResponse<Attachment>) => {            
-                    const { sideEffects } = action;
-                    if (sideEffects.success) {
-                        sideEffects.success();
-                    }
-                    this.store.dispatch(new AddToast({ description: 'Attachment Upload' }));
+                    handleSuccessSideEffects((action as UploadAttachmentAction).sideEffects);
                     return new UploadAttachmentActionSuccess(response.data, action.payload._id);
                 }),
                 catchError(err => of(new UploadAttachmentActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Attachment Upload' }));
+                        handleFailureSideEffects((action as UploadAttachmentAction).sideEffects);
                     })
                 ))
             )

@@ -18,8 +18,3 @@ export const selectClientById = (id: string) => createSelector(
     clientSelector,
     state => state.entities[id] as Client
 );
-
-export const selectSearchedClients = (query: string) => createSelector(
-    clientSelector,
-    state => Object.values(state.entities).filter((client) => client?.searchQuery.has(query)) as Client[]
-);

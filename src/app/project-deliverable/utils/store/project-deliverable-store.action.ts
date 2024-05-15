@@ -28,7 +28,7 @@ export enum ProjectDeliverableActionsType {
 
 export class CreateProjectDeliverableAction implements Action {
     readonly type = ProjectDeliverableActionsType.CREATE_PROJECT_DELIVERABLE;
-    constructor(public payload: ProjectDeliverable){}
+    constructor(public payload: ProjectDeliverable, public sideEffects = new SideEffects()){}
 }
 
 export class CreateProjectDeliverableActionSuccess implements Action {

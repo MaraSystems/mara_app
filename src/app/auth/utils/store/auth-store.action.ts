@@ -3,6 +3,7 @@ import { Auth } from "../models/auth.model";
 import { Client } from "src/app/client/utils/models/client";
 import { Login } from "../models/login.model";
 import { Update } from "@ngrx/entity";
+import { SideEffects } from "src/app/general/utils/models/side.effects";
 
 export enum AuthActionsType {
     GET_PASSWORD_AUTH = "[AUTH] Get Password Auth",
@@ -40,7 +41,7 @@ export class GetPasswordAuthActionFail implements Action {
 
 export class LoginAuthAction implements Action {
     readonly type = AuthActionsType.LOGIN_AUTH;
-    constructor(public payload: Login){}
+    constructor(public payload: Login, public sideEffects = new SideEffects()){}
 }
 
 export class LoginAuthActionSuccess implements Action {
@@ -69,6 +70,7 @@ export class GetAuthActionFail implements Action {
 
 export class LogoutAuthAction implements Action {
     readonly type = AuthActionsType.LOGOUT_AUTH;
+    constructor(public sideEffects = new SideEffects()){}
 }
 
 export class LogoutAuthActionSuccess implements Action {

@@ -2,6 +2,7 @@ import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
 import { Share } from "../models/share.model";
 import { ListOptions } from "src/app/general/utils/models/list-options";
+import { SideEffects } from "src/app/general/utils/models/side.effects";
 
 export enum ShareActionsType {
     CREATE_SHARE = "[SHARE] Create Share",
@@ -27,7 +28,7 @@ export enum ShareActionsType {
 
 export class CreateShareAction implements Action {
     readonly type = ShareActionsType.CREATE_SHARE;
-    constructor(public payload: Share){}
+    constructor(public payload: Share, public sideEffects = new SideEffects()){}
 }
 
 export class CreateShareActionSuccess implements Action {
@@ -43,7 +44,7 @@ export class CreateShareActionFail implements Action {
 
 export class UpdateShareAction implements Action {
     readonly type = ShareActionsType.UPDATE_SHARE;
-    constructor(public payload: Update<Partial<Share>>){}
+    constructor(public payload: Update<Share>, public sideEffects = new SideEffects()){}
 }
 
 export class UpdateShareActionSuccess implements Action {

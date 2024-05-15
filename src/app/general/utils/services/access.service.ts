@@ -55,7 +55,7 @@ export class AccessService {
     return of(response);
   }
 
-  public insertOne<T>(endpoint: string, entry: Partial<T>) {
+  public insertOne<T>(endpoint: string, entry: Partial<T>) {    
     const collection = this.db.createCollection<T>(endpoint, { timestamp: true });
     const data = collection.insertOne(entry as T);
     const response: DataResponse<T> = { success: true, data };

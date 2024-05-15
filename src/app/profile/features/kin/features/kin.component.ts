@@ -52,7 +52,7 @@ export class KinComponent extends UnSubscriber implements OnInit {
           this.newSubscription = this.form.controls[control].valueChanges.subscribe(value => {
             this.updateData = this.updateData
               ? { ...this.updateData, [control]: value }
-              : { [control]: value } as Partial<Client>;   
+              : { [control]: value } as Partial<Kin>;   
           });
         });
       });

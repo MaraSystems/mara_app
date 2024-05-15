@@ -1,0 +1,20 @@
+<div class="header">
+    <span class="note">
+        <span class="header-3">Account Setup</span>
+        <span class="text-2">Please help us setup your account.</span>
+    </span>
+    <span class="logout" (click)="logout()">
+        <span class="material-symbols-outlined pane-icon">logout</span>
+        <h1 class="text-1">Logout</h1>
+    </span>
+</div>
+
+<div class="main">
+    <app-profile-create-personal *ngIf="currentPage === 1" (done)="nextPage()"></app-profile-create-personal>
+
+    <app-profile-create-compliance [userId]="profile._id" *ngIf="currentPage === 2" (done)="nextPage()"></app-profile-create-compliance>
+
+    <app-profile-create-kin [userId]="profile._id" *ngIf="currentPage === 3" (done)="nextPage()"></app-profile-create-kin>
+
+    <span class="text-2">page {{currentPage}} of {{pagelength}}</span>
+</div>

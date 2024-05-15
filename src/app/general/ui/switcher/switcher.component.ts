@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class SwitcherComponent implements OnInit {
   @Input() totalItems = 0;
   @Input() active = 0;
-  @Output() select = new EventEmitter<Number>();
+  @Output() select = new EventEmitter<number>();
   
   initial = 0;
   items: number[] = [];

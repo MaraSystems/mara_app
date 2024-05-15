@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { Auth } from './auth/utils/models/auth.model';
 import { GetAuthAction } from './auth/utils/store/auth-store.action';
+import { GetClientAction } from './client/utils/store/client-store.action';
+import { selectClientById } from './client/utils/store/client-store.selector';
+import { OnboardEnum } from './profile/utils/onboard.enum';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +18,7 @@ import { GetAuthAction } from './auth/utils/store/auth-store.action';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent  extends UnSubscriber implements OnInit {
-  auth: Auth | undefined;
+  auth!: Auth;
   notApp = false;
   notAppUrl = ['/', '/404'];
 
@@ -31,11 +34,23 @@ export class AppComponent  extends UnSubscriber implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new GetAuthAction());
     this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
-      this.auth = auth      
+      this.auth = auth;
+      if (this.auth) {
+        this.onboardClient();
+      }
     });
 
     this.newSubscription = this.router.events.subscribe((event) => {
       this.notApp = !this.notAppUrl.includes(this.document.location.pathname) && !!this.auth;
+    });
+  }
+
+  onboardClient() {
+    this.store.dispatch(new GetClientAction(this.auth.id, true));
+    this.newSubscription = this.store.select(selectClientById(this.auth.id)).subscribe(client => {
+      if (client.onboard !== OnboardEnum.COMPLETED) {
+        this.router.navigateByUrl('/profile/create');
+      }
     });
   }
 }

@@ -1,0 +1,21 @@
+<h1 class="header-3">Personal Information</h1>
+
+<form action="" class="form" [formGroup]="form">
+    <app-input name="firstname" [control]="getControl(form, 'firstname')"></app-input>
+
+    <app-input name="lastname" [control]="getControl(form, 'lastname')"></app-input>
+
+    <app-select name="gender" [control]="getControl(form, 'gender')" [list]="genderEnum"></app-select>
+
+    <app-input name="dob" [control]="getControl(form, 'dob')" type="date"></app-input>
+
+    <app-select name="country" [control]="getControl(form, 'country')" [list]="address.countries"></app-select>
+
+    <app-select name="state" [control]="getControl(form, 'state')" [list]="address.states"></app-select>
+
+    <app-select name="city" [control]="getControl(form, 'city')" [list]="address.cities"></app-select>
+
+    <app-input name="street" [control]="getControl(form, 'street')"></app-input>
+
+    <button [disabled]="form.invalid" class="button text-1 form-control" (click)="updateClient()">Continue</button>
+</form>

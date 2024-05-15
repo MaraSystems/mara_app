@@ -19,8 +19,8 @@ const routes: Routes = [
   },
   { 
     path: 'register', 
-    loadChildren: () => import('./client/features/client-register/client-register.module').then(
-      (m) => m.ClientRegisterModule
+    loadChildren: () => import('./client/features/client-create/client-create.module').then(
+      (m) => m.ClientCreateModule
     ),
     canActivate: [NoAuthGuard]
   },

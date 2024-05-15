@@ -1,0 +1,10 @@
+:host {
+    width: -webkit-fill-available;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-big);
+
+    .form {
+        gap: var(--gap-x-big);
+    }
+}

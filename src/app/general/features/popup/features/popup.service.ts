@@ -23,7 +23,7 @@ export class PopupService {
   }
 
   open(name: string, data?: any) {    
-    const popup = this.popups.find(x => x.name === name) as PopupComponent;
+    const popup = this.popups.find(x => x.name === name) as PopupComponent;    
     if (popup) {
       popup.open(data); 
     }   

@@ -20,7 +20,7 @@ export enum KinActionsType {
 
 export class CreateKinAction implements Action {
     readonly type = KinActionsType.CREATE_KIN;
-    constructor(public payload: Kin){}
+    constructor(public payload: Kin, public sideEffects = new SideEffects()){}
 }
 
 export class CreateKinActionSuccess implements Action {

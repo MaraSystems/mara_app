@@ -1,7 +1,7 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { Action } from "@ngrx/store";
 import { Client } from "../models/client";
-import { ClientActionsType, GetClientActionSuccess, ListClientsActionSuccess, RegisterClientActionSuccess, UpdateClientActionFail, UpdateClientActionSuccess } from "./client-store.action";
+import { ClientActionsType, GetClientActionSuccess, ListClientsActionSuccess, CreateClientActionSuccess, UpdateClientActionFail, UpdateClientActionSuccess } from "./client-store.action";
 
 export interface ClientState extends EntityState<Client> {
     selectedId: string | null;
@@ -29,14 +29,14 @@ const initialState = clientAdapter.getInitialState(defualtIssue);
 
 export function clientReducer(state = initialState, action: Action): ClientState {
     switch (action.type) {
-        case ClientActionsType.REGISTER_CLIENT:
+        case ClientActionsType.CREATE_CLIENT:
             return { ...state, loading: true, loaded: false };
 
-        case ClientActionsType.REGISTER_CLIENT_SUCCESS:
-            const registerPayload = (action as RegisterClientActionSuccess).payload;
+        case ClientActionsType.CREATE_CLIENT_SUCCESS:
+            const registerPayload = (action as CreateClientActionSuccess).payload;
             return clientAdapter.addOne(registerPayload, { ...state, loading: false, loaded: true })
             
-        case ClientActionsType.REGISTER_CLIENT_FAIL:
+        case ClientActionsType.CREATE_CLIENT_FAIL:
             return {
                 ...state,
                 loading: false,

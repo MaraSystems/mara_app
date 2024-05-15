@@ -1,21 +1,22 @@
-import { NewClient } from "./new-client";
+import { GenderEnum } from "src/app/profile/utils/gender.enum";
+import { OnboardEnum } from "src/app/profile/utils/onboard.enum";
 
-export class Client implements NewClient {
-    _id = '';
-    email!: string;
-    phone!: string;
-    username!: string
-    firstname!: string;
-    lastname!: string;
-    createdAt!: Date;
-    verified!: boolean;
-    dob!: Date;
-    street!: string;
-    city!: string;
-    state!: string;
-    country!: string;
-    gender!: string;
+export interface Client {
+    _id: string;
+    email: string;
+    phone: string;
+    username: string
+    firstname: string;
+    lastname: string;
+    createdAt: Date;
+    verified: boolean;
+    dob: Date;
+    street: string;
+    city: string;
+    state: string;
+    country: string;
+    gender: GenderEnum;
     business: any; 
-    image: string = '../../../../assets//images/db.png';
-    searchQuery: Set<string> = new Set();
+    image: string;
+    onboard: OnboardEnum;
 }

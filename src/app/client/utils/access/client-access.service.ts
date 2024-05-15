@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Client } from '../models/client';
-import { NewClient } from '../models/new-client';
 import { AccessService } from 'src/app/general/utils/services/access.service';
-import { Collection } from '@black-ink/lonedb';
-import { DataResponse } from 'src/app/general/utils/models/data-response';
-import { of } from 'rxjs';
 import { Update } from '@ngrx/entity';
 import { ListOptions } from 'src/app/general/utils/models/list-options';
 
@@ -18,7 +14,7 @@ export class ClientAccessService {
     private accessService: AccessService
   ) {}
 
-  registerClient(data: NewClient) {        
+  createClient(data: Client) {        
     const response = this.accessService.insertOne<Client>(this.domain, data);
     return response;
   }

@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Client } from 'src/app/client/utils/models/client';
 import { ListClientsAction } from 'src/app/client/utils/store/client-store.action';
-import { selectAllClients, selectSearchedClients } from 'src/app/client/utils/store/client-store.selector';
+import { selectAllClients } from 'src/app/client/utils/store/client-store.selector';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 
 @Component({

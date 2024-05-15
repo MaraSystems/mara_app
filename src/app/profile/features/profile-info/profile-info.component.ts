@@ -11,6 +11,8 @@ import * as addressUtil from 'src/app/general/utils/lib/address';
 import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { ToastEnum } from 'src/app/general/features/toast/utils/models/toast.enum';
+import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { OnboardEnum } from '../../utils/onboard.enum';
 
 @Component({
   selector: 'app-profile-info',
@@ -18,21 +20,21 @@ import { ToastEnum } from 'src/app/general/features/toast/utils/models/toast.enu
   styleUrls: ['./profile-info.component.scss']
 })
 export class ProfileInfoComponent extends UnSubscriber implements OnInit {
-  profile = new Client();
+  profile!: Client;
   edit = false;
   form!: FormGroup;
   updateData!: Partial<Client>;
   address: addressUtil.IAddress = { countries: addressUtil.listCountries, states: [], cities: [] };
+  onboardEnum = OnboardEnum;
 
   constructor (
     public store: Store<AppState>,
-    private activatedRoute: ActivatedRoute
+    public popupService: PopupService
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.initForm();
     this.newSubscription = this.store.select(selectAuthClient).subscribe(client => {
       this.profile = client;
 

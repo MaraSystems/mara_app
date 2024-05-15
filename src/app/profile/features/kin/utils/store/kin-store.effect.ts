@@ -9,6 +9,7 @@ import { CreateKinAction, CreateKinActionFail, CreateKinActionSuccess, GetKinAct
 import { Kin } from "src/app/client/utils/models/kin";
 import { RouterService } from "src/app/router/utils/router.service";
 import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
+import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()
 export class KinStoreEffect {
@@ -23,16 +24,13 @@ export class KinStoreEffect {
         ofType<CreateKinAction>(KinActionsType.CREATE_KIN),
         mergeMap((action: CreateKinAction) => 
             this.kinAccessService.createKin(action.payload).pipe(
-                tap(() => {                    
-                    this.store.dispatch(new AddToast({ description: 'Kin Creation' }));
-                    this.routerService.navigate('/profile/kin');
-                }),
                 map((response: DataResponse<Kin>) => {
+                    handleSuccessSideEffects((action as CreateKinAction).sideEffects);
                     return new CreateKinActionSuccess(response.data);
                 }),
                 catchError(err => of(new CreateKinActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Kin Creation' }));
+                        handleFailureSideEffects((action as CreateKinAction).sideEffects);
                     })
                 ))
             )
@@ -44,17 +42,12 @@ export class KinStoreEffect {
         mergeMap((action: UpdateKinAction) => 
             this.kinAccessService.updateKin(action.payload).pipe(
                 map((response: DataResponse<Kin>) => {   
-                    const { sideEffects } = (action as UpdateKinAction);
-                    if (sideEffects.success) {
-                        sideEffects.success();
-                    }
-                    this.store.dispatch(new AddToast({ description: 'Kin Update' }));
-                    this.routerService.navigate('/profile/kin');                 
+                    handleSuccessSideEffects((action as UpdateKinAction).sideEffects);              
                     return new UpdateKinActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateKinActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ description: 'Kin Update', type: ToastEnum.ERROR }));
+                        handleFailureSideEffects((action as UpdateKinAction).sideEffects);              
                     })
                 ))
             )

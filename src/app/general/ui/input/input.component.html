@@ -9,5 +9,6 @@
     class="form-control text-1" 
     [formControl]="control" 
     [ngClass]="{ invalid: (control.invalid && control.touched) }"
-    [placeholder]="placeholder">
+    [placeholder]="placeholder"
+    [required]="required">
 <app-form-errors [control]="control" [name]="name"></app-form-errors>

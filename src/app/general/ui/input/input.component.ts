@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -13,6 +13,7 @@ export class InputComponent {
   @Input() measure: string = '';
   @Input() type: 'text' | 'email' | 'date' | 'phone' | 'number' = 'text';
   @Input() control!: FormControl;
+  @Input() required!: boolean;
 
   isValid() {
     const { invalid, touched } = this.control;    

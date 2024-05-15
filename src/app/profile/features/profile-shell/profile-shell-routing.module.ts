@@ -20,6 +20,12 @@ const routes: Routes = [
         loadChildren: () => import('../kin/features/kin.module').then(
           (m) => m.KinModule
         )
+      },
+      {
+        path: 'create',
+        loadChildren: () => import('../profile-create/feature/profile-create.module').then(
+          (m) => m.ProfileCreateModule
+        )
       }
     ]
   }

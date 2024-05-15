@@ -1,15 +1,14 @@
 import { Action } from "@ngrx/store";
 import { Client } from "../models/client";
-import { NewClient } from "../models/new-client";
 import { Update } from "@ngrx/entity";
 import { Kin } from "../models/kin";
 import { SideEffects } from "src/app/general/utils/models/side.effects";
 import { ListOptions } from "src/app/general/utils/models/list-options";
 
 export enum ClientActionsType {
-    REGISTER_CLIENT = "[CLIENT] Register Client",
-    REGISTER_CLIENT_SUCCESS = "[CLIENT] Register Client Success",
-    REGISTER_CLIENT_FAIL = "[CLIENT] Register Client Fail",
+    CREATE_CLIENT = "[CLIENT] Create Client",
+    CREATE_CLIENT_SUCCESS = "[CLIENT] Create Client Success",
+    CREATE_CLIENT_FAIL = "[CLIENT] Create Client Fail",
 
     UPDATE_CLIENT = "[CLIENT] Update Client",
     UPDATE_CLIENT_SUCCESS = "[CLIENT] Update Client Success",
@@ -24,18 +23,18 @@ export enum ClientActionsType {
     LIST_CLIENTS_FAIL = "[CLIENT] List Clients Fail"
 }
 
-export class RegisterClientAction implements Action {
-    readonly type = ClientActionsType.REGISTER_CLIENT;
-    constructor(public payload: NewClient){}
+export class CreateClientAction implements Action {
+    readonly type = ClientActionsType.CREATE_CLIENT;
+    constructor(public payload: Client, public sideEffects = new SideEffects()){}
 }
 
-export class RegisterClientActionSuccess implements Action {
-    readonly type = ClientActionsType.REGISTER_CLIENT_SUCCESS;
+export class CreateClientActionSuccess implements Action {
+    readonly type = ClientActionsType.CREATE_CLIENT_SUCCESS;
     constructor(public payload: Client){}
 }
 
-export class RegisterClientActionFail implements Action {
-    readonly type = ClientActionsType.REGISTER_CLIENT_FAIL;
+export class CreateClientActionFail implements Action {
+    readonly type = ClientActionsType.CREATE_CLIENT_FAIL;
     constructor(public payload: string){}
 }
 
@@ -85,9 +84,9 @@ export class ListClientsActionFail implements Action {
 }
 
 export type ClientAction = 
-RegisterClientAction |
-RegisterClientActionSuccess |
-RegisterClientActionFail |
+CreateClientAction |
+CreateClientActionSuccess |
+CreateClientActionFail |
 UpdateClientAction |
 UpdateClientActionSuccess |
 UpdateClientActionFail |

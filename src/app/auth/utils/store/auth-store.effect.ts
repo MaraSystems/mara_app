@@ -11,6 +11,7 @@ import { AppState } from "src/app/app.state";
 import { GetClientAction } from "src/app/client/utils/store/client-store.action";
 import { RouterService } from "src/app/router/utils/router.service";
 import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
+import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()
 export class AuthStoreEffect {
@@ -18,7 +19,6 @@ export class AuthStoreEffect {
         private actions$: Actions,
         private authAccessService: AuthAccessService,
         private store: Store<AppState>,
-        private routerService: RouterService
     ){}
 
     getPasswordAuth$ = createEffect(() => this.actions$.pipe(
@@ -41,17 +41,14 @@ export class AuthStoreEffect {
         ofType<LoginAuthAction>(AuthActionsType.LOGIN_AUTH),
         mergeMap((action: LoginAuthAction) => 
             this.authAccessService.login(action.payload).pipe(
-                tap(() => {                    
-                    this.store.dispatch(new AddToast({ description: 'Sign In' }));
-                    this.routerService.navigate('/profile');
-                }),
-                map((response: DataResponse<Auth>) => {                    
+                map((response: DataResponse<Auth>) => {         
+                    handleSuccessSideEffects((action as LoginAuthAction).sideEffects);           
                     this.store.dispatch(new GetClientAction(response.data.id, true));               
                     return new LoginAuthActionSuccess(response.data);
                 }),
                 catchError(err => of(new LoginAuthActionFail(err)).pipe(
                     tap(() => {                                                
-                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Sign In' }));
+                        handleFailureSideEffects((action as LoginAuthAction).sideEffects);
                     })
                 ))
             )
@@ -75,17 +72,13 @@ export class AuthStoreEffect {
         ofType<LogoutAuthAction>(AuthActionsType.LOGOUT_AUTH),
         mergeMap((action: LogoutAuthAction) => 
             this.authAccessService.logout().pipe(
-                tap(() => {
-                    this.store.dispatch(new AddToast({ description: 'Sign Out' }));
-                    this.routerService.navigate('/auth');
-                }),
                 map(() => {
+                    handleSuccessSideEffects((action as LogoutAuthAction).sideEffects);
                     return new LogoutAuthActionSuccess();
                 }),
                 catchError(err => of(new LogoutAuthActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Sign Out' }));
-                    })
+                        handleFailureSideEffects((action as LogoutAuthAction).sideEffects);                    })
                 ))
             )
         )

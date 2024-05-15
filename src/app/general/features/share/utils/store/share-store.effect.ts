@@ -1,20 +1,17 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of, tap } from "rxjs";
-import { Store } from "@ngrx/store";
-import { Router } from "@angular/router";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { ShareAccessService } from "../access/share-access.service";
 import { CreateShareAction, CreateShareActionFail, CreateShareActionSuccess, DeleteShareAction, DeleteShareActionFail, DeleteShareActionSuccess, GetShareAction, GetShareActionFail, GetShareActionSuccess, ListSharesAction, ListSharesActionFail, ListSharesActionSuccess, ShareActionsType, UpdateShareAction, UpdateShareActionSuccess, UpdateShareActionFail } from "./share-store.action";
 import { Share } from "../models/share.model";
+import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()
 export class ShareStoreEffect {
     constructor(
         private actions$: Actions,
-        private shareAccessService: ShareAccessService,
-        private store: Store,
-        private router: Router,
+        private shareAccessService: ShareAccessService
     ){}
 
     createShare$ = createEffect(() => this.actions$.pipe(
@@ -22,9 +19,14 @@ export class ShareStoreEffect {
         mergeMap((action: CreateShareAction) => 
             this.shareAccessService.createShare(action.payload).pipe(
                 map((response: DataResponse<Share>) => {
+                    handleSuccessSideEffects((action as CreateShareAction).sideEffects);
                     return new CreateShareActionSuccess(response.data);
                 }),
-                catchError(err => of(new CreateShareActionFail(err)))
+                catchError(err => of(new CreateShareActionFail(err)).pipe(
+                    tap(() => {
+                        handleFailureSideEffects((action as CreateShareAction).sideEffects);
+                    })
+                ))
             )
         )
     ));
@@ -34,9 +36,14 @@ export class ShareStoreEffect {
         mergeMap((action: UpdateShareAction) => 
             this.shareAccessService.updateShare(action.payload).pipe(
                 map((response: DataResponse<Share>) => {
+                    handleSuccessSideEffects((action as UpdateShareAction).sideEffects);
                     return new UpdateShareActionSuccess({ id: action.payload.id as string, changes: response.data });
                 }),
-                catchError(err => of(new UpdateShareActionFail(err)))
+                catchError(err => of(new UpdateShareActionFail(err)).pipe(
+                    tap(() => {
+                        handleFailureSideEffects((action as UpdateShareAction).sideEffects);
+                    })
+                ))            
             )
         )
     ));

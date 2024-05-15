@@ -1,0 +1,7 @@
+<span class="text-1" style="font-weight: bold;">Upload any of these documents</span>
+
+<app-select [name]="name + ' Document'" [list]="list" [control]="getControl(form, 'modelType')"></app-select>
+
+<app-file-input [control]="getControl(form, 'document')"></app-file-input>
+
+<app-input [required]="expiry" [name]="'Expiry Date'" type="date" *ngIf="expiry" [control]="getControl(form, 'expiry')"></app-input>
