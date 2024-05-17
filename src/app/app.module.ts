@@ -15,6 +15,7 @@ import { FootbarModule } from './general/features/footbar/footbar.module';
 import { NotfoundModule } from './notfound/notfound.module';
 import { PopupModule } from './general/features/popup/features/popup.module';
 import { PopupService } from './general/features/popup/features/popup.service';
+import { TabsModule } from './general/ui/tabs/tabs.module';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { PopupService } from './general/features/popup/features/popup.service';
     SidebarModule,
     NavbarModule,
     FootbarModule,
-    NotfoundModule
+    NotfoundModule,
+    TabsModule
   ],
   bootstrap: [AppComponent]
 })

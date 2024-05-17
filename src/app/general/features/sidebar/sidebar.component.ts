@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { LogoutAuthAction } from 'src/app/auth/utils/store/auth-store.action';
 import { UnSubscriber } from '../../utils/services/unsubscriber.service';
+import { AddToast } from '../toast/utils/store/toast.action';
 
 @Component({
   selector: 'app-sidebar',
@@ -29,6 +30,14 @@ export class SidebarComponent extends UnSubscriber implements OnInit {
   }
 
   logout() {
-    this.store.dispatch(new LogoutAuthAction());
+    this.store.dispatch(new LogoutAuthAction({
+      success: () => {        
+        this.store.dispatch(new AddToast({ description: 'Logout successful' }));
+        this.router.navigateByUrl('/auth');
+      },
+      failure: () => {
+        this.store.dispatch(new AddToast({ description: 'Logout failed' }));
+      }
+    }));
   }
 }

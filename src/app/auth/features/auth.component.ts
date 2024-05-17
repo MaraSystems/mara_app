@@ -5,6 +5,8 @@ import { AppState } from 'src/app/app.state';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { LoginAuthAction } from '../utils/store/auth-store.action';
 import { Login } from '../utils/models/login.model';
+import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -18,6 +20,7 @@ export class AuthComponent extends UnSubscriber implements OnInit {
 
   constructor(
     public store: Store<AppState>,
+    public router: Router
   ) {
     super();
   }
@@ -41,6 +44,14 @@ export class AuthComponent extends UnSubscriber implements OnInit {
   }
 
   login() {    
-    this.store.dispatch(new LoginAuthAction(this.loginData));
+    this.store.dispatch(new LoginAuthAction(this.loginData, {
+      success: () => {        
+        this.store.dispatch(new AddToast({ description: 'Login successful' }));
+        this.router.navigateByUrl('/dashboard');
+      },
+      failure: () => {
+        this.store.dispatch(new AddToast({ description: 'Login failed' }));
+      }
+    }));
   }
 }

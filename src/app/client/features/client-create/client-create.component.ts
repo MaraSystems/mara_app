@@ -8,6 +8,7 @@ import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.servic
 import { Client } from '../../utils/models/client';
 import { OnboardEnum } from 'src/app/profile/utils/onboard.enum';
 import { Router } from '@angular/router';
+import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 
 @Component({
   selector: 'app-client-create',
@@ -49,7 +50,11 @@ export class ClientCreateComponent extends UnSubscriber implements OnInit {
   register() {    
     this.store.dispatch(new CreateClientAction(this.client, {
       success: () => {        
+        this.store.dispatch(new AddToast({ description: 'Registration successful' }));
         this.router.navigateByUrl('/auth');
+      },
+      failure: () => {
+        this.store.dispatch(new AddToast({ description: 'Registration failed' }));
       }
     }));
   }

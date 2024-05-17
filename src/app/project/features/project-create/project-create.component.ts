@@ -10,6 +10,9 @@ import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { SharePrivacyEnum } from 'src/app/general/features/share/utils/models/share.privacy-enum';
 import { ShareAccessEnum } from 'src/app/general/features/share/utils/models/share.access-enum';
 import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
+import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
+import { Router } from '@angular/router';
+import { ProjectStatus } from '../../utils/models/project-status.enum';
 
 
 @Component({
@@ -23,7 +26,8 @@ export class ProjectCreateComponent extends UnSubscriber implements OnInit {
   categories = projectCategories;
 
   constructor(
-    public store: Store<AppState>
+    public store: Store<AppState>,
+    public router: Router
   ){
     super();
   }
@@ -48,6 +52,11 @@ export class ProjectCreateComponent extends UnSubscriber implements OnInit {
       description: new FormControl(null, [Validators.maxLength(10000)]),
       userId: new FormControl(null),
       privacy: new FormControl({ type: SharePrivacyEnum.PUBLIC, access: ShareAccessEnum.ENGAGE } as Privacy),
+      status: new FormControl(ProjectStatus.DRAFT),
+      hidden: new FormControl(false),
+      likes: new FormControl([]),
+      bookmarks: new FormControl([]),
+      shares: new FormControl(0)
     });
   }
 
@@ -62,6 +71,14 @@ export class ProjectCreateComponent extends UnSubscriber implements OnInit {
   }
 
   createProject() {    
-    this.store.dispatch(new CreateProjectAction(this.project));
+    this.store.dispatch(new CreateProjectAction(this.project, {
+      success: () => {        
+        this.store.dispatch(new AddToast({ description: 'Project creation successful' }));
+        this.router.navigateByUrl('/projects');
+      },
+      failure: () => {
+        this.store.dispatch(new AddToast({ description: 'Project creation failed' }));
+      }
+    }));
   }
 }

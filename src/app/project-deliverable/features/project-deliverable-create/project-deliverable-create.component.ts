@@ -5,11 +5,12 @@ import { ProjectDeliverable } from '../../utils/models/project-deliverable.model
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { CreateProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { SharePrivacyEnum } from 'src/app/general/features/share/utils/models/share.privacy-enum';
 import { ShareAccessEnum } from 'src/app/general/features/share/utils/models/share.access-enum';
 import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
+import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 
 @Component({
   selector: 'app-project-deliverable-create',
@@ -19,15 +20,18 @@ import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
 export class ProjectDeliverableCreateComponent extends UnSubscriber implements OnInit {
   deliverable!: ProjectDeliverable;
   form!: FormGroup;
+  projectId!: string;
 
   constructor(
     public store: Store<AppState>,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ){
     super();
   }
   
   ngOnInit(): void {
+    this.projectId = this.activatedRoute.snapshot.paramMap.get('project_id') as string;
     this.initForm();
 
     this.newSubscription = this.form.valueChanges.subscribe(data => {      
@@ -37,8 +41,6 @@ export class ProjectDeliverableCreateComponent extends UnSubscriber implements O
     this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {      
       this.form.get('userId')?.setValue(auth.id);
     });
-
-    this.form.get('projectId')?.setValue(this.activatedRoute.snapshot.paramMap.get('project_id'));
   }
 
   initForm() {
@@ -47,7 +49,12 @@ export class ProjectDeliverableCreateComponent extends UnSubscriber implements O
       price: new FormControl(null, [Validators.required, Validators.min(1)]),
       duration: new FormControl(null, [Validators.required, Validators.min(1)]),
       description: new FormControl(null, [Validators.maxLength(10000)]),
-      projectId: new FormControl(null),
+      projectId: new FormControl(this.projectId),
+      documents: new FormControl([]),
+      hidden: new FormControl(false),
+      likes: new FormControl([]),
+      bookmarks: new FormControl([]),
+      shares: new FormControl(0)
     });
   }
 
@@ -62,6 +69,14 @@ export class ProjectDeliverableCreateComponent extends UnSubscriber implements O
   }
 
   createDeliverable() {    
-    this.store.dispatch(new CreateProjectDeliverableAction(this.deliverable));
+    this.store.dispatch(new CreateProjectDeliverableAction(this.deliverable, {
+      success: () => {        
+        this.store.dispatch(new AddToast({ description: 'Deliverable creation successful' }));
+        this.router.navigateByUrl(`/projects/${this.projectId}`);
+      },
+      failure: () => {
+        this.store.dispatch(new AddToast({ description: 'Deliverable creation failed' }));
+      }
+    }));
   }
 }

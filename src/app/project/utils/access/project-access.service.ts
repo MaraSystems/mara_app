@@ -16,14 +16,7 @@ export class ProjectAccessService {
   ) {}
 
   createProject(data: Project) {    
-    const response = this.accessService.insertOne<Project>(this.domain, { 
-      ...data, 
-      status: ProjectStatus.DRAFT, 
-      hidden: false,
-      likes: [],
-      bookmarks: [],
-      shares: 0
-    });
+    const response = this.accessService.insertOne<Project>(this.domain, data);
     return response;
   }
 

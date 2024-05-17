@@ -29,32 +29,6 @@ export class AccessService {
     });
   }
 
-  public upload(entry: UploadData) {
-    const { _id, name, model, modelId, data: url } = entry;
-    const collection = this.db.createCollection<Attachment>('attachments', { timestamp: true });
-    const { version: latest } = collection.findOne({ _id }) || { version: -1 };
-    const version = latest + 1;
-    const path = `${model}/${modelId}/${ name ? `${name}/` : ''}${version}`;
-    localStorage.setItem(path, url);
-
-    const document: Partial<Attachment> = { name, model, modelId, version, path };
-    const data = version 
-      ? collection.updateOne({ _id }, document as Attachment)
-      : collection.insertOne(document as Attachment);
-    
-    const response: DataResponse<Attachment> = { success: true, data };
-    return of(response);
-  }
-
-  public download(query: DownloadData){
-    const collection = this.db.createCollection<Attachment>('attachments', { timestamp: true });    
-    const document = collection.findOne(query, {}, { sort: { version: 'desc' } } as IQueryOption);
-    const { path } = document;
-    const url = localStorage.getItem(`${path}`) as string;
-    const response: DataResponse<string> = { success: true, data: url as string };
-    return of(response);
-  }
-
   public insertOne<T>(endpoint: string, entry: Partial<T>) {    
     const collection = this.db.createCollection<T>(endpoint, { timestamp: true });
     const data = collection.insertOne(entry as T);

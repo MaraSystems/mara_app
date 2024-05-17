@@ -32,7 +32,7 @@ import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
 })
 export class ProjectViewComponent extends UnSubscriber implements OnInit {
   auth!: Auth;
-  project = new Project();
+  project!: Project;
   deliverables: ProjectDeliverable[] = [];
   id!: string;
   price!: string;

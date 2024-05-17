@@ -11,12 +11,9 @@
         align-self: stretch;
     }
 
-    .label {
-        color: var(--color-dark);
-        text-transform: capitalize;
-    }
-
     .file {
+        display: flex;
+        flex-direction: row;
         justify-content: space-between;
 
         &-preview {

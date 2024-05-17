@@ -69,19 +69,27 @@ html, body {
 
     &-control {
         display: flex;
-        align-items: flex-start;
-        gap: var(--gap-small);
+        flex-direction: column;
+        gap: var(--gap-x-small);
         align-self: stretch;
-        align-items: center;
         border-radius: var(--gap-x-small);
         border: 1px solid var(--color-primary);
-        height: 2rem;
         width: -webkit-fill-available;
-        padding: .25rem .5rem;
+        padding: var(--gap-x-small);
         color: var(--color-dark);
 
         &:focus {
             background: var(--color-light);
+        }
+
+        &-label {
+            color: var(--color-dark);
+            text-transform: capitalize;
+        }
+
+        &-data {
+            border: none;
+            background-color: transparent;
         }
     }
 }
@@ -248,5 +256,9 @@ html, body {
     
     .button {
         padding: var(--gap-small) var(--gap-x-big);
+    }
+
+    .form-control {
+        padding: var(--gap-small);
     }
 }

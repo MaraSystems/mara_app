@@ -12,11 +12,6 @@
         align-items: center;
     }
 
-    .label {
-        color: var(--color-dark);
-        text-transform: capitalize;
-    }
-
     .invalid {
         border: 1px solid var(--color-error) !important;
     }

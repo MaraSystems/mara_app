@@ -1,14 +1,16 @@
-<span class="info" *ngIf="label">
-    <label [for]="name" class="label text-1">{{name}}</label>
-    <h1 *ngIf="measure" class="text-2 unit">{{measure}}</h1>
+<span class="form-control" [ngClass]="{ invalid: (control.invalid && control.touched) }" (click)="input.focus()">
+    <span class="info" *ngIf="label">
+        <label [for]="name" class="form-control-label text-1">{{name}}</label>
+        <h1 *ngIf="measure" class="text-2 unit">{{measure}}</h1>
+    </span>
+    
+    <input 
+        #input
+        [type]="type" 
+        [name]="name" 
+        class="form-control-data text-1" 
+        [formControl]="control" 
+        [placeholder]="placeholder"
+        [required]="required">
 </span>
-
-<input 
-    [type]="type" 
-    [name]="name" 
-    class="form-control text-1" 
-    [formControl]="control" 
-    [ngClass]="{ invalid: (control.invalid && control.touched) }"
-    [placeholder]="placeholder"
-    [required]="required">
 <app-form-errors [control]="control" [name]="name"></app-form-errors>

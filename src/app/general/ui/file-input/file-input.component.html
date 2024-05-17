@@ -1,10 +1,12 @@
-<span class="info">
-    <label [for]="name" class="label text-1">{{name}}</label>
-</span>
-
-<span class="file form-control" [ngClass]="{ invalid: isValid() }">
-    <input type="file" (change)="changed($event)" [multiple]="multiple" [accept]="accept" (click)="control.markAllAsTouched()">
-    <img class="file-preview" [src]="src" alt="" *ngIf="src">
+<span class="form-control" [ngClass]="{ invalid: isValid() }" (click)="input.focus()">
+    <span class="info">
+        <label [for]="name" class="form-control-label text-1">{{name}}</label>
+    </span>
+    
+    <span class="file">
+        <input type="file" (change)="changed($event)" [multiple]="multiple" [accept]="accept" (click)="control.markAllAsTouched()" #input>
+        <img class="file-preview" [src]="src" alt="" *ngIf="src">
+    </span>
 </span>
 
 <app-form-errors [control]="control" [name]="name"></app-form-errors>

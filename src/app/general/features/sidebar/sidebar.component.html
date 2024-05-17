@@ -15,9 +15,9 @@
         <h1 *ngIf="openSidebar" class="pane-title text-1">Contracts</h1>
     </div>
 
-    <div class="pane-item" routerLink="/wallet" [ngClass]="{ 'pane-item-active': active === 'wallet' }">
+    <div class="pane-item" routerLink="/transactions" [ngClass]="{ 'pane-item-active': active === 'wallet' }">
         <span class="material-symbols-outlined pane-icon">wallet</span>
-        <h1 *ngIf="openSidebar" class="pane-title text-1">Wallet</h1>
+        <h1 *ngIf="openSidebar" class="pane-title text-1">Transactions</h1>
     </div>
 
     <div class="pane-item" routerLink="/settings" [ngClass]="{ 'pane-item-active': active === 'settings' }">

@@ -1,8 +1,10 @@
-<span class="info">
-    <label [for]="name" class="label text-1">{{name}}</label>
+<span class="form-control" [ngClass]="{ invalid: (control.invalid && control.touched) }" (click)="textarea.focus()">
+    <span class="info">
+        <label [for]="name" class="form-control-label text-1">{{name}}</label>
+    </span>
+    
+    <textarea #textarea class="text-1 form-control-data" [name]="name" [ngClass]="{ invalid: (control.invalid && control.touched) }" [formControl]="control" >
+    </textarea>
+    
 </span>
-
-<textarea class="form-control text-1" [name]="name" [ngClass]="{ invalid: (control.invalid && control.touched) }" [formControl]="control" >
-</textarea>
-
 <app-form-errors [control]="control" [name]="name"></app-form-errors>
