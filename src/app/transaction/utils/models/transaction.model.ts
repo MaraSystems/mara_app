@@ -6,8 +6,8 @@ import { TransactionStatusEnum } from "./transaction-status.enum";
 export interface Transaction {
     _id: string;
     userId: string;
-    amount: string;
-    balance: string;
+    amount: number;
+    balance: number;
     action: TransactionActionEnum;
     title: string;
     status: TransactionStatusEnum;

@@ -59,6 +59,7 @@
     :host {
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         height: -webkit-fill-available;
         padding: var(--gap-small) var(--gap-normal);
         align-items: flex-start;

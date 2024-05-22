@@ -21,6 +21,10 @@ import { ShareStoreEffect } from "./general/features/share/utils/store/share-sto
 import { ShareState, shareReducer } from "./general/features/share/utils/store/share-store.reducer";
 import { ComplianceStoreEffect } from "./profile/features/compliance/utils/store/compliance-store.effect";
 import { ComplianceState, complianceReducer } from "./profile/features/compliance/utils/store/compliance-store.reducer";
+import { DashboardStoreEffect } from "./dashboard/utils/store/dashboard-store.effect";
+import { DashboardState, dashboardReducer } from "./dashboard/utils/store/dashboard-store.reducer";
+import { TransactionStoreEffect } from "./transaction/utils/store/transaction-store.effect";
+import { TransactionState, transactionReducer } from "./transaction/utils/store/transaction-store.reducer";
 
 export const appEffects = [
     ClientStoreEffect,
@@ -32,7 +36,9 @@ export const appEffects = [
     CommentStoreEffect,
     ToastEffect,
     ShareStoreEffect,
-    ComplianceStoreEffect
+    ComplianceStoreEffect,
+    DashboardStoreEffect,
+    TransactionStoreEffect
 ];
 
 export interface AppState {
@@ -46,7 +52,9 @@ export interface AppState {
     attachments: AttachmentState,
     comments: CommentState,
     shares: ShareState,
-    compliances: ComplianceState
+    compliances: ComplianceState,
+    dashboard: DashboardState,
+    transactions: TransactionState
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -60,5 +68,7 @@ export const appReducers: ActionReducerMap<AppState> = {
     attachments: attachmentReducer,
     comments: commentReducer,
     shares: shareReducer,
-    compliances: complianceReducer
+    compliances: complianceReducer,
+    dashboard: dashboardReducer,
+    transactions: transactionReducer
 }

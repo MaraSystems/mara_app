@@ -1,4 +1,5 @@
 export enum TransactionStatusEnum {
-    DRAFT = 'draft',
-    PUBLISHED = 'published',
+    PENDING = 'pending',
+    SUCCESSFUL = 'successful',
+    FAILED = 'failed'
 }

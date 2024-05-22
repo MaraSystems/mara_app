@@ -14,13 +14,7 @@ export class TransactionAccessService {
 
   constructor(
     private accessService: AccessService,
-    private dbService: DBService
   ) {}
-
-  getWallet(id: string) {    
-    const response = this.accessService.findOne<Transaction>(this.domain, { _id: id });
-    return response;
-  }
 
   getTransaction(id: string) {    
     const response = this.accessService.findOne<Transaction>(this.domain, { _id: id });

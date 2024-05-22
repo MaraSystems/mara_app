@@ -1,0 +1,26 @@
+<span class="header-3">Wallet</span>
+
+<span class="balance">
+    <span class="text-1">Nigerian Naira</span>
+    <span class="amount header-3">{{balance | currency:'₦'}}</span>
+</span>
+
+<span class="control">
+    <span class="button credit" (click)="popupService.open('wallet-credit')">
+        <span class="material-symbols-outlined">account_balance</span>
+        <span class="control-text">Deposit</span>
+    </span>
+
+    <span class="button debit" (click)="popupService.open('wallet-debit')">
+        <span class="material-symbols-outlined">account_balance</span>
+        <span class="control-text">Withdraw</span>
+    </span>
+</span>
+
+<app-popup [name]="'wallet-credit'">
+    <app-wallet-credit [userId]="userId" [balance]="balance"></app-wallet-credit>
+</app-popup>
+
+<app-popup [name]="'wallet-debit'">
+    <app-wallet-debit [userId]="userId"></app-wallet-debit>
+</app-popup>

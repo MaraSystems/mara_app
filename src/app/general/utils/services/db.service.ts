@@ -11,6 +11,7 @@ import { DownloadData } from '../../features/attachment/utils/models/download-da
 import { AccessService } from './access.service';
 import { TransactionModelEnum } from 'src/app/transaction/utils/models/transaction-model.enum';
 import { Transaction } from 'src/app/transaction/utils/models/transaction.model';
+import { TransactionActionEnum } from 'src/app/transaction/utils/models/transaction-action.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -47,13 +48,27 @@ export class DBService {
     return of(response);
   }
 
-  public getWallet(id: string) {
+  public getWallet(userId: string) {
     const collection = this.accessService.db.createCollection<Transaction>('transactions', { timestamp: true });
-    const { balance } = collection.findOne({ _id: id, model: TransactionModelEnum.WALLET }, {}, { sort: { createdAt: 'desc' } }) || { balance: 0 };
-    return balance;
+    const { balance } = collection.findOne({ userId, model: TransactionModelEnum.WALLET }, {}, { sort: { createdAt: 'desc' } }) || { balance: 0.00 };
+    const response: DataResponse<number> = { success: true, data: balance };
+    return response;
   }
 
-  public updateWallet() {
+  public updateWallet(transaction: Transaction) {
+    let { data: balance } = this.getWallet(transaction.userId);
 
+    balance = TransactionActionEnum.CREDIT
+      ? balance + transaction.amount
+      : balance - transaction.amount;
+
+    if (balance < 0) {
+      throw new Error('Insufficient Balance');
+    }
+
+    const collection = this.accessService.db.createCollection<Transaction>('transactions', { timestamp: true });
+    const { balance: newBalance } = collection.insertOne({ ...transaction, balance });
+    const response: DataResponse<number> = { success: true, data: newBalance };
+    return response;
   }
 }

@@ -4,7 +4,7 @@ import { Transaction } from "../models/transaction.model";
 
 export const clientSelector = createFeatureSelector<Readonly<TransactionState>>('transactions');
 
-export const selectAllTransactions = createSelector(
+export const selectAllTransactions = (filter: any) => createSelector(
     clientSelector,
     transactionAdapter.getSelectors().selectAll
 );

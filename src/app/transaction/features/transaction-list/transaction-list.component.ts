@@ -4,6 +4,7 @@ import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.servic
 import { selectAllTransactions } from '../../utils/store/transaction-store.selector';
 import { Transaction } from '../../utils/models/transaction.model';
 import { ListTransactionsAction } from '../../utils/store/transaction-store.action';
+import { PopupService } from 'src/app/general/features/popup/features/popup.service';
 
 @Component({
   selector: 'app-transaction-list',
@@ -12,17 +13,24 @@ import { ListTransactionsAction } from '../../utils/store/transaction-store.acti
 })
 export class TransactionListComponent extends UnSubscriber implements OnInit {
   transactions: Transaction[] = [];
+  selectedTransaction!: Transaction;
 
   constructor(
-    public store: Store
+    public store: Store,
+    public popupService: PopupService
   ){
     super();
   }
 
   ngOnInit(): void {
     this.store.dispatch(new ListTransactionsAction({ limit: 10, skip: 0 }));
-    this.newSubscription = this.store.select(selectAllTransactions).subscribe(transactions => {      
+    this.newSubscription = this.store.select(selectAllTransactions({})).subscribe(transactions => {            
       this.transactions = transactions;
     });
+  }
+
+  openTransaction(item: Transaction) {    
+    this.selectedTransaction = item; 
+    this.popupService.open('transaction-view');
   }
 }

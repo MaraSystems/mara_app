@@ -19,7 +19,7 @@
         display: flex;
         align-items: center;
         padding: var(--gap-small);
-        gap: var(--XSmall-Gap, 1rem);
+        gap: var(--gap-x-small, 1rem);
     }
 
     .reversed {

@@ -1,0 +1,19 @@
+<span class="form-control" [ngClass]="{ invalid: (control.invalid && control.touched) }" (click)="edit = true; input.focus()">
+    <span class="info" *ngIf="label">
+        <label [for]="name" class="form-control-label text-1">{{name}}</label>
+        <h1 *ngIf="measure" class="text-2 unit">{{measure}}</h1>
+    </span>
+        
+    <span [ngClass]="{ hidden: edit }" class="form-control-data text-1" >{{control.value | currency:'₦' }}</span>
+    
+    <input 
+        #input
+        [ngClass]="{ hidden: !edit }"
+        type="number"
+        [name]="name" 
+        class="form-control-data text-1" 
+        [formControl]="control" 
+        [required]="required"
+        (focusout)="edit = false">
+</span>
+<app-form-errors [control]="control" [name]="name"></app-form-errors>

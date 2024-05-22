@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TransactionViewComponent } from './transaction-view.component';
-import { TransactionViewRoutingModule } from './transaction-view-routing.module';
 import { KeyvalueModule } from 'src/app/general/ui/keyvalue/keyvalue.module';
 import { IconCounterModule } from 'src/app/general/ui/icon-counter/icon-counter.module';
 import { MoreModule } from 'src/app/general/ui/more/more.module';
@@ -18,7 +17,6 @@ import { ShareModule } from 'src/app/general/features/share/features/share.modul
   ],
   imports: [
     CommonModule,
-    TransactionViewRoutingModule,
     KeyvalueModule,
     IconCounterModule,
     MoreModule,
@@ -27,6 +25,9 @@ import { ShareModule } from 'src/app/general/features/share/features/share.modul
     EmptyModule,
     CommentListModule,
     ShareModule
+  ],
+  exports: [
+    TransactionViewComponent
   ]
 })
 export class TransactionViewModule { }

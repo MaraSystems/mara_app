@@ -52,7 +52,7 @@ export class TransactionStoreEffect {
         ofType<ListTransactionsAction>(TransactionActionsType.LIST_TRANSACTIONS),
         mergeMap((action: ListTransactionsAction) => 
             this.transactionAccessService.listTransactions(action.payload).pipe(
-                map((response: DataResponse<[Transaction]>) => {                    
+                map((response: DataResponse<[Transaction]>) => {                                        
                     return new ListTransactionsActionSuccess(response.data);
                 }),
                 catchError(err => of(new ListTransactionsActionFail(err))

@@ -1,0 +1,16 @@
+<h1 class="page-title header-3">New Project</h1>
+
+<div class="container">
+    <form action="" class="form" [formGroup]="form" (ngSubmit)="createBank()">
+        <app-input type="text" name="title" class="form-group" [control]="getControl('title')"></app-input>
+        <app-input type="text" name="tags" class="form-group" [control]="getControl('tags')"></app-input>
+        <app-text-area name="description" class="form-group" [control]="getControl('description')"></app-text-area>
+
+        <button 
+            [disabled]="form.invalid"
+            class="button form-group text-1"
+            type="submit">
+            Create Project
+        </button>
+    </form>
+</div>

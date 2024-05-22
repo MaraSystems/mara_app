@@ -1,17 +1,20 @@
 <div class="header">
-    <h1 class="header-title header-3">Projects</h1>
+    <h1 class="header-title header-3">Transactions</h1>
 
     <span class="header-controls">
         <span class="material-symbols-outlined header-controls-icon">filter_alt</span>
-        <span class="material-symbols-outlined header-controls-icon" routerLink="/transactions/create">add</span>
     </span>
 </div>
 
 <div class="transactions" *ngIf="transactions.length">
-    <app-table-header [list]="['', 'title', 'category', 'duration', 'price']"></app-table-header>
+    <app-table-header [list]="['', 'title', 'amount', 'action', 'status', 'date']"></app-table-header>
     <div class="transactions-list">
-        <!-- <app-project-item *ngFor="let item of transactions" [project]="item" [routerLink]="'/transactions/' + item._id"></app-project-item> -->
+        <app-transaction-item [transaction]="item" *ngFor="let item of transactions" (click)="openTransaction(item)"></app-transaction-item>
     </div>
 </div>
 
-<app-empty *ngIf="!transactions.length" name="project"></app-empty>
+<app-empty *ngIf="!transactions.length" name="transaction"></app-empty>
+
+<app-popup [name]="'transaction-view'" title="Transaction">
+    <app-transaction-view *ngIf="selectedTransaction" [id]="selectedTransaction._id"></app-transaction-view>
+</app-popup> 

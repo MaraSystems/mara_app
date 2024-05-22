@@ -6,13 +6,13 @@ import { UnitDirective } from './unit.directive';
 
 @NgModule({
   declarations: [
-    UnitDirective
+    UnitDirective,
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    UnitDirective
+    UnitDirective,
   ]
 })
 export class DirectivesModule { }

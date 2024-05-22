@@ -1,0 +1,34 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-low);
+    gap: var(--gap-normal);
+    padding: var(--gap-normal);
+    border-radius: var(--gap-small);
+    width: -webkit-fill-available;
+    align-items: center;
+
+    .balance {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-x-small);
+        align-items: center;
+    }
+
+    .control {
+        display: flex;
+        flex-direction: row;
+        gap: var(--gap-big);
+        align-items: center;
+
+        .debit {
+            background-color: var(--color-secondary);
+        }
+    }
+}
+
+@media only screen and (min-width: 760px){
+    :host {
+        max-width: var(--enclosed-500);
+    }
+}

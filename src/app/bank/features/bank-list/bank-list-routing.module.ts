@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TransactionViewComponent } from './transaction-view.component';
+import { BankListComponent } from './bank-list.component';
 
 const routes: Routes = [
   { 
     path: '', 
-    component: TransactionViewComponent
+    component: BankListComponent
   }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TransactionViewRoutingModule { }
+export class BankListRoutingModule { }

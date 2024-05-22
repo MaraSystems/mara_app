@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
-import { selectAllTransactions } from '../../utils/store/transaction-store.selector';
 import { Transaction } from '../../utils/models/transaction.model';
-import { ListTransactionsAction } from '../../utils/store/transaction-store.action';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-shell',
@@ -12,17 +10,28 @@ import { ListTransactionsAction } from '../../utils/store/transaction-store.acti
 })
 export class TransactionShellComponent extends UnSubscriber implements OnInit {
   transactions: Transaction[] = [];
+  tabs = ['history', 'banks'];
+  selectedTab = 0;
 
   constructor(
-    public store: Store
+    private router: Router,
   ){
     super();
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new ListTransactionsAction({ limit: 10, skip: 0 }));
-    this.newSubscription = this.store.select(selectAllTransactions).subscribe(transactions => {      
-      this.transactions = transactions;
-    });
+    this.chooseTab();
+    const [section, ..._] = location.pathname.split('/').reverse();
+    this.selectedTab = this.tabs.indexOf(section);    
+  }
+
+  navigate (name: string) {        
+    this.router.navigateByUrl(`/transactions/${name}`);
+  }
+
+  chooseTab() {
+    if (location.pathname === '/transactions') {
+      this.navigate(this.tabs[0]);
+    }
   }
 }

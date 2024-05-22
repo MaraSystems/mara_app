@@ -1,0 +1,67 @@
+:host {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-auto-rows: auto;
+    grid-template-areas: 
+    "image title title"
+    "image action amount"
+    "image status date"
+    ;
+    width: -webkit-fill-available;
+    gap: var(--gap-small);
+    padding: var(--gap-small);
+    border-radius: var(--gap-small);
+    align-items: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-medium);
+
+    .image {
+        grid-area: image;
+        border: 1px solid var(--color-secondary);
+        border-radius: 50%;
+        padding: var(--gap-small);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--gap-big);
+        height: var(--gap-big);
+        align-self: flex-start;
+
+        .icon {
+            font-size: var(--gap-big);
+        }
+    }
+
+    .title {
+        grid-area: title;
+        text-align: left;
+    }
+
+    .action {
+        grid-area: action;
+        text-align: left;
+        text-transform: uppercase;
+    }
+
+    .amount {
+        grid-area: amount;
+    }
+
+    .status {
+        grid-area: status;
+        text-transform: uppercase;
+    }
+
+    .date {
+        grid-area: date;
+    }
+}
+
+@media only screen and (min-width: 760px){
+    :host {
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-areas: 
+            "image title amount action status date"
+        ;
+    }
+}
