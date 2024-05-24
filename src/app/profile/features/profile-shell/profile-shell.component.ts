@@ -27,16 +27,16 @@ export class ProfileShellComponent extends UnSubscriber implements OnInit {
   }
 
   ngOnInit(): void {
-    this.chooseTab();
-    const [section, ..._] = location.pathname.split('/').reverse();
-    this.selectedTab = this.tabs.indexOf(section);    
+    const [section, ..._] = location.pathname.split('/').reverse();    
+    this.selectedTab = this.tabs.indexOf(section);     
+    this.chooseTab();   
   }
 
   navigate (name: string) {    
     this.router.navigateByUrl(`/profile/${name}`);
   }
 
-  chooseTab() {
+  chooseTab() {    
     if (location.pathname === '/profile') {
       this.navigate(this.tabs[0]);
     }

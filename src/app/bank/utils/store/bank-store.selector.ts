@@ -6,7 +6,12 @@ export const clientSelector = createFeatureSelector<Readonly<BankState>>('banks'
 
 export const selectAllClientBanks = (userId: string) => createSelector(
     clientSelector,
-    () => Object.values(bankAdapter.getSelectors().selectAll).filter((bank) => bank.userId === userId) as Bank[]
+    state => Object.values(bankAdapter.getSelectors().selectAll(state)).filter((bank) => bank.userId === userId) as Bank[]
+);
+
+export const selectClientDefaultBank = (userId: string) => createSelector(
+    clientSelector,
+    state => Object.values(bankAdapter.getSelectors().selectAll(state)).find((bank) => (bank.userId === userId && bank.default === true)) as Bank
 );
 
 export const selectBankById = (id: string) => createSelector(

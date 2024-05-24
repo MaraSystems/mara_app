@@ -1,1 +1,24 @@
-Banks here
+<div class="header">
+    <h1 class="header-title header-3">Banks</h1>
+
+    <span class="header-controls">
+        <span class="material-symbols-outlined icon clickable" (click)="popupService.open('bank-create')">add</span>
+    </span>
+</div>
+
+<div class="banks" *ngIf="banks.length">
+    <app-table-header [list]="['', 'bank name', 'account number', 'account name', 'defualt', 'date']"></app-table-header>
+    <div class="banks-list">
+        <app-bank-item *ngFor="let item of banks" [bank]="item" (click)="updateBank(item._id)"></app-bank-item>
+    </div>
+</div>
+
+<app-empty *ngIf="!banks.length" name="bank"></app-empty>
+
+<app-popup [name]="'bank-create'" title="Create Bank">
+    <app-bank-create></app-bank-create>
+</app-popup>
+
+<app-popup [name]="'bank-update'" title="Update Bank">
+    <app-bank-update *ngIf="selectedBankId" [id]="selectedBankId"></app-bank-update>
+</app-popup>

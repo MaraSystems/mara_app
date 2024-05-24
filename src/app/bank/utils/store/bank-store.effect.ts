@@ -3,7 +3,6 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
-import { Router } from "@angular/router";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { BankAccessService } from "../access/bank-access.service";
 import { DeleteBankAction, DeleteBankActionFail, DeleteBankActionSuccess, GetBankAction, GetBankActionFail, GetBankActionSuccess, ListBanksAction, ListBanksActionFail, ListBanksActionSuccess, BankActionsType, UpdateBankAction, UpdateBankActionFail, UpdateBankActionSuccess, CreateBankAction, CreateBankActionFail, CreateBankActionSuccess } from "./bank-store.action";
@@ -16,7 +15,6 @@ export class BankStoreEffect {
         private actions$: Actions,
         private bankAccessService: BankAccessService,
         private store: Store,
-        private router: Router,
     ){}
 
     createBank$ = createEffect(() => this.actions$.pipe(
@@ -83,7 +81,6 @@ export class BankStoreEffect {
             this.bankAccessService.deleteBank(action.payload).pipe(
                 map((response: DataResponse<Bank>) => {         
                     this.store.dispatch(new AddToast({ description: 'Bank Deleted' }));
-                    this.router.navigateByUrl('/banks');           
                     return new DeleteBankActionSuccess(response.data);
                 }),
                 catchError(err => of(new DeleteBankActionFail(err))

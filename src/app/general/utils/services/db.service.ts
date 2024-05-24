@@ -57,8 +57,9 @@ export class DBService {
 
   public updateWallet(transaction: Transaction) {
     let { data: balance } = this.getWallet(transaction.userId);
-
-    balance = TransactionActionEnum.CREDIT
+    console.log(transaction);
+    
+    balance = transaction.action === TransactionActionEnum.CREDIT
       ? balance + transaction.amount
       : balance - transaction.amount;
 

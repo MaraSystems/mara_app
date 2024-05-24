@@ -11,7 +11,7 @@ export class InputComponent {
   @Input() placeholder: string = '';
   @Input() label = true;
   @Input() measure: string = '';
-  @Input() type: 'text' | 'email' | 'date' | 'phone' | 'number' = 'text';
+  @Input() type: 'text' | 'email' | 'date' | 'phone' | 'number' | 'checkbox' = 'text';
   @Input() control!: FormControl;
   @Input() required!: boolean;
 

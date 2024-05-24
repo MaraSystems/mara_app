@@ -1,20 +1,16 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/app.state";
 import { PopupService } from "src/app/general/features/popup/features/popup.service";
-import { Toast } from "src/app/general/features/toast/utils/models/toast.class";
 import { UnSubscriber } from "src/app/general/utils/services/unsubscriber.service";
-import { DeleteTransactionAction } from "src/app/transaction/utils/store/transaction-store.action";
-import { GetWalletAction, UpdateWalletAction } from "../../utils/store/dashboard-store.action";
-import { selectDashboardWidgetById } from "../../utils/store/dashboard-store.selector";
+import { UpdateWalletAction } from "../../utils/store/dashboard-store.action";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { TransactionPlatformEnum } from "src/app/transaction/utils/models/transaction-platform.enum";
 import { TransactionModelEnum } from "src/app/transaction/utils/models/transaction-model.enum";
-import { TransactionStatusEnum } from "src/app/transaction/utils/models/transaction-status.enum";
 import { Transaction } from "src/app/transaction/utils/models/transaction.model";
 import { getFormControl } from "src/app/general/utils/lib/getFormControl";
 import { TransactionActionEnum } from "src/app/transaction/utils/models/transaction-action.enum";
+import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
 
 @Component({
   selector: 'app-wallet-credit',
@@ -55,15 +51,13 @@ export class WalletCreditComponent extends UnSubscriber implements OnInit {
     });
   }
 
-  deposit() {
-    console.log(this.transaction);
-    
+  deposit() {    
     this.store.dispatch(new UpdateWalletAction(this.transaction, {
       success: () => {
-        
+        this.store.dispatch(new AddToast({ description: 'Wallet credit successful'}))
       },
       failure: () => {
-        
+        this.store.dispatch(new AddToast({ description: 'Wallet credit failed'}))
       }
     }))
   }

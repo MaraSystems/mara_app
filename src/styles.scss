@@ -78,6 +78,7 @@ html, body {
         width: -webkit-fill-available;
         padding: var(--gap-x-small);
         color: var(--color-dark);
+        align-items: flex-start;
 
         &:focus {
             background: var(--color-light);
@@ -92,6 +93,13 @@ html, body {
             border: none;
             background-color: transparent;
             min-height: 25px;
+            width: -webkit-fill-available;
+        }
+
+        &-data.checkbox {
+            width: var(--gap-normal);
+            height: var(--gap-normal);
+            accent-color: var(--color-primary);
         }
     }
 }
@@ -178,7 +186,7 @@ html, body {
 }
 
 .icon {
-    font-size: var(--gap-normal);
+    font-size: var(--gap-big);
     color: var(--color-dark);
 
     &:hover {

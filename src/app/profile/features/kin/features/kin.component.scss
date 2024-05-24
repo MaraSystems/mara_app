@@ -6,6 +6,7 @@
     gap: var(--gap-normal);
     width: calc(100% - calc(var(--gap-normal) * 2));
     height: calc(100% - calc(var(--gap-normal) * 2));
+    overflow: auto;
 
     .summery {
         display: flex;

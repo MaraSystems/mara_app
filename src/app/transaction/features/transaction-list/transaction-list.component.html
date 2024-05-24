@@ -9,12 +9,12 @@
 <div class="transactions" *ngIf="transactions.length">
     <app-table-header [list]="['', 'title', 'amount', 'action', 'status', 'date']"></app-table-header>
     <div class="transactions-list">
-        <app-transaction-item [transaction]="item" *ngFor="let item of transactions" (click)="openTransaction(item)"></app-transaction-item>
+        <app-transaction-item [transaction]="item" *ngFor="let item of transactions" (click)="openTransaction(item._id)"></app-transaction-item>
     </div>
 </div>
 
 <app-empty *ngIf="!transactions.length" name="transaction"></app-empty>
 
 <app-popup [name]="'transaction-view'" title="Transaction">
-    <app-transaction-view *ngIf="selectedTransaction" [id]="selectedTransaction._id"></app-transaction-view>
+    <app-transaction-view *ngIf="selectedTransactionId" [id]="selectedTransactionId"></app-transaction-view>
 </app-popup> 

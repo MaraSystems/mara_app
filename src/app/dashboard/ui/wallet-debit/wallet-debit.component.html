@@ -1,0 +1,16 @@
+<span class="balance">
+    <span class="text-1">Balance</span>
+    <span class="amount header-3">{{balance | currency:'₦'}}</span>
+</span>
+
+<form class="form">
+    <app-money-input name="amount" [control]="getControl(form, 'amount')"></app-money-input>
+    <app-select name="bank" [control]="getControl(form, 'modelId')" [list]="banks"></app-select>
+    <button 
+        [disabled]="form.invalid"
+        class="button form-group text-1"
+        type="submit"
+        (click)="withdraw()">
+        Withdraw
+    </button>
+</form>

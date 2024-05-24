@@ -25,6 +25,8 @@ import { DashboardStoreEffect } from "./dashboard/utils/store/dashboard-store.ef
 import { DashboardState, dashboardReducer } from "./dashboard/utils/store/dashboard-store.reducer";
 import { TransactionStoreEffect } from "./transaction/utils/store/transaction-store.effect";
 import { TransactionState, transactionReducer } from "./transaction/utils/store/transaction-store.reducer";
+import { BankStoreEffect } from "./bank/utils/store/bank-store.effect";
+import { BankState, bankReducer } from "./bank/utils/store/bank-store.reducer";
 
 export const appEffects = [
     ClientStoreEffect,
@@ -38,7 +40,8 @@ export const appEffects = [
     ShareStoreEffect,
     ComplianceStoreEffect,
     DashboardStoreEffect,
-    TransactionStoreEffect
+    TransactionStoreEffect,
+    BankStoreEffect
 ];
 
 export interface AppState {
@@ -54,7 +57,8 @@ export interface AppState {
     shares: ShareState,
     compliances: ComplianceState,
     dashboard: DashboardState,
-    transactions: TransactionState
+    transactions: TransactionState,
+    banks: BankState
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -70,5 +74,6 @@ export const appReducers: ActionReducerMap<AppState> = {
     shares: shareReducer,
     compliances: complianceReducer,
     dashboard: dashboardReducer,
-    transactions: transactionReducer
+    transactions: transactionReducer,
+    banks: bankReducer
 }

@@ -8,18 +8,19 @@ import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.servic
   templateUrl: './dashboard-shell.component.html',
   styleUrls: ['./dashboard-shell.component.scss']
 })
-export class DashboardShellComponent extends UnSubscriber implements OnInit {
+export class DashboardShellComponent extends UnSubscriber implements OnInit {    
   userId = '';
 
   constructor(
     public store: Store
-  ){
+  ) {
     super();
   }
 
   ngOnInit(): void {
-    this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
-      this.userId = auth.id;
-    });
+     this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
+      this.userId = auth?.id;
+     });
   }
 }
+

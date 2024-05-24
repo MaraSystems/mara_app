@@ -11,6 +11,8 @@ import { ShareAccessEnum } from 'src/app/general/features/share/utils/models/sha
 import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { Router } from '@angular/router';
+import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { accountNumberPattern } from 'src/app/general/utils/lib/patterns';
 
 
 @Component({
@@ -24,7 +26,7 @@ export class BankCreateComponent extends UnSubscriber implements OnInit {
 
   constructor(
     public store: Store<AppState>,
-    public router: Router
+    public popupService: PopupService
   ){
     super();
   }
@@ -33,7 +35,7 @@ export class BankCreateComponent extends UnSubscriber implements OnInit {
     this.initForm();
 
     this.newSubscription = this.form.valueChanges.subscribe(data => {      
-      this.bank = data;
+      this.bank = data;      
     });
 
     this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {      
@@ -43,16 +45,12 @@ export class BankCreateComponent extends UnSubscriber implements OnInit {
 
   initForm() {
     this.form = new FormGroup({
-      title: new FormControl(null, [Validators.minLength(3), Validators.required]),
-      category: new FormControl(null, [Validators.required]),
-      tags: new FormControl(null, [Validators.required]),
-      description: new FormControl(null, [Validators.maxLength(10000)]),
+      bankName: new FormControl(null, [Validators.minLength(3), Validators.required]),
+      accountNumber: new FormControl(null, [Validators.pattern(accountNumberPattern), Validators.required]),
+      accountName: new FormControl(null, [Validators.minLength(3), Validators.required]),
       userId: new FormControl(null),
-      privacy: new FormControl({ type: SharePrivacyEnum.PUBLIC, access: ShareAccessEnum.ENGAGE } as Privacy),
-      hidden: new FormControl(false),
-      likes: new FormControl([]),
-      bookmarks: new FormControl([]),
-      shares: new FormControl(0)
+      default: new FormControl(false),
+      hidden: new FormControl(false)
     });
   }
 
@@ -66,11 +64,11 @@ export class BankCreateComponent extends UnSubscriber implements OnInit {
     return control;
   }
 
-  createBank() {    
+  addBank() {        
     this.store.dispatch(new CreateBankAction(this.bank, {
       success: () => {        
         this.store.dispatch(new AddToast({ description: 'Bank creation successful' }));
-        this.router.navigateByUrl('/banks');
+        this.popupService.close('bank-create');
       },
       failure: () => {
         this.store.dispatch(new AddToast({ description: 'Bank creation failed' }));

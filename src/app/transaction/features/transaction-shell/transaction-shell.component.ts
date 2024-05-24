@@ -22,10 +22,10 @@ export class TransactionShellComponent extends UnSubscriber implements OnInit {
   ngOnInit(): void {
     this.chooseTab();
     const [section, ..._] = location.pathname.split('/').reverse();
-    this.selectedTab = this.tabs.indexOf(section);    
+    this.selectedTab = this.tabs.indexOf(section);        
   }
 
-  navigate (name: string) {        
+  navigate (name: string) {            
     this.router.navigateByUrl(`/transactions/${name}`);
   }
 

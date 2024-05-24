@@ -13,7 +13,7 @@ import { PopupService } from 'src/app/general/features/popup/features/popup.serv
 })
 export class TransactionListComponent extends UnSubscriber implements OnInit {
   transactions: Transaction[] = [];
-  selectedTransaction!: Transaction;
+  selectedTransactionId = '';
 
   constructor(
     public store: Store,
@@ -29,8 +29,8 @@ export class TransactionListComponent extends UnSubscriber implements OnInit {
     });
   }
 
-  openTransaction(item: Transaction) {    
-    this.selectedTransaction = item; 
+  openTransaction(id: string) {    
+    this.selectedTransactionId = id; 
     this.popupService.open('transaction-view');
   }
 }

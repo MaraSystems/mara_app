@@ -5,8 +5,8 @@
     </span>
     
     <select class="form-control-data text-1" [name]="name" [formControl]="control" #select>
-        <option disabled value="" [defaultSelected]="true" class="default">Select {{name}}</option>
-        <option *ngFor="let item of list" [selected]="item === control.value" [ngValue]="item">{{ item }}</option>
+        <option disabled [defaultSelected]="true" class="default">Select {{name}}</option>
+        <option *ngFor="let item of keys; index as i" [selected]="item === control.value" [ngValue]="item">{{ values[i] }}</option>
     </select>
 </span>
 <app-form-errors [control]="control" [name]="name"></app-form-errors>

@@ -1,11 +1,31 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { InputComponent } from '../input/input.component';
+import { KeyValue } from '@angular/common';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss']
 })
-export class SelectComponent extends InputComponent {
-  @Input() list!: string[];
+export class SelectComponent extends InputComponent implements OnInit {
+  @Input() list!: Array<string | KeyValue<string, string>>;
+  keys: string[] = [];
+  values: string[] = [];
+
+  ngOnInit(): void {
+    this.useList();
+  }
+
+  useList() {
+    for (const item of this.list) {
+      if (typeof item !== 'string') {
+        this.keys.push(item.key);
+        this.values.push(item.value);
+      }
+      else {
+        this.keys.push(item);
+        this.values.push(item);
+      }
+    } 
+  }
 }

@@ -4,9 +4,16 @@
 <app-checkbox type="checkbox" name="default" class="form-group" [control]="getControl('default')"></app-checkbox>
 
 <button 
-    [disabled]="form.invalid"
+    [disabled]="!updateData || form.invalid"
     class="button form-group text-1"
     type="submit"
-    (click)="addBank()">
-    Add Bank
+    (click)="updateBank()">
+    Update Bank
+</button>
+
+<button 
+    class="button form-group text-1"
+    type="submit"
+    (click)="deleteBank()">
+    Delete Bank
 </button>

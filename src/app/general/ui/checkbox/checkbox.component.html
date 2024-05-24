@@ -6,13 +6,12 @@
     
     <input 
         #input
-        [type]="type" 
+        type="checkbox"
         [name]="name" 
-        class="form-control-data text-1" 
+        class="form-control-data text-1 checkbox" 
         [formControl]="control" 
         [placeholder]="placeholder"
         [required]="required"
-        [ngClass]="{checkbox: type === 'checkbox'}"
         >
 </span>
 <app-form-errors [control]="control" [name]="name"></app-form-errors>

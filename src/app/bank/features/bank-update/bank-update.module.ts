@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BankCreateComponent } from './bank-create.component';
+import { BankUpdateComponent } from './bank-update.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputModule } from 'src/app/general/ui/input/input.module';
 import { FileInputModule } from 'src/app/general/ui/file-input/file-input.module';
@@ -12,7 +12,7 @@ import { CheckboxModule } from 'src/app/general/ui/checkbox/checkbox.module';
 
 @NgModule({
   declarations: [
-    BankCreateComponent
+    BankUpdateComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +24,7 @@ import { CheckboxModule } from 'src/app/general/ui/checkbox/checkbox.module';
     CheckboxModule
   ],
   exports: [
-    BankCreateComponent
+    BankUpdateComponent
   ]
 })
-export class BankCreateModule { }
+export class BankUpdateModule { }
