@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { environment } from 'src/environments/environment';
-import { Database, EngineTypes } from '@black-ink/lonedb';
 import { DataResponse } from '../models/data-response';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { IQueryOption } from '@black-ink/lonedb/lib/models/query-option.interface';
 import { UploadData } from '../../features/attachment/utils/models/upload-data';
 import { Attachment } from '../../features/attachment/utils/models/attatchment.model';
@@ -12,11 +9,14 @@ import { AccessService } from './access.service';
 import { TransactionModelEnum } from 'src/app/transaction/utils/models/transaction-model.enum';
 import { Transaction } from 'src/app/transaction/utils/models/transaction.model';
 import { TransactionActionEnum } from 'src/app/transaction/utils/models/transaction-action.enum';
+import { Notification } from 'src/app/notification/utils/models/notification.model';
+import { NotificationStatusEnum } from 'src/app/notification/utils/models/notification-status.enum';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class DBService {
+export class APIService {
   constructor(
     private accessService: AccessService
   ) { 
@@ -41,7 +41,7 @@ export class DBService {
 
   public download(query: DownloadData){
     const collection = this.accessService.db.createCollection<Attachment>('attachments', { timestamp: true });    
-    const document = collection.findOne(query, {}, { sort: { version: 'desc' } } as IQueryOption);
+    const document = collection.findOne(query, { sort: { version: 'desc' } } as IQueryOption);
     const { path } = document;
     const url = localStorage.getItem(`${path}`) as string;
     const response: DataResponse<string> = { success: true, data: url as string };
@@ -50,15 +50,13 @@ export class DBService {
 
   public getWallet(userId: string) {
     const collection = this.accessService.db.createCollection<Transaction>('transactions', { timestamp: true });
-    const { balance } = collection.findOne({ userId, model: TransactionModelEnum.WALLET }, {}, { sort: { createdAt: 'desc' } }) || { balance: 0.00 };
+    const { balance } = collection.findOne({ userId, model: TransactionModelEnum.WALLET }, { sort: { createdAt: 'desc' } }) || { balance: 0.00 };
     const response: DataResponse<number> = { success: true, data: balance };
     return response;
   }
 
   public updateWallet(transaction: Transaction) {
-    let { data: balance } = this.getWallet(transaction.userId);
-    console.log(transaction);
-    
+    let { data: balance } = this.getWallet(transaction.userId);    
     balance = transaction.action === TransactionActionEnum.CREDIT
       ? balance + transaction.amount
       : balance - transaction.amount;
@@ -71,5 +69,29 @@ export class DBService {
     const { balance: newBalance } = collection.insertOne({ ...transaction, balance });
     const response: DataResponse<number> = { success: true, data: newBalance };
     return response;
+  }
+
+  public createNotification(data: Notification) {
+    const collection = this.accessService.db.createCollection<Notification>('notifications', { timestamp: true });
+    const notification = collection.insertOne(data);
+    return of(notification);
+  }
+
+  public readNotification(id: string, userId: string) {
+    const collection = this.accessService.db.createCollection<Notification>('notifications', { timestamp: true });
+    const notification = collection.findOne({ _id: id });
+    if (!notification) {
+      throw new Error('Notification not found');
+    }
+
+    const users = notification.users.map(user => {
+      return user.userId === userId
+        ? { ...user, status: NotificationStatusEnum.READ }
+        : user
+    });
+
+    const data = collection.updateOne({ _id: id }, { users });
+    const response: DataResponse<Notification> = { success: true, data };
+    return of(response);
   }
 }

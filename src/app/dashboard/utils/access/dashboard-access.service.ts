@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { DBService } from 'src/app/general/utils/services/db.service';
+import { APIService } from 'src/app/general/utils/services/api.service';
 import { TransactionActionEnum } from 'src/app/transaction/utils/models/transaction-action.enum';
 import { Transaction } from 'src/app/transaction/utils/models/transaction.model';
 
@@ -9,16 +9,16 @@ import { Transaction } from 'src/app/transaction/utils/models/transaction.model'
 })
 export class DashboardAccessService {
   constructor(
-    private dbService: DBService,
+    private apiService: APIService,
   ) {}
 
   getWallet(userId: string) {    
-    const response = this.dbService.getWallet(userId);
+    const response = this.apiService.getWallet(userId);
     return of(response);
   }
 
   updateWallet(transaction: Transaction) {
-    const response = this.dbService.updateWallet(transaction);
+    const response = this.apiService.updateWallet(transaction);
     return of(response);
   }
 }

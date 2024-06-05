@@ -4,7 +4,7 @@ import { Update } from '@ngrx/entity';
 import { Transaction } from '../models/transaction.model';
 import { ListOptions } from 'src/app/general/utils/models/list-options';
 import { TransactionStatusEnum } from '../models/transaction-status.enum';
-import { DBService } from 'src/app/general/utils/services/db.service';
+import { APIService } from 'src/app/general/utils/services/api.service';
 
 @Injectable({
   providedIn: 'root'

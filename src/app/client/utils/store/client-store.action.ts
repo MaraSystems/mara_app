@@ -70,7 +70,7 @@ export class GetClientActionFail implements Action {
 
 export class ListClientsAction implements Action {
     readonly type = ClientActionsType.LIST_CLIENTS;
-    constructor(public payload?: any, public aggregation?: any, public options?: ListOptions){}
+    constructor(public payload?: any, public options?: ListOptions){}
 }
 
 export class ListClientsActionSuccess implements Action {

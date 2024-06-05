@@ -80,10 +80,6 @@ html, body {
         color: var(--color-dark);
         align-items: flex-start;
 
-        &:focus {
-            background: var(--color-light);
-        }
-
         &-label {
             color: var(--color-dark);
             text-transform: capitalize;
@@ -92,7 +88,7 @@ html, body {
         &-data {
             border: none;
             background-color: transparent;
-            min-height: 25px;
+            min-height: 30px;
             width: -webkit-fill-available;
         }
 

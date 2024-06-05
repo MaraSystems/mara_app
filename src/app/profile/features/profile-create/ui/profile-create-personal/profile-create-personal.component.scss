@@ -1,12 +1,8 @@
 :host {
     width: -webkit-fill-available;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content 1fr;
     gap: var(--gap-normal);
-}
-
-@media only screen and (min-width: 760px){
-    :host {        
-        
-    }
+    max-width: var(--enclosed-500);
 }

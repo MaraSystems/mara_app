@@ -68,7 +68,7 @@ export class ClientStoreEffect {
     listProjects$ = createEffect(() => this.actions$.pipe(
         ofType<ListClientsAction>(ClientActionsType.LIST_CLIENTS),
         mergeMap((action: ListClientsAction) => 
-            this.clientAccessService.listClients(action.payload, action.aggregation, action.options).pipe(
+            this.clientAccessService.listClients(action.payload, action.options).pipe(
                 map((response: DataResponse<[Client]>) => {                    
                     return new ListClientsActionSuccess(response.data, action.payload);
                 }),

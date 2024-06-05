@@ -3,7 +3,7 @@ import { AccessService } from 'src/app/general/utils/services/access.service';
 import { UploadData } from '../models/upload-data';
 import { DownloadData } from '../models/download-data';
 import { Attachment } from '../models/attatchment.model';
-import { DBService } from 'src/app/general/utils/services/db.service';
+import { APIService } from 'src/app/general/utils/services/api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +13,16 @@ export class AttachmentAccessService {
 
   constructor(
     private accessService: AccessService,
-    private dbService: DBService
+    private apiService: APIService
   ) {}
 
   uploadAttachment(data: UploadData) {        
-    const response = this.dbService.upload(data);    
+    const response = this.apiService.upload(data);    
     return response;
   }
 
   downloadAttachment(data: DownloadData) {
-    const response = this.dbService.download(data);    
+    const response = this.apiService.download(data);    
     return response;
   }
 

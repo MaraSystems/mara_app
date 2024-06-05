@@ -29,8 +29,8 @@ export class ClientAccessService {
     return response;
   }
 
-  listClients(query: any = {}, aggregation: any = {}, options: ListOptions = {}) {
-    const response = this.accessService.find<[Client]>(this.domain, { hidden: false, ...query }, aggregation, options);
+  listClients(query: any = {}, options: ListOptions = {}) {
+    const response = this.accessService.find<[Client]>(this.domain, { hidden: false, ...query }, options);
     return response;
   }
 }

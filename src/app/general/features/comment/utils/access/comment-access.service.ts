@@ -5,7 +5,7 @@ import { ListOptions } from 'src/app/general/utils/models/list-options';
 import { Comment } from '../models/comment.model';
 import { map, mergeMap, of, tap } from 'rxjs';
 import { DataResponse } from 'src/app/general/utils/models/data-response';
-import { DBService } from 'src/app/general/utils/services/db.service';
+import { APIService } from 'src/app/general/utils/services/api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class CommentAccessService {
 
   constructor(
     private accessService: AccessService,
-    private dbService: DBService
+    private apiService: APIService
   ) {}
 
   createComment(data: Comment) {    
@@ -26,7 +26,7 @@ export class CommentAccessService {
       bookmarks: []
     }).pipe(
       mergeMap(({ data: comment }) => attachment
-        ? this.dbService.upload({ 
+        ? this.apiService.upload({ 
           model: 'Comment', modelId: comment._id as string, data: attachment, name: ''
         }).pipe(
           tap(({ data: uploaded }) => {
