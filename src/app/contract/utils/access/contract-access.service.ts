@@ -19,7 +19,7 @@ export class ContractAccessService {
 
   createContract(data: Contract) {    
     const response = this.accessService.insertOne<Contract>(this.domain, data);
-    return of(response);
+    return response;
   }
 
   getContract(id: string) {    
@@ -34,6 +34,6 @@ export class ContractAccessService {
 
   updateContract(data: Update<Contract>) {    
     const response = this.accessService.updateOne<Contract>(this.domain, { _id: data.id }, data.changes);
-    return of(response);
+    return response;
   }
 }
