@@ -1,13 +1,13 @@
 <h1 class="header-3">Compliance Information</h1>
 
 <div class="form">
-    <app-profile-create-compliance-item [list]="identificationList" [expiry]="identificationExpiry" name="identification" (changes)="identificationForm = $event"></app-profile-create-compliance-item>
+    <app-profile-create-compliance-item [data]="identificationList" name="identification" (changes)="identificationForm = $event"></app-profile-create-compliance-item>
 
-    <app-profile-create-compliance-item [list]="supportList" name="support" (changes)="supportForm = $event"></app-profile-create-compliance-item>
+    <app-profile-create-compliance-item [data]="supportList" name="support" (changes)="supportForm = $event"></app-profile-create-compliance-item>
     
     <button 
     type="submit"
-    [disabled]="!identificationForm || identificationForm.invalid || !supportForm || supportForm.invalid" 
+    [disabled]="(!identificationForm || identificationForm.invalid) || (!supportForm || supportForm.invalid)" 
     class="button text-1 form-control" 
     (click)="updateCompliance()">Complete</button>
 </div>

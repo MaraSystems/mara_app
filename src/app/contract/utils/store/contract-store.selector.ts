@@ -4,9 +4,9 @@ import { Contract } from "../models/contract.model";
 
 export const clientSelector = createFeatureSelector<Readonly<ContractState>>('contracts');
 
-export const selectAllContracts = createSelector(
+export const selectAllClientContracts = (userId: string) => createSelector(
     clientSelector,
-    contractAdapter.getSelectors().selectAll
+    state => contractAdapter.getSelectors().selectAll(state).filter(contract => (contract.clientId === userId) || (contract.contractorId === userId))
 );
 
 export const selectContractById = (id: string) => createSelector(

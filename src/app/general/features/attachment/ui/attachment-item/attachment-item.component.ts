@@ -15,6 +15,7 @@ import { Toast } from '../../../toast/utils/models/toast.class';
 })
 export class AttachmentItemComponent extends UnSubscriber implements OnInit {
   @Input({ required: true }) id!: string;
+  @Input() deletable = false;
   attachment!: Attachment;
 
   moreList: More[] = [];
@@ -35,8 +36,10 @@ export class AttachmentItemComponent extends UnSubscriber implements OnInit {
 
     this.moreList = [
       { name: 'Update', icon: 'update', popup: `attachment-update-${this.id}` },
-      { name: 'Delete', icon: 'delete', action: () => { this.delete() } }
     ];
+    if (this.deletable) {
+      this.moreList.push({ name: 'Delete', icon: 'delete', action: () => { this.delete() } });
+    }
   }
 
   delete() {

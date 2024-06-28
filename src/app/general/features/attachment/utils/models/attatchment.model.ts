@@ -1,3 +1,5 @@
+import { AttachmentModelEnum } from "./attatchment-model.enum";
+
 export interface Attachment {
     _id: string;
     name: string;
@@ -5,7 +7,7 @@ export interface Attachment {
     updatedAt: Date;
     path: string;
     version: number;
-    model: string;
+    model: AttachmentModelEnum;
     modelId: string;
     url: string;
 }

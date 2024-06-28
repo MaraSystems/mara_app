@@ -33,13 +33,23 @@
     <div class="section-title">
         <h1 class="text-1 section-title-text">Deliverables</h1>
         <span class="section-icons">
-            <span class="material-symbols-outlined" [routerLink]="'/projects/' + id + '/deliverables/create' ">add</span>
+            <span class="material-symbols-outlined" [routerLink]="'/projects/' + id + '/deliverables/create' " *ngIf="auth.id === project.userId && project.status === projectStatus.DRAFT">
+                add
+            </span>
             <span class="material-symbols-outlined" [routerLink]="'/projects/' + id + '/deliverables' ">arrow_outward</span>
+            <span class="material-symbols-outlined" *ngIf="auth.id !== project.userId && project.status === projectStatus.PUBLISHED" (click)="toggleDeliverableList(selectedDeliverables.length !== deliverables.length)">
+                {{ selectedDeliverables.length === deliverables.length ? 'radio_button_checked' : 'radio_button_unchecked' }}
+            </span>
         </span>
     </div>
 
     <div class="deliverables-list section-container" *ngIf="deliverables.length">
-        <app-project-deliverable-item *ngFor="let item of deliverables" [deliverable]="item" [routerLink]="'/projects/' + item.projectId + '/deliverables/' + item._id"></app-project-deliverable-item>
+        <span class="deliverables-list-item" *ngFor="let item of deliverables">
+            <app-project-deliverable-item [deliverable]="item" [routerLink]="'/projects/' + item.projectId + '/deliverables/' + item._id"></app-project-deliverable-item>
+            <span class="material-symbols-outlined clickable" *ngIf="auth.id !== project.userId && project.status === projectStatus.PUBLISHED" (click)="toggleDeliverable(item._id)">
+                {{ selectedDeliverables.includes(item._id) ? 'radio_button_checked' : 'radio_button_unchecked' }}
+            </span>
+        </span>
     </div>
     
     <app-empty *ngIf="!deliverables.length" name="project deliverable"></app-empty>
@@ -50,25 +60,33 @@
     <pre class="description-text text-1 section-container">{{project.description}}</pre>
 </div>
 
-<button class="button text-1">Initiate Contract</button>
+<button 
+    [disabled]="!selectedDeliverables.length"
+    class="button text-1" 
+    *ngIf="auth.id !== project.userId && project.status === projectStatus.PUBLISHED" 
+    (click)="requestContract()">
+    Request Contract
+</button>
 
-<app-popup [name]="'project-update-' + id" title="Project">
-    <app-project-update></app-project-update>
-</app-popup>
-
-<app-popup [name]="'project-comment-' + id" title="Comments">
-    <app-comment-list [model]="commentModel" [modelId]="id"></app-comment-list>
-</app-popup>
-
-<app-popup [name]="'project-share-' + id" title="Project">
-    <app-share 
-        *ngIf="project.privacy" 
-        [model]="shareModel" 
-        [modelId]="project._id" 
-        [privacy]="project.privacy.type" 
-        [access]="project.privacy.access" 
-        [link]="'project/'+project._id" 
-        [ownerId]="project.userId" 
-        (changed)="updatePrivacy($event)"
-        (shareTo)="updateSharedList($event)"></app-share>
-</app-popup>
+<span class="popups">
+    <app-popup [name]="'project-update-' + id" title="Project">
+        <app-project-update></app-project-update>
+    </app-popup>
+    
+    <app-popup [name]="'project-comment-' + id" title="Comments">
+        <app-comment-list [model]="commentModel" [modelId]="id"></app-comment-list>
+    </app-popup>
+    
+    <app-popup [name]="'project-share-' + id" title="Project">
+        <app-share 
+            *ngIf="project.privacy" 
+            [model]="shareModel" 
+            [modelId]="project._id" 
+            [privacy]="project.privacy.type" 
+            [access]="project.privacy.access" 
+            [link]="'project/'+project._id" 
+            [ownerId]="project.userId" 
+            (changed)="updatePrivacy($event)"
+            (shareTo)="updateSharedList($event)"></app-share>
+    </app-popup>
+</span>

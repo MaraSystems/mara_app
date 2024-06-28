@@ -68,7 +68,7 @@ export class GetContractDeliverableActionFail implements Action {
 
 export class ListContractDeliverablesAction implements Action {
     readonly type = ContractDeliverableActionsType.LIST_CONTRACT_DELIVERABLES;
-    constructor(public payload: ListOptions, public contractId: string){}
+    constructor(public contractId: string, public payload?: ListOptions){}
 }
 
 export class ListContractDeliverablesActionSuccess implements Action {

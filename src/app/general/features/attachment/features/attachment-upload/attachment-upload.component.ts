@@ -9,6 +9,7 @@ import { Attachment } from '../../utils/models/attatchment.model';
 import { UploadData } from '../../utils/models/upload-data';
 import { AddToast } from '../../../toast/utils/store/toast.action';
 import { PopupService } from '../../../popup/features/popup.service';
+import { AttachmentModelEnum } from '../../utils/models/attatchment-model.enum';
 
 @Component({
   selector: 'app-attachment-upload',
@@ -18,7 +19,7 @@ import { PopupService } from '../../../popup/features/popup.service';
 export class AttachmentUploadComponent extends UnSubscriber implements OnInit {
   @Input () multiple = false;
   @Input () modelId = '';
-  @Input () model = '';
+  @Input () model!: AttachmentModelEnum;
   @Input () popupId = '';
   @Input() attachment!: Attachment;
 

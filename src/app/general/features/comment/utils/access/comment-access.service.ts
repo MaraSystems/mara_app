@@ -6,6 +6,7 @@ import { Comment } from '../models/comment.model';
 import { map, mergeMap, of, tap } from 'rxjs';
 import { DataResponse } from 'src/app/general/utils/models/data-response';
 import { APIService } from 'src/app/general/utils/services/api.service';
+import { AttachmentModelEnum } from '../../../attachment/utils/models/attatchment-model.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class CommentAccessService {
     }).pipe(
       mergeMap(({ data: comment }) => attachment
         ? this.apiService.upload({ 
-          model: 'Comment', modelId: comment._id as string, data: attachment, name: ''
+          model: AttachmentModelEnum.COMMENT, modelId: comment._id as string, data: attachment, name: ''
         }).pipe(
           tap(({ data: uploaded }) => {
             this.updateComment({ id: comment._id, changes: { attachment: uploaded._id }});

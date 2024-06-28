@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })
-export class InputComponent {
+export class InputComponent implements OnChanges {
   @Input() name: string = '';
   @Input() placeholder: string = '';
   @Input() label = true;
@@ -18,5 +18,8 @@ export class InputComponent {
   isValid() {
     const { invalid, touched } = this.control;    
     return invalid && touched;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {    
   }
 }

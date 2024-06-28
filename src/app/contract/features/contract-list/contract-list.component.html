@@ -1,0 +1,16 @@
+<div class="header">
+    <h1 class="header-title header-3">Contracts</h1>
+
+    <span class="header-controls">
+        <span class="material-symbols-outlined header-controls-icon">filter_alt</span>
+    </span>
+</div>
+
+<div class="contracts" *ngIf="contracts.length">
+    <app-table-header [list]="['', 'title', 'status', 'duration', 'price']"></app-table-header>
+    <div class="contracts-list">
+        <app-contract-item *ngFor="let item of contracts" [contract]="item" [routerLink]="'/contracts/' + item._id"></app-contract-item>
+    </div>
+</div>
+
+<app-empty *ngIf="!contracts.length" name="contract"></app-empty>

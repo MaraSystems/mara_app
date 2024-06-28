@@ -19,23 +19,6 @@ export class ContractDeliverableStoreEffect {
         private router: Router
     ){}
 
-    createContractDeliverable$ = createEffect(() => this.actions$.pipe(
-        ofType<CreateContractDeliverableAction>(ContractDeliverableActionsType.CREATE_CONTRACT_DELIVERABLE),
-        mergeMap((action: CreateContractDeliverableAction) => 
-            this.contractDeliverableAccessService.createContractDeliverable(action.payload).pipe(
-                map((response: DataResponse<ContractDeliverable>) => {
-                    this.router.navigate(['/contracts', action.payload.contractId, 'deliverables']);
-                    return new CreateContractDeliverableActionSuccess(response.data);
-                }),
-                catchError(err => of(new CreateContractDeliverableActionFail(err)).pipe(
-                    tap(() => {
-                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Contract Deliverable Creation' }));
-                    })
-                ))
-            )
-        )
-    ));
-
     updateContractDeliverable$ = createEffect(() => this.actions$.pipe(
         ofType<UpdateContractDeliverableAction>(ContractDeliverableActionsType.UPDATE_CONTRACT_DELIVERABLE),
         mergeMap((action: UpdateContractDeliverableAction) => 
@@ -69,7 +52,7 @@ export class ContractDeliverableStoreEffect {
         ofType<ListContractDeliverablesAction>(ContractDeliverableActionsType.LIST_CONTRACT_DELIVERABLES),
         mergeMap((action: ListContractDeliverablesAction) => 
             this.contractDeliverableAccessService.listContractDeliverables(action.contractId).pipe(
-                map((response: DataResponse<[ContractDeliverable]>) => {                    
+                map((response: DataResponse<ContractDeliverable[]>) => {                    
                     return new ListContractDeliverablesActionSuccess(response.data);
                 }),
                 catchError(err => of(new ListContractDeliverablesActionFail(err))

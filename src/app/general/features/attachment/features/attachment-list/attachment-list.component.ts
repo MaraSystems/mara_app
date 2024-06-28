@@ -5,6 +5,7 @@ import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.servic
 import { ListAttachmentsAction } from '../../utils/store/attatchment-store.action';
 import { selectAttachmentsByModelId } from '../../utils/store/attatchment-store.selector';
 import { Attachment } from '../../utils/models/attatchment.model';
+import { AttachmentModelEnum } from '../../utils/models/attatchment-model.enum';
 
 @Component({
   selector: 'app-attachment-list',
@@ -13,7 +14,8 @@ import { Attachment } from '../../utils/models/attatchment.model';
 })
 export class AttachmentListComponent extends UnSubscriber implements OnInit {
   @Input() modelId = '';
-  @Input() model = '';
+  @Input() model!: AttachmentModelEnum;
+  @Input() add = true;
   attachments: Attachment[] = [];
 
   constructor(

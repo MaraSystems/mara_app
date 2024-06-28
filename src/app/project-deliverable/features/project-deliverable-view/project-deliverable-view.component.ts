@@ -20,6 +20,7 @@ import { GetProjectAction } from 'src/app/project/utils/store/project-store.acti
 import { selectProjectById } from 'src/app/project/utils/store/project-store.selector';
 import { Toast } from 'src/app/general/features/toast/utils/models/toast.class';
 import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
+import { AttachmentModelEnum } from 'src/app/general/features/attachment/utils/models/attatchment-model.enum';
 
 @Component({
   selector: 'app-project-deliverable-view',
@@ -36,6 +37,7 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
   moreList: More[] = [];
   commentModel = CommentEnum.PROJECT;
   commentsCount = 0;
+  attatmentModel = AttachmentModelEnum;
 
   constructor(
     public store: Store<AppState>,

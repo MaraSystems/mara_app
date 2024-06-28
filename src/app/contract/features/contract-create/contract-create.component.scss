@@ -1,0 +1,23 @@
+:host {
+    display: flex;
+    padding: var(--gap-x-big) var(--gap-normal);
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-big);
+    height: calc(100% - calc(var(--gap-x-big) * 2));
+    width: calc(100% - calc(var(--gap-normal) * 2));
+}
+
+@media only screen and (min-width: 760px){
+    :host {
+        padding: var(--gap-x-big);
+        gap: var(--gap-big);
+        max-width: var(--enclosed-500);
+        height: min-content;
+        width: calc(50% + calc(var(--gap-x-big) * 2));
+        margin: auto;
+        box-shadow: var(--shadow-high);
+        border-radius: var(--gap-x-small);
+        background-color: var(--color-light);
+    }
+}

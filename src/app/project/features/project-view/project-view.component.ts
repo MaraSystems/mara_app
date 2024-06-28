@@ -4,7 +4,7 @@ import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.servic
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { selectProjectById } from '../../utils/store/project-store.selector';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DeleteProjectAction, GetProjectAction, UpdateProjectAction } from '../../utils/store/project-store.action';
 import { More } from 'src/app/general/utils/models/more.model';
 import { PopupService } from 'src/app/general/features/popup/features/popup.service';
@@ -22,8 +22,10 @@ import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/
 import { ToastEnum } from 'src/app/general/features/toast/utils/models/toast.enum';
 import { Toast } from 'src/app/general/features/toast/utils/models/toast.class';
 import { ShareEnum } from 'src/app/general/features/share/utils/models/share.enum';
-import { Share } from 'src/app/general/features/share/utils/models/share.model';
 import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
+import { ContractRequest } from 'src/app/contract/utils/models/contract.model';
+import { CreateContractAction } from 'src/app/contract/utils/store/contract-store.action';
+import { summerizeDeliverables } from 'src/app/general/utils/lib/summerizeDeliverables';
 
 @Component({
   selector: 'app-project-view',
@@ -34,6 +36,7 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
   auth!: Auth;
   project!: Project;
   deliverables: ProjectDeliverable[] = [];
+  selectedDeliverables: string[] = [];
   id!: string;
   price!: string;
   duration!: number;
@@ -45,12 +48,13 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
   commentModel = CommentEnum.PROJECT;
   shareModel = ShareEnum.PROJECT;
   commentsCount = 0;
+  projectStatus = ProjectStatus;
 
   constructor(
     public store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
     public popupService: PopupService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ){
     super();
   }
@@ -62,39 +66,31 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
 
     this.newSubscription = this.store.select(selectAllProjectDeliverables(this.id)).subscribe(deliverables => {
       this.deliverables = deliverables;
-      
-      const { price, duration } = this.deliverables.reduce((acc, red) => {
-        acc.price += Number(red.price);
-        acc.duration += Number(red.duration);
-        return acc;
-      }, { price: 0, duration: 0 });
-
-      this.price = Intl.NumberFormat('en-US').format(price);
-      this.duration = duration;
-      this.cdr.detectChanges();
+      this.toggleDeliverableList(true);
     });
     
     this.newSubscription = this.store.select(selectProjectById(this.id)).subscribe(project => {
-      this.project = project;       
+      this.project = project;             
 
       if (this.project) {
         this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
           this.auth = auth;
           this.liked = this.project.likes.includes(this.auth.id);      
-          this.bookmarked = this.project.bookmarks.includes(this.auth.id);      
-        });         
-      }    
-    });
+          this.bookmarked = this.project.bookmarks.includes(this.auth.id);   
+          
+          const activation = this.project.status === ProjectStatus.DRAFT 
+            ? { name: 'Activate', icon: 'publish', action: () => { this.activate() } }
+            : { name: 'De-Activate', icon: 'unpublished',action: () => { this.deactivate() } };
 
-    this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {      
-      this.moreList = auth.id === this.project.userId
-        ? this.moreList = [
-          { name: 'Update', icon: 'update', popup: `project-update-${this.id}` },
-          { name: 'Activate', icon: 'publish', action: () => { this.activate() } },
-          { name: 'De-Activate', icon: 'unpublished',action: () => { this.deactivate() } },
-          { name: 'Delete', icon: 'Delete', action: () => { this.deleteProject() } }
-        ]
-        : [];
+          this.moreList = auth.id === this.project.userId
+            ? this.moreList = [
+              { name: 'Update', icon: 'update', popup: `project-update-${this.id}` },
+              { name: 'Delete', icon: 'Delete', action: () => { this.deleteProject() } },
+              activation
+            ]
+            : [];
+            });         
+      }    
     });
 
     this.store.dispatch(new ListCommentsAction(this.commentModel, this.id));
@@ -160,5 +156,39 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
   updateSharedList(list: string[]){    
     const shares = this.project.shares + list.length;
     this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { shares } }));
+  }
+
+  requestContract() {
+    const contract: ContractRequest = { deliverables: this.selectedDeliverables, clientId: this.auth.id, projectId: this.id };
+    this.store.dispatch(new CreateContractAction(contract, {
+      success: () => {
+        this.store.dispatch(new AddToast({ description: 'Contract Request Successful' }));
+        // this.router.navigateByUrl('/contracts');
+      },
+      failure: () => {
+        this.store.dispatch(new AddToast({ description: 'Contract Request Failed' }));
+      }
+    }));
+  }
+
+  summerize() {
+    const summery = summerizeDeliverables(this.deliverables, this.selectedDeliverables);
+    this.price = summery.price;
+    this.duration = summery.duration;
+
+    this.cdr.detectChanges();
+  }
+
+  toggleDeliverable(id: string) {
+    this.selectedDeliverables = toggleList(this.selectedDeliverables, id);
+    this.summerize();
+  }
+
+  toggleDeliverableList(flag = false) {
+    this.selectedDeliverables = flag
+      ? this.deliverables.map(d => d._id)
+      : [];    
+
+    this.summerize();
   }
 }

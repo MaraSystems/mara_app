@@ -4,8 +4,10 @@
     align-items: center;
     gap: var(--gap-normal);
     width: -webkit-fill-available;
-    padding: var(--gap-normal) var(--gap-none);
+    padding: var(--gap-normal);
     max-width: var(--enclosed-1000);
+    height: -webkit-fill-available;
+    overflow: hidden;
 
     .header {
         width: inherit;
@@ -34,26 +36,30 @@
         }
     }
 
-    .projects {
+    .contracts {
         display: flex;
         flex-direction: column;
         gap: var(--gap-small);
         padding: var(--gap-none) var(--gap-normal);
         width: -webkit-fill-available;
-
+        height: -webkit-fill-available;
+        overflow: hidden;
 
         &-list {
             display: flex;
             flex-direction: column;
-            gap: var(--gap-small);
+            gap: var(--gap-x-small);
+            padding:var(--gap-small);
             width: -webkit-fill-available;
+            height: -webkit-fill-available;
+            overflow: auto;
         }
     }
 }
 
 @media only screen and (min-width: 760px){
     :host {
-        .projects-list {
+        .contracts-list {
             gap: var(--gap-big);
         }
     }

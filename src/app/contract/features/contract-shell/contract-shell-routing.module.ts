@@ -1,11 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ContractShellComponent } from './contract-shell.component';
+
 
 const routes: Routes = [
   { 
     path: '', 
-    component: ContractShellComponent
+    loadChildren: () => import('../contract-list/contract-list.module').then(
+      (m) => m.ContractListModule
+    )
+  },
+  { 
+    path: ':contract_id', 
+    loadChildren: () => import('../contract-view/contract-view.module').then(
+      (m) => m.ContractViewModule
+    )
+  },
+  { 
+    path: ':contract_id/deliverables', 
+    loadChildren: () => import('../../../contract-deliverable/features/contract-deliverable-shell/contract-deliverable-shell.module').then(
+      (m) => m.ContractDeliverableShellModule
+    )
   }
 ];
 

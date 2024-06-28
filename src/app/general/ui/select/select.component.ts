@@ -12,7 +12,8 @@ export class SelectComponent extends InputComponent implements OnChanges {
   keys: string[] = [];
   values: string[] = [];
 
-  ngOnChanges(changes: SimpleChanges): void {
+  
+  public override ngOnChanges(changes: SimpleChanges): void {
     this.useList();
   }
 

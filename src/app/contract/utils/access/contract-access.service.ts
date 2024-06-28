@@ -5,7 +5,7 @@ import { DataResponse } from 'src/app/general/utils/models/data-response';
 import { of } from 'rxjs';
 import { Update } from '@ngrx/entity';
 import { ListOptions } from 'src/app/general/utils/models/list-options';
-import { Contract } from '../models/contract.model';
+import { Contract, ContractRequest } from '../models/contract.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,18 +17,13 @@ export class ContractAccessService {
     private accessService: AccessService
   ) {}
 
-  createContract(data: Contract) {    
-    const response = this.accessService.insertOne<Contract>(this.domain, data);
-    return response;
-  }
-
   getContract(id: string) {    
     const response = this.accessService.findOne<Contract>(this.domain, { _id: id });
     return response;
   }
 
-  listContracts(data: ListOptions) {
-    const response = this.accessService.findOne<[Contract]>(this.domain, {});
+  listContracts(userId: string, data: ListOptions) {
+    const response = this.accessService.find<[Contract]>(this.domain, { '@or': { clientId: userId, contractorId: userId } });
     return response;
   }
 

@@ -16,18 +16,13 @@ export class ContractDeliverableAccessService {
     private accessService: AccessService
   ) {}
 
-  createContractDeliverable(data: ContractDeliverable) {    
-    const response = this.accessService.insertOne<ContractDeliverable>(this.domain, data);
-    return response;
-  }
-
   getContractDeliverable(id: string) {    
     const response = this.accessService.findOne<ContractDeliverable>(this.domain, { _id: id });
     return response;
   }
 
   listContractDeliverables(contractId: string, limit = 10, skip = 0) {
-    const response = this.accessService.findOne<ContractDeliverable>(this.domain, { contractId });
+    const response = this.accessService.find<ContractDeliverable[]>(this.domain, { contractId });
     return response;
   }
 

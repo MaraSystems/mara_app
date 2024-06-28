@@ -1,15 +1,13 @@
-import { FileData } from "src/app/general/utils/models/file-data";
 
 export class ContractDeliverable {
     _id!: string;
     contractId!: string;
-    name!: string;
+    title!: string;
     description!: string;
     duration!: number;
-    cost!: number;
-    files!: FileData[];
+    price!: number;
+    documents!: string[];
     image!: string;
-    likes!: string[];
     startedAt!: Date;
     finishedAt!: Date;
 }

@@ -1,7 +1,7 @@
 <div class="header">
     <h1 class="text-1 title">Files</h1>
     <span class="icons">
-        <span class="material-symbols-outlined" (click)="popupService.open(model + '-attachment-upload-' + modelId)" >add</span>
+        <span class="material-symbols-outlined" (click)="popupService.open(model + '-attachment-upload-' + modelId)" *ngIf="add">add</span>
     </span>
 </div>
 

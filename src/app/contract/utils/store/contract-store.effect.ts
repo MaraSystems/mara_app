@@ -2,37 +2,33 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { Store } from "@ngrx/store";
-import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
-import { Toast } from "src/app/general/features/toast/features/toast.model";
 import { Router } from "@angular/router";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { ContractAccessService } from "../access/contract-access.service";
 import { CreateContractAction, CreateContractActionFail, CreateContractActionSuccess, GetContractAction, GetContractActionFail, GetContractActionSuccess, ListContractsAction, ListContractsActionFail, ListContractsActionSuccess, ContractActionsType, UpdateContractAction, UpdateContractActionFail, UpdateContractActionSuccess } from "./contract-store.action";
 import { Contract } from "../models/contract.model";
+import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
+import { APIService } from "src/app/general/utils/services/api.service";
 
 @Injectable()
 export class ContractStoreEffect {
     constructor(
         private actions$: Actions,
         private contractAccessService: ContractAccessService,
-        private store: Store,
-        private router: Router
+        private apiService: APIService
     ){}
 
     createContract$ = createEffect(() => this.actions$.pipe(
         ofType<CreateContractAction>(ContractActionsType.CREATE_CONTRACT),
         mergeMap((action: CreateContractAction) => 
-            this.contractAccessService.createContract(action.payload).pipe(
-                tap(() => {
-                    this.store.dispatch(new AddToast(new Toast({ description: 'Contract Creation' })));
-                    this.router.navigateByUrl('/contracts');
-                }),
+            this.apiService.requestContract(action.payload).pipe(
                 map((response: DataResponse<Contract>) => {
+                    handleSuccessSideEffects((action as CreateContractAction).sideEffects);
                     return new CreateContractActionSuccess(response.data);
                 }),
                 catchError(err => of(new CreateContractActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast({ isError: true, description: 'Contract Creation' })));
+                        handleFailureSideEffects((action as CreateContractAction).sideEffects);
                     })
                 ))
             )
@@ -43,16 +39,13 @@ export class ContractStoreEffect {
         ofType<UpdateContractAction>(ContractActionsType.UPDATE_CONTRACT),
         mergeMap((action: UpdateContractAction) => 
             this.contractAccessService.updateContract(action.payload).pipe(
-                tap(() => {
-                    this.store.dispatch(new AddToast(new Toast({ description: 'User update' })));
-                    this.router.navigate(['/contract', action.payload.id]);
-                }),
-                map((response: DataResponse<Contract>) => {                    
+                map((response: DataResponse<Contract>) => {                 
+                    handleSuccessSideEffects((action as UpdateContractAction).sideEffects);   
                     return new UpdateContractActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateContractActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast(new Toast({ description: 'User update', isError: true })));
+                        handleSuccessSideEffects((action as UpdateContractAction).sideEffects);   
                     })
                 ))
             )
@@ -74,7 +67,7 @@ export class ContractStoreEffect {
     listContracts$ = createEffect(() => this.actions$.pipe(
         ofType<ListContractsAction>(ContractActionsType.LIST_CONTRACTS),
         mergeMap((action: ListContractsAction) => 
-            this.contractAccessService.listContracts(action.payload).pipe(
+            this.contractAccessService.listContracts(action.userId, action.payload).pipe(
                 map((response: DataResponse<[Contract]>) => {                    
                     return new ListContractsActionSuccess(response.data);
                 }),

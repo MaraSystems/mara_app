@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ContractShellRoutingModule } from './contract-shell-routing.module';
 
 
-
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    ContractShellRoutingModule
+    ContractShellRoutingModule,
   ]
 })
 export class ContractShellModule { }

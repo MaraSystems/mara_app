@@ -1,7 +1,8 @@
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
-import { Contract } from "../models/contract.model";
+import { Contract, ContractRequest } from "../models/contract.model";
 import { ListOptions } from "src/app/general/utils/models/list-options";
+import { SideEffects } from "src/app/general/utils/models/side.effects";
 
 export enum ContractActionsType {
     CREATE_CONTRACT = "[CONTRACT] Create Contract",
@@ -23,7 +24,7 @@ export enum ContractActionsType {
 
 export class CreateContractAction implements Action {
     readonly type = ContractActionsType.CREATE_CONTRACT;
-    constructor(public payload: Contract){}
+    constructor(public payload: ContractRequest, public sideEffects = new SideEffects()){}
 }
 
 export class CreateContractActionSuccess implements Action {
@@ -38,7 +39,7 @@ export class CreateContractActionFail implements Action {
 
 export class UpdateContractAction implements Action {
     readonly type = ContractActionsType.UPDATE_CONTRACT;
-    constructor(public payload: Update<Contract>){}
+    constructor(public payload: Update<Contract>, public sideEffects = new SideEffects()){}
 }
 
 export class UpdateContractActionSuccess implements Action {
@@ -68,7 +69,7 @@ export class GetContractActionFail implements Action {
 
 export class ListContractsAction implements Action {
     readonly type = ContractActionsType.LIST_CONTRACTS;
-    constructor(public payload: ListOptions){}
+    constructor(public userId: string, public payload: ListOptions){}
 }
 
 export class ListContractsActionSuccess implements Action {
