@@ -55,6 +55,7 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
     private activatedRoute: ActivatedRoute,
     public popupService: PopupService,
     private cdr: ChangeDetectorRef,
+    private router: Router
   ){
     super();
   }
@@ -163,7 +164,7 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
     this.store.dispatch(new CreateContractAction(contract, {
       success: () => {
         this.store.dispatch(new AddToast({ description: 'Contract Request Successful' }));
-        // this.router.navigateByUrl('/contracts');
+        this.router.navigateByUrl('/contracts');
       },
       failure: () => {
         this.store.dispatch(new AddToast({ description: 'Contract Request Failed' }));
@@ -172,9 +173,9 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
   }
 
   summerize() {
-    const summery = summerizeDeliverables(this.deliverables, this.selectedDeliverables);
-    this.price = summery.price;
-    this.duration = summery.duration;
+    const summary = summerizeDeliverables(this.deliverables, this.selectedDeliverables);
+    this.price = summary.price;
+    this.duration = summary.duration;
 
     this.cdr.detectChanges();
   }

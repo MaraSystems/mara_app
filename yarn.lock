@@ -1283,10 +1283,10 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
-"@black-ink/lonedb@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@black-ink/lonedb/-/lonedb-2.4.0.tgz#1d4ab70a398d68ac30681700951e03a3bcca83a7"
-  integrity sha512-b3+d7aapVMVu3Cv5ITd0M2g2pnb3z9Q3yTpMZ9n0vRQC6PnY9NDwrQfB98tZyVV9wre9E2dz1S4yJsAf7pX6VA==
+"@black-ink/lonedb@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@black-ink/lonedb/-/lonedb-2.4.1.tgz#cc1994af546553a53a1b358d980aa317ee9967f4"
+  integrity sha512-u5zUW3BQ/ichTDtwiuiYBljDvNlw3tdZzlUrpN6ae9W+gIhWjMS51ELEoLljDJSRYsRkoV/uqtlL/Exzds1RyQ==
   dependencies:
     chai "^4.3.4"
     mocha "^9.1.3"

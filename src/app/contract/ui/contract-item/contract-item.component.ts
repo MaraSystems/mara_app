@@ -29,9 +29,9 @@ export class ContractItemComponent extends UnSubscriber implements OnInit {
     this.store.dispatch(new ListContractDeliverablesAction(this.contract._id));
 
     this.newSubscription = this.store.select(selectAllContractDeliverables(this.contract._id)).subscribe(deliverables => {
-      const summery = summerizeDeliverables(deliverables);                  
-      this.price = summery.price;
-      this.duration = summery.duration;
+      const summary = summerizeDeliverables(deliverables);                  
+      this.price = summary.price;
+      this.duration = summary.duration;
     });
   }
 }

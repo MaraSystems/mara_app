@@ -15,6 +15,6 @@
 
 <app-empty *ngIf="!transactions.length" name="transaction"></app-empty>
 
-<app-popup [name]="'transaction-view'" title="Transaction">
+<app-popup [name]="'transaction-view'" heading="Transaction">
     <app-transaction-view *ngIf="selectedTransactionId" [id]="selectedTransactionId"></app-transaction-view>
 </app-popup> 

@@ -7,14 +7,14 @@
 </div>
 
 <div class="notifications" *ngIf="notifications.length">
-    <app-table-header [list]="['', 'title', 'amount', 'action', 'status', 'date']"></app-table-header>
+    <app-table-header [list]="['', 'title', 'status', 'date']"></app-table-header>
     <div class="notifications-list">
-        <app-notification-item [notification]="item" *ngFor="let item of notifications" (click)="openNotification(item._id)"></app-notification-item>
+        <app-notification-item [notification]="item" *ngFor="let item of notifications" [userId]="auth.id" (click)="openNotification(item._id)"></app-notification-item>
     </div>
 </div>
 
 <app-empty *ngIf="!notifications.length" name="notification"></app-empty>
 
-<app-popup [name]="'notification-view'" title="Transaction">
+<app-popup [name]="'notification-view'" heading="Notification">
     <app-notification-view *ngIf="selectedNotificationId" [id]="selectedNotificationId" [userId]="auth.id"></app-notification-view>
 </app-popup> 

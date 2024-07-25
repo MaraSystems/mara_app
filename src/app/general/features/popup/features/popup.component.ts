@@ -8,7 +8,7 @@ import { PopupService } from './popup.service';
 })
 export class PopupComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() name!: string;
-  @Input() title = '';
+  @Input() heading = '';
   @Input() component!: Type<any>;
   @Input() data!: any;
 

@@ -15,7 +15,7 @@ export class AccessService {
   constructor(
     private httpClient: HttpClient
   ) { 
-    (window as any).db = Database;
+    (window as any).accessDB = this.db;
   }
 
   public request<T, K>(method: string, endpoint: string, data?: K) {    
@@ -45,7 +45,7 @@ export class AccessService {
   public find<T>(endpoint: string, query?: any, options?: IQueryOption) {    
     const collection = this.db.createCollection<T>(endpoint, { timestamp: true });    
     const data = collection.find(query, options);     
-    const response: DataResponse<T> = { success: true, data: data as T };    
+    const response: DataResponse<T> = { success: true, data: data as T };        
     return of(response);
   }
 

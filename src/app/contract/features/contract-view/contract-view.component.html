@@ -38,18 +38,36 @@
     <pre class="description-text text-1 section-container">{{contract.description}}</pre>
 </div>
 
+<div class="controls">
+    <span class="button" *ngIf="auth.id === this.contract.contractorId && contract.status === contractStatus.REQUESTED" (click)="approveContract()">
+        <span class="material-symbols-outlined">check</span>
+        <span class="control-text">Approve</span>
+    </span>
+    
+    <span class="button" *ngIf="auth.id === this.contract.clientId && contract.status === contractStatus.APPROVED" (click)="initiateContract()">
+        <span class="material-symbols-outlined">signature</span>
+        <span class="control-text">Initiate</span>
+    </span>
+    
+    <span class="button" *ngIf="[contractStatus.APPROVED, contractStatus.REQUESTED].includes(contract.status)" (click)="terminateContract()">
+        <span class="material-symbols-outlined">close</span>
+        <span class="control-text">Terminate</span>
+    </span>    
+</div>
+
+
 <app-more class="more" [list]="moreList" [elevated]="true"></app-more>
 
 <span class="popups">
-    <app-popup [name]="'contract-update-' + id" title="Contract">
+    <app-popup [name]="'contract-update-' + id" heading="Contract">
         <!-- <app-contract-update></app-contract-update> -->
     </app-popup>
     
-    <app-popup [name]="'contract-comment-' + id" title="Comments">
+    <app-popup [name]="'contract-comment-' + id" heading="Comments">
         <app-comment-list [model]="commentModel" [modelId]="id"></app-comment-list>
     </app-popup>
     
-    <app-popup [name]="'contract-share-' + id" title="Contract">
+    <app-popup [name]="'contract-share-' + id" heading="Contract">
         <!-- <app-share 
             *ngIf="contract.privacy" 
             [model]="shareModel" 

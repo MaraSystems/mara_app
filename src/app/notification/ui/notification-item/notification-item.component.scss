@@ -4,7 +4,6 @@
     grid-auto-rows: auto;
     grid-template-areas: 
     "image title title"
-    "image action amount"
     "image status date"
     ;
     width: -webkit-fill-available;
@@ -37,16 +36,6 @@
         text-align: left;
     }
 
-    .action {
-        grid-area: action;
-        text-align: left;
-        text-transform: uppercase;
-    }
-
-    .amount {
-        grid-area: amount;
-    }
-
     .status {
         grid-area: status;
         text-transform: uppercase;
@@ -59,9 +48,9 @@
 
 @media only screen and (min-width: 760px){
     :host {
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         grid-template-areas: 
-            "image title amount action status date"
+            "image title status date"
         ;
     }
 }

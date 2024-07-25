@@ -1,12 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NotificationShellComponent } from './notification-shell.component';
 
 const routes: Routes = [
   { 
     path: '', 
-    component: NotificationShellComponent
-  }
+    loadChildren: () => import('../notification-list/notification-list.module').then(
+      (m) => m.NotificationListModule
+    )
+  },
+  { 
+    path: ':id', 
+    loadChildren: () => import('../notification-view/notification-view.module').then(
+      (m) => m.NotificationViewModule
+    )
+  },
 ];
 
 @NgModule({

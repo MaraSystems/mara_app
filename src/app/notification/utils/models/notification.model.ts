@@ -1,3 +1,4 @@
+import { NotificationLink } from "./notification-link.model";
 import { NotificationModelEnum } from "./notification-model.enum";
 import { NotificationUser } from "./notification-user.model";
 
@@ -11,4 +12,5 @@ export interface Notification {
     modelId: string;
     users: NotificationUser[];
     description: string;
+    links: NotificationLink[];
 }

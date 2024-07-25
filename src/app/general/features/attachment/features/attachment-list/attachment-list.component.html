@@ -11,6 +11,6 @@
 
 <app-empty *ngIf="!attachments.length" [name]="model + 'attachments'"></app-empty>
 
-<app-popup [name]="model + '-attachment-upload-' + modelId" title="Upload Attatchment">
+<app-popup [name]="model + '-attachment-upload-' + modelId" heading="Upload Attatchment">
     <app-attachment-upload [model]="model" [modelId]="modelId" [popupId]="model + '-attachment-upload-' + modelId"></app-attachment-upload>
 </app-popup>

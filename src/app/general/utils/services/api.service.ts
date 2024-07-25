@@ -92,7 +92,7 @@ export class APIService {
       contractorId: project.userId,
       projectId: project._id,
       image: project.image,
-      status: ContractStatus.REQUESTED,
+      status: ContractStatus.REQUESTED
     };
     const contract = contractCollection.insertOne(contractData as Contract);
     data.deliverables.map(deliverableId => this.createContractDeliverable(deliverableId, contract._id));
@@ -104,7 +104,9 @@ export class APIService {
       model: NotificationModelEnum.CONTRACT,
       modelId: contract._id,
       users: [{ status: NotificationStatusEnum.PENDING, userId: project.userId }],
-     } as any);
+      hidden: false,
+      links: [{ title: 'Open Request', url: `http://${location.host}/contracts/${contract._id}`}]
+     } as Notification as any);
 
     const response: DataResponse<Contract> = { success: true, data: contract };
     return of(response);
@@ -130,9 +132,9 @@ export class APIService {
     contractDeliverableCollection.updateOne({ _id: contractDeliverable._id }, { documents: documentList });    
   }
 
-  public createNotification(data: Notification) {
+  public createNotification(data: Notification) {    
     const collection = this.accessService.db.createCollection<Notification>('notifications', { timestamp: true });
-    const notification = collection.insertOne(data);
+    const notification = collection.insertOne(data);        
     return of(notification);
   }
 

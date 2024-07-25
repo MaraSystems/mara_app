@@ -16,6 +16,18 @@ const routes: Routes = [
         )
       },
       {
+        path: 'interests',
+        loadChildren: () => import('../profile-interests/profile-interests.module').then(
+          (m) => m.ProfileInterestsModule
+        )
+      },
+      {
+        path: 'status',
+        loadChildren: () => import('../profile-status/profile-status.module').then(
+          (m) => m.ProfileStatusModule
+        )
+      },
+      {
         path: 'kin',
         loadChildren: () => import('../kin/features/kin.module').then(
           (m) => m.KinModule

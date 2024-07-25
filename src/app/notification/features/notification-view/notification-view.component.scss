@@ -30,26 +30,16 @@
         }
     }
 
-    .summery {
+    .summary {
         display: flex;
         flex-direction: column;
         box-shadow: var(--shadow-low);
-        border-radius: var(--gap-normal);
+        border-radius: var(--gap-x-small);
+        padding: var(--gap-small);
+        line-height: var(--gap-normal);
     }
 
-    .object {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: var(--gap-big) var(--gap-small);
-        border-bottom: 1px solid var(--color-light);
-
-        :last-of-type {
-            border-bottom: 1px solid transparent;
-        }
-    }
-
-    .button {
+    .controls {
         align-self: center;
     }
 }

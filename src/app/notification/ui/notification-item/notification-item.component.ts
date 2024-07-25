@@ -11,7 +11,7 @@ export class NotificationItemComponent {
   @Input() userId = '';
 
   get status() {
-    const status = this.notification.users.find(user => user.userId === this.userId)?.status;
+    const status = this.notification.users.find(user => user.userId === this.userId)?.status;    
     return status;
   }
 }

@@ -21,8 +21,8 @@ export class NotificationAccessService {
     return response;
   }
 
-  listNotifications(userId: string, data: ListOptions) {
-    const response = this.accessService.find<[Notification]>(this.domain, { hidden: false, '@has': { users: userId } });
+  listNotifications(userId: string, data: ListOptions) {        
+    const response = this.accessService.find<[Notification]>(this.domain, { hidden: false });
     return response;
   }
 

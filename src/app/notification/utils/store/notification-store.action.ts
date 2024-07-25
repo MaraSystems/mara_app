@@ -50,7 +50,7 @@ export class GetNotificationActionFail implements Action {
 
 export class ListNotificationsAction implements Action {
     readonly type = NotificationActionsType.LIST_NOTIFICATIONS;
-    constructor(public payload: ListOptions){}
+    constructor(public userId: string, public payload: ListOptions){}
 }
 
 export class ListNotificationsActionSuccess implements Action {

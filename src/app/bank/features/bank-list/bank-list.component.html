@@ -15,10 +15,10 @@
 
 <app-empty *ngIf="!banks.length" name="bank"></app-empty>
 
-<app-popup [name]="'bank-create'" title="Create Bank">
+<app-popup [name]="'bank-create'" heading="Create Bank">
     <app-bank-create></app-bank-create>
 </app-popup>
 
-<app-popup [name]="'bank-update'" title="Update Bank">
+<app-popup [name]="'bank-update'" heading="Update Bank">
     <app-bank-update *ngIf="selectedBankId" [id]="selectedBankId"></app-bank-update>
 </app-popup>

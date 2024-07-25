@@ -6,7 +6,11 @@ export const clientSelector = createFeatureSelector<Readonly<NotificationState>>
 
 export const selectAllClientNotifications = (userId: string) => createSelector(
     clientSelector,
-    state => Object.values(notificationAdapter.getSelectors().selectAll(state)).filter(note => note.users.filter(user => user.userId === userId)) as Notification[]
+    state => notificationAdapter.getSelectors()
+        .selectAll(state)
+        .filter(note => {            
+            return note.users.filter(user => user.userId === userId);
+        }) as Notification[]
 );
 
 export const selectNotificationById = (id: string) => createSelector(

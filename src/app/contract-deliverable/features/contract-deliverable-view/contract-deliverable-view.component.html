@@ -29,10 +29,10 @@
 
 <app-more class="more" [list]="moreList" [elevated]="true"></app-more>
 
-<app-popup [name]="'contract-deliverable-comment-' + id" title="Comments">
+<app-popup [name]="'contract-deliverable-comment-' + id" heading="Comments">
     <app-comment-list [model]="commentModel" [modelId]="id"></app-comment-list>
 </app-popup>
 
-<app-popup [name]="'contract-deliverable-share-' + id" title="Share">
+<app-popup [name]="'contract-deliverable-share-' + id" heading="Share">
     <!-- <app-share [link]="'contract/'+deliverable.contractId+'/deliverables/'+deliverable._id" (shareTo)="updateSharedList($event)"></app-share> -->
 </app-popup>

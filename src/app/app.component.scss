@@ -5,26 +5,28 @@
     flex-direction: column;
     overflow: hidden;
 
-    .app-page {
-        display: flex;
-        overflow: hidden;
-        height: 100%;
-        width: 100%;
-        z-index: var(--index-elevated);
-    }
-
-    .app-content {
-        display: flex;
-        overflow: auto;
-        height: 100%;
-        width: 100%;
-        background-color: var(--color-white);
-        justify-content: center;
-    }
-
-    .app-title {
-        color: var(--color-dark);
-        width: -webkit-fill-available;
+    .app {
+        &-page {
+            display: flex;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            z-index: var(--index-elevated);
+        }
+    
+        &-content {
+            display: flex;
+            overflow: auto;
+            height: 100%;
+            width: 100%;
+            background-color: var(--color-white);
+            justify-content: center;
+        }
+    
+        &-title {
+            color: var(--color-dark);
+            width: -webkit-fill-available;
+        }
     }
 }
 
@@ -33,6 +35,21 @@
         .app {
             display: grid;
             grid-template-columns: max-content 1fr;
+
+            &-content {
+                width: -webkit-fill-available;
+                padding: 0% 5%;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 760px){
+    :host {
+        .app {
+            &-content {
+                padding: 0% 10%;
+            }
         }
     }
 }

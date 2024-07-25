@@ -66,9 +66,9 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
 
     this.newSubscription = this.store.select(selectAllContractDeliverables(this.id)).subscribe(deliverables => {
       this.deliverables = deliverables;
-      const summery = summerizeDeliverables(this.deliverables);
-      this.price = summery.price;
-      this.duration = summery.duration;
+      const summary = summerizeDeliverables(this.deliverables);
+      this.price = summary.price;
+      this.duration = summary.duration;
     });
     
     this.newSubscription = this.store.select(selectContractById(this.id)).subscribe(contract => {
@@ -77,14 +77,7 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
       if (this.contract) {
         this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
           this.auth = auth;
-
-          this.moreList = auth.id === this.contract.contractorId
-            ? this.moreList = [
-              { name: 'Update', icon: 'update', popup: `contract-update-${this.id}` },
-              { name: 'Terminate', icon: 'Delete', action: () => { this.terminateContract() } },
-            ]
-            : [];
-            });         
+        });         
       }    
     });
 
@@ -95,37 +88,36 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
     });
   }
 
-  terminateContract() {
-    // Toast.warn(this.store, 'Click continue to delete contract', ['Continue'], () => {
-    //   this.store.dispatch(new DeleteContractAction(this.id));
-    // });
+  approveContract() {
+    this.store.dispatch(new UpdateContractAction({ id: this.id, changes: { status: ContractStatus.APPROVED }}, {
+      success: () => {
+        this.store.dispatch(new AddToast({ description: 'Contract Approved Successful' }));
+      },
+      failure: () => {
+        this.store.dispatch(new AddToast({ description: 'Contract Approved Failed' }));
+      }
+    }));
   }
 
-  // activate() {
-  //   if (this.deliverables.length === 0) {
-  //     this.store.dispatch(new AddToast({ description: 'You can not publish a contract with no deliverables', type: ToastEnum.ERROR }));
-  //     return;
-  //   }
+  initiateContract() {
+    this.store.dispatch(new UpdateContractAction({ id: this.id, changes: { status: ContractStatus.INITIATED }}, {
+      success: () => {
+        this.store.dispatch(new AddToast({ description: 'Contract Initiation Successful' }));
+      },
+      failure: () => {
+        this.store.dispatch(new AddToast({ description: 'Contract Initiation Failed' }));
+      }
+    }));
+  }
 
-  //   Toast.warn(this.store, 'Click continue to activate contract', ['Continue'], () => {
-  //     this.store.dispatch(new UpdateContractAction({ id: this.id, changes: { status: ContractStatus.PUBLISHED, active: true }}, {
-  //       success: () => {
-  //         this.store.dispatch(new AddToast({ description: 'Contract Activation' }));
-  //         this.popupService.close(`contract-activate-${this.id}`);
-  //       },
-  //       failure: () => {
-  //         this.store.dispatch(new AddToast({ description: 'Contract Activation', type: ToastEnum.ERROR }));
-  //       }
-  //     }));
-  //   });
-  // }
-
-  // updatePrivacy(data: Privacy) {
-  //   this.store.dispatch(new UpdateContractAction({ id: this.id, changes: { privacy: data } }));
-  // }
-
-  // updateSharedList(list: string[]){    
-  //   const shares = this.contract.shares + list.length;
-  //   this.store.dispatch(new UpdateContractAction({ id: this.id, changes: { shares } }));
-  // }
+  terminateContract() {
+    this.store.dispatch(new UpdateContractAction({ id: this.id, changes: { status: ContractStatus.TERMINATED }}, {
+      success: () => {
+        this.store.dispatch(new AddToast({ description: 'Contract Approved Successful' }));
+      },
+      failure: () => {
+        this.store.dispatch(new AddToast({ description: 'Contract Approved Failed' }));
+      }
+    }));
+  }
 }

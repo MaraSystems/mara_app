@@ -9,6 +9,7 @@ import { DirectivesModule } from 'src/app/general/utils/directives/directives.mo
 import { EmptyModule } from 'src/app/general/ui/empty/empty.module';
 import { CommentListModule } from 'src/app/general/features/comment/features/comment-list/comment-list.module';
 import { ShareModule } from 'src/app/general/features/share/features/share.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ShareModule } from 'src/app/general/features/share/features/share.modul
     DirectivesModule,
     EmptyModule,
     CommentListModule,
-    ShareModule
+    ShareModule,
+    RouterModule
   ],
   exports: [
     NotificationViewComponent

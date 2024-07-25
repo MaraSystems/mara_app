@@ -36,14 +36,14 @@
     <app-attachment-list [modelId]="this.id" [model]="attatmentModel.PROJECT_DELIVERABLE" class="section-container"></app-attachment-list>
 </div>
 
-<app-popup [name]="'project-deliverable-update-' + id" title="Deliverable">
+<app-popup [name]="'project-deliverable-update-' + id" heading="Deliverable">
     <app-project-deliverable-update></app-project-deliverable-update>
 </app-popup>
 
-<app-popup [name]="'project-deliverable-comment-' + id" title="Comments">
+<app-popup [name]="'project-deliverable-comment-' + id" heading="Comments">
     <app-comment-list [model]="commentModel" [modelId]="id"></app-comment-list>
 </app-popup>
 
-<app-popup [name]="'project-deliverable-share-' + id" title="Share">
+<app-popup [name]="'project-deliverable-share-' + id" heading="Share">
     <app-share [link]="'project/'+deliverable.projectId+'/deliverables/'+deliverable._id" (shareTo)="updateSharedList($event)"></app-share>
 </app-popup>

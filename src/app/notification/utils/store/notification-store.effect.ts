@@ -51,8 +51,8 @@ export class NotificationStoreEffect {
     listNotifications$ = createEffect(() => this.actions$.pipe(
         ofType<ListNotificationsAction>(NotificationActionsType.LIST_NOTIFICATIONS),
         mergeMap((action: ListNotificationsAction) => 
-            this.notificationAccessService.listNotifications(action.payload).pipe(
-                map((response: DataResponse<[Notification]>) => {                                        
+            this.notificationAccessService.listNotifications(action.userId, action.payload).pipe(
+                map((response: DataResponse<[Notification]>) => {                                                            
                     return new ListNotificationsActionSuccess(response.data);
                 }),
                 catchError(err => of(new ListNotificationsActionFail(err))

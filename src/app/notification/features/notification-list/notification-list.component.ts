@@ -26,14 +26,12 @@ export class NotificationListComponent extends UnSubscriber implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new ListNotificationsAction({ limit: 10, skip: 0 }));
-
     this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
       this.auth = auth;
-
-      if (this.auth) {
-        this.newSubscription = this.store.select(selectAllClientNotifications(this.auth.id)).subscribe(notifications => {            
-          this.notifications = notifications;
+      if (this.auth) {        
+        this.store.dispatch(new ListNotificationsAction(auth.id, { limit: 10, skip: 0 }));
+        this.newSubscription = this.store.select(selectAllClientNotifications(this.auth.id)).subscribe(notifications => {                   
+          this.notifications = notifications;                    
         });
       }
     });

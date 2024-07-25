@@ -12,9 +12,7 @@ import { GetClientAction } from './client/utils/store/client-store.action';
 import { selectClientById } from './client/utils/store/client-store.selector';
 import { OnboardEnum } from './profile/utils/onboard.enum';
 import { APIService } from './general/utils/services/api.service';
-import { NotificationStatusEnum } from './notification/utils/models/notification-status.enum';
-import { Notification } from './notification/utils/models/notification.model';
-import { NotificationModelEnum } from './notification/utils/models/notification-model.enum';
+
 
 @Component({
   selector: 'app-root',
@@ -56,16 +54,6 @@ export class AppComponent  extends UnSubscriber implements OnInit {
       if (client.onboard !== OnboardEnum.COMPLETED) {
         this.router.navigateByUrl('/profile/create');
       }
-
-      const notification: Notification = {
-        users: [{ userId: this.auth.id, status: NotificationStatusEnum.PENDING }],
-        subject: 'This is a notification',
-        description: 'Mi est ut egestas eget pharetra eget sed sed dignissim. Eget hac vitae tristique nisl at diam enim imperdiet. Diam id est mi tincidunt vulputate enim. Aenean senectus dolor egestas quisque magna in. Libero facilisi lectus duis aliquet tellus dapibus morbi curabitur mauris',
-        model: NotificationModelEnum.SUBSCRIPTION,
-        hidden: false
-      } as any;
-
-      this.apiService.createNotification(notification);
     });
   }
 }

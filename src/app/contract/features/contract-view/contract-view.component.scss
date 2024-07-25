@@ -6,7 +6,7 @@
         "details"
         "description"
         "deliverables"
-        "button"
+        "controls"
     ;
     justify-content: center;
     gap: var(--gap-big);
@@ -34,25 +34,6 @@
             img {
                 height: 200px;
                 width: 200px;
-            }
-        }
-
-        .controls {
-            display: flex;
-            box-shadow: var(--shadow-high);
-            padding: var(--gap-small);
-            border-radius: var(--gap-normal);
-            width: -webkit-fill-available;
-            justify-content: space-around;
-            align-items: center;
-            gap: var(--gap-small);
-
-            .stats {
-                display: flex;
-                padding: var(--gap-x-small);
-                width: -webkit-fill-available;
-                justify-content: space-around;
-                align-items: center;
             }
         }
     }
@@ -133,6 +114,14 @@
         }
     }
 
+    .controls {
+        grid-area: controls;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: var(--gap-big);
+    }
+
     .more {
         position: absolute;
         z-index: 1;
@@ -150,26 +139,14 @@
             "header header"
             "details description"
             "deliverables deliverables"
-            "button button"
+            "controls controls"
         ;
-        max-width: 1000px;
 
         .header {
             width: min-content;
 
             .image {
                 height: -webkit-fill-available;
-            }
-
-            .controls {
-                gap: var(--gap-x-big);
-                padding: var(--gap-small);
-
-                .stats {
-                    gap: var(--gap-x-big);
-                    padding: var(--gap-small);
-                    width: -webkit-fill-available;
-                }
             }
         }
 

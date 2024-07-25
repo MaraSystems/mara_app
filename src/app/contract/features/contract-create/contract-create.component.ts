@@ -34,7 +34,7 @@ export class ContractCreateComponent extends UnSubscriber implements OnInit {
   price!: string;
   duration!: number;
 
-  get summery() {
+  get summary() {
     const { price, duration } = this.deliverables.reduce((acc, red) => {
       acc.price += Number(red.price);
       acc.duration += Number(red.duration);
@@ -58,7 +58,7 @@ export class ContractCreateComponent extends UnSubscriber implements OnInit {
 
     this.newSubscription = this.store.select(selectAllProjectDeliverables(this.id)).subscribe(deliverables => {
       this.deliverables = deliverables;
-      const { price, duration} = this.summery;
+      const { price, duration} = this.summary;
       this.price = price;
       this.duration = duration;
     });
@@ -72,9 +72,7 @@ export class ContractCreateComponent extends UnSubscriber implements OnInit {
 
   initForm() {
     this.form = new FormGroup({
-      clientId: new FormControl(null),
-      status: new FormControl(ContractStatus.DRAFT),
-      hidden: new FormControl(false),
+      clientId: new FormControl(null)
     });
 
     this.newSubscription = this.form.valueChanges.subscribe(data => {      

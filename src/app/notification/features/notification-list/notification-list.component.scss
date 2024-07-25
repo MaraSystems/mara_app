@@ -35,11 +35,10 @@
         }
     }
 
-    .transactions {
+    .notifications {
         display: flex;
         flex-direction: column;
         gap: var(--gap-small);
-        padding: var(--gap-none) var(--gap-normal);
         width: -webkit-fill-available;
         height: -webkit-fill-available;
         overflow: auto;
@@ -58,7 +57,7 @@
 
 @media only screen and (min-width: 760px){
     :host {
-        .transactions-list {
+        .notifications-list {
             gap: var(--gap-big);
         }
     }

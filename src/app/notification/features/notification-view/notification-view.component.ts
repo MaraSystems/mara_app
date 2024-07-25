@@ -6,6 +6,8 @@ import { AppState } from 'src/app/app.state';
 import { selectNotificationById } from '../../utils/store/notification-store.selector';
 import { More } from 'src/app/general/utils/models/more.model';
 import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { NotificationLink } from '../../utils/models/notification-link.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -28,6 +30,7 @@ export class NotificationViewComponent extends UnSubscriber implements OnChanges
   constructor(
     public store: Store<AppState>,
     public popupService: PopupService,
+    public router: Router
   ){
     super();
   }
@@ -36,5 +39,10 @@ export class NotificationViewComponent extends UnSubscriber implements OnChanges
     this.newSubscription = this.store.select(selectNotificationById(this.id)).subscribe(notification => {      
       this.notification = notification;
     });    
+  }
+
+  openLink(item: NotificationLink){
+    const url = new URL(item.url);
+    this.router.navigateByUrl(url.pathname);
   }
 }

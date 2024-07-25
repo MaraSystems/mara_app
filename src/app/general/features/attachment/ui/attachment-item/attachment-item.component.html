@@ -6,11 +6,11 @@
 <span class="version text-2">{{ 'V.' + attachment.version}}</span>
 <app-more class="more" [elevated]="false" [list]="moreList"></app-more>
 
-<app-popup [name]="'attachment-update-' + id" title="Update Attatchment">
+<app-popup [name]="'attachment-update-' + id" heading="Update Attatchment">
     <app-attachment-upload [model]="attachment.model" [modelId]="attachment.modelId" [attachment]="attachment" [popupId]="'attachment-update-' + id"></app-attachment-upload>
 </app-popup>
 
 
-<app-popup [name]="'attachment-view-' + id" [style]="{ zIndex: 1 }" title="Preview Attatchment">
+<app-popup [name]="'attachment-view-' + id" [style]="{ zIndex: 1 }" heading="Preview Attatchment">
     <app-attachment-view [id]="id"></app-attachment-view>
 </app-popup>
