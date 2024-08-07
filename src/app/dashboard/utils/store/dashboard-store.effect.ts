@@ -6,19 +6,22 @@ import { DashboardActionsType, GetWalletAction, GetWalletActionFail, GetWalletAc
 import { GetTransactionActionFail } from "src/app/transaction/utils/store/transaction-store.action";
 import { DashboardAccessService } from "../access/dashboard-access.service";
 import { DashboardWidgetEnum } from "../models/dashboard-widget.enum";
+import { TransactionAccessService } from "src/app/transaction/utils/access/transaction-access.service";
 
 @Injectable()
 export class DashboardStoreEffect {
     constructor(
         private actions$: Actions,
-        private dashboardAccessService: DashboardAccessService,
+        private transactionService: TransactionAccessService,
     ){}
 
     getWallet$ = createEffect(() => this.actions$.pipe(
         ofType<GetWalletAction>(DashboardActionsType.GET_WALLET),
         mergeMap((action: GetWalletAction) => 
-            this.dashboardAccessService.getWallet(action.payload).pipe(
-                map((response: DataResponse<number>) => {                                        
+            this.transactionService.getWallet(action.payload).pipe(
+                map((response: DataResponse<number>) => {    
+                    console.log(response);
+                                                                                                
                     return new GetWalletActionSuccess({ data: response.data, id: 'wallet-balance', type: DashboardWidgetEnum.TRANSACTIONS });
                 }),
                 catchError(err => of(new GetWalletActionFail(err))
@@ -29,7 +32,7 @@ export class DashboardStoreEffect {
     updateWallet$ = createEffect(() => this.actions$.pipe(
         ofType<UpdateWalletAction>(DashboardActionsType.UPDATE_WALLET),
         mergeMap((action: UpdateWalletAction) => 
-            this.dashboardAccessService.updateWallet(action.payload).pipe(
+            this.transactionService.updateWallet(action.payload).pipe(
                 map((response: DataResponse<number>) => {                                        
                     return new UpdateWalletActionSuccess({ id: 'wallet-balance', changes: { data: response.data } });
                 }),

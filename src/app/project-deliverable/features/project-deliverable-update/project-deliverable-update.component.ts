@@ -65,11 +65,11 @@ export class ProjectDeliverableUpdateComponent extends UnSubscriber implements O
   updateDeliverable() {    
     this.store.dispatch(new UpdateProjectDeliverableAction({ id: this.id, changes: this.updateData}, {
       success: () => {
-        this.store.dispatch(new AddToast({ description: 'Project Deliverable Update' }));
+        this.store.dispatch(new AddToast({ title: 'Project Deliverable Update' }));
         this.popupService.close(`project-deliverable-update-${this.id}`);
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Project Deliverable Update', type: ToastEnum.ERROR }));
+        this.store.dispatch(new AddToast({ title: 'Project Deliverable Update', type: ToastEnum.ERROR }));
       }
     }));
   }

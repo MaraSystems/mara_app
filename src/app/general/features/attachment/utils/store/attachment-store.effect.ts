@@ -4,9 +4,9 @@ import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
 import { DataResponse } from "src/app/general/utils/models/data-response";
-import { UploadAttachmentAction, UploadAttachmentActionFail, UploadAttachmentActionSuccess, DeleteAttachmentAction, DeleteAttachmentActionFail, DeleteAttachmentActionSuccess, GetAttachmentAction, GetAttachmentActionFail, GetAttachmentActionSuccess, ListAttachmentsAction, ListAttachmentsActionFail, ListAttachmentsActionSuccess, AttachmentActionsType, DownloadAttachmentAction, DownloadAttachmentActionFail, DownloadAttachmentActionSuccess } from "./attatchment-store.action";
-import { AttachmentAccessService } from "../access/attatchment-access.service";
-import { Attachment } from "../models/attatchment.model";
+import { UploadAttachmentAction, UploadAttachmentActionFail, UploadAttachmentActionSuccess, DeleteAttachmentAction, DeleteAttachmentActionFail, DeleteAttachmentActionSuccess, GetAttachmentAction, GetAttachmentActionFail, GetAttachmentActionSuccess, ListAttachmentsAction, ListAttachmentsActionFail, ListAttachmentsActionSuccess, AttachmentActionsType, DownloadAttachmentAction, DownloadAttachmentActionFail, DownloadAttachmentActionSuccess } from "./attachment-store.action";
+import { AttachmentAccessService } from "../access/attachment-access.service";
+import { Attachment } from "../models/attachment.model";
 import { ToastEnum } from "../../../toast/utils/models/toast.enum";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
@@ -29,22 +29,6 @@ export class AttachmentStoreEffect {
                 catchError(err => of(new UploadAttachmentActionFail(err)).pipe(
                     tap(() => {
                         handleFailureSideEffects((action as UploadAttachmentAction).sideEffects);
-                    })
-                ))
-            )
-        )
-    ));
-
-    downloadAttachment$ = createEffect(() => this.actions$.pipe(
-        ofType<DownloadAttachmentAction>(AttachmentActionsType.DOWNLOAD_ATTACHMENT),
-        mergeMap((action: DownloadAttachmentAction) => 
-            this.attachmentAccessService.downloadAttachment(action.payload).pipe(
-                map((response: DataResponse<string>) => {
-                    return new DownloadAttachmentActionSuccess({ id: action.payload._id, changes: { url: response.data } });
-                }),
-                catchError(err => of(new DownloadAttachmentActionFail(err)).pipe(
-                    tap(() => {
-                        this.store.dispatch(new AddToast({ title: 'Attachment Update', type: ToastEnum.ERROR }));
                     })
                 ))
             )
@@ -84,7 +68,7 @@ export class AttachmentStoreEffect {
         ofType<ListAttachmentsAction>(AttachmentActionsType.LIST_ATTACHMENTS),
         mergeMap((action: ListAttachmentsAction) => 
             this.attachmentAccessService.listAttachments(action.model, action.modelId).pipe(
-                map((response: DataResponse<[Attachment]>) => {                                        
+                map((response: DataResponse<Attachment[]>) => {                                        
                     return new ListAttachmentsActionSuccess(response.data);
                 }),
                 catchError(err => of(new ListAttachmentsActionFail(err))

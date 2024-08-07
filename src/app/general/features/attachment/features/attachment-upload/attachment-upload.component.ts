@@ -3,13 +3,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
-import { UploadAttachmentAction } from 'src/app/general/features/attachment/utils/store/attatchment-store.action';
+import { UploadAttachmentAction } from 'src/app/general/features/attachment/utils/store/attachment-store.action';
 import { fileValidator } from 'src/app/general/utils/validators/fileValidator';
-import { Attachment } from '../../utils/models/attatchment.model';
+import { Attachment } from '../../utils/models/attachment.model';
 import { UploadData } from '../../utils/models/upload-data';
 import { AddToast } from '../../../toast/utils/store/toast.action';
 import { PopupService } from '../../../popup/features/popup.service';
-import { AttachmentModelEnum } from '../../utils/models/attatchment-model.enum';
+import { AttachmentModelEnum } from '../../utils/models/attachment-model.enum';
 
 @Component({
   selector: 'app-attachment-upload',

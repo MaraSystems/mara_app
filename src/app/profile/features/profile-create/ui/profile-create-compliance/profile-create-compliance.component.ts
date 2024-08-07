@@ -5,7 +5,7 @@ import { AppState } from 'src/app/app.state';
 import { FormGroup } from '@angular/forms';
 import { getFormControl } from 'src/app/general/utils/lib/getFormControl';
 import { PopupService } from 'src/app/general/features/popup/features/popup.service';
-import { Compliance, IdentificationComplianceEnum, SupportComplianceEnum } from 'src/app/client/utils/models/compliance';
+import { Compliance, IdentificationComplianceEnum, AddressComplianceEnum, ComplianceModel } from 'src/app/client/utils/models/compliance';
 import { CreateComplianceAction } from '../../../compliance/utils/store/compliance-store.action';
 
 
@@ -18,18 +18,16 @@ export class ProfileCreateComplianceComponent extends UnSubscriber {
   @Input({ required: true }) userId = '';
   @Output() done = new EventEmitter();
 
-  identificationCompliance!: Compliance;
-  supportCompliance!: Compliance;
-
   identificationForm!: FormGroup;
-  supportForm!: FormGroup;
+  addressForm!: FormGroup;
+  complainceModel = ComplianceModel;
 
   identificationList = [
-    { title: IdentificationComplianceEnum.DRIVERS_LICENSE, expiry: true },
+    { title: IdentificationComplianceEnum.DRIVING_LICENCE, expiry: true },
     { title: IdentificationComplianceEnum.INTERNATIONAL_PASSPORT, expiry: true },
     { title: IdentificationComplianceEnum.NATIONAL_IDENTIFICATION, expiry: false }
   ];
-  supportList = Object.values(SupportComplianceEnum).map(title => ({ title, expiry: false }));
+  supportList = Object.values(AddressComplianceEnum).map(title => ({ title, expiry: false }));
 
   constructor (
     public store: Store<AppState>,
@@ -38,13 +36,16 @@ export class ProfileCreateComplianceComponent extends UnSubscriber {
     super();
   }
 
-  updateCompliance() {    
-    this.identificationCompliance = this.identificationForm.value;
-    this.supportCompliance = this.supportForm.value;
+  updateCompliance() {  
+    const { document: [identificationDocument], ...identificationCompliance } = 
+      { ...this.identificationForm.value, userId: this.userId } as any;
+
+    const { document: [addressDocument], ...addressCompliance } =
+      { ...this.addressForm.value, userId: this.userId } as any;
     
-    this.store.dispatch(new CreateComplianceAction(this.identificationCompliance, {
+    this.store.dispatch(new CreateComplianceAction({ compliance: identificationCompliance, document: identificationDocument }, {
       success: () => {
-        this.store.dispatch(new CreateComplianceAction(this.supportCompliance, {
+        this.store.dispatch(new CreateComplianceAction({ compliance: addressCompliance, document: addressDocument }, {
           success: () => {
             this.done.emit();
           }

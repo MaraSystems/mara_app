@@ -23,7 +23,7 @@ export class ComplianceStoreEffect {
     createCompliance$ = createEffect(() => this.actions$.pipe(
         ofType<CreateComplianceAction>(ComplianceActionsType.CREATE_COMPLIANCE),
         mergeMap((action: CreateComplianceAction) => 
-            this.complianceAccessService.createCompliance(action.payload).pipe(
+            this.complianceAccessService.createCompliance(action.payload.compliance, action.payload.document).pipe(
                 tap(() => {                    
                     handleSuccessSideEffects((action as CreateComplianceAction).sideEffects);
                 }),

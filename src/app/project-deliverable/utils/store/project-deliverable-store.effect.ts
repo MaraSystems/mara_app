@@ -59,13 +59,13 @@ export class ProjectDeliverableStoreEffect {
         mergeMap((action: DeleteProjectDeliverableAction) => 
             this.projectDeliverableAccessService.deleteProjectDeliverable(action.payload).pipe(
                 map((response: DataResponse<ProjectDeliverable>) => {         
-                    this.store.dispatch(new AddToast({ description: 'User delete' }));
+                    this.store.dispatch(new AddToast({ title: 'User delete' }));
                     this.routerService.navigate(`/projects/${response.data.projectId}/deliverables`);
                     return new DeleteProjectDeliverableActionSuccess(response.data);
                 }),
                 catchError(err => of(new DeleteProjectDeliverableActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ description: 'User delete', type: ToastEnum.ERROR }));
+                        this.store.dispatch(new AddToast({ title: 'User delete', type: ToastEnum.ERROR }));
                     })
                 ))
             )

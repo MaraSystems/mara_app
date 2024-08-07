@@ -8,9 +8,9 @@
     </span>
 </span>
 
-<canvas class="canvas" id="canvas"></canvas>
+<canvas class="canvas" id="canvas" [width]="width" [height]="height"></canvas>
 
 <span class="controls">
     <button class="button text-1" (click)="context.clearRect(0, 0, width, height)">Reset</button>
-    <button class="button text-1" (click)="getImage()">Submit</button>
+    <button class="button text-1" (click)="updateSignature()">Submit</button>
 </span>

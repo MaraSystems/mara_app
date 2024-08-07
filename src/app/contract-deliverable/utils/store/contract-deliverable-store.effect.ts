@@ -29,7 +29,7 @@ export class ContractDeliverableStoreEffect {
                 }),
                 catchError(err => of(new UpdateContractDeliverableActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Contract Deliverable Update' }));
+                        this.store.dispatch(new AddToast({ title: 'Contract Deliverable Update', type: ToastEnum.ERROR }));
                     })
                 ))
             )

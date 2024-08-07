@@ -67,11 +67,11 @@ export class BankCreateComponent extends UnSubscriber implements OnInit {
   addBank() {        
     this.store.dispatch(new CreateBankAction(this.bank, {
       success: () => {        
-        this.store.dispatch(new AddToast({ description: 'Bank creation successful' }));
+        this.store.dispatch(new AddToast({ title: 'Bank creation successful' }));
         this.popupService.close('bank-create');
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Bank creation failed' }));
+        this.store.dispatch(new AddToast({ title: 'Bank creation failed' }));
       }
     }));
   }

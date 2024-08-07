@@ -15,6 +15,7 @@ import { Bank } from "src/app/bank/utils/models/bank.model";
 import { KeyValue } from "@angular/common";
 import { ListBanksAction } from "src/app/bank/utils/store/bank-store.action";
 import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
+import { WalletTransaction } from "../../utils/models/wallet-transaction.model";
 
 @Component({
   selector: 'app-wallet-debit',
@@ -25,7 +26,7 @@ export class WalletDebitComponent extends UnSubscriber implements OnInit {
   @Input({ required: true }) userId = '';
   @Input({ required: true }) balance = 0;
   form!: FormGroup;
-  transaction!: Transaction;
+  transaction!: WalletTransaction;
   getControl = getFormControl;
   banks: KeyValue<string, string>[] = [];
   defaultBank!: Bank;
@@ -56,10 +57,6 @@ export class WalletDebitComponent extends UnSubscriber implements OnInit {
     this.form = new FormGroup({
       amount: new FormControl(null, [Validators.required, Validators.min(1000)]),
       modelId: new FormControl(this.defaultBank?._id, [Validators.required, Validators.min(1000)]),
-      platform: new FormControl(TransactionPlatformEnum.CONTRACTOR),
-      model: new FormControl(TransactionModelEnum.WALLET),
-      title: new FormControl('Bank Withrawal'),
-      hidden: new FormControl(false),
       action: new FormControl(TransactionActionEnum.DEBIT),
       userId: new FormControl(this.userId),
     });
@@ -72,10 +69,10 @@ export class WalletDebitComponent extends UnSubscriber implements OnInit {
   withdraw() {    
     this.store.dispatch(new UpdateWalletAction(this.transaction, {
       success: () => {
-        this.store.dispatch(new AddToast({ description: 'Wallet debit successful'}))
+        this.store.dispatch(new AddToast({ title: 'Wallet debit successful'}))
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Wallet debit failed'}))
+        this.store.dispatch(new AddToast({ title: 'Wallet debit failed'}))
       }
     }))
   }

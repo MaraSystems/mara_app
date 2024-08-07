@@ -71,10 +71,10 @@ export class ProfileInfoComponent extends UnSubscriber implements OnInit {
     this.store.dispatch(new UpdateClientAction({ id: this.profile._id, changes: this.updateData }, {
       success: () => {
         this.edit = false;
-        this.store.dispatch(new AddToast({ description: 'User update' }));
+        this.store.dispatch(new AddToast({ title: 'User update' }));
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'User update', type: ToastEnum.ERROR }));
+        this.store.dispatch(new AddToast({ title: 'User update', type: ToastEnum.ERROR }));
       }
     }));
   }

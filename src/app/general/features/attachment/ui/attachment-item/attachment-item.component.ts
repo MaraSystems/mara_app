@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { More } from 'src/app/general/utils/models/more.model';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
-import { DeleteAttachmentAction, GetAttachmentAction } from 'src/app/general/features/attachment/utils/store/attatchment-store.action';
-import { selectAttachmentById } from 'src/app/general/features/attachment/utils/store/attatchment-store.selector';
-import { Attachment } from '../../utils/models/attatchment.model';
+import { DeleteAttachmentAction, GetAttachmentAction } from 'src/app/general/features/attachment/utils/store/attachment-store.action';
+import { selectAttachmentById } from 'src/app/general/features/attachment/utils/store/attachment-store.selector';
+import { Attachment } from '../../utils/models/attachment.model';
 import { PopupService } from '../../../popup/features/popup.service';
 import { Toast } from '../../../toast/utils/models/toast.class';
 

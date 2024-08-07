@@ -40,15 +40,14 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
   id!: string;
   price!: string;
   duration!: number;
-
   moreList: More[] = [];
-
   liked = false;
   bookmarked = false;
   commentModel = CommentEnum.PROJECT;
   shareModel = ShareEnum.PROJECT;
   commentsCount = 0;
   projectStatus = ProjectStatus;
+  image = '../../../../assets/images/db.png'
 
   constructor(
     public store: Store<AppState>,
@@ -109,18 +108,18 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
 
   activate() {
     if (this.deliverables.length === 0) {
-      this.store.dispatch(new AddToast({ description: 'You can not publish a project with no deliverables', type: ToastEnum.ERROR }));
+      this.store.dispatch(new AddToast({ title: 'You can not publish a project with no deliverables', type: ToastEnum.ERROR }));
       return;
     }
 
     Toast.warn(this.store, 'Click continue to activate project', ['Continue'], () => {
       this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.PUBLISHED, active: true }}, {
         success: () => {
-          this.store.dispatch(new AddToast({ description: 'Project Activation' }));
+          this.store.dispatch(new AddToast({ title: 'Project Activation' }));
           this.popupService.close(`project-activate-${this.id}`);
         },
         failure: () => {
-          this.store.dispatch(new AddToast({ description: 'Project Activation', type: ToastEnum.ERROR }));
+          this.store.dispatch(new AddToast({ title: 'Project Activation', type: ToastEnum.ERROR }));
         }
       }));
     });
@@ -130,11 +129,11 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
     Toast.warn(this.store, 'Click continue to deactivate project', ['Continue'], () => {
       this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: { status: ProjectStatus.DRAFT, active: false }}, {
         success: () => {
-          this.store.dispatch(new AddToast({ description: 'Project Deactivation' }));
+          this.store.dispatch(new AddToast({ title: 'Project Deactivation' }));
           this.popupService.close(`project-deactivate-${this.id}`);
         },
         failure: () => {
-          this.store.dispatch(new AddToast({ description: 'Project Deactivation', type: ToastEnum.ERROR }));
+          this.store.dispatch(new AddToast({ title: 'Project Deactivation', type: ToastEnum.ERROR }));
         }
       }));
     });
@@ -163,11 +162,11 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
     const contract: ContractRequest = { deliverables: this.selectedDeliverables, clientId: this.auth.id, projectId: this.id };
     this.store.dispatch(new CreateContractAction(contract, {
       success: () => {
-        this.store.dispatch(new AddToast({ description: 'Contract Request Successful' }));
+        this.store.dispatch(new AddToast({ title: 'Contract Request Successful' }));
         this.router.navigateByUrl('/contracts');
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Contract Request Failed' }));
+        this.store.dispatch(new AddToast({ title: 'Contract Request Failed' }));
       }
     }));
   }

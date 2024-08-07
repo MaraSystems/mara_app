@@ -8,20 +8,18 @@ import { ContractAccessService } from "../access/contract-access.service";
 import { CreateContractAction, CreateContractActionFail, CreateContractActionSuccess, GetContractAction, GetContractActionFail, GetContractActionSuccess, ListContractsAction, ListContractsActionFail, ListContractsActionSuccess, ContractActionsType, UpdateContractAction, UpdateContractActionFail, UpdateContractActionSuccess } from "./contract-store.action";
 import { Contract } from "../models/contract.model";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
-import { APIService } from "src/app/general/utils/services/api.service";
 
 @Injectable()
 export class ContractStoreEffect {
     constructor(
         private actions$: Actions,
         private contractAccessService: ContractAccessService,
-        private apiService: APIService
     ){}
 
     createContract$ = createEffect(() => this.actions$.pipe(
         ofType<CreateContractAction>(ContractActionsType.CREATE_CONTRACT),
         mergeMap((action: CreateContractAction) => 
-            this.apiService.requestContract(action.payload).pipe(
+            this.contractAccessService.requestContract(action.payload).pipe(
                 map((response: DataResponse<Contract>) => {
                     handleSuccessSideEffects((action as CreateContractAction).sideEffects);
                     return new CreateContractActionSuccess(response.data);
@@ -44,8 +42,8 @@ export class ContractStoreEffect {
                     return new UpdateContractActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateContractActionFail(err)).pipe(
-                    tap(() => {
-                        handleSuccessSideEffects((action as UpdateContractAction).sideEffects);   
+                    tap((failedAction) => {                     
+                        handleFailureSideEffects((action as UpdateContractAction).sideEffects, failedAction.payload);   
                     })
                 ))
             )

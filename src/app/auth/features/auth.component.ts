@@ -46,11 +46,11 @@ export class AuthComponent extends UnSubscriber implements OnInit {
   login() {    
     this.store.dispatch(new LoginAuthAction(this.loginData, {
       success: () => {        
-        this.store.dispatch(new AddToast({ description: 'Login successful' }));
+        this.store.dispatch(new AddToast({ title: 'Login successful' }));
         this.router.navigateByUrl('/dashboard');
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Login failed' }));
+        this.store.dispatch(new AddToast({ title: 'Login failed' }));
       }
     }));
   }

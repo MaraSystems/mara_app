@@ -9,7 +9,8 @@ export interface Client {
     firstname: string;
     lastname: string;
     createdAt: Date;
-    verified: boolean;
+    updatedAt: Date;
+    emailVerified: boolean;
     dob: Date;
     street: string;
     city: string;

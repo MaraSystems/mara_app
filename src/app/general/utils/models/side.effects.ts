@@ -1,4 +1,4 @@
 export class SideEffects {
-    success? = () => {};
-    failure? = () => {};
+    success? = (message?: string) => {};
+    failure? = (error?: string) => {};
 }

@@ -15,7 +15,7 @@ export class AccessService {
   constructor(
     private httpClient: HttpClient
   ) { 
-    (window as any).accessDB = this.db;
+    (window as any).access = this;
   }
 
   public request<T, K>(method: string, endpoint: string, data?: K) {    
@@ -36,7 +36,7 @@ export class AccessService {
     const collection = this.db.createCollection<T>(endpoint, { timestamp: true });
     const data = collection.findOne(query, options);
     if (!data) {
-      return throwError(() => 'Not found');
+      return throwError('Not found');
     }    
     const response: DataResponse<T> = { success: true, data: data as T };
     return of(response);
@@ -63,6 +63,13 @@ export class AccessService {
       return throwError(() => 'Not found');
     }
     const response: DataResponse<T> = { success: true, data: data as T };
+    return of(response);
+  }
+
+  public remove<T>(endpoint: string, query?: any) {    
+    const collection = this.db.createCollection<T>(endpoint, { timestamp: true });    
+    const data = collection.remove(query);     
+    const response: DataResponse<T> = { success: true, data: data as T };        
     return of(response);
   }
 }

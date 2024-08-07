@@ -50,11 +50,11 @@ export class ClientCreateComponent extends UnSubscriber implements OnInit {
   register() {    
     this.store.dispatch(new CreateClientAction(this.client, {
       success: () => {        
-        this.store.dispatch(new AddToast({ description: 'Registration successful' }));
+        this.store.dispatch(new AddToast({ title: 'Registration successful' }));
         this.router.navigateByUrl('/auth');
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Registration failed' }));
+        this.store.dispatch(new AddToast({ title: 'Registration failed' }));
       }
     }));
   }

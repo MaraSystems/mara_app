@@ -40,7 +40,7 @@ export class ProfileCreateComponent extends UnSubscriber implements OnInit {
     if (this.currentPage > this.pagelength) {
       this.store.dispatch(new UpdateClientAction({ id: this.profile._id, changes: { onboard: OnboardEnum.COMPLETED } }, {
         success: () => {
-          this.store.dispatch(new AddToast({ description: 'Welcome Onboard' }));
+          this.store.dispatch(new AddToast({ title: 'Welcome Onboard' }));
           this.router.navigateByUrl('/profile/info');
         }
       }));

@@ -71,11 +71,11 @@ export class ProjectDeliverableCreateComponent extends UnSubscriber implements O
   createDeliverable() {    
     this.store.dispatch(new CreateProjectDeliverableAction(this.deliverable, {
       success: () => {        
-        this.store.dispatch(new AddToast({ description: 'Deliverable creation successful' }));
+        this.store.dispatch(new AddToast({ title: 'Deliverable creation successful' }));
         this.router.navigateByUrl(`/projects/${this.projectId}`);
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Deliverable creation failed' }));
+        this.store.dispatch(new AddToast({ title: 'Deliverable creation failed' }));
       }
     }));
   }

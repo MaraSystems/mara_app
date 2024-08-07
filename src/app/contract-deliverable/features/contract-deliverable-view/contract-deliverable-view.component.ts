@@ -6,11 +6,10 @@ import { ActivatedRoute } from '@angular/router';
 import { More } from 'src/app/general/utils/models/more.model';
 import { PopupService } from 'src/app/general/features/popup/features/popup.service';
 import { ContractDeliverable } from '../../utils/models/contract-deliverable.model';
-import { GetContractDeliverableAction, UpdateContractDeliverableAction } from '../../utils/store/contract-deliverable-store.action';
+import { GetContractDeliverableAction } from '../../utils/store/contract-deliverable-store.action';
 import { selectContractDeliverableById } from '../../utils/store/contract-deliverable-store.selector';
-import { Attachment } from 'src/app/general/features/attachment/utils/models/attatchment.model';
-import { ListAttachmentsAction } from 'src/app/general/features/attachment/utils/store/attatchment-store.action';
-import { toggleList } from 'src/app/general/utils/lib/toggleList';
+import { Attachment } from 'src/app/general/features/attachment/utils/models/attachment.model';
+import { ListAttachmentsAction } from 'src/app/general/features/attachment/utils/store/attachment-store.action';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
 import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/store/comment-store.selector';
@@ -18,9 +17,7 @@ import { ListCommentsAction } from 'src/app/general/features/comment/utils/store
 import { CommentEnum } from 'src/app/general/features/comment/utils/models/comment.enum';
 import { GetContractAction } from 'src/app/contract/utils/store/contract-store.action';
 import { selectContractById } from 'src/app/contract/utils/store/contract-store.selector';
-import { Toast } from 'src/app/general/features/toast/utils/models/toast.class';
-import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
-import { AttachmentModelEnum } from 'src/app/general/features/attachment/utils/models/attatchment-model.enum';
+import { AttachmentModelEnum } from 'src/app/general/features/attachment/utils/models/attachment-model.enum';
 
 @Component({
   selector: 'app-contract-deliverable-view',

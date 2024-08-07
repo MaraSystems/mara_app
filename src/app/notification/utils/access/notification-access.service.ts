@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AccessService } from 'src/app/general/utils/services/access.service';
 import { Notification } from '../models/notification.model';
 import { ListOptions } from 'src/app/general/utils/models/list-options';
-import { APIService } from 'src/app/general/utils/services/api.service';
+import { map, mergeMap } from 'rxjs';
+import { NotificationStatusEnum } from '../models/notification-status.enum';
 
 
 @Injectable({
@@ -13,8 +14,12 @@ export class NotificationAccessService {
 
   constructor(
     private accessService: AccessService,
-    private apiService: APIService
   ) {}
+
+  createNotification(data: Notification) {    
+    const response = this.accessService.insertOne<Notification>(this.domain, data);        
+    return response;
+  }
 
   getNotification(id: string) {    
     const response = this.accessService.findOne<Notification>(this.domain, { _id: id });
@@ -26,8 +31,24 @@ export class NotificationAccessService {
     return response;
   }
 
-  readNotification(id: string, userId: string) {    
-    const response = this.apiService.readNotification(id, userId);
-    return response;
+  readNotification(id: string, userId: string) {
+    return this.accessService.findOne<Notification>(this.domain, { _id: id })
+      .pipe(
+        map(({ data: notification }) => {
+          if (!notification) {
+            throw new Error('Notification not found');
+          }
+      
+          const users = notification.users.map(user => {
+            return user.userId === userId
+              ? { ...user, status: NotificationStatusEnum.READ }
+              : user
+          });
+
+          return users;
+        })
+      ).pipe(
+        mergeMap((users) => this.accessService.updateOne<Notification>(this.domain, { _id: id }, { users }))
+      )
   }
 }

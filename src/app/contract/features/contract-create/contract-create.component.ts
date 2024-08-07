@@ -93,11 +93,11 @@ export class ContractCreateComponent extends UnSubscriber implements OnInit {
   createContract() {    
     this.store.dispatch(new CreateContractAction(this.contract, {
       success: () => {        
-        this.store.dispatch(new AddToast({ description: 'Contract creation successful' }));
+        this.store.dispatch(new AddToast({ title: 'Contract creation successful' }));
         this.router.navigateByUrl('/contracts');
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Contract creation failed' }));
+        this.store.dispatch(new AddToast({ title: 'Contract creation failed' }));
       }
     }));
   }

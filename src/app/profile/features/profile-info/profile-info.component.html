@@ -3,7 +3,7 @@
     <div class="basic">
         <span class="image">
             <img [src]="profile.image || '../../../../assets/images/db.png'" alt="">
-            <span class="material-symbols-outlined verification-badge" *ngIf="profile.verified">
+            <span class="material-symbols-outlined verification-badge" *ngIf="profile.emailVerified">
                 {{ profile.business ? 'handshake' : 'done' }}
             </span>
         </span>

@@ -69,11 +69,11 @@ export class ProjectUpdateComponent extends UnSubscriber implements OnInit {
   saveProject() {    
     this.store.dispatch(new UpdateProjectAction({ id: this.id, changes: this.updateData }, {
       success: () => {
-        this.store.dispatch(new AddToast({ description: 'Project Update' }));
+        this.store.dispatch(new AddToast({ title: 'Project Update' }));
         this.popupService.close(`project-update-${this.id}`);
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Project Update', type: ToastEnum.ERROR }));
+        this.store.dispatch(new AddToast({ title: 'Project Update', type: ToastEnum.ERROR }));
       }
     }));
   }

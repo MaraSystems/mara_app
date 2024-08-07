@@ -8,8 +8,8 @@ import { toggleList } from 'src/app/general/utils/lib/toggleList';
 import { DeleteCommentAction, ListCommentsAction, UpdateCommentAction } from '../../utils/store/comment-store.action';
 import { CommentEnum } from '../../utils/models/comment.enum';
 import { selectCommentsByModelId } from '../../utils/store/comment-store.selector';
-import { DownloadAttachmentAction, GetAttachmentAction } from '../../../attachment/utils/store/attatchment-store.action';
-import { selectAttachmentById } from '../../../attachment/utils/store/attatchment-store.selector';
+import { DownloadAttachmentAction, GetAttachmentAction } from '../../../attachment/utils/store/attachment-store.action';
+import { selectAttachmentById } from '../../../attachment/utils/store/attachment-store.selector';
 import { More } from 'src/app/general/utils/models/more.model';
 import { PopupService } from '../../../popup/features/popup.service';
 
@@ -58,8 +58,6 @@ export class CommentItemComponent extends UnSubscriber implements OnInit {
     
     if (this.comment.attachment) {
       this.store.dispatch(new GetAttachmentAction(this.comment.attachment));
-      this.store.dispatch(new DownloadAttachmentAction({ _id: this.comment.attachment }));
-
       this.newSubscription = this.store.select(selectAttachmentById(this.comment.attachment)).subscribe(attachment => {
         this.attachment = attachment.url;
       });

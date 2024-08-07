@@ -3,6 +3,12 @@ import { Store } from '@ngrx/store';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
 import { Client } from 'src/app/client/utils/models/client';
 import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
+import { CreateComplianceAction, GetComplianceAction } from 'src/app/profile/features/compliance/utils/store/compliance-store.action';
+import { GetAttachmentAction } from '../attachment/utils/store/attachment-store.action';
+import { Compliance, ComplianceModel, ComplianceStatusEnum, ComplianceTitleEnum } from 'src/app/client/utils/models/compliance';
+import { UnSubscriber } from '../../utils/services/unsubscriber.service';
+import { selectAttachmentById } from '../attachment/utils/store/attachment-store.selector';
+import { AddToast } from '../toast/utils/store/toast.action';
 
 export interface Point {
   x: number;
@@ -14,10 +20,12 @@ export interface Point {
   templateUrl: './signature.component.html',
   styleUrls: ['./signature.component.scss']
 })
-export class SignatureComponent implements OnInit, AfterViewInit {
-  @Output() signature = new EventEmitter<string>();
-  @Input() image = '';
+export class SignatureComponent extends UnSubscriber implements OnInit, AfterViewInit {
+  @Input() compliance!: Compliance | undefined;
+  @Output() signed = new EventEmitter();
+
   client!: Client;
+  signature = '';
 
   context!: CanvasRenderingContext2D;
   trackMouse = false;
@@ -36,12 +44,18 @@ export class SignatureComponent implements OnInit, AfterViewInit {
   constructor(
     private elementRef: ElementRef,
     private store: Store
-  ) { }
+  ) { 
+    super();
+  }
 
   ngOnInit(): void {
     this.store.select(selectAuthClient).subscribe(client => {
       this.client = client;
-    });
+      this.store.dispatch(new GetAttachmentAction(this.compliance?.attachment as string));
+      this.newSubscription = this.store.select(selectAttachmentById(this.compliance?.attachment as string)).subscribe(attachment => {
+        this.signature = attachment.url;        
+      });
+    });   
   }
 
   ngAfterViewInit(){
@@ -70,6 +84,8 @@ export class SignatureComponent implements OnInit, AfterViewInit {
       this.trackMouse = false;
       this.context.canvas.removeEventListener("mousemove", this.drawTracks, false);
     });
+
+    this.setFont();
   } 
 
   drawTracks  = (event: MouseEvent) => {
@@ -94,21 +110,16 @@ export class SignatureComponent implements OnInit, AfterViewInit {
     return { x, y } as Point;
   }
 
-  getImage(){
-   this.image = this.context.canvas.toDataURL();  
-   this.signature.emit(this.image);
-  }
-
   setImage () {
     const img = document.createElement('img');
-    img.src = this.image;
+    img.src = this.signature;
 
     img.addEventListener('load', () => {
       this.context.drawImage(img, 0, 0);
     });
   }
 
-  setFont(font: string) {
+  setFont(font = 'custom') {
     const name = this.client.firstname+this.client.lastname;
     this.selectedFont = font
     this.context.clearRect(0, 0, this.width, this.height);
@@ -121,5 +132,20 @@ export class SignatureComponent implements OnInit, AfterViewInit {
       this.context.font = `30px ${font}`;
       this.context.fillText(name, this.width/10, this.height/2);      
     }
+  }
+
+  updateSignature() {
+    this.signature = this.context.canvas.toDataURL();  
+    const compliance: Compliance = { userId: this.client._id, model: ComplianceModel.SIGNATURE, status: ComplianceStatusEnum.PENDING, hidden: false, title: ComplianceTitleEnum.SIGNATURE, ...this.compliance } as any;
+    
+    this.store.dispatch(new CreateComplianceAction({ compliance, document: this.signature }, {
+      success: () => {
+        this.store.dispatch(new AddToast({ title: 'Signature upload successful'}));
+        this.signed.emit();
+      }, 
+      failure: () => {
+        this.store.dispatch(new AddToast({ title: 'Signature upload failed'}));
+      }
+    }));
   }
 }

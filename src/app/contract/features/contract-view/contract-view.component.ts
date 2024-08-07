@@ -15,18 +15,13 @@ import { ContractStatus } from '../../utils/models/contract-status.enum';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
-import { toggleList } from 'src/app/general/utils/lib/toggleList';
 import { CommentEnum } from 'src/app/general/features/comment/utils/models/comment.enum';
 import { ListCommentsAction } from 'src/app/general/features/comment/utils/store/comment-store.action';
 import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/store/comment-store.selector';
-import { ToastEnum } from 'src/app/general/features/toast/utils/models/toast.enum';
-import { Toast } from 'src/app/general/features/toast/utils/models/toast.class';
 import { ShareEnum } from 'src/app/general/features/share/utils/models/share.enum';
-import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
-import { ContractRequest } from 'src/app/contract/utils/models/contract.model';
-import { CreateContractAction } from 'src/app/contract/utils/store/contract-store.action';
 import { summerizeDeliverables } from 'src/app/general/utils/lib/summerizeDeliverables';
-
+import { ToastEnum } from 'src/app/general/features/toast/utils/models/toast.enum';
+import { GetWalletAction } from 'src/app/dashboard/utils/store/dashboard-store.action';
 @Component({
   selector: 'app-contract-view',
   templateUrl: './contract-view.component.html',
@@ -40,15 +35,14 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
   id!: string;
   price!: string;
   duration!: number;
-
   moreList: More[] = [];
-
   liked = false;
   bookmarked = false;
   commentModel = CommentEnum.PROJECT;
   shareModel = ShareEnum.PROJECT;
   commentsCount = 0;
   contractStatus = ContractStatus;
+  walletBalance = 0;
 
   constructor(
     public store: Store<AppState>,
@@ -63,6 +57,11 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
     this.id = this.activatedRoute.snapshot.paramMap.get('contract_id') as string;   
     this.store.dispatch(new GetContractAction(this.id)); 
     this.store.dispatch(new ListContractDeliverablesAction(this.id));
+    this.store.dispatch(new ListCommentsAction(this.commentModel, this.id));
+
+    this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
+      this.auth = auth;
+    });    
 
     this.newSubscription = this.store.select(selectAllContractDeliverables(this.id)).subscribe(deliverables => {
       this.deliverables = deliverables;
@@ -72,16 +71,8 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
     });
     
     this.newSubscription = this.store.select(selectContractById(this.id)).subscribe(contract => {
-      this.contract = contract;             
-
-      if (this.contract) {
-        this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
-          this.auth = auth;
-        });         
-      }    
+      this.contract = contract;               
     });
-
-    this.store.dispatch(new ListCommentsAction(this.commentModel, this.id));
 
     this.newSubscription = this.store.select(selectCommentsByModelId(this.commentModel, this.id)).subscribe(comments => {
       this.commentsCount = comments.length;
@@ -91,10 +82,10 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
   approveContract() {
     this.store.dispatch(new UpdateContractAction({ id: this.id, changes: { status: ContractStatus.APPROVED }}, {
       success: () => {
-        this.store.dispatch(new AddToast({ description: 'Contract Approved Successful' }));
+        this.store.dispatch(new AddToast({ title: 'Contract Approval Successful' }));
       },
-      failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Contract Approved Failed' }));
+      failure: (error) => {
+        this.store.dispatch(new AddToast({ title: 'Contract Approval Failed', description: error, type: ToastEnum.ERROR }));
       }
     }));
   }
@@ -102,10 +93,11 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
   initiateContract() {
     this.store.dispatch(new UpdateContractAction({ id: this.id, changes: { status: ContractStatus.INITIATED }}, {
       success: () => {
-        this.store.dispatch(new AddToast({ description: 'Contract Initiation Successful' }));
+        this.store.dispatch(new GetWalletAction(this.auth.id));
+        this.store.dispatch(new AddToast({ title: 'Contract Initiation Successful' }));
       },
-      failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Contract Initiation Failed' }));
+      failure: (error) => {        
+        this.store.dispatch(new AddToast({ title: 'Contract Initiation Failed', description: error, type: ToastEnum.ERROR }));
       }
     }));
   }
@@ -113,10 +105,10 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
   terminateContract() {
     this.store.dispatch(new UpdateContractAction({ id: this.id, changes: { status: ContractStatus.TERMINATED }}, {
       success: () => {
-        this.store.dispatch(new AddToast({ description: 'Contract Approved Successful' }));
+        this.store.dispatch(new AddToast({ title: 'Contract Termination Successful' }));
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Contract Approved Failed' }));
+        this.store.dispatch(new AddToast({ title: 'Contract Termination Failed' }));
       }
     }));
   }

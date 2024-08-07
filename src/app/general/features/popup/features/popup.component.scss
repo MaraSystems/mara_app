@@ -21,7 +21,7 @@
             position: fixed;
             height: 100%;
             width: 100%;
-            backdrop-filter: blur(var(--gap-small));
+            backdrop-filter: blur(var(--gap-x-small));
             background-color: var(--color-overlay);
         }
 
@@ -63,6 +63,9 @@
             
             &-wrapper {
                 width: var(--enclosed-500);
+                margin: var(--gap-small);
+                border-radius: var(--gap-normal);
+                box-shadow: var(--shadow-high);
             }
         }
     }

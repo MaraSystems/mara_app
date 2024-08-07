@@ -11,7 +11,6 @@ import { GetAuthAction } from './auth/utils/store/auth-store.action';
 import { GetClientAction } from './client/utils/store/client-store.action';
 import { selectClientById } from './client/utils/store/client-store.selector';
 import { OnboardEnum } from './profile/utils/onboard.enum';
-import { APIService } from './general/utils/services/api.service';
 
 
 @Component({
@@ -27,7 +26,6 @@ export class AppComponent  extends UnSubscriber implements OnInit {
   constructor(
     private store: Store<AppState>,
     private authAccessService: AuthAccessService,
-    private apiService: APIService,
     @Inject(DOCUMENT) private document: Document,
     private router: Router,
   ) {

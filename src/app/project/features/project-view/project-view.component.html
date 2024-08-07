@@ -33,11 +33,11 @@
     <div class="section-title">
         <h1 class="text-1 section-title-text">Deliverables</h1>
         <span class="section-icons">
-            <span class="material-symbols-outlined" [routerLink]="'/projects/' + id + '/deliverables/create' " *ngIf="auth.id === project.userId && project.status === projectStatus.DRAFT">
+            <span class="material-symbols-outlined icon clickable" [routerLink]="'/projects/' + id + '/deliverables/create' " *ngIf="auth.id === project.userId && project.status === projectStatus.DRAFT">
                 add
             </span>
-            <span class="material-symbols-outlined" [routerLink]="'/projects/' + id + '/deliverables' ">arrow_outward</span>
-            <span class="material-symbols-outlined" *ngIf="auth.id !== project.userId && project.status === projectStatus.PUBLISHED" (click)="toggleDeliverableList(selectedDeliverables.length !== deliverables.length)">
+            <span class="material-symbols-outlined icon clickable" [routerLink]="'/projects/' + id + '/deliverables' ">arrow_outward</span>
+            <span class="material-symbols-outlined icon clickable" *ngIf="auth.id !== project.userId && project.status === projectStatus.PUBLISHED" (click)="toggleDeliverableList(selectedDeliverables.length !== deliverables.length)">
                 {{ selectedDeliverables.length === deliverables.length ? 'radio_button_checked' : 'radio_button_unchecked' }}
             </span>
         </span>

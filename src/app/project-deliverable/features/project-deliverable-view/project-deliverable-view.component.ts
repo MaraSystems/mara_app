@@ -8,8 +8,8 @@ import { PopupService } from 'src/app/general/features/popup/features/popup.serv
 import { ProjectDeliverable } from '../../utils/models/project-deliverable.model';
 import { DeleteProjectDeliverableAction, GetProjectDeliverableAction, UpdateProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
 import { selectProjectDeliverableById } from '../../utils/store/project-deliverable-store.selector';
-import { Attachment } from 'src/app/general/features/attachment/utils/models/attatchment.model';
-import { ListAttachmentsAction } from 'src/app/general/features/attachment/utils/store/attatchment-store.action';
+import { Attachment } from 'src/app/general/features/attachment/utils/models/attachment.model';
+import { ListAttachmentsAction } from 'src/app/general/features/attachment/utils/store/attachment-store.action';
 import { toggleList } from 'src/app/general/utils/lib/toggleList';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
@@ -20,7 +20,7 @@ import { GetProjectAction } from 'src/app/project/utils/store/project-store.acti
 import { selectProjectById } from 'src/app/project/utils/store/project-store.selector';
 import { Toast } from 'src/app/general/features/toast/utils/models/toast.class';
 import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
-import { AttachmentModelEnum } from 'src/app/general/features/attachment/utils/models/attatchment-model.enum';
+import { AttachmentModelEnum } from 'src/app/general/features/attachment/utils/models/attachment-model.enum';
 
 @Component({
   selector: 'app-project-deliverable-view',
@@ -29,7 +29,7 @@ import { AttachmentModelEnum } from 'src/app/general/features/attachment/utils/m
 })
 export class ProjectDeliverableViewComponent extends UnSubscriber implements OnInit {
   auth!: Auth;
-  deliverable = new ProjectDeliverable();
+  deliverable!: ProjectDeliverable;
   attachment: Attachment[] = [];
   id!: string;
   liked = false;

@@ -24,7 +24,7 @@ export enum ComplianceActionsType {
 
 export class CreateComplianceAction implements Action {
     readonly type = ComplianceActionsType.CREATE_COMPLIANCE;
-    constructor(public payload: Compliance, public sideEffects = new SideEffects()){}
+    constructor(public payload: { compliance: Compliance, document: string }, public sideEffects = new SideEffects()){}
 }
 
 export class CreateComplianceActionSuccess implements Action {

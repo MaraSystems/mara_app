@@ -71,11 +71,11 @@ export class BankUpdateComponent extends UnSubscriber implements OnInit {
   updateBank() {        
     this.store.dispatch(new UpdateBankAction({ id: this.id, changes: this.updateData }, {
       success: () => {        
-        this.store.dispatch(new AddToast({ description: 'Bank update successful' }));
+        this.store.dispatch(new AddToast({ title: 'Bank update successful' }));
         this.popupService.close('bank-update');
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Bank update failed' }));
+        this.store.dispatch(new AddToast({ title: 'Bank update failed' }));
       }
     }));
   }

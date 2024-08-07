@@ -80,7 +80,7 @@ export class BankStoreEffect {
         mergeMap((action: DeleteBankAction) => 
             this.bankAccessService.deleteBank(action.payload).pipe(
                 map((response: DataResponse<Bank>) => {         
-                    this.store.dispatch(new AddToast({ description: 'Bank Deleted' }));
+                    this.store.dispatch(new AddToast({ title: 'Bank Deleted' }));
                     return new DeleteBankActionSuccess(response.data);
                 }),
                 catchError(err => of(new DeleteBankActionFail(err))

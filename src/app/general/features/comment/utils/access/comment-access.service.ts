@@ -5,8 +5,8 @@ import { ListOptions } from 'src/app/general/utils/models/list-options';
 import { Comment } from '../models/comment.model';
 import { map, mergeMap, of, tap } from 'rxjs';
 import { DataResponse } from 'src/app/general/utils/models/data-response';
-import { APIService } from 'src/app/general/utils/services/api.service';
-import { AttachmentModelEnum } from '../../../attachment/utils/models/attatchment-model.enum';
+import { AttachmentModelEnum } from '../../../attachment/utils/models/attachment-model.enum';
+import { AttachmentAccessService } from '../../../attachment/utils/access/attachment-access.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class CommentAccessService {
 
   constructor(
     private accessService: AccessService,
-    private apiService: APIService
+    private attachmentService: AttachmentAccessService
   ) {}
 
   createComment(data: Comment) {    
@@ -27,13 +27,11 @@ export class CommentAccessService {
       bookmarks: []
     }).pipe(
       mergeMap(({ data: comment }) => attachment
-        ? this.apiService.upload({ 
+        ? this.attachmentService.uploadAttachment({ 
           model: AttachmentModelEnum.COMMENT, modelId: comment._id as string, data: attachment, name: ''
         }).pipe(
-          tap(({ data: uploaded }) => {
-            this.updateComment({ id: comment._id, changes: { attachment: uploaded._id }});
-          }),
           map(({ data: uploaded }) => {
+            this.updateComment({ id: comment._id, changes: { attachment: uploaded._id }});
             const uploadedComment: DataResponse<Comment> =  { success: true, data: { ...comment, attachment: uploaded._id }};
             return uploadedComment;
           })

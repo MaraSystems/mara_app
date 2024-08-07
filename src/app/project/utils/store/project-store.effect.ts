@@ -83,7 +83,7 @@ export class ProjectStoreEffect {
         mergeMap((action: DeleteProjectAction) => 
             this.projectAccessService.deleteProject(action.payload).pipe(
                 map((response: DataResponse<Project>) => {         
-                    this.store.dispatch(new AddToast({ description: 'Project Deleted' }));
+                    this.store.dispatch(new AddToast({ title: 'Project Deleted' }));
                     this.router.navigateByUrl('/projects');           
                     return new DeleteProjectActionSuccess(response.data);
                 }),

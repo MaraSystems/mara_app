@@ -73,11 +73,11 @@ export class ProjectCreateComponent extends UnSubscriber implements OnInit {
   createProject() {    
     this.store.dispatch(new CreateProjectAction(this.project, {
       success: () => {        
-        this.store.dispatch(new AddToast({ description: 'Project creation successful' }));
+        this.store.dispatch(new AddToast({ title: 'Project creation successful' }));
         this.router.navigateByUrl('/projects');
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Project creation failed' }));
+        this.store.dispatch(new AddToast({ title: 'Project creation failed' }));
       }
     }));
   }

@@ -65,7 +65,7 @@ export class TransactionStoreEffect {
         mergeMap((action: DeleteTransactionAction) => 
             this.transactionAccessService.deleteTransaction(action.payload).pipe(
                 map((response: DataResponse<Transaction>) => {         
-                    this.store.dispatch(new AddToast({ description: 'Transaction Deleted' }));
+                    this.store.dispatch(new AddToast({ title: 'Transaction Deleted' }));
                     this.router.navigateByUrl('/transactions');           
                     return new DeleteTransactionActionSuccess(response.data);
                 }),

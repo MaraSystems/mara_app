@@ -3,6 +3,7 @@ import { DashboardWidget } from "../models/dashboard-widget";
 import { Transaction } from "src/app/transaction/utils/models/transaction.model";
 import { SideEffects } from "src/app/general/utils/models/side.effects";
 import { Update } from "@ngrx/entity";
+import { WalletTransaction } from "../models/wallet-transaction.model";
 
 export enum DashboardActionsType {
     GET_WALLET = "[DASHBOARD] Get Wallet",
@@ -31,7 +32,7 @@ export class GetWalletActionFail implements Action {
 
 export class UpdateWalletAction implements Action {
     readonly type = DashboardActionsType.UPDATE_WALLET;
-    constructor(public payload: Transaction, public sideEffects = new SideEffects()){}
+    constructor(public payload: WalletTransaction, public sideEffects = new SideEffects()){}
 }
 
 export class UpdateWalletActionSuccess implements Action {

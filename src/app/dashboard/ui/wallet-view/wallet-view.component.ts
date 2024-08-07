@@ -29,7 +29,7 @@ export class WalletViewComponent extends UnSubscriber implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new GetWalletAction(this.userId)); 
     
-    this.newSubscription = this.store.select(selectDashboardWidgetById<number>('wallet-balance')).subscribe(widget => {
+    this.newSubscription = this.store.select(selectDashboardWidgetById<number>('wallet-balance')).subscribe(widget => {                  
       this.balance = widget.data
     });
   }

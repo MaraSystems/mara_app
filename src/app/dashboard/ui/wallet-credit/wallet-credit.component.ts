@@ -38,10 +38,6 @@ export class WalletCreditComponent extends UnSubscriber implements OnInit {
   initForm() {
     this.form = new FormGroup({
       amount: new FormControl(null, [Validators.required, Validators.min(1000)]),
-      platform: new FormControl(TransactionPlatformEnum.CONTRACTOR),
-      model: new FormControl(TransactionModelEnum.WALLET),
-      title: new FormControl('Wallet Deposit'),
-      hidden: new FormControl(false),
       action: new FormControl(TransactionActionEnum.CREDIT),
       userId: new FormControl(this.userId),
     });
@@ -54,10 +50,10 @@ export class WalletCreditComponent extends UnSubscriber implements OnInit {
   deposit() {    
     this.store.dispatch(new UpdateWalletAction(this.transaction, {
       success: () => {
-        this.store.dispatch(new AddToast({ description: 'Wallet credit successful'}))
+        this.store.dispatch(new AddToast({ title: 'Wallet credit successful'}))
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Wallet credit failed'}))
+        this.store.dispatch(new AddToast({ title: 'Wallet credit failed'}))
       }
     }))
   }

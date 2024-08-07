@@ -32,11 +32,11 @@ export class SidebarComponent extends UnSubscriber implements OnInit {
   logout() {
     this.store.dispatch(new LogoutAuthAction({
       success: () => {        
-        this.store.dispatch(new AddToast({ description: 'Logout successful' }));
+        this.store.dispatch(new AddToast({ title: 'Logout successful' }));
         this.router.navigateByUrl('/auth');
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ description: 'Logout failed' }));
+        this.store.dispatch(new AddToast({ title: 'Logout failed' }));
       }
     }));
   }

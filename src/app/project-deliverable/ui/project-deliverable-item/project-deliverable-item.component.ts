@@ -7,5 +7,5 @@ import { ProjectDeliverable } from '../../utils/models/project-deliverable.model
   styleUrls: ['./project-deliverable-item.component.scss']
 })
 export class ProjectDeliverableItemComponent {
-  @Input() deliverable = new ProjectDeliverable;
+  @Input() deliverable!: ProjectDeliverable;
 }

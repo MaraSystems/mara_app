@@ -9,6 +9,7 @@ import { selectToastById } from '../store/toast.selector';
 
 export interface IToast {
     type?: ToastEnum;
+    title?: string;
     description?: string;
     duration?: number;
     options?: string[]
@@ -17,6 +18,7 @@ export interface IToast {
 export class Toast {
     id: string = '';
     duration = 5;
+    title = '';
     description = '';
     type = ToastEnum.NOTE;
     options: string[] = [];
@@ -25,9 +27,10 @@ export class Toast {
     constructor(
         data: Partial<IToast>
     ){        
-        const { duration, type, description, options } = data;        
+        const { duration, type, title, options, description } = data;        
         this.id = uuid();
         this.type = type ? type : this.type;
+        this.title = title ? title : this.title;
         this.description = description ? description : this.description;
 
         this.duration = (typeof duration !== 'undefined') ? duration : this.duration;
@@ -43,7 +46,7 @@ export class Toast {
         options: string[] = [], 
         callback = (selected: string) => {}
     ) {
-        const toast = new Toast({ description: warning, type: ToastEnum.WAIT, options });
+        const toast = new Toast({ title: warning, type: ToastEnum.WAIT, options });
         store.dispatch(new AddToastSuccess(toast));
     
         store.select(selectToastById(toast.id)).subscribe(t => {

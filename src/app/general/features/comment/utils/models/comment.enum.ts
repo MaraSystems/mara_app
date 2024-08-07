@@ -3,5 +3,6 @@ export enum CommentEnum {
     CONTRACT = 'contract',
     COMMENT = 'comment',
     PROJECTDELIVERABLE = 'project deliverable',
-    CONTRACTDELIVERABLE = 'contract deliverable'
+    CONTRACTDELIVERABLE = 'contract deliverable',
+    ATTATCHMENT = 'attachment'
 }

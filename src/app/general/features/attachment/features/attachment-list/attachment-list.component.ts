@@ -2,10 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PopupService } from 'src/app/general/features/popup/features/popup.service';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
-import { ListAttachmentsAction } from '../../utils/store/attatchment-store.action';
-import { selectAttachmentsByModelId } from '../../utils/store/attatchment-store.selector';
-import { Attachment } from '../../utils/models/attatchment.model';
-import { AttachmentModelEnum } from '../../utils/models/attatchment-model.enum';
+import { ListAttachmentsAction } from '../../utils/store/attachment-store.action';
+import { selectAttachmentsByModelId } from '../../utils/store/attachment-store.selector';
+import { Attachment } from '../../utils/models/attachment.model';
+import { AttachmentModelEnum } from '../../utils/models/attachment-model.enum';
 
 @Component({
   selector: 'app-attachment-list',

@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AccessService } from 'src/app/general/utils/services/access.service';
-import { Collection } from '@black-ink/lonedb';
-import { of } from 'rxjs';
+import { catchError, map, mergeMap, of, tap, throwError } from "rxjs";
 import { Update } from '@ngrx/entity';
-import { Compliance } from 'src/app/client/utils/models/compliance';
+import { Compliance, ComplianceStatusEnum, ComplianceTitleEnum } from 'src/app/client/utils/models/compliance';
+import { DataResponse } from 'src/app/general/utils/models/data-response';
+import { AttachmentModelEnum } from 'src/app/general/features/attachment/utils/models/attachment-model.enum';
+import { AttachmentAccessService } from 'src/app/general/features/attachment/utils/access/attachment-access.service';
+import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +15,21 @@ export class ComplianceAccessService {
   domain = 'compliances';
 
   constructor(
-    private accessService: AccessService
+    private accessService: AccessService,
+    private attachmentService: AttachmentAccessService,
   ) {}
 
-  createCompliance(data: Compliance) {    
-    const response = this.accessService.insertOne<Compliance>(this.domain, data);
-    return response;
+  createCompliance(data: Compliance, document: string) {         
+    return data._id
+      ? this.uploadComplianceDocument(data, document)
+      : this.accessService.insertOne<Compliance>(this.domain, data)
+        .pipe(
+          mergeMap(({ data: compliance }) => this.uploadComplianceDocument(compliance, document))
+        )
   }
 
-  getCompliance(userId: string) {    
-    const response = this.accessService.findOne<Compliance>(this.domain, { userId });
+  getCompliance(id: string) {        
+    const response = this.accessService.findOne<Compliance>(this.domain, { _id: id });
     return response;
   }
 
@@ -33,5 +41,24 @@ export class ComplianceAccessService {
   updateCompliance(data: Update<Compliance>) {    
     const response = this.accessService.updateOne<Compliance>(this.domain, { _id: data.id }, data.changes);    
     return response;
+  }
+
+  uploadComplianceDocument(data: Compliance, document: string) {
+    return this.attachmentService.uploadAttachment({ 
+      data: document, model: AttachmentModelEnum.COMPLIANCE, modelId: data._id, name: '', _id: data.attachment 
+    }).pipe(
+      tap(({ data: uploaded }) => this.updateCompliance({ id: data._id, changes: { attachment: uploaded._id }})),
+      map(({ data: uploaded }) => {
+        const uploadedCompliance: DataResponse<Compliance> =  { success: true, data: { ...data, attachment: uploaded._id }};
+        return uploadedCompliance;
+      })
+    )
+  }
+
+  checkCompliance(userId: string, title: ComplianceTitleEnum) {
+    return this.accessService.findOne<Compliance>(this.domain, { userId, title })
+      .pipe(
+        catchError(error => throwError(`Please upload your ${title}`))
+      )
   }
 }

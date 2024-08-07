@@ -5,6 +5,7 @@ import { AppState } from 'src/app/app.state';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { getFormControl } from 'src/app/general/utils/lib/getFormControl';
 import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { ComplianceModel } from 'src/app/client/utils/models/compliance';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { PopupService } from 'src/app/general/features/popup/features/popup.serv
 })
 export class ProfileCreateComplianceItemComponent extends UnSubscriber implements OnInit {
   @Input() data: { title: string, expiry: boolean }[] = [];
-  @Input() name = '';
+  @Input() model!: ComplianceModel;
 
   @Output() changes = new EventEmitter<FormGroup>();
 
@@ -30,8 +31,8 @@ export class ProfileCreateComplianceItemComponent extends UnSubscriber implement
     super();
   }
 
-  setExpiry (modelType: string) {    
-    const item = this.data.find(d => d.title === modelType);    
+  setExpiry (title: string) {    
+    const item = this.data.find(d => d.title === title);    
     this.expiry = !!item?.expiry;
 
     const expiryControl = getFormControl(this.form, 'expiry');
@@ -41,21 +42,22 @@ export class ProfileCreateComplianceItemComponent extends UnSubscriber implement
 
   ngOnInit(): void {    
     this.initForm();
-    this.list = this.data.map(d => d.title);
+    this.list = this.data.map(d => d.title);    
   }
 
   initForm() {
     this.form = new FormGroup({
-      modelType: new FormControl(null, [Validators.minLength(12), Validators.required]),
+      title: new FormControl(null, [Validators.minLength(12), Validators.required]),
       document: new FormControl(null, [Validators.required]),
-      expiry: new FormControl(null, [Validators.required])
+      expiry: new FormControl(null, [Validators.required]),
+      model: new FormControl(this.model)
     });
 
     this.newSubscription = this.form.valueChanges.subscribe(data => {                          
       this.changes.emit(this.form);    
     });
 
-    const modelControl = getFormControl(this.form, 'modelType');
+    const modelControl = getFormControl(this.form, 'title');
     modelControl.valueChanges.subscribe(value => this.setExpiry(value));
   }
 }

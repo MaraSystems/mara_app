@@ -1,4 +1,4 @@
-import { AttachmentModelEnum } from "./attatchment-model.enum";
+import { AttachmentModelEnum } from "./attachment-model.enum";
 
 export interface UploadData {
     _id?: string;

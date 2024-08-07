@@ -30,7 +30,7 @@ export class AuthStoreEffect {
                 }),
                 catchError(err => of(new GetPasswordAuthActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ type: ToastEnum.ERROR, description: 'Password Request' }));
+                        this.store.dispatch(new AddToast({ title: 'Password Request', type: ToastEnum.ERROR }));
                     })
                 ))
             )

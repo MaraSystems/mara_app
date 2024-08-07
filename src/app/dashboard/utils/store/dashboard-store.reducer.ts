@@ -31,7 +31,13 @@ export function dashboardReducer(state = initialState, action: Action): Dashboar
             return { ...state, loading: true, loaded: false };
 
         case DashboardActionsType.GET_WALLET_SUCCESS:
-            const { payload: getPayload } = (action as GetWalletActionSuccess);                        
+            const { payload: getPayload } = (action as GetWalletActionSuccess);  
+            if(state.entities['wallet-balance']) {
+                return dashboardAdapter.updateOne(
+                    { id: '', changes: getPayload }, { ...state, loading: false, loaded: true }
+                )
+            }
+                                 
             return dashboardAdapter.addOne(
                 getPayload, { ...state, loading: false, loaded: true }
             )
@@ -48,7 +54,7 @@ export function dashboardReducer(state = initialState, action: Action): Dashboar
             return { ...state, loading: true, loaded: false };
 
         case DashboardActionsType.UPDATE_WALLET_SUCCESS:
-            const { payload: updatePayload } = (action as UpdateWalletActionSuccess);                        
+            const { payload: updatePayload } = (action as UpdateWalletActionSuccess);  
             return dashboardAdapter.updateOne(
                 updatePayload, { ...state, loading: false, loaded: true }
             )
