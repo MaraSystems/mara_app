@@ -6,7 +6,7 @@ import { CreateClientAction } from '../../utils/store/client-store.action';
 import { phonePattern, usernamePattern } from 'src/app/general/utils/lib/patterns';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Client } from '../../utils/models/client';
-import { OnboardEnum } from 'src/app/profile/utils/onboard.enum';
+import { OnboardStatus } from 'src/app/profile/utils/onboard-status';
 import { Router } from '@angular/router';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 
@@ -43,7 +43,7 @@ export class ClientCreateComponent extends UnSubscriber implements OnInit {
       email: new FormControl(null, [Validators.email, Validators.required]),
       phone: new FormControl(null, [Validators.pattern(phonePattern), Validators.required]),
       username: new FormControl(null, [Validators.pattern(usernamePattern), Validators.required]),
-      onboard: new FormControl(OnboardEnum.PENDING)
+      onboard: new FormControl(OnboardStatus.PENDING)
     });
   }
 

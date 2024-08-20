@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ContractDeliverable } from '../../utils/models/contract-deliverable.model';
+import { ContractDeliverable } from '../../utils/models/contract-deliverable';
 
 @Component({
   selector: 'app-contract-deliverable-item',

@@ -1,19 +1,15 @@
 import { Action } from "@ngrx/store";
 import { ListOptions } from "src/app/general/utils/models/list-options";
 import { Update } from "@ngrx/entity";
-import { Attachment } from "../models/attachment.model";
+import { Attachment } from "../models/attachment";
 import { UploadData } from "../models/upload-data";
 import { DownloadData } from "../models/download-data";
-import { SideEffects } from "src/app/general/utils/models/side.effects";
+import { SideEffects } from "src/app/general/utils/models/side-effects";
 
 export enum AttachmentActionsType {
     UPLOAD_ATTACHMENT = "[ATTACHMENT] Upload Attachment",
     UPLOAD_ATTACHMENT_SUCCESS = "[ATTACHMENT] Upload Attachment Success",
     UPLOAD_ATTACHMENT_FAIL = "[ATTACHMENT] Upload Attachment Fail",
-
-    DOWNLOAD_ATTACHMENT = "[ATTACHMENT] Download Attachment",
-    DOWNLOAD_ATTACHMENT_SUCCESS = "[ATTACHMENT] Download Attachment Success",
-    DOWNLOAD_ATTACHMENT_FAIL = "[ATTACHMENT] Download Attachment Fail",
 
     GET_ATTACHMENT = "[ATTACHMENT] Get Attachment",
     GET_ATTACHMENT_SUCCESS = "[ATTACHMENT] Get Attachment Success",
@@ -22,6 +18,10 @@ export enum AttachmentActionsType {
     DELETE_ATTACHMENT = "[ATTACHMENT] Delete Attachment",
     DELETE_ATTACHMENT_SUCCESS = "[ATTACHMENT] Delete Attachment Success",
     DELETE_ATTACHMENT_FAIL = "[ATTACHMENT] Delete Attachment Fail",
+
+    UPDATE_ATTACHMENT = "[ATTACHMENT] Update Attachment",
+    UPDATE_ATTACHMENT_SUCCESS = "[ATTACHMENT] Update Attachment Success",
+    UPDATE_ATTACHMENT_FAIL = "[ATTACHMENT] Update Attachment Fail",
 
     LIST_ATTACHMENTS = "[ATTACHMENT] List Attachments",
     LIST_ATTACHMENTS_SUCCESS = "[ATTACHMENT] List Attachments Success",
@@ -40,21 +40,6 @@ export class UploadAttachmentActionSuccess implements Action {
 
 export class UploadAttachmentActionFail implements Action {
     readonly type = AttachmentActionsType.UPLOAD_ATTACHMENT_FAIL;
-    constructor(public payload: string){}
-}
-
-export class DownloadAttachmentAction implements Action {
-    readonly type = AttachmentActionsType.DOWNLOAD_ATTACHMENT;
-    constructor(public payload: DownloadData){}
-}
-
-export class DownloadAttachmentActionSuccess implements Action {
-    readonly type = AttachmentActionsType.DOWNLOAD_ATTACHMENT_SUCCESS;
-    constructor(public payload: Update<Attachment>){}
-}
-
-export class DownloadAttachmentActionFail implements Action {
-    readonly type = AttachmentActionsType.DOWNLOAD_ATTACHMENT_FAIL;
     constructor(public payload: string){}
 }
 
@@ -103,13 +88,25 @@ export class DeleteAttachmentActionFail implements Action {
     constructor(public payload: string){}
 }
 
+export class UpdateAttachmentAction implements Action {
+    readonly type = AttachmentActionsType.UPDATE_ATTACHMENT;
+    constructor(public payload: Update<Attachment>, public sideEffects = new SideEffects()){}
+}
+
+export class UpdateAttachmentActionSuccess implements Action {
+    readonly type = AttachmentActionsType.UPDATE_ATTACHMENT_SUCCESS;
+    constructor(public payload: Update<Attachment>){}
+}
+
+export class UpdateAttachmentActionFail implements Action {
+    readonly type = AttachmentActionsType.UPDATE_ATTACHMENT_FAIL;
+    constructor(public payload: string){}
+}
+
 export type AttachmentAction = 
 UploadAttachmentAction |
 UploadAttachmentActionSuccess |
 UploadAttachmentActionFail |
-DownloadAttachmentAction |
-DownloadAttachmentActionSuccess |
-DownloadAttachmentActionFail |
 GetAttachmentAction |
 GetAttachmentActionSuccess |
 GetAttachmentActionFail |

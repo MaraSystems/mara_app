@@ -1,7 +1,7 @@
 import { Kin } from "src/app/client/utils/models/kin";
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
-import { SideEffects } from "src/app/general/utils/models/side.effects";
+import { SideEffects } from "src/app/general/utils/models/side-effects";
 
 
 export enum KinActionsType {

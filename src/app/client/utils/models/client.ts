@@ -1,5 +1,6 @@
-import { GenderEnum } from "src/app/profile/utils/gender.enum";
-import { OnboardEnum } from "src/app/profile/utils/onboard.enum";
+import { GenderType } from "src/app/profile/utils/gender-type";
+import { OnboardStatus } from "src/app/profile/utils/onboard-status";
+import { Compliance } from "./compliance";
 
 export interface Client {
     _id: string;
@@ -16,8 +17,9 @@ export interface Client {
     city: string;
     state: string;
     country: string;
-    gender: GenderEnum;
+    gender: GenderType;
     business: any; 
     image: string;
-    onboard: OnboardEnum;
+    onboard: OnboardStatus;
+    compliances: Compliance[];
 }

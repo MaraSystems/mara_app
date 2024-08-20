@@ -1,16 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output, Type } from '@angular/core';
-import { Share } from '../utils/models/share.model';
 import { Privacy } from '../utils/models/privacy';
-import { ShareEnum } from '../utils/models/share.enum';
-import { SharePrivacyEnum } from '../utils/models/share.privacy-enum';
-import { ShareAccessEnum } from '../utils/models/share.access-enum';
+import { Share } from '../utils/models/share';
+import { SharePrivacyType } from '../utils/models/share-privacy-type';
+import { ShareAccessType } from '../utils/models/share-access-type';
 import { Store } from '@ngrx/store';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { ListSharesAction } from '../utils/store/share-store.action';
 import { GetClientAction } from 'src/app/client/utils/store/client-store.action';
 import { selectClientById } from 'src/app/client/utils/store/client-store.selector';
-import { ShareStateEnum } from '../utils/models/share.state-enum';
+import { ShareStateType } from '../utils/models/share-state-type';
 import { selectSharesByModelId } from '../utils/store/share-store.selector';
+import { ShareType } from '../utils/models/share-type';
 
 @Component({
   selector: 'app-share',
@@ -18,10 +18,10 @@ import { selectSharesByModelId } from '../utils/store/share-store.selector';
   styleUrls: ['./share.component.scss']
 })
 export class ShareComponent extends UnSubscriber implements OnInit {
-  @Input() model!: ShareEnum;
+  @Input() model!: ShareType;
   @Input() modelId!: string;
-  @Input() privacy!: SharePrivacyEnum;
-  @Input() access!: ShareAccessEnum;
+  @Input() privacy!: SharePrivacyType;
+  @Input() access!: ShareAccessType;
   @Input() link!: string;
   @Input() ownerId!: string;
 
@@ -41,7 +41,7 @@ export class ShareComponent extends UnSubscriber implements OnInit {
       this.store.dispatch(new ListSharesAction(this.model, this.modelId));
       this.store.dispatch(new GetClientAction(this.ownerId));
       this.newSubscription = this.store.select(selectClientById(this.ownerId)).subscribe(client => {
-        const owner: any = { userId: client._id, email: client.email, access: ShareAccessEnum.OWNER, model: this.model, modelId: this.modelId, state: ShareStateEnum.ACCEPTED };    
+        const owner: any = { userId: client._id, email: client.email, access: ShareAccessType.OWNER, model: this.model, modelId: this.modelId, state: ShareStateType.ACCEPTED };    
 
         this.newSubscription = this.store.select(selectSharesByModelId(this.model, this.modelId)).subscribe(sharedList => {
           this.sharedList = [owner, ...sharedList]; 

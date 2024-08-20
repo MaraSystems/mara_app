@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { CommentAccessService } from "../access/comment-access.service";
 import { CreateCommentAction, CreateCommentActionFail, CreateCommentActionSuccess, DeleteCommentAction, DeleteCommentActionFail, DeleteCommentActionSuccess, GetCommentAction, GetCommentActionFail, GetCommentActionSuccess, ListCommentsAction, ListCommentsActionFail, ListCommentsActionSuccess, CommentActionsType, UpdateCommentAction, UpdateCommentActionSuccess, UpdateCommentActionFail } from "./comment-store.action";
-import { Comment } from "../models/comment.model";
+import { Comment } from "../models/comment";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()

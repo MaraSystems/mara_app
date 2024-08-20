@@ -2,7 +2,7 @@ import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
 import { Bank } from "../models/bank.model";
 import { ListOptions } from "src/app/general/utils/models/list-options";
-import { SideEffects } from "src/app/general/utils/models/side.effects";
+import { SideEffects } from "src/app/general/utils/models/side-effects";
 
 export enum BankActionsType {
     CREATE_BANK = "[BANK] Create Bank",

@@ -6,6 +6,7 @@
         "details"
         "description"
         "deliverables"
+        "users"
         "controls"
     ;
     justify-content: center;
@@ -122,6 +123,24 @@
         gap: var(--gap-big);
     }
 
+    .users {
+        grid-area: users;
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-big);
+        justify-content: space-between;
+
+        &-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .signature {
+            height: var(--gap-max);
+        }
+    }
+
     .more {
         position: absolute;
         z-index: 1;
@@ -139,6 +158,7 @@
             "header header"
             "details description"
             "deliverables deliverables"
+            "users users"
             "controls controls"
         ;
 
@@ -156,6 +176,10 @@
             &-title {
                 padding: var(--gap-small) 0px;
             }
+        }
+
+        .users {
+            flex-direction: row;
         }
     }
 }

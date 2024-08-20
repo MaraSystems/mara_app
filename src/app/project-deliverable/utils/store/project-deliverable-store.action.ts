@@ -1,8 +1,8 @@
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
-import { ProjectDeliverable } from "../models/project-deliverable.model";
+import { ProjectDeliverable } from "../models/project-deliverable";
 import { ListOptions } from "src/app/general/utils/models/list-options";
-import { SideEffects } from "src/app/general/utils/models/side.effects";
+import { SideEffects } from "src/app/general/utils/models/side-effects";
 
 export enum ProjectDeliverableActionsType {
     CREATE_PROJECT_DELIVERABLE = "[PROJECT_DELIVERABLE] Create ProjectDeliverable",

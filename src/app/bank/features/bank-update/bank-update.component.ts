@@ -6,14 +6,14 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { CreateBankAction, DeleteBankAction, UpdateBankAction } from '../../utils/store/bank-store.action';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
-import { SharePrivacyEnum } from 'src/app/general/features/share/utils/models/share.privacy-enum';
-import { ShareAccessEnum } from 'src/app/general/features/share/utils/models/share.access-enum';
+import { SharePrivacyType } from 'src/app/general/features/share/utils/models/share-privacy-type';
+import { ShareAccessType } from 'src/app/general/features/share/utils/models/share-access-type';
 import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { Router } from '@angular/router';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
 import { accountNumberPattern } from 'src/app/general/utils/lib/patterns';
-import { Toast } from 'src/app/general/features/toast/utils/models/toast.class';
+import { Toast } from 'src/app/general/features/toast/utils/models/toast';
 import { selectBankById } from '../../utils/store/bank-store.selector';
 
 

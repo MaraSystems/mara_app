@@ -1,8 +1,8 @@
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
-import { Transaction } from "../models/transaction.model";
+import { Transaction } from "../models/transaction";
 import { ListOptions } from "src/app/general/utils/models/list-options";
-import { SideEffects } from "src/app/general/utils/models/side.effects";
+import { SideEffects } from "src/app/general/utils/models/side-effects";
 
 export enum TransactionActionsType {
     UPDATE_TRANSACTION = "[TRANSACTION] Update Transaction",

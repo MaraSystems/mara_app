@@ -1,7 +1,7 @@
 <div class="container">
     <form action="" class="form" [formGroup]="form" (ngSubmit)="uploadAttachment()">
         <app-file-input [multiple]="true" name="data" class="form-group" [control]="getControl('data')" [multiple]="multiple"></app-file-input>
-        <app-input *ngIf="!multiple" type="text" name="name" class="form-group" [control]="getControl('name')"></app-input>
+        <app-input *ngIf="named" type="text" name="name" class="form-group" [control]="getControl('name')"></app-input>
         <button 
             [disabled]="form.invalid"
             class="button form-group text-1"

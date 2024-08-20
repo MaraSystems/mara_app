@@ -5,7 +5,7 @@ import { Store } from "@ngrx/store";
 import { Router } from "@angular/router";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { AddToast, AddToastSuccess, RemoveToast, ToastActionTypes } from "./toast.action";
-import { IToast, Toast } from "../models/toast.class";
+import { IToast, Toast } from "../models/toast";
 
 @Injectable()
 export class ToastEffect {

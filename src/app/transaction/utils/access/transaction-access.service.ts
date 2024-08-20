@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AccessService } from 'src/app/general/utils/services/access.service';
 import { Update } from '@ngrx/entity';
-import { Transaction } from '../models/transaction.model';
+import { Transaction } from '../models/transaction';
 import { ListOptions } from 'src/app/general/utils/models/list-options';
-import { TransactionModelEnum } from '../models/transaction-model.enum';
+import { TransactionType } from '../models/transaction-type';
 import { catchError, map, mergeMap, of, throwError } from 'rxjs';
 import { DataResponse } from 'src/app/general/utils/models/data-response';
-import { TransactionActionEnum } from '../models/transaction-action.enum';
-import { WalletTransaction } from 'src/app/dashboard/utils/models/wallet-transaction.model';
-import { TransactionPlatformEnum } from '../models/transaction-platform.enum';
-import { TransactionStatusEnum } from '../models/transaction-status.enum';
+import { TransactionAction } from '../models/transaction-action';
+import { WalletTransaction } from 'src/app/dashboard/utils/models/wallet-transaction';
+import { TransactionPlatform } from '../models/transaction-platform';
+import { TransactionStatus } from '../models/transaction-status';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class TransactionAccessService {
   ) {}
 
   createTransaction(data: Transaction) {    
-    return this.accessService.insertOne<Transaction>(this.domain, { ...data, hidden: false, status: TransactionStatusEnum.SUCCESSFUL });
+    return this.accessService.insertOne<Transaction>(this.domain, { ...data, hidden: false, status: TransactionStatus.SUCCESSFUL });
   }
 
   getTransaction(id: string) {    
@@ -46,7 +47,7 @@ export class TransactionAccessService {
   }
 
   getWallet(userId: string) {    
-    return this.accessService.findOne<Transaction>(this.domain, { userId, model: TransactionModelEnum.WALLET }, { sort: { createdAt: 'desc' } })
+    return this.accessService.findOne<Transaction>(this.domain, { userId, model: TransactionType.WALLET }, { sort: { createdAt: 'desc' } })
       .pipe(
         map(({ data: transaction }) => {          
           return { success: true, data: transaction.balance } as DataResponse<number>;
@@ -65,11 +66,11 @@ export class TransactionAccessService {
     return this.getWallet(walletTransaction.userId)
       .pipe(
         map(({ data: currentBalance }) => {
-          let balance = walletTransaction.action === TransactionActionEnum.CREDIT
+          let balance = walletTransaction.action === TransactionAction.CREDIT
             ? currentBalance + walletTransaction.amount
             : currentBalance - walletTransaction.amount;
 
-          title = walletTransaction.action === TransactionActionEnum.CREDIT
+          title = walletTransaction.action === TransactionAction.CREDIT
             ? 'Wallet Deposit'
             : 'Wallet Withdrawal'
 
@@ -83,9 +84,9 @@ export class TransactionAccessService {
         mergeMap((balance) => this.createTransaction({ 
           ...walletTransaction, 
           balance, 
-          model: TransactionModelEnum.WALLET, 
+          model: TransactionType.WALLET, 
           title, 
-          platform: TransactionPlatformEnum.CONTRACTOR
+          platform: TransactionPlatform.CONTRACTOR
         } as Transaction)),
         map(({ data: transaction }) => {
           const response: DataResponse<number> = { success: true, data: transaction.balance };

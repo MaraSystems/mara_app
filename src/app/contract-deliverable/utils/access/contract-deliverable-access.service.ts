@@ -3,10 +3,8 @@ import { AccessService } from 'src/app/general/utils/services/access.service';
 import { Collection } from '@black-ink/lonedb';
 import { concatMap, map, merge, mergeMap, of, tap, toArray } from 'rxjs';
 import { Update } from '@ngrx/entity';
-import { ContractDeliverable } from '../models/contract-deliverable.model';
-import { ProjectDeliverable } from 'src/app/project-deliverable/utils/models/project-deliverable.model';
-import { Attachment } from 'src/app/general/features/attachment/utils/models/attachment.model';
-import { AttachmentModelEnum } from 'src/app/general/features/attachment/utils/models/attachment-model.enum';
+import { ContractDeliverable } from '../models/contract-deliverable';
+import { AttachmentType } from 'src/app/general/features/attachment/utils/models/attachment-type';
 import { ProjectDeliverableAccessService } from 'src/app/project-deliverable/utils/access/project-deliverable-access.service';
 import { AttachmentAccessService } from 'src/app/general/features/attachment/utils/access/attachment-access.service';
 import { UploadData } from 'src/app/general/features/attachment/utils/models/upload-data';
@@ -37,14 +35,11 @@ export class ContractDeliverableAccessService {
         tap(({ data: deliverable }) => { 
           contractDeliverable = deliverable
         }),
-        mergeMap(() => this.attachmentService.listAttachments(AttachmentModelEnum.PROJECT_DELIVERABLE, deliverableId)),
+        mergeMap(() => this.attachmentService.listAttachments(AttachmentType.PROJECT_DELIVERABLE, deliverableId)),
         concatMap(({ data: documents }) => documents),
-        map(({ name }) => ({ name, model: AttachmentModelEnum.CONTRACT_DELIVERABLE, modelId: contractDeliverable._id } as UploadData)),
+        map(({ name }) => ({ name, model: AttachmentType.CONTRACT_DELIVERABLE, modelId: contractDeliverable._id } as UploadData)),
         mergeMap((attachmentData) => this.attachmentService.uploadAttachment(attachmentData)),
-      ).pipe(
-        toArray(),
-        map((attachments) => attachments.map(({ data: attachment }) => attachment._id)),
-        mergeMap((documentList) => this.accessService.updateOne<ContractDeliverable>(this.domain, { _id: contractDeliverable._id }, { documents: documentList }))
+        map(() => contractDeliverable)
       )
   }
 
@@ -61,5 +56,9 @@ export class ContractDeliverableAccessService {
   updateContractDeliverable(data: Update<ContractDeliverable>) {    
     const response = this.accessService.updateOne<ContractDeliverable>(this.domain, { _id: data.id }, data.changes);
     return response;
+  }
+
+  requestReview() {
+    
   }
 }

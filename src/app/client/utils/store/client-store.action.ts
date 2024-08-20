@@ -2,7 +2,7 @@ import { Action } from "@ngrx/store";
 import { Client } from "../models/client";
 import { Update } from "@ngrx/entity";
 import { Kin } from "../models/kin";
-import { SideEffects } from "src/app/general/utils/models/side.effects";
+import { SideEffects } from "src/app/general/utils/models/side-effects";
 import { ListOptions } from "src/app/general/utils/models/list-options";
 
 export enum ClientActionsType {

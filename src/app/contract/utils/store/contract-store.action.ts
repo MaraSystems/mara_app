@@ -1,8 +1,9 @@
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
-import { Contract, ContractRequest } from "../models/contract.model";
+import { Contract } from "../models/contract";
 import { ListOptions } from "src/app/general/utils/models/list-options";
-import { SideEffects } from "src/app/general/utils/models/side.effects";
+import { SideEffects } from "src/app/general/utils/models/side-effects";
+import { ContractRequest } from "../models/contract-request";
 
 export enum ContractActionsType {
     CREATE_CONTRACT = "[CONTRACT] Create Contract",

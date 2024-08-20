@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { ContractState, contractAdapter } from "./contract-store.reducer";
-import { Contract } from "../models/contract.model";
+import { Contract } from "../models/contract";
 
 export const clientSelector = createFeatureSelector<Readonly<ContractState>>('contracts');
 

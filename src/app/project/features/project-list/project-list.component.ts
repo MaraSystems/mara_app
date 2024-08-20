@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { selectAllProjects } from '../../utils/store/project-store.selector';
-import { Project } from '../../utils/models/project.model';
+import { Project } from '../../utils/models/project';
 import { ListProjectsAction } from '../../utils/store/project-store.action';
 
 @Component({

@@ -7,8 +7,8 @@ import { Router } from "@angular/router";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { ContractDeliverableAccessService } from "../access/contract-deliverable-access.service";
 import { CreateContractDeliverableAction, CreateContractDeliverableActionFail, CreateContractDeliverableActionSuccess, GetContractDeliverableAction, GetContractDeliverableActionFail, GetContractDeliverableActionSuccess, ListContractDeliverablesAction, ListContractDeliverablesActionFail, ListContractDeliverablesActionSuccess, ContractDeliverableActionsType, UpdateContractDeliverableAction, UpdateContractDeliverableActionFail, UpdateContractDeliverableActionSuccess } from "./contract-deliverable-store.action";
-import { ContractDeliverable } from "../models/contract-deliverable.model";
-import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
+import { ContractDeliverable } from "../models/contract-deliverable";
+import { ToastType } from "src/app/general/features/toast/utils/models/toast-type";
 
 @Injectable()
 export class ContractDeliverableStoreEffect {
@@ -29,7 +29,7 @@ export class ContractDeliverableStoreEffect {
                 }),
                 catchError(err => of(new UpdateContractDeliverableActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ title: 'Contract Deliverable Update', type: ToastEnum.ERROR }));
+                        this.store.dispatch(new AddToast({ title: 'Contract Deliverable Update', type: ToastType.ERROR }));
                     })
                 ))
             )

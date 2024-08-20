@@ -1,4 +1,4 @@
-import { SideEffects } from "../models/side.effects";
+import { SideEffects } from "../models/side-effects";
 
 export const handleSuccessSideEffects = (sideEffects: SideEffects, message?: string) => {
     if (sideEffects.success) {

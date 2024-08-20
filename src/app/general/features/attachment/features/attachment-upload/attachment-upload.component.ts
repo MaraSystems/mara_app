@@ -1,15 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { UploadAttachmentAction } from 'src/app/general/features/attachment/utils/store/attachment-store.action';
 import { fileValidator } from 'src/app/general/utils/validators/fileValidator';
-import { Attachment } from '../../utils/models/attachment.model';
+import { Attachment } from '../../utils/models/attachment';
 import { UploadData } from '../../utils/models/upload-data';
-import { AddToast } from '../../../toast/utils/store/toast.action';
-import { PopupService } from '../../../popup/features/popup.service';
-import { AttachmentModelEnum } from '../../utils/models/attachment-model.enum';
+import { PopupService } from '../../../popup/popup.service';
+import { AttachmentType } from '../../utils/models/attachment-type';
 
 @Component({
   selector: 'app-attachment-upload',
@@ -18,10 +17,12 @@ import { AttachmentModelEnum } from '../../utils/models/attachment-model.enum';
 })
 export class AttachmentUploadComponent extends UnSubscriber implements OnInit {
   @Input () multiple = false;
+  @Input () named = false;
   @Input () modelId = '';
-  @Input () model!: AttachmentModelEnum;
+  @Input () model!: AttachmentType;
   @Input () popupId = '';
   @Input() attachment!: Attachment;
+  @Output() updated = new EventEmitter();
 
   uploadData!: UploadData;
   form!: FormGroup;
@@ -34,8 +35,7 @@ export class AttachmentUploadComponent extends UnSubscriber implements OnInit {
   }
   
   ngOnInit(): void {    
-    this.initForm(); 
-
+    this.initForm();     
     this.newSubscription = this.form.valueChanges.subscribe(data => {      
       this.uploadData = data;
     });
@@ -46,7 +46,7 @@ export class AttachmentUploadComponent extends UnSubscriber implements OnInit {
       data: new FormControl(null, [fileValidator({ min: this.attachment ? 0 : 1 })]),
     });
 
-    if (!this.multiple) {
+    if (this.named) {
       this.form.addControl('name', new FormControl(this.attachment?.name, [Validators.minLength(3)]));
     }
   }
@@ -66,6 +66,7 @@ export class AttachmentUploadComponent extends UnSubscriber implements OnInit {
       success: () => {        
         this.popupService.close(this.popupId);
         this.form.reset();
+        this.updated.emit();
       }
     }));
   }

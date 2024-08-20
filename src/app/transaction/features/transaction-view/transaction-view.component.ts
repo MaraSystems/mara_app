@@ -1,14 +1,13 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Transaction } from '../../utils/models/transaction.model';
+import { Transaction } from '../../utils/models/transaction';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { selectTransactionById } from '../../utils/store/transaction-store.selector';
 import { DeleteTransactionAction } from '../../utils/store/transaction-store.action';
-import { More } from 'src/app/general/utils/models/more.model';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
-import { Toast } from 'src/app/general/features/toast/utils/models/toast.class';
-import { ShareEnum } from 'src/app/general/features/share/utils/models/share.enum';
+import { More } from 'src/app/general/utils/models/more';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
+import { Toast } from 'src/app/general/features/toast/utils/models/toast';
 
 @Component({
   selector: 'app-transaction-view',

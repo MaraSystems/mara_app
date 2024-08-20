@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { selectAllTransactions } from '../../utils/store/transaction-store.selector';
-import { Transaction } from '../../utils/models/transaction.model';
+import { Transaction } from '../../utils/models/transaction';
 import { ListTransactionsAction } from '../../utils/store/transaction-store.action';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
 
 @Component({
   selector: 'app-transaction-list',

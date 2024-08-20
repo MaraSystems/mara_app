@@ -3,24 +3,23 @@ import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.servic
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { ActivatedRoute } from '@angular/router';
-import { More } from 'src/app/general/utils/models/more.model';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
-import { ProjectDeliverable } from '../../utils/models/project-deliverable.model';
+import { More } from 'src/app/general/utils/models/more';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
+import { ProjectDeliverable } from '../../utils/models/project-deliverable';
 import { DeleteProjectDeliverableAction, GetProjectDeliverableAction, UpdateProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
 import { selectProjectDeliverableById } from '../../utils/store/project-deliverable-store.selector';
-import { Attachment } from 'src/app/general/features/attachment/utils/models/attachment.model';
+import { Attachment } from 'src/app/general/features/attachment/utils/models/attachment';
 import { ListAttachmentsAction } from 'src/app/general/features/attachment/utils/store/attachment-store.action';
 import { toggleList } from 'src/app/general/utils/lib/toggleList';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
 import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/store/comment-store.selector';
 import { ListCommentsAction } from 'src/app/general/features/comment/utils/store/comment-store.action';
-import { CommentEnum } from 'src/app/general/features/comment/utils/models/comment.enum';
+import { CommentType } from 'src/app/general/features/comment/utils/models/comment-type';
 import { GetProjectAction } from 'src/app/project/utils/store/project-store.action';
 import { selectProjectById } from 'src/app/project/utils/store/project-store.selector';
-import { Toast } from 'src/app/general/features/toast/utils/models/toast.class';
-import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
-import { AttachmentModelEnum } from 'src/app/general/features/attachment/utils/models/attachment-model.enum';
+import { Toast } from 'src/app/general/features/toast/utils/models/toast';
+import { AttachmentType } from 'src/app/general/features/attachment/utils/models/attachment-type';
 
 @Component({
   selector: 'app-project-deliverable-view',
@@ -35,9 +34,9 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
   liked = false;
   bookmarked = false;
   moreList: More[] = [];
-  commentModel = CommentEnum.PROJECT;
+  commentModel = CommentType.PROJECT;
   commentsCount = 0;
-  attatmentModel = AttachmentModelEnum;
+  attatmentModel = AttachmentType;
 
   constructor(
     public store: Store<AppState>,

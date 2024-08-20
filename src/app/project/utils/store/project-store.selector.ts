@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { ProjectState, projectAdapter } from "./project-store.reducer";
-import { Project } from "../models/project.model";
+import { Project } from "../models/project";
 
 export const clientSelector = createFeatureSelector<Readonly<ProjectState>>('projects');
 

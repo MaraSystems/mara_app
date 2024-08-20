@@ -5,7 +5,7 @@ import { ProjectDeliverableViewRoutingModule } from './project-deliverable-view-
 import { KeyvalueModule } from 'src/app/general/ui/keyvalue/keyvalue.module';
 import { IconCounterModule } from 'src/app/general/ui/icon-counter/icon-counter.module';
 import { MoreModule } from 'src/app/general/ui/more/more.module';
-import { PopupModule } from 'src/app/general/features/popup/features/popup.module';
+import { PopupModule } from 'src/app/general/features/popup/popup.module';
 import { ProjectDeliverableUpdateModule } from '../project-deliverable-update/project-deliverable-update.module';
 import { EmptyModule } from 'src/app/general/ui/empty/empty.module';
 import { DirectivesModule } from 'src/app/general/utils/directives/directives.module';

@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { AccessService } from 'src/app/general/utils/services/access.service';
 import { Update } from '@ngrx/entity';
 import { ListOptions } from 'src/app/general/utils/models/list-options';
-import { Comment } from '../models/comment.model';
+import { Comment } from '../models/comment';
 import { map, mergeMap, of, tap } from 'rxjs';
 import { DataResponse } from 'src/app/general/utils/models/data-response';
-import { AttachmentModelEnum } from '../../../attachment/utils/models/attachment-model.enum';
+import { AttachmentType } from '../../../attachment/utils/models/attachment-type';
 import { AttachmentAccessService } from '../../../attachment/utils/access/attachment-access.service';
 
 @Injectable({
@@ -28,7 +28,7 @@ export class CommentAccessService {
     }).pipe(
       mergeMap(({ data: comment }) => attachment
         ? this.attachmentService.uploadAttachment({ 
-          model: AttachmentModelEnum.COMMENT, modelId: comment._id as string, data: attachment, name: ''
+          model: AttachmentType.COMMENT, modelId: comment._id as string, data: attachment, name: ''
         }).pipe(
           map(({ data: uploaded }) => {
             this.updateComment({ id: comment._id, changes: { attachment: uploaded._id }});

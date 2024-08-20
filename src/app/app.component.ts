@@ -10,7 +10,7 @@ import { Auth } from './auth/utils/models/auth.model';
 import { GetAuthAction } from './auth/utils/store/auth-store.action';
 import { GetClientAction } from './client/utils/store/client-store.action';
 import { selectClientById } from './client/utils/store/client-store.selector';
-import { OnboardEnum } from './profile/utils/onboard.enum';
+import { OnboardStatus } from './profile/utils/onboard-status';
 
 
 @Component({
@@ -49,7 +49,7 @@ export class AppComponent  extends UnSubscriber implements OnInit {
   onboardClient() {
     this.store.dispatch(new GetClientAction(this.auth.id, true));
     this.newSubscription = this.store.select(selectClientById(this.auth.id)).subscribe(client => {
-      if (client.onboard !== OnboardEnum.COMPLETED) {
+      if (client.onboard !== OnboardStatus.COMPLETED) {
         this.router.navigateByUrl('/profile/create');
       }
     });

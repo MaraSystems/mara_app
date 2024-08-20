@@ -3,9 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of } from "rxjs";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { DashboardActionsType, GetWalletAction, GetWalletActionFail, GetWalletActionSuccess, UpdateWalletAction, UpdateWalletActionFail, UpdateWalletActionSuccess } from "./dashboard-store.action";
-import { GetTransactionActionFail } from "src/app/transaction/utils/store/transaction-store.action";
-import { DashboardAccessService } from "../access/dashboard-access.service";
-import { DashboardWidgetEnum } from "../models/dashboard-widget.enum";
+import { DashboardWidgetType } from "../models/dashboard-widget-type";
 import { TransactionAccessService } from "src/app/transaction/utils/access/transaction-access.service";
 
 @Injectable()
@@ -22,7 +20,7 @@ export class DashboardStoreEffect {
                 map((response: DataResponse<number>) => {    
                     console.log(response);
                                                                                                 
-                    return new GetWalletActionSuccess({ data: response.data, id: 'wallet-balance', type: DashboardWidgetEnum.TRANSACTIONS });
+                    return new GetWalletActionSuccess({ data: response.data, id: 'wallet-balance', type: DashboardWidgetType.TRANSACTIONS });
                 }),
                 catchError(err => of(new GetWalletActionFail(err))
             )

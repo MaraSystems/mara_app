@@ -2,19 +2,13 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { phonePattern, usernamePattern } from 'src/app/general/utils/lib/patterns';
 import * as addressUtil from 'src/app/general/utils/lib/address';
 import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
-import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
-import { ToastEnum } from 'src/app/general/features/toast/utils/models/toast.enum';
 import { getFormControl } from 'src/app/general/utils/lib/getFormControl';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
-import { Kin } from 'src/app/client/utils/models/kin';
-import { GenderEnum } from 'src/app/profile/utils/gender.enum';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
+import { GenderType } from 'src/app/profile/utils/gender-type';
 import { UpdateClientAction } from 'src/app/client/utils/store/client-store.action';
-import { selectKinByUserId } from '../../../kin/utils/store/kin-store.selector';
 import { Client } from 'src/app/client/utils/models/client';
 
 @Component({
@@ -30,7 +24,7 @@ export class ProfileCreatePersanalComponent extends UnSubscriber implements OnIn
   personalData!: Partial<Client>;
   address: addressUtil.IAddress = { countries: addressUtil.listCountries, states: [], cities: [] };
   getControl = getFormControl;
-  genderEnum = Object.values(GenderEnum);
+  genderEnum = Object.values(GenderType);
 
   constructor (
     public store: Store<AppState>,

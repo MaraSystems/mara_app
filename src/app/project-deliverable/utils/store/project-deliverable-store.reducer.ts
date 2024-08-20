@@ -1,6 +1,6 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { Action } from "@ngrx/store";
-import { ProjectDeliverable } from "../models/project-deliverable.model";
+import { ProjectDeliverable } from "../models/project-deliverable";
 import { CreateProjectDeliverableActionFail, CreateProjectDeliverableActionSuccess, DeleteProjectDeliverableActionFail, DeleteProjectDeliverableActionSuccess, GetProjectDeliverableActionFail, GetProjectDeliverableActionSuccess, ListProjectDeliverablesActionFail, ListProjectDeliverablesActionSuccess, ProjectDeliverableActionsType, UpdateProjectDeliverableActionFail, UpdateProjectDeliverableActionSuccess } from "./project-deliverable-store.action";
 
 export interface ProjectDeliverableState extends EntityState<ProjectDeliverable> {

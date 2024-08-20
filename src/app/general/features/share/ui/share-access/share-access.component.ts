@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ShareEnum } from '../../utils/models/share.enum';
-import { SharePrivacyEnum } from '../../utils/models/share.privacy-enum';
-import { ShareAccessEnum } from '../../utils/models/share.access-enum';
+import { Share } from '../../utils/models/share';
+import { SharePrivacyType } from '../../utils/models/share-privacy-type';
+import { ShareAccessType } from '../../utils/models/share-access-type';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Privacy } from '../../utils/models/privacy';
 import { Store } from '@ngrx/store';
+import { ShareType } from '../../utils/models/share-type';
 
 
 @Component({
@@ -14,27 +15,27 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./share-access.component.scss']
 })
 export class ShareAccessComponent extends UnSubscriber implements OnInit {
-  @Input() model!: ShareEnum;
+  @Input() model!: ShareType;
   @Input() modelId!: string;
-  @Input() privacy!: SharePrivacyEnum;
-  @Input() access!: ShareAccessEnum;
+  @Input() privacy!: SharePrivacyType;
+  @Input() access!: ShareAccessType;
 
   @Output() changed = new EventEmitter<Privacy>();
 
   privacyForm!: FormGroup;
 
-  privacyList: SharePrivacyEnum[] = [
-    SharePrivacyEnum.PUBLIC,
-    SharePrivacyEnum.PRIVATE
+  privacyList: SharePrivacyType[] = [
+    SharePrivacyType.PUBLIC,
+    SharePrivacyType.PRIVATE
   ];
 
-  accessList: ShareAccessEnum[] = [
-    ShareAccessEnum.VIEW,
-    ShareAccessEnum.ENGAGE
+  accessList: ShareAccessType[] = [
+    ShareAccessType.VIEW,
+    ShareAccessType.ENGAGE
   ];
 
   get public () {
-    return this.privacy === SharePrivacyEnum.PUBLIC;
+    return this.privacy === SharePrivacyType.PUBLIC;
   }
 
   constructor(

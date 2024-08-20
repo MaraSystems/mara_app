@@ -4,7 +4,7 @@ import { catchError, map, mergeMap, of, tap, throwError } from "rxjs";
 import { Update } from '@ngrx/entity';
 import { Compliance, ComplianceStatusEnum, ComplianceTitleEnum } from 'src/app/client/utils/models/compliance';
 import { DataResponse } from 'src/app/general/utils/models/data-response';
-import { AttachmentModelEnum } from 'src/app/general/features/attachment/utils/models/attachment-model.enum';
+import { AttachmentType } from 'src/app/general/features/attachment/utils/models/attachment-type';
 import { AttachmentAccessService } from 'src/app/general/features/attachment/utils/access/attachment-access.service';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 
@@ -45,7 +45,7 @@ export class ComplianceAccessService {
 
   uploadComplianceDocument(data: Compliance, document: string) {
     return this.attachmentService.uploadAttachment({ 
-      data: document, model: AttachmentModelEnum.COMPLIANCE, modelId: data._id, name: '', _id: data.attachment 
+      data: document, model: AttachmentType.COMPLIANCE, modelId: data._id, name: '', _id: data.attachment 
     }).pipe(
       tap(({ data: uploaded }) => this.updateCompliance({ id: data._id, changes: { attachment: uploaded._id }})),
       map(({ data: uploaded }) => {

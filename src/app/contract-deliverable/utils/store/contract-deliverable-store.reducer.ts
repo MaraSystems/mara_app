@@ -1,6 +1,6 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { Action } from "@ngrx/store";
-import { ContractDeliverable } from "../models/contract-deliverable.model";
+import { ContractDeliverable } from "../models/contract-deliverable";
 import { CreateContractDeliverableActionFail, CreateContractDeliverableActionSuccess, GetContractDeliverableActionSuccess, ListContractDeliverablesActionFail, ListContractDeliverablesActionSuccess, ContractDeliverableActionsType, UpdateContractDeliverableActionFail, UpdateContractDeliverableActionSuccess } from "./contract-deliverable-store.action";
 
 export interface ContractDeliverableState extends EntityState<ContractDeliverable> {

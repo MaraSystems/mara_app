@@ -1,7 +1,7 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { Action } from "@ngrx/store";
-import { DeleteAttachmentActionFail, DeleteAttachmentActionSuccess, AttachmentActionsType, DownloadAttachmentActionFail, DownloadAttachmentActionSuccess, GetAttachmentActionFail, GetAttachmentActionSuccess, ListAttachmentsActionFail, ListAttachmentsActionSuccess, UploadAttachmentActionFail, UploadAttachmentActionSuccess } from "./attachment-store.action";
-import { Attachment } from "../models/attachment.model";
+import { DeleteAttachmentActionFail, DeleteAttachmentActionSuccess, AttachmentActionsType, GetAttachmentActionFail, GetAttachmentActionSuccess, ListAttachmentsActionFail, ListAttachmentsActionSuccess, UploadAttachmentActionFail, UploadAttachmentActionSuccess, UpdateAttachmentActionSuccess } from "./attachment-store.action";
+import { Attachment } from "../models/attachment";
 
 export interface AttachmentState extends EntityState<Attachment> {
     selectedId: string | null;
@@ -43,21 +43,6 @@ export function attachmentReducer(state = initialState, action: Action): Attachm
                 loaded: true,
                 error: (action as UploadAttachmentActionFail).payload
             }    
-
-        case AttachmentActionsType.DOWNLOAD_ATTACHMENT:
-            return { ...state, loading: true, loaded: false };
-
-        case AttachmentActionsType.DOWNLOAD_ATTACHMENT_SUCCESS:
-            const updatePayload = (action as DownloadAttachmentActionSuccess).payload;            
-            return attachmentAdapter.updateOne(updatePayload, { ...state, loading: false, loaded: true })
-            
-        case AttachmentActionsType.DOWNLOAD_ATTACHMENT_FAIL:
-            return {
-                ...state,
-                loading: false,
-                loaded: true,
-                error: (action as DownloadAttachmentActionFail).payload
-            }   
             
         case AttachmentActionsType.GET_ATTACHMENT:
             return { ...state, loading: true, loaded: false };
@@ -103,6 +88,23 @@ export function attachmentReducer(state = initialState, action: Action): Attachm
             )
             
         case AttachmentActionsType.DELETE_ATTACHMENT_FAIL:
+            return {
+                ...state,
+                loading: false,
+                loaded: true,
+                error: (action as DeleteAttachmentActionFail).payload
+            } 
+
+        case AttachmentActionsType.UPDATE_ATTACHMENT:
+            return { ...state, loading: true, loaded: false };
+
+        case AttachmentActionsType.UPDATE_ATTACHMENT_SUCCESS:
+            const { payload: updatePayload } = (action as UpdateAttachmentActionSuccess);
+            return attachmentAdapter.updateOne(
+                updatePayload, { ...state, loading: false, loaded: true }
+            )
+            
+        case AttachmentActionsType.UPDATE_ATTACHMENT_FAIL:
             return {
                 ...state,
                 loading: false,

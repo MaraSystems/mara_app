@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
-import { Contract } from '../../utils/models/contract.model';
+import { Contract } from '../../utils/models/contract';
 import { ListContractsAction } from '../../utils/store/contract-store.action';
 import { selectAllClientContracts } from '../../utils/store/contract-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';

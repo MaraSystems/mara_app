@@ -1,27 +1,35 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Contract } from '../../utils/models/contract.model';
+import { Contract } from '../../utils/models/contract';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { selectContractById } from '../../utils/store/contract-store.selector';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GetContractAction, UpdateContractAction } from '../../utils/store/contract-store.action';
-import { More } from 'src/app/general/utils/models/more.model';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { More } from 'src/app/general/utils/models/more';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
 import { selectAllContractDeliverables } from 'src/app/contract-deliverable/utils/store/contract-deliverable-store.selector';
-import { ContractDeliverable } from 'src/app/contract-deliverable/utils/models/contract-deliverable.model';
+import { ContractDeliverable } from 'src/app/contract-deliverable/utils/models/contract-deliverable';
 import { ListContractDeliverablesAction } from 'src/app/contract-deliverable/utils/store/contract-deliverable-store.action';
-import { ContractStatus } from '../../utils/models/contract-status.enum';
+import { ContractStatus } from '../../utils/models/contract-status';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
-import { CommentEnum } from 'src/app/general/features/comment/utils/models/comment.enum';
+import { CommentType } from 'src/app/general/features/comment/utils/models/comment-type';
 import { ListCommentsAction } from 'src/app/general/features/comment/utils/store/comment-store.action';
 import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/store/comment-store.selector';
-import { ShareEnum } from 'src/app/general/features/share/utils/models/share.enum';
+import { Share } from 'src/app/general/features/share/utils/models/share';
 import { summerizeDeliverables } from 'src/app/general/utils/lib/summerizeDeliverables';
-import { ToastEnum } from 'src/app/general/features/toast/utils/models/toast.enum';
+import { ToastType } from 'src/app/general/features/toast/utils/models/toast-type';
 import { GetWalletAction } from 'src/app/dashboard/utils/store/dashboard-store.action';
+import { GetComplianceAction } from 'src/app/profile/features/compliance/utils/store/compliance-store.action';
+import { GetClientAction } from 'src/app/client/utils/store/client-store.action';
+import { selectClientById } from 'src/app/client/utils/store/client-store.selector';
+import { Client } from 'src/app/client/utils/models/client';
+import { GetAttachmentAction } from 'src/app/general/features/attachment/utils/store/attachment-store.action';
+import { ComplianceTitleEnum } from 'src/app/client/utils/models/compliance';
+import { selectAttachmentById } from 'src/app/general/features/attachment/utils/store/attachment-store.selector';
+import { ShareType } from 'src/app/general/features/share/utils/models/share-type';
 @Component({
   selector: 'app-contract-view',
   templateUrl: './contract-view.component.html',
@@ -38,11 +46,15 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
   moreList: More[] = [];
   liked = false;
   bookmarked = false;
-  commentModel = CommentEnum.PROJECT;
-  shareModel = ShareEnum.PROJECT;
+  commentModel = CommentType.PROJECT;
+  shareModel = ShareType.PROJECT;
   commentsCount = 0;
   contractStatus = ContractStatus;
   walletBalance = 0;
+  contractor!: Client;
+  contractClient!: Client;
+  contractorSignature = '';
+  clientSignature = '';
 
   constructor(
     public store: Store<AppState>,
@@ -71,7 +83,8 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
     });
     
     this.newSubscription = this.store.select(selectContractById(this.id)).subscribe(contract => {
-      this.contract = contract;               
+      this.contract = contract; 
+      this.getContractUsers();   
     });
 
     this.newSubscription = this.store.select(selectCommentsByModelId(this.commentModel, this.id)).subscribe(comments => {
@@ -85,7 +98,7 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
         this.store.dispatch(new AddToast({ title: 'Contract Approval Successful' }));
       },
       failure: (error) => {
-        this.store.dispatch(new AddToast({ title: 'Contract Approval Failed', description: error, type: ToastEnum.ERROR }));
+        this.store.dispatch(new AddToast({ title: 'Contract Approval Failed', description: error, type: ToastType.ERROR }));
       }
     }));
   }
@@ -97,7 +110,7 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
         this.store.dispatch(new AddToast({ title: 'Contract Initiation Successful' }));
       },
       failure: (error) => {        
-        this.store.dispatch(new AddToast({ title: 'Contract Initiation Failed', description: error, type: ToastEnum.ERROR }));
+        this.store.dispatch(new AddToast({ title: 'Contract Initiation Failed', description: error, type: ToastType.ERROR }));
       }
     }));
   }
@@ -111,5 +124,29 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
         this.store.dispatch(new AddToast({ title: 'Contract Termination Failed' }));
       }
     }));
+  }
+
+  getContractUsers() {
+    const { clientId, contractorId } = this.contract;
+
+    this.store.dispatch(new GetClientAction(contractorId));
+    this.newSubscription = this.store.select(selectClientById(contractorId)).subscribe(contractor => {
+      this.contractor = contractor;            
+    });
+
+    this.store.dispatch(new GetAttachmentAction(this.contract.contractorSignature?.attachment));      
+    this.newSubscription = this.store.select(selectAttachmentById(this.contract.contractorSignature?.attachment)).subscribe(a => {        
+      this.contractorSignature = a?.versions[a?.versions.length - 1].url as string;
+    });
+
+    this.store.dispatch(new GetClientAction(clientId));
+    this.newSubscription = this.store.select(selectClientById(clientId)).subscribe(contractClient => {
+      this.contractClient = contractClient;      
+    });
+
+    this.store.dispatch(new GetAttachmentAction(this.contract.clientSignature?.attachment));      
+    this.newSubscription = this.store.select(selectAttachmentById(this.contract.clientSignature?.attachment)).subscribe(a => {        
+      this.clientSignature = a?.versions[a?.versions.length - 1].url as string;
+    });
   }
 }

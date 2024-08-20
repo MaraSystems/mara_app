@@ -8,7 +8,7 @@ import { KinAccessService } from "../access/kin-access.service";
 import { CreateKinAction, CreateKinActionFail, CreateKinActionSuccess, GetKinAction, GetKinActionFail, GetKinActionSuccess, KinActionsType, UpdateKinAction, UpdateKinActionFail, UpdateKinActionSuccess } from "./kin-store.action";
 import { Kin } from "src/app/client/utils/models/kin";
 import { RouterService } from "src/app/router/utils/router.service";
-import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
+import { ToastType } from "src/app/general/features/toast/utils/models/toast-type";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()

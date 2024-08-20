@@ -1,9 +1,9 @@
 import { Action } from "@ngrx/store";
 import { DashboardWidget } from "../models/dashboard-widget";
-import { Transaction } from "src/app/transaction/utils/models/transaction.model";
-import { SideEffects } from "src/app/general/utils/models/side.effects";
+import { Transaction } from "src/app/transaction/utils/models/transaction";
+import { SideEffects } from "src/app/general/utils/models/side-effects";
 import { Update } from "@ngrx/entity";
-import { WalletTransaction } from "../models/wallet-transaction.model";
+import { WalletTransaction } from "../models/wallet-transaction";
 
 export enum DashboardActionsType {
     GET_WALLET = "[DASHBOARD] Get Wallet",

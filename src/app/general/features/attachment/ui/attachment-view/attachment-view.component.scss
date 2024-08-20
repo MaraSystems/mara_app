@@ -25,11 +25,7 @@
         cursor: pointer;
         border-radius: var(--gap-small);
         box-shadow: var(--shadow-low);
-
-        img {
-            width: -webkit-fill-available;
-            height: -webkit-fill-available;
-        }
+        font-size: var(--gap-max);
     }
 
     .name {

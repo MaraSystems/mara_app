@@ -4,7 +4,7 @@ import { AttachmentListComponent } from './attachment-list.component';
 import { EmptyModule } from 'src/app/general/ui/empty/empty.module';
 import { TableHeaderModule } from 'src/app/general/ui/table-header/table-header.module';
 import { AttachmentItemModule } from '../../ui/attachment-item/attachment-item.module';
-import { PopupModule } from '../../../popup/features/popup.module';
+import { PopupModule } from '../../../popup/popup.module';
 import { AttachmentUploadModule } from '../attachment-upload/attachment-upload.module';
 
 

@@ -5,7 +5,7 @@ import { NotificationListRoutingModule } from './notification-list-routing.modul
 import { TableHeaderModule } from 'src/app/general/ui/table-header/table-header.module';
 import { EmptyModule } from 'src/app/general/ui/empty/empty.module';
 import { NotificationItemModule } from '../../ui/notification-item/notification-item.module';
-import { PopupModule } from 'src/app/general/features/popup/features/popup.module';
+import { PopupModule } from 'src/app/general/features/popup/popup.module';
 import { NotificationViewModule } from '../notification-view/notification-view.module';
 
 

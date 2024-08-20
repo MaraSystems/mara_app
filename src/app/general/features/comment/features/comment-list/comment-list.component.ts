@@ -3,9 +3,9 @@ import { Store } from '@ngrx/store';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { ListCommentsAction } from '../../utils/store/comment-store.action';
 import { selectCommentsByModelId } from '../../utils/store/comment-store.selector';
-import { Comment } from '../../utils/models/comment.model';
-import { CommentEnum } from '../../utils/models/comment.enum';
-import { CommentPage } from '../../utils/models/comment.page';
+import { Comment } from '../../utils/models/comment';
+import { CommentType } from '../../utils/models/comment-type';
+import { CommentPage } from '../../utils/models/comment-page';
 
 @Component({
   selector: 'app-comment-list',
@@ -13,12 +13,12 @@ import { CommentPage } from '../../utils/models/comment.page';
   styleUrls: ['./comment-list.component.scss']
 })
 export class CommentListComponent extends UnSubscriber implements OnInit {
-  @Input() model!: CommentEnum;
+  @Input() model!: CommentType;
   @Input() modelId = '';
 
   comments: Comment[] = [];
   pages: CommentPage[] = [];
-  commentModel = CommentEnum.COMMENT;
+  commentModel = CommentType.COMMENT;
 
   constructor(
     public store: Store,
@@ -37,7 +37,7 @@ export class CommentListComponent extends UnSubscriber implements OnInit {
     });
   }
 
-  addPage(model: CommentEnum, modelId: string) {
+  addPage(model: CommentType, modelId: string) {
     this.pages.push({ model, modelId });
     this.showPage(model, modelId);    
   }
@@ -48,7 +48,7 @@ export class CommentListComponent extends UnSubscriber implements OnInit {
     this.showPage(model, modelId);
   }
 
-  showPage(model: CommentEnum, modelId: string) {
+  showPage(model: CommentType, modelId: string) {
     this.model = model;
     this.modelId = modelId;
 

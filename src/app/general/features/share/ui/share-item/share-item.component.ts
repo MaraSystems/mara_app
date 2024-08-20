@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
-import { Share } from '../../utils/models/share.model';
+import { Share } from '../../utils/models/share';
 import { GetClientAction } from 'src/app/client/utils/store/client-store.action';
 import { selectClientById } from 'src/app/client/utils/store/client-store.selector';
-import { ShareAccessEnum } from '../../utils/models/share.access-enum';
+import { ShareAccessType } from '../../utils/models/share-access-type';
 import { FormControl } from '@angular/forms';
 import { DeleteShareAction, UpdateShareAction } from '../../utils/store/share-store.action';
 
@@ -16,14 +16,14 @@ import { DeleteShareAction, UpdateShareAction } from '../../utils/store/share-st
 export class ShareItemComponent extends UnSubscriber implements OnInit {
   @Input() share!: Share;
 
-  @Output() changed = new EventEmitter<ShareAccessEnum>();
+  @Output() changed = new EventEmitter<ShareAccessType>();
 
   control!: FormControl;
 
-  accessEnum = ShareAccessEnum;
-  accessList: ShareAccessEnum[] = [
-    ShareAccessEnum.VIEW,
-    ShareAccessEnum.ENGAGE
+  accessEnum = ShareAccessType;
+  accessList: ShareAccessType[] = [
+    ShareAccessType.VIEW,
+    ShareAccessType.ENGAGE
   ];
 
   constructor(
@@ -33,7 +33,7 @@ export class ShareItemComponent extends UnSubscriber implements OnInit {
    }
 
   ngOnInit(): void {
-    this.control = new FormControl<ShareAccessEnum>(this.share.access);
+    this.control = new FormControl<ShareAccessType>(this.share.access);
 
     if (this.share.userId) {
       this.store.dispatch(new GetClientAction(this.share.userId));

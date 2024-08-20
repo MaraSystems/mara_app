@@ -1,6 +1,6 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { Action } from "@ngrx/store";
-import { Transaction } from "../models/transaction.model";
+import { Transaction } from "../models/transaction";
 import { DeleteTransactionActionFail, DeleteTransactionActionSuccess, GetTransactionActionFail, GetTransactionActionSuccess, ListTransactionsActionFail, ListTransactionsActionSuccess, TransactionActionsType, UpdateTransactionActionFail, UpdateTransactionActionSuccess } from "./transaction-store.action";
 
 export interface TransactionState extends EntityState<Transaction> {

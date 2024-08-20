@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import { ContractDeliverable } from '../../utils/models/contract-deliverable.model';
+import { ContractDeliverable } from '../../utils/models/contract-deliverable';
 import { ListContractDeliverablesAction } from '../../utils/store/contract-deliverable-store.action';
 import { selectAllContractDeliverables } from '../../utils/store/contract-deliverable-store.selector';
 

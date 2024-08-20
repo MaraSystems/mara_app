@@ -6,7 +6,7 @@ import { Bank } from '../../utils/models/bank.model';
 import { ListBanksAction } from '../../utils/store/bank-store.action';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
 
 @Component({
   selector: 'app-bank-list',

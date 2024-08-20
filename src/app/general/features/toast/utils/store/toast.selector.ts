@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { ToastState, toastAdapter } from "./toast.reducer";
-import { Toast } from "../models/toast.class";
+import { Toast } from "../models/toast";
 
 
 export const toastSelector = createFeatureSelector<Readonly<ToastState>>('toasts');

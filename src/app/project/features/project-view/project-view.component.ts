@@ -1,31 +1,31 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Project } from '../../utils/models/project.model';
+import { Project } from '../../utils/models/project';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { selectProjectById } from '../../utils/store/project-store.selector';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeleteProjectAction, GetProjectAction, UpdateProjectAction } from '../../utils/store/project-store.action';
-import { More } from 'src/app/general/utils/models/more.model';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { More } from 'src/app/general/utils/models/more';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
 import { selectAllProjectDeliverables } from 'src/app/project-deliverable/utils/store/project-deliverable-store.selector';
-import { ProjectDeliverable } from 'src/app/project-deliverable/utils/models/project-deliverable.model';
+import { ProjectDeliverable } from 'src/app/project-deliverable/utils/models/project-deliverable';
 import { ListProjectDeliverablesAction } from 'src/app/project-deliverable/utils/store/project-deliverable-store.action';
-import { ProjectStatus } from '../../utils/models/project-status.enum';
+import { ProjectStatus } from '../../utils/models/project-status';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
 import { toggleList } from 'src/app/general/utils/lib/toggleList';
-import { CommentEnum } from 'src/app/general/features/comment/utils/models/comment.enum';
+import { CommentType } from 'src/app/general/features/comment/utils/models/comment-type';
 import { ListCommentsAction } from 'src/app/general/features/comment/utils/store/comment-store.action';
 import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/store/comment-store.selector';
-import { ToastEnum } from 'src/app/general/features/toast/utils/models/toast.enum';
-import { Toast } from 'src/app/general/features/toast/utils/models/toast.class';
-import { ShareEnum } from 'src/app/general/features/share/utils/models/share.enum';
+import { ToastType } from 'src/app/general/features/toast/utils/models/toast-type';
+import { Toast } from 'src/app/general/features/toast/utils/models/toast';
 import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
-import { ContractRequest } from 'src/app/contract/utils/models/contract.model';
 import { CreateContractAction } from 'src/app/contract/utils/store/contract-store.action';
 import { summerizeDeliverables } from 'src/app/general/utils/lib/summerizeDeliverables';
+import { ContractRequest } from 'src/app/contract/utils/models/contract-request';
+import { ShareType } from 'src/app/general/features/share/utils/models/share-type';
 
 @Component({
   selector: 'app-project-view',
@@ -43,8 +43,8 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
   moreList: More[] = [];
   liked = false;
   bookmarked = false;
-  commentModel = CommentEnum.PROJECT;
-  shareModel = ShareEnum.PROJECT;
+  commentModel = CommentType.PROJECT;
+  shareModel = ShareType.PROJECT;
   commentsCount = 0;
   projectStatus = ProjectStatus;
   image = '../../../../assets/images/db.png'
@@ -108,7 +108,7 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
 
   activate() {
     if (this.deliverables.length === 0) {
-      this.store.dispatch(new AddToast({ title: 'You can not publish a project with no deliverables', type: ToastEnum.ERROR }));
+      this.store.dispatch(new AddToast({ title: 'You can not publish a project with no deliverables', type: ToastType.ERROR }));
       return;
     }
 
@@ -119,7 +119,7 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
           this.popupService.close(`project-activate-${this.id}`);
         },
         failure: () => {
-          this.store.dispatch(new AddToast({ title: 'Project Activation', type: ToastEnum.ERROR }));
+          this.store.dispatch(new AddToast({ title: 'Project Activation', type: ToastType.ERROR }));
         }
       }));
     });
@@ -133,7 +133,7 @@ export class ProjectViewComponent extends UnSubscriber implements OnInit {
           this.popupService.close(`project-deactivate-${this.id}`);
         },
         failure: () => {
-          this.store.dispatch(new AddToast({ title: 'Project Deactivation', type: ToastEnum.ERROR }));
+          this.store.dispatch(new AddToast({ title: 'Project Deactivation', type: ToastType.ERROR }));
         }
       }));
     });

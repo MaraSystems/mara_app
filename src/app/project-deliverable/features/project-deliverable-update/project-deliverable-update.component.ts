@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
-import { ProjectDeliverable } from '../../utils/models/project-deliverable.model';
+import { ProjectDeliverable } from '../../utils/models/project-deliverable';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { CreateProjectDeliverableAction, UpdateProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
 import { ActivatedRoute } from '@angular/router';
 import { selectProjectDeliverableById } from '../../utils/store/project-deliverable-store.selector';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
-import { ToastEnum } from 'src/app/general/features/toast/utils/models/toast.enum';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
+import { ToastType } from 'src/app/general/features/toast/utils/models/toast-type';
 
 @Component({
   selector: 'app-project-deliverable-update',
@@ -69,7 +69,7 @@ export class ProjectDeliverableUpdateComponent extends UnSubscriber implements O
         this.popupService.close(`project-deliverable-update-${this.id}`);
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ title: 'Project Deliverable Update', type: ToastEnum.ERROR }));
+        this.store.dispatch(new AddToast({ title: 'Project Deliverable Update', type: ToastType.ERROR }));
       }
     }));
   }

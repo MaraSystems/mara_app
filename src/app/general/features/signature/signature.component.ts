@@ -52,8 +52,10 @@ export class SignatureComponent extends UnSubscriber implements OnInit, AfterVie
     this.store.select(selectAuthClient).subscribe(client => {
       this.client = client;
       this.store.dispatch(new GetAttachmentAction(this.compliance?.attachment as string));
-      this.newSubscription = this.store.select(selectAttachmentById(this.compliance?.attachment as string)).subscribe(attachment => {
-        this.signature = attachment.url;        
+      this.newSubscription = this.store.select(selectAttachmentById(this.compliance?.attachment as string)).subscribe(attachment => {        
+        if (attachment) {
+          // this.signature = attachment.versions[attachment.versions.length - 1].url as string;
+        }
       });
     });   
   }

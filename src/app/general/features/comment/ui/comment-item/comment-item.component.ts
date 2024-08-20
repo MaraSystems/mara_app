@@ -3,15 +3,15 @@ import { Store } from '@ngrx/store';
 import { Client } from 'src/app/client/utils/models/client';
 import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
-import { Comment } from '../../utils/models/comment.model';
+import { Comment } from '../../utils/models/comment';
 import { toggleList } from 'src/app/general/utils/lib/toggleList';
 import { DeleteCommentAction, ListCommentsAction, UpdateCommentAction } from '../../utils/store/comment-store.action';
-import { CommentEnum } from '../../utils/models/comment.enum';
+import { CommentType } from '../../utils/models/comment-type';
 import { selectCommentsByModelId } from '../../utils/store/comment-store.selector';
-import { DownloadAttachmentAction, GetAttachmentAction } from '../../../attachment/utils/store/attachment-store.action';
+import { GetAttachmentAction } from '../../../attachment/utils/store/attachment-store.action';
 import { selectAttachmentById } from '../../../attachment/utils/store/attachment-store.selector';
-import { More } from 'src/app/general/utils/models/more.model';
-import { PopupService } from '../../../popup/features/popup.service';
+import { More } from 'src/app/general/utils/models/more';
+import { PopupService } from '../../../popup/popup.service';
 
 @Component({
   selector: 'app-comment-item',
@@ -38,7 +38,7 @@ export class CommentItemComponent extends UnSubscriber implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new ListCommentsAction(CommentEnum.COMMENT, this.comment._id));
+    this.store.dispatch(new ListCommentsAction(CommentType.COMMENT, this.comment._id));
 
     this.newSubscription = this.store.select(selectAuthClient).subscribe(client => {
       this.client = client;
@@ -52,14 +52,16 @@ export class CommentItemComponent extends UnSubscriber implements OnInit {
         : [];
     });
 
-    this.newSubscription = this.store.select(selectCommentsByModelId(CommentEnum.COMMENT, this.comment._id)).subscribe(comments => {
+    this.newSubscription = this.store.select(selectCommentsByModelId(CommentType.COMMENT, this.comment._id)).subscribe(comments => {
       this.commentsCount = comments.length;
     });
     
     if (this.comment.attachment) {
       this.store.dispatch(new GetAttachmentAction(this.comment.attachment));
       this.newSubscription = this.store.select(selectAttachmentById(this.comment.attachment)).subscribe(attachment => {
-        this.attachment = attachment.url;
+        if (attachment) {
+          this.attachment = attachment.versions[attachment.versions.length - 1].url as string;        
+        }
       });
     }
   }

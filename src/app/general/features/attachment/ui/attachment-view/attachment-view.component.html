@@ -1,13 +1,11 @@
-<span class="image" (click)="this.popupService.open('attachment-view-' + id)">
-    <img src="../../../../assets/images/db.png" alt="">
-</span>
+<span class="material-symbols-outlined image" (click)="this.popupService.open('attachment-view-' + attachment._id)">{{ url ? 'draft' : 'hourglass_empty' }}</span>
 
 <span class="name header-3">{{attachment.name}}</span>
-<app-more class="more" [elevated]="false" [list]="moreList"></app-more>
+<app-more class="more" [elevated]="false" [list]="moreList" *ngIf="moreList.length"></app-more>
 
 <span class="date text-1">{{attachment.createdAt | date}}</span>
-<span class="version text-1">{{ 'V.' + attachment.version}}</span>
+<span class="version text-1">{{ 'V.' + (attachment.versions.length - 1)}}</span>
 
-<app-popup [name]="'attachment-view-update-' + id" heading="Update Attatchment">
-    <app-attachment-upload [model]="attachment.model" [modelId]="attachment.modelId" [attachment]="attachment" [popupId]="'attachment-view-update-' + id"></app-attachment-upload>
+<app-popup [name]="'attachment-view-update-' + attachment._id" heading="Update Attachment">
+    <app-attachment-upload [model]="attachment.model" [modelId]="attachment.modelId" [attachment]="attachment" [popupId]="'attachment-view-update-' + attachment._id"></app-attachment-upload>
 </app-popup>

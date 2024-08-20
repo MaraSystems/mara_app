@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { AttachmentState } from "./attachment-store.reducer";
-import { Attachment } from "../models/attachment.model";
+import { Attachment } from "../models/attachment";
 
 export const clientSelector = createFeatureSelector<Readonly<AttachmentState>>('attachments');
 

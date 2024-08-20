@@ -5,11 +5,11 @@ import { AppState } from 'src/app/app.state';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as addressUtil from 'src/app/general/utils/lib/address';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
-import { ToastEnum } from 'src/app/general/features/toast/utils/models/toast.enum';
+import { ToastType } from 'src/app/general/features/toast/utils/models/toast-type';
 import { getFormControl } from 'src/app/general/utils/lib/getFormControl';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
 import { Kin } from 'src/app/client/utils/models/kin';
-import { GenderEnum } from 'src/app/profile/utils/gender.enum';
+import { GenderType } from 'src/app/profile/utils/gender-type';
 import { selectKinByUserId } from '../../../kin/utils/store/kin-store.selector';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { CreateKinAction } from '../../../kin/utils/store/kin-store.action';
@@ -29,7 +29,7 @@ export class ProfileCreateKinComponent extends UnSubscriber implements OnInit {
   form!: FormGroup;
   address: addressUtil.IAddress = { countries: addressUtil.listCountries, states: [], cities: [] };
   getControl = getFormControl;
-  genderEnum = Object.values(GenderEnum);
+  genderEnum = Object.values(GenderType);
 
   constructor (
     public store: Store<AppState>,

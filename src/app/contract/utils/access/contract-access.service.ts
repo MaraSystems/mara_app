@@ -1,28 +1,29 @@
 import { Injectable } from '@angular/core';
 import { AccessService } from 'src/app/general/utils/services/access.service';
-import { Collection } from '@black-ink/lonedb';
 import { DataResponse } from 'src/app/general/utils/models/data-response';
 import { catchError, concatMap, map, mergeMap, of, tap, throwError, toArray } from 'rxjs';
 import { Update } from '@ngrx/entity';
 import { ListOptions } from 'src/app/general/utils/models/list-options';
-import { Contract, ContractRequest } from '../models/contract.model';
-import { ContractStatus } from '../models/contract-status.enum';
-import { Project } from 'src/app/project/utils/models/project.model';
+import { Contract } from '../models/contract';
+import { ContractStatus } from '../models/contract-status';
+import { Project } from 'src/app/project/utils/models/project';
 import { ContractDeliverableAccessService } from 'src/app/contract-deliverable/utils/access/contract-deliverable-access.service';
 import { NotificationAccessService } from 'src/app/notification/utils/access/notification-access.service';
 import { ProjectAccessService } from 'src/app/project/utils/access/project-access.service';
-import { Notification } from 'src/app/notification/utils/models/notification.model';
-import { NotificationModelEnum } from 'src/app/notification/utils/models/notification-model.enum';
-import { NotificationStatusEnum } from 'src/app/notification/utils/models/notification-status.enum';
-import { ClientAccessService } from 'src/app/client/utils/access/client-access.service';
+import { Notification } from 'src/app/notification/utils/models/notification';
+import { NotificationType } from 'src/app/notification/utils/models/notification-type';
+import { NotificationStatusType } from 'src/app/notification/utils/models/notification-status-type';
 import { ComplianceAccessService } from 'src/app/profile/features/compliance/utils/access/compliance-access.service';
 import { ComplianceTitleEnum } from 'src/app/client/utils/models/compliance';
 import { TransactionAccessService } from 'src/app/transaction/utils/access/transaction-access.service';
-import { Transaction } from 'src/app/transaction/utils/models/transaction.model';
-import { WalletTransaction } from 'src/app/dashboard/utils/models/wallet-transaction.model';
-import { TransactionActionEnum } from 'src/app/transaction/utils/models/transaction-action.enum';
-import { TransactionModelEnum } from 'src/app/transaction/utils/models/transaction-model.enum';
-import { TransactionPlatformEnum } from 'src/app/transaction/utils/models/transaction-platform.enum';
+import { Transaction } from 'src/app/transaction/utils/models/transaction';
+import { WalletTransaction } from 'src/app/dashboard/utils/models/wallet-transaction';
+import { TransactionAction } from 'src/app/transaction/utils/models/transaction-action';
+import { TransactionType } from 'src/app/transaction/utils/models/transaction-type';
+import { TransactionPlatform } from 'src/app/transaction/utils/models/transaction-platform';
+import { AttachmentAccessService } from 'src/app/general/features/attachment/utils/access/attachment-access.service';
+import { Attachment } from 'src/app/general/features/attachment/utils/models/attachment';
+import { ContractRequest } from '../models/contract-request';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,8 @@ export class ContractAccessService {
     private notificationService: NotificationAccessService,
     private projectService: ProjectAccessService,
     private transactionService: TransactionAccessService,
-    private complianceService: ComplianceAccessService
+    private complianceService: ComplianceAccessService,
+    private attachmentService: AttachmentAccessService
   ) {}
 
   requestContract(data: ContractRequest) {
@@ -62,9 +64,9 @@ export class ContractAccessService {
         mergeMap(() => this.notificationService.createNotification({ 
           subject: 'Contract Request',
           description: `A contract request has been made on your project ${project.title}`,
-          model: NotificationModelEnum.CONTRACT,
+          model: NotificationType.CONTRACT,
           modelId: response.data._id,
-          users: [{ status: NotificationStatusEnum.PENDING, userId: project.userId }],
+          users: [{ status: NotificationStatusType.PENDING, userId: project.userId }],
           hidden: false,
           links: [{ title: 'Open Request', url: `http://${location.host}/contracts/${response.data._id}`}]
          } as Notification)),
@@ -108,34 +110,39 @@ export class ContractAccessService {
   private approveContract(contract: Contract, update: Partial<Contract>) {
     return this.complianceService.checkCompliance(contract.contractorId, ComplianceTitleEnum.SIGNATURE)
       .pipe(
-        mergeMap(() => this.accessService.updateOne<Contract>(this.domain, { _id: contract._id }, update))
+        mergeMap(({ data: compliance }) => this.attachmentService.getAttachment(compliance.attachment)),
+        mergeMap(({ data: attachment }) => this.accessService.updateOne<Contract>(this.domain, { _id: contract._id }, { ...update, approvedAt: new Date(), contractorSignature: { version: attachment.versions.length - 1, attachment: attachment._id }}))
       )
   }
 
   private terminateContract(contract: Contract, update: Partial<Contract>) {
-    return this.accessService.updateOne<Contract>(this.domain, { _id: contract._id }, update);
+    return this.accessService.updateOne<Contract>(this.domain, { _id: contract._id }, { ...update, terminatedAt: new Date()});
   }
 
   private initiateContract(contract: Contract, update: Partial<Contract>) {
     let contractCost = 0;
+    let attachment: Attachment;
+
     return this.complianceService.checkCompliance(contract.clientId, ComplianceTitleEnum.SIGNATURE)
       .pipe(
+        mergeMap(({ data: compliance }) => this.attachmentService.getAttachment(compliance.attachment)),
+        tap(({ data }) => attachment = data),
         mergeMap(() => this.contractDeliverableService.listContractDeliverables(contract._id)),
         mergeMap(({ data: deliverables }) => {
           contractCost = deliverables.reduce((acc, red) => acc + Number(red.price), 0);
-          const transaction: WalletTransaction = { userId: contract.clientId, amount: contractCost, action: TransactionActionEnum.DEBIT };
+          const transaction: WalletTransaction = { userId: contract.clientId, amount: contractCost, action: TransactionAction.DEBIT };
           return this.transactionService.updateWallet(transaction);
         }),
         mergeMap(() => this.transactionService.createTransaction({ 
           balance: contractCost, 
-          model: TransactionModelEnum.CONTRACT, 
+          model: TransactionType.CONTRACT, 
           modelId: contract._id, 
           amount: contractCost, 
-          action: TransactionActionEnum.CREDIT,
+          action: TransactionAction.CREDIT,
           title: 'Contract Deposit', 
-          platform: TransactionPlatformEnum.CONTRACTOR
+          platform: TransactionPlatform.CONTRACTOR
         } as Transaction)),
-        mergeMap(() => this.accessService.updateOne<Contract>(this.domain, { _id: contract._id }, update))
+        mergeMap(() => this.accessService.updateOne<Contract>(this.domain, { _id: contract._id }, { ...update, initiatedAt: new Date(), clientSignature: { version: attachment.versions.length - 1, attachment: attachment._id }}))
       )
   }
 }

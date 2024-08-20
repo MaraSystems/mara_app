@@ -7,8 +7,7 @@ import { Router } from "@angular/router";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { ProjectAccessService } from "../access/project-access.service";
 import { CreateProjectAction, CreateProjectActionFail, CreateProjectActionSuccess, DeleteProjectAction, DeleteProjectActionFail, DeleteProjectActionSuccess, GetProjectAction, GetProjectActionFail, GetProjectActionSuccess, ListProjectsAction, ListProjectsActionFail, ListProjectsActionSuccess, ProjectActionsType, UpdateProjectAction, UpdateProjectActionFail, UpdateProjectActionSuccess } from "./project-store.action";
-import { Project } from "../models/project.model";
-import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
+import { Project } from "../models/project";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()

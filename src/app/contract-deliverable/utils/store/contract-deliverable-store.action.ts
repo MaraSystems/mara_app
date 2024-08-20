@@ -1,6 +1,6 @@
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
-import { ContractDeliverable } from "../models/contract-deliverable.model";
+import { ContractDeliverable } from "../models/contract-deliverable";
 import { ListOptions } from "src/app/general/utils/models/list-options";
 
 export enum ContractDeliverableActionsType {

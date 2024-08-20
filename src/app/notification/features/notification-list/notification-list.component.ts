@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
-import { Notification } from '../../utils/models/notification.model';
+import { Notification } from '../../utils/models/notification';
 import { ListNotificationsAction } from '../../utils/store/notification-store.action';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
 import { selectAllClientNotifications } from '../../utils/store/notification-store.selector';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';

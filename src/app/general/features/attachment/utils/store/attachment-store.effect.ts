@@ -4,10 +4,10 @@ import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
 import { DataResponse } from "src/app/general/utils/models/data-response";
-import { UploadAttachmentAction, UploadAttachmentActionFail, UploadAttachmentActionSuccess, DeleteAttachmentAction, DeleteAttachmentActionFail, DeleteAttachmentActionSuccess, GetAttachmentAction, GetAttachmentActionFail, GetAttachmentActionSuccess, ListAttachmentsAction, ListAttachmentsActionFail, ListAttachmentsActionSuccess, AttachmentActionsType, DownloadAttachmentAction, DownloadAttachmentActionFail, DownloadAttachmentActionSuccess } from "./attachment-store.action";
+import { UploadAttachmentAction, UploadAttachmentActionFail, UploadAttachmentActionSuccess, DeleteAttachmentAction, DeleteAttachmentActionFail, DeleteAttachmentActionSuccess, GetAttachmentAction, GetAttachmentActionFail, GetAttachmentActionSuccess, ListAttachmentsAction, ListAttachmentsActionFail, ListAttachmentsActionSuccess, AttachmentActionsType, UpdateAttachmentAction, UpdateAttachmentActionSuccess } from "./attachment-store.action";
 import { AttachmentAccessService } from "../access/attachment-access.service";
-import { Attachment } from "../models/attachment.model";
-import { ToastEnum } from "../../../toast/utils/models/toast.enum";
+import { Attachment } from "../models/attachment";
+import { ToastType } from "../../../toast/utils/models/toast-type";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()
@@ -45,7 +45,7 @@ export class AttachmentStoreEffect {
                 }),
                 catchError(err => of(new DeleteAttachmentActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ title: 'Attachment delete', type: ToastEnum.ERROR }));
+                        this.store.dispatch(new AddToast({ title: 'Attachment delete', type: ToastType.ERROR }));
                     })
                 ))
             )
@@ -75,4 +75,21 @@ export class AttachmentStoreEffect {
             )
         )
     )));
+
+    updateAttachment$ = createEffect(() => this.actions$.pipe(
+        ofType<UpdateAttachmentAction>(AttachmentActionsType.UPDATE_ATTACHMENT),
+        mergeMap((action: UpdateAttachmentAction) => 
+            this.attachmentAccessService.updateAttachment(action.payload).pipe(
+                map((response: DataResponse<Attachment>) => {            
+                    handleSuccessSideEffects((action as UpdateAttachmentAction).sideEffects);
+                    return new UpdateAttachmentActionSuccess({ ...action.payload, changes: response.data });
+                }),
+                catchError(err => of(new UpdateAttachmentAction(err)).pipe(
+                    tap(() => {
+                        handleFailureSideEffects((action as UpdateAttachmentAction).sideEffects);
+                    })
+                ))
+            )
+        )
+    ));
 }

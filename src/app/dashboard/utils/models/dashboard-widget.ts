@@ -1,7 +1,7 @@
-import { DashboardWidgetEnum } from "./dashboard-widget.enum";
+import { DashboardWidgetType } from "./dashboard-widget-type";
 
 export interface DashboardWidget<T> {
     id: string;
-    type: DashboardWidgetEnum;
+    type: DashboardWidgetType;
     data: T;
 }

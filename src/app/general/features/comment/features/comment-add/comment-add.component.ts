@@ -5,8 +5,8 @@ import { Client } from 'src/app/client/utils/models/client';
 import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { CreateCommentAction } from '../../utils/store/comment-store.action';
-import { Comment } from '../../utils/models/comment.model';
-import { CommentEnum } from '../../utils/models/comment.enum';
+import { Comment } from '../../utils/models/comment';
+import { CommentType } from '../../utils/models/comment-type';
 import { upload } from 'src/app/general/utils/lib/upload';
 
 @Component({
@@ -15,7 +15,7 @@ import { upload } from 'src/app/general/utils/lib/upload';
   styleUrls: ['./comment-add.component.scss']
 })
 export class CommentAddComponent extends UnSubscriber implements OnInit {
-  @Input() model!: CommentEnum;
+  @Input() model!: CommentType;
   @Input() modelId = '';
 
   client!: Client;

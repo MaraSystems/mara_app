@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProjectDeliverable } from '../../utils/models/project-deliverable.model';
+import { ProjectDeliverable } from '../../utils/models/project-deliverable';
 
 @Component({
   selector: 'app-project-deliverable-item',

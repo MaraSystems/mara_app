@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { ContractDeliverableState, contractDeliverableAdapter } from "./contract-deliverable-store.reducer";
-import { ContractDeliverable } from "../models/contract-deliverable.model";
+import { ContractDeliverable } from "../models/contract-deliverable";
 
 export const contractDeliverableSelector = createFeatureSelector<Readonly<ContractDeliverableState>>('contractDeliverables');
 

@@ -1,7 +1,7 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { Action } from "@ngrx/store";
-import { Contract } from "../models/contract.model";
 import { CreateContractActionFail, CreateContractActionSuccess, GetContractActionSuccess, ListContractsActionFail, ListContractsActionSuccess, ContractActionsType, UpdateContractActionFail, UpdateContractActionSuccess } from "./contract-store.action";
+import { Contract } from "../models/contract";
 
 export interface ContractState extends EntityState<Contract> {
     selectedId: string | null;

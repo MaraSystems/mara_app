@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
-import { ProjectDeliverable } from '../../utils/models/project-deliverable.model';
+import { ProjectDeliverable } from '../../utils/models/project-deliverable';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { CreateProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
 import { ActivatedRoute, Router } from '@angular/router';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
-import { SharePrivacyEnum } from 'src/app/general/features/share/utils/models/share.privacy-enum';
-import { ShareAccessEnum } from 'src/app/general/features/share/utils/models/share.access-enum';
+import { SharePrivacyType } from 'src/app/general/features/share/utils/models/share-privacy-type';
+import { ShareAccessType } from 'src/app/general/features/share/utils/models/share-access-type';
 import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 

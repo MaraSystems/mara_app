@@ -13,8 +13,8 @@ import { SidebarModule } from './general/features/sidebar/sidebar.module';
 import { NavbarModule } from './general/features/navbar/navbar.module';
 import { FootbarModule } from './general/features/footbar/footbar.module';
 import { NotfoundModule } from './notfound/notfound.module';
-import { PopupModule } from './general/features/popup/features/popup.module';
-import { PopupService } from './general/features/popup/features/popup.service';
+import { PopupModule } from './general/features/popup/popup.module';
+import { PopupService } from './general/features/popup/popup.service';
 import { TabsModule } from './general/ui/tabs/tabs.module';
 
 

@@ -1,21 +1,21 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/app.state";
-import { PopupService } from "src/app/general/features/popup/features/popup.service";
+import { PopupService } from "src/app/general/features/popup/popup.service";
 import { UnSubscriber } from "src/app/general/utils/services/unsubscriber.service";
 import { UpdateWalletAction } from "../../utils/store/dashboard-store.action";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { TransactionPlatformEnum } from "src/app/transaction/utils/models/transaction-platform.enum";
-import { TransactionModelEnum } from "src/app/transaction/utils/models/transaction-model.enum";
-import { Transaction } from "src/app/transaction/utils/models/transaction.model";
+import { TransactionPlatform } from "src/app/transaction/utils/models/transaction-platform";
+import { TransactionType } from "src/app/transaction/utils/models/transaction-type";
+import { Transaction } from "src/app/transaction/utils/models/transaction";
 import { getFormControl } from "src/app/general/utils/lib/getFormControl";
-import { TransactionActionEnum } from "src/app/transaction/utils/models/transaction-action.enum";
+import { TransactionAction } from "src/app/transaction/utils/models/transaction-action";
 import { selectAllClientBanks, selectClientDefaultBank } from "src/app/bank/utils/store/bank-store.selector";
 import { Bank } from "src/app/bank/utils/models/bank.model";
 import { KeyValue } from "@angular/common";
 import { ListBanksAction } from "src/app/bank/utils/store/bank-store.action";
 import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
-import { WalletTransaction } from "../../utils/models/wallet-transaction.model";
+import { WalletTransaction } from "../../utils/models/wallet-transaction";
 
 @Component({
   selector: 'app-wallet-debit',
@@ -57,7 +57,7 @@ export class WalletDebitComponent extends UnSubscriber implements OnInit {
     this.form = new FormGroup({
       amount: new FormControl(null, [Validators.required, Validators.min(1000)]),
       modelId: new FormControl(this.defaultBank?._id, [Validators.required, Validators.min(1000)]),
-      action: new FormControl(TransactionActionEnum.DEBIT),
+      action: new FormControl(TransactionAction.DEBIT),
       userId: new FormControl(this.userId),
     });
 

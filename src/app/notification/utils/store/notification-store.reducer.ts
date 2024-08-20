@@ -1,6 +1,6 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { Action } from "@ngrx/store";
-import { Notification } from "../models/notification.model";
+import { Notification } from "../models/notification";
 import { GetNotificationActionFail, GetNotificationActionSuccess, ListNotificationsActionFail, ListNotificationsActionSuccess, NotificationActionsType, ReadNotificationActionFail, ReadNotificationActionSuccess } from "./notification-store.action";
 
 export interface NotificationState extends EntityState<Notification> {

@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { TransactionAccessService } from "../access/transaction-access.service";
 import { DeleteTransactionAction, DeleteTransactionActionFail, DeleteTransactionActionSuccess, GetTransactionAction, GetTransactionActionFail, GetTransactionActionSuccess, ListTransactionsAction, ListTransactionsActionFail, ListTransactionsActionSuccess, TransactionActionsType, UpdateTransactionAction, UpdateTransactionActionFail, UpdateTransactionActionSuccess } from "./transaction-store.action";
-import { Transaction } from "../models/transaction.model";
+import { Transaction } from "../models/transaction";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()

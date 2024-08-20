@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { ContractAccessService } from "../access/contract-access.service";
 import { CreateContractAction, CreateContractActionFail, CreateContractActionSuccess, GetContractAction, GetContractActionFail, GetContractActionSuccess, ListContractsAction, ListContractsActionFail, ListContractsActionSuccess, ContractActionsType, UpdateContractAction, UpdateContractActionFail, UpdateContractActionSuccess } from "./contract-store.action";
-import { Contract } from "../models/contract.model";
+import { Contract } from "../models/contract";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()

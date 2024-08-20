@@ -1,0 +1,1 @@
+export const enumIndex = (object: any, enumKey: string) => Object.keys(object).findIndex(key => enumKey === key);

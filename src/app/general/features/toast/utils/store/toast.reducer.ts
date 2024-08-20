@@ -1,6 +1,6 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { AddToastSuccess, RemoveToast, ToastActionTypes, ToastActions, UpdateToast } from "./toast.action";
-import { Toast } from "../models/toast.class";
+import { Toast } from "../models/toast";
 
 export interface ToastState extends EntityState<Toast> {
     selectedId: number | null;

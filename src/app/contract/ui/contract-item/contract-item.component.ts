@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Contract } from '../../utils/models/contract.model';
+import { Contract } from '../../utils/models/contract';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { GetContractAction } from '../../utils/store/contract-store.action';

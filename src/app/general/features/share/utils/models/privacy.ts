@@ -1,8 +1,8 @@
-import { ShareAccessEnum } from "./share.access-enum";
-import { ShareEnum } from "./share.enum";
-import { SharePrivacyEnum } from "./share.privacy-enum";
+import { ShareAccessType } from "./share-access-type";
+import { Share } from "./share";
+import { SharePrivacyType } from "./share-privacy-type";
 
 export interface Privacy {
-    type: SharePrivacyEnum;
-    access: ShareAccessEnum;
+    type: SharePrivacyType;
+    access: ShareAccessType;
 }

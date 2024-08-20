@@ -5,8 +5,8 @@ import { AppState } from 'src/app/app.state';
 import { selectToasts } from '../utils/store/toast.selector';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { RemoveToast, UpdateToast } from '../utils/store/toast.action';
-import { Toast } from '../utils/models/toast.class';
-import { ToastEnum } from '../utils/models/toast.enum';
+import { Toast } from '../utils/models/toast';
+import { ToastType } from '../utils/models/toast-type';
 
 @Component({
   selector: 'app-toast',
@@ -17,7 +17,7 @@ export class ToastComponent extends UnSubscriber implements OnInit {
   toasts!: Observable<Toast[]>
   element!: Element;
   timeout = 1000;
-  enum = ToastEnum;
+  enum = ToastType;
 
   constructor(
     public store: Store<AppState>,

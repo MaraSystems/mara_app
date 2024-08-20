@@ -1,7 +1,7 @@
-import { ENVEnum } from "src/app/general/utils/models/env.enum";
+import { EnvTypes } from "src/app/general/utils/models/env.enum";
 
 export const environment = {
-    env: ENVEnum.TESTING,
+    env: EnvTypes.TESTING,
     apiUrl: 'http://localhost:3000',
     appName: 'Contractor',
 };

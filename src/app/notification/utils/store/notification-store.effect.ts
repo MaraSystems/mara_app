@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { NotificationAccessService } from "../access/notification-access.service";
 import { GetNotificationAction, GetNotificationActionFail, GetNotificationActionSuccess, ListNotificationsAction, ListNotificationsActionFail, ListNotificationsActionSuccess, NotificationActionsType, ReadNotificationAction, ReadNotificationActionFail, ReadNotificationActionSuccess } from "./notification-store.action";
-import { Notification } from "../models/notification.model";
+import { Notification } from "../models/notification";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()

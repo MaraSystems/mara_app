@@ -8,7 +8,7 @@ import { ComplianceAccessService } from "../access/compliance-access.service";
 import { CreateComplianceAction, CreateComplianceActionFail, CreateComplianceActionSuccess, GetComplianceAction, GetComplianceActionFail, GetComplianceActionSuccess, ComplianceActionsType, UpdateComplianceAction, UpdateComplianceActionFail, UpdateComplianceActionSuccess, ListComplianceAction, ListComplianceActionFail, ListComplianceActionSuccess } from "./compliance-store.action";
 import { Compliance } from "src/app/client/utils/models/compliance";
 import { RouterService } from "src/app/router/utils/router.service";
-import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
+import { ToastType } from "src/app/general/features/toast/utils/models/toast-type";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()

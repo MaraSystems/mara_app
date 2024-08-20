@@ -1,6 +1,6 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { Action } from "@ngrx/store";
-import { Comment } from "../models/comment.model";
+import { Comment } from "../models/comment";
 import { CreateCommentActionFail, CreateCommentActionSuccess, DeleteCommentActionFail, DeleteCommentActionSuccess, GetCommentActionFail, GetCommentActionSuccess, ListCommentsActionFail, ListCommentsActionSuccess, CommentActionsType, UpdateCommentActionSuccess, UpdateCommentActionFail } from "./comment-store.action";
 
 export interface CommentState extends EntityState<Comment> {

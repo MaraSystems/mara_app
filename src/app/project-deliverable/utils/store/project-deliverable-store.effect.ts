@@ -6,9 +6,9 @@ import { AddToast } from "src/app/general/features/toast/utils/store/toast.actio
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { ProjectDeliverableAccessService } from "../access/project-deliverable-access.service";
 import { CreateProjectDeliverableAction, CreateProjectDeliverableActionFail, CreateProjectDeliverableActionSuccess, DeleteProjectDeliverableAction, DeleteProjectDeliverableActionFail, DeleteProjectDeliverableActionSuccess, GetProjectDeliverableAction, GetProjectDeliverableActionFail, GetProjectDeliverableActionSuccess, ListProjectDeliverablesAction, ListProjectDeliverablesActionFail, ListProjectDeliverablesActionSuccess, ProjectDeliverableActionsType, UpdateProjectDeliverableAction, UpdateProjectDeliverableActionFail, UpdateProjectDeliverableActionSuccess } from "./project-deliverable-store.action";
-import { ProjectDeliverable } from "../models/project-deliverable.model";
+import { ProjectDeliverable } from "../models/project-deliverable";
 import { RouterService } from "src/app/router/utils/router.service";
-import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
+import { ToastType } from "src/app/general/features/toast/utils/models/toast-type";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()
@@ -65,7 +65,7 @@ export class ProjectDeliverableStoreEffect {
                 }),
                 catchError(err => of(new DeleteProjectDeliverableActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ title: 'User delete', type: ToastEnum.ERROR }));
+                        this.store.dispatch(new AddToast({ title: 'User delete', type: ToastType.ERROR }));
                     })
                 ))
             )

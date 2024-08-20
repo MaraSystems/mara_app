@@ -4,8 +4,8 @@ import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { ShareAccessService } from "../access/share-access.service";
 import { CreateShareAction, CreateShareActionFail, CreateShareActionSuccess, DeleteShareAction, DeleteShareActionFail, DeleteShareActionSuccess, GetShareAction, GetShareActionFail, GetShareActionSuccess, ListSharesAction, ListSharesActionFail, ListSharesActionSuccess, ShareActionsType, UpdateShareAction, UpdateShareActionSuccess, UpdateShareActionFail } from "./share-store.action";
-import { Share } from "../models/share.model";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
+import { Share } from "../models/share";
 
 @Injectable()
 export class ShareStoreEffect {

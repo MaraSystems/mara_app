@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ENVEnum } from 'src/app/general/utils/models/env.enum';
+import { EnvTypes } from 'src/app/general/utils/models/env';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class RouterService {
   ) { }
 
   navigate(url: string) {    
-    if (this.env === ENVEnum.TESTING) {
+    if (this.env === EnvTypes.TESTING) {
       return;
     }
 

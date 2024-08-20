@@ -8,7 +8,7 @@ import { Store } from "@ngrx/store";
 import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { RouterService } from "src/app/router/utils/router.service";
-import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
+import { ToastType } from "src/app/general/features/toast/utils/models/toast-type";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()

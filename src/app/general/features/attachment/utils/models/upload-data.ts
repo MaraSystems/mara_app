@@ -1,9 +1,9 @@
-import { AttachmentModelEnum } from "./attachment-model.enum";
+import { AttachmentType } from "./attachment-type";
 
 export interface UploadData {
     _id?: string;
     name: string;
-    model: AttachmentModelEnum;
+    model: AttachmentType;
     modelId: string;
     data: string;
 }

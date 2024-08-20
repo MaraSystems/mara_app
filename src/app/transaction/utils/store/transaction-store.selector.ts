@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { TransactionState, transactionAdapter } from "./transaction-store.reducer";
-import { Transaction } from "../models/transaction.model";
+import { Transaction } from "../models/transaction";
 
 export const clientSelector = createFeatureSelector<Readonly<TransactionState>>('transactions');
 

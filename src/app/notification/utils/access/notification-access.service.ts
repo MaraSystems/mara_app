@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AccessService } from 'src/app/general/utils/services/access.service';
-import { Notification } from '../models/notification.model';
+import { Notification } from '../models/notification';
 import { ListOptions } from 'src/app/general/utils/models/list-options';
 import { map, mergeMap } from 'rxjs';
-import { NotificationStatusEnum } from '../models/notification-status.enum';
+import { NotificationStatusType } from '../models/notification-status-type';
 
 
 @Injectable({
@@ -41,7 +41,7 @@ export class NotificationAccessService {
       
           const users = notification.users.map(user => {
             return user.userId === userId
-              ? { ...user, status: NotificationStatusEnum.READ }
+              ? { ...user, status: NotificationStatusType.READ }
               : user
           });
 

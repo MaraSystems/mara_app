@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AccessService } from 'src/app/general/utils/services/access.service';
 import { Update } from '@ngrx/entity';
-import { Project } from '../models/project.model';
+import { Project } from '../models/project';
 import { ListOptions } from 'src/app/general/utils/models/list-options';
-import { ProjectStatus } from '../models/project-status.enum';
+
 
 @Injectable({
   providedIn: 'root'

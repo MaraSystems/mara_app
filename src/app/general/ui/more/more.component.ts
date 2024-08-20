@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { More } from '../../utils/models/more.model';
-import { PopupService } from '../../features/popup/features/popup.service';
+import { More } from '../../utils/models/more';
+import { PopupService } from '../../features/popup/popup.service';
 
 @Component({
   selector: 'app-more',

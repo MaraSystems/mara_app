@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { FormGroup } from '@angular/forms';
 import { getFormControl } from 'src/app/general/utils/lib/getFormControl';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
 import { Compliance, IdentificationComplianceEnum, AddressComplianceEnum, ComplianceModel } from 'src/app/client/utils/models/compliance';
 import { CreateComplianceAction } from '../../../compliance/utils/store/compliance-store.action';
 

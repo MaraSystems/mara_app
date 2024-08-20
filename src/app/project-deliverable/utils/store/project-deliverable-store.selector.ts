@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { ProjectDeliverableState, projectDeliverableAdapter } from "./project-deliverable-store.reducer";
-import { ProjectDeliverable } from "../models/project-deliverable.model";
+import { ProjectDeliverable } from "../models/project-deliverable";
 
 export const clientSelector = createFeatureSelector<Readonly<ProjectDeliverableState>>('projectDeliverables');
 

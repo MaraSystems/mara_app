@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
-import { Transaction } from '../../utils/models/transaction.model';
+import { Transaction } from '../../utils/models/transaction';
 import { Router } from '@angular/router';
 
 @Component({

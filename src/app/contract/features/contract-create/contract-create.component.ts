@@ -6,17 +6,17 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { CreateContractAction } from '../../utils/store/contract-store.action';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
-import { SharePrivacyEnum } from 'src/app/general/features/share/utils/models/share.privacy-enum';
-import { ShareAccessEnum } from 'src/app/general/features/share/utils/models/share.access-enum';
+import { SharePrivacyType } from 'src/app/general/features/share/utils/models/share-privacy-type';
+import { ShareAccessType } from 'src/app/general/features/share/utils/models/share-access-type';
 import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { Router } from '@angular/router';
 import { ContractStatus } from '../../utils/models/contract-status.enum';
-import { Project } from 'src/app/project/utils/models/project.model';
+import { Project } from 'src/app/project/utils/models/project';
 import { GetProjectAction } from 'src/app/project/utils/store/project-store.action';
 import { ListProjectDeliverablesAction } from 'src/app/project-deliverable/utils/store/project-deliverable-store.action';
 import { selectAllProjectDeliverables } from 'src/app/project-deliverable/utils/store/project-deliverable-store.selector';
-import { ProjectDeliverable } from 'src/app/project-deliverable/utils/models/project-deliverable.model';
+import { ProjectDeliverable } from 'src/app/project-deliverable/utils/models/project-deliverable';
 import { ContractDeliverable } from 'src/app/contract-deliverable/utils/models/contract-deliverable.model';
 
 

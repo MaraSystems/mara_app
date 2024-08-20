@@ -38,6 +38,20 @@
     <pre class="description-text text-1 section-container">{{contract.description}}</pre>
 </div>
 
+<div class="users">
+    <span class="users-item section" *ngIf="contractor && contract.contractorSignature">
+        <h1 class="users-item-name header-3">{{ contractor.firstname + ' ' + contractor.lastname }}</h1>
+        <img class="signature" [src]="contractorSignature" alt="">
+        <p class="users-item-function text-1">Contractor</p>
+    </span>
+
+    <span class="users-item section" *ngIf="contractClient && contract.clientSignature">
+        <h1 class="users-item-name header-3">{{ contractClient.firstname + ' ' + contractClient.lastname }}</h1>
+        <img class="signature" [src]="clientSignature" alt="">
+        <p class="users-item-function text-1">Client</p>
+    </span>
+</div>
+
 <div class="controls">
     <span class="button" *ngIf="auth.id === this.contract.contractorId && contract.status === contractStatus.REQUESTED" (click)="approveContract()">
         <span class="material-symbols-outlined">check</span>
@@ -54,7 +68,6 @@
         <span class="control-text">Terminate</span>
     </span>    
 </div>
-
 
 <app-more class="more" [list]="moreList" [elevated]="true"></app-more>
 

@@ -1,8 +1,9 @@
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
-import { Share } from "../models/share.model";
+import { ShareType } from "../models/share-type";
 import { ListOptions } from "src/app/general/utils/models/list-options";
-import { SideEffects } from "src/app/general/utils/models/side.effects";
+import { SideEffects } from "src/app/general/utils/models/side-effects";
+import { Share } from "../models/share";
 
 export enum ShareActionsType {
     CREATE_SHARE = "[SHARE] Create Share",
@@ -74,7 +75,7 @@ export class GetShareActionFail implements Action {
 
 export class ListSharesAction implements Action {
     readonly type = ShareActionsType.LIST_SHARES;
-    constructor(public model: string, public modelId: string, public payload?: ListOptions){}
+    constructor(public model: ShareType, public modelId: string, public payload?: ListOptions){}
 }
 
 export class ListSharesActionSuccess implements Action {

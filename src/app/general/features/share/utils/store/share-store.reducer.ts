@@ -1,7 +1,8 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { Action } from "@ngrx/store";
-import { Share } from "../models/share.model";
+import { ShareType } from "../models/share-type";
 import { CreateShareActionFail, CreateShareActionSuccess, DeleteShareActionFail, DeleteShareActionSuccess, GetShareActionFail, GetShareActionSuccess, ListSharesActionFail, ListSharesActionSuccess, ShareActionsType, UpdateShareActionSuccess, UpdateShareActionFail } from "./share-store.action";
+import { Share } from "../models/share";
 
 export interface ShareState extends EntityState<Share> {
     selectedId: string | null;

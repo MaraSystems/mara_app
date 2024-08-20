@@ -6,15 +6,16 @@ import { AppState } from 'src/app/app.state';
 import { selectBankById } from '../../utils/store/bank-store.selector';
 import { ActivatedRoute } from '@angular/router';
 import { DeleteBankAction, GetBankAction } from '../../utils/store/bank-store.action';
-import { More } from 'src/app/general/utils/models/more.model';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { More } from 'src/app/general/utils/models/more';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
-import { CommentEnum } from 'src/app/general/features/comment/utils/models/comment.enum';
+import { CommentType } from 'src/app/general/features/comment/utils/models/comment-type';
 import { ListCommentsAction } from 'src/app/general/features/comment/utils/store/comment-store.action';
 import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/store/comment-store.selector';
-import { Toast } from 'src/app/general/features/toast/utils/models/toast.class';
-import { ShareEnum } from 'src/app/general/features/share/utils/models/share.enum';
+import { Toast } from 'src/app/general/features/toast/utils/models/toast';
+import { Share } from 'src/app/general/features/share/utils/models/share';
+import { ShareType } from 'src/app/general/features/share/utils/models/share-type';
 
 @Component({
   selector: 'app-bank-view',
@@ -32,8 +33,8 @@ export class BankViewComponent extends UnSubscriber implements OnInit {
 
   liked = false;
   bookmarked = false;
-  commentModel = CommentEnum.PROJECT;
-  shareModel = ShareEnum.PROJECT;
+  commentModel = CommentType.PROJECT;
+  shareModel = ShareType.PROJECT;
   commentsCount = 0;
 
   constructor(

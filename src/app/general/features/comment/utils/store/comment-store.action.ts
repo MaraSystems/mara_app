@@ -1,8 +1,8 @@
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
-import { Comment } from "../models/comment.model";
+import { Comment } from "../models/comment";
 import { ListOptions } from "src/app/general/utils/models/list-options";
-import { SideEffects } from "src/app/general/utils/models/side.effects";
+import { SideEffects } from "src/app/general/utils/models/side-effects";
 
 export enum CommentActionsType {
     CREATE_COMMENT = "[COMMENT] Create Comment",

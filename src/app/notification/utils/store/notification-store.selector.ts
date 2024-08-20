@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { NotificationState, notificationAdapter } from "./notification-store.reducer";
-import { Notification } from "../models/notification.model";
+import { Notification } from "../models/notification";
 
 export const clientSelector = createFeatureSelector<Readonly<NotificationState>>('notifications');
 

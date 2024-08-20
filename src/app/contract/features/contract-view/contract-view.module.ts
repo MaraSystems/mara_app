@@ -5,7 +5,7 @@ import { ContractViewRoutingModule } from './contract-view-routing.module';
 import { KeyvalueModule } from 'src/app/general/ui/keyvalue/keyvalue.module';
 import { IconCounterModule } from 'src/app/general/ui/icon-counter/icon-counter.module';
 import { MoreModule } from 'src/app/general/ui/more/more.module';
-import { PopupModule } from 'src/app/general/features/popup/features/popup.module';
+import { PopupModule } from 'src/app/general/features/popup/popup.module';
 // import { ContractDeliverableListModule } from '../../../contract-deliverable/features/contract-deliverable-list/contract-deliverable-list.module';
 // import { ContractUpdateModule } from '../contract-update/contract-update.module';
 import { DirectivesModule } from 'src/app/general/utils/directives/directives.module';

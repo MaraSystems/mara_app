@@ -1,8 +1,8 @@
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
-import { Project } from "../models/project.model";
+import { Project } from "../models/project";
 import { ListOptions } from "src/app/general/utils/models/list-options";
-import { SideEffects } from "src/app/general/utils/models/side.effects";
+import { SideEffects } from "src/app/general/utils/models/side-effects";
 
 export enum ProjectActionsType {
     CREATE_PROJECT = "[PROJECT] Create Project",

@@ -4,7 +4,7 @@
     align-items: center;
     gap: var(--gap-normal);
     width: -webkit-fill-available;
-    padding: var(--gap-normal);
+    padding: var(--gap-small);
     height: -webkit-fill-available;
     overflow: hidden;
 
@@ -13,7 +13,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: var(--gap-none) var(--gap-normal);
+        padding: var(--gap-none) var(--gap-small);
 
         &-title {
             color: var(--color-secondary);

@@ -1,8 +1,8 @@
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
-import { Notification } from "../models/notification.model";
+import { Notification } from "../models/notification";
 import { ListOptions } from "src/app/general/utils/models/list-options";
-import { SideEffects } from "src/app/general/utils/models/side.effects";
+import { SideEffects } from "src/app/general/utils/models/side-effects";
 
 export enum NotificationActionsType {
     READ_NOTIFICATION = "[NOTIFICATION] Read Notification",

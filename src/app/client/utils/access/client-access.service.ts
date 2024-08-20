@@ -3,6 +3,8 @@ import { Client } from '../models/client';
 import { AccessService } from 'src/app/general/utils/services/access.service';
 import { Update } from '@ngrx/entity';
 import { ListOptions } from 'src/app/general/utils/models/list-options';
+import { ComplianceAccessService } from 'src/app/profile/features/compliance/utils/access/compliance-access.service';
+import { map, mergeMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,8 @@ export class ClientAccessService {
   domain = 'clients';
 
   constructor(
-    private accessService: AccessService
+    private accessService: AccessService,
+    private complianceService: ComplianceAccessService
   ) {}
 
   createClient(data: Client) {        
@@ -20,8 +23,17 @@ export class ClientAccessService {
   }
 
   getClient(id: string) {    
-    const response = this.accessService.findOne<Client>(this.domain, { _id: id });
-    return response;
+    return this.accessService.findOne<Client>(this.domain, { _id: id })
+      .pipe(
+        mergeMap((response) => {
+          return this.complianceService.listCompliance(id).pipe(
+            map(({ data }) => {
+              response.data.compliances = data;
+              return response;
+            })
+          )
+        })
+      )
   }
 
   updateClient(data: Update<Client>) {    

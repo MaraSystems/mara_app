@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Client } from 'src/app/client/utils/models/client';
-import { More } from 'src/app/general/utils/models/more.model';
+import { More } from 'src/app/general/utils/models/more';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 
 @Component({

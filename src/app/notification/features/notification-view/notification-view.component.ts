@@ -1,12 +1,12 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Notification } from '../../utils/models/notification.model';
+import { Notification } from '../../utils/models/notification';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { selectNotificationById } from '../../utils/store/notification-store.selector';
-import { More } from 'src/app/general/utils/models/more.model';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
-import { NotificationLink } from '../../utils/models/notification-link.model';
+import { More } from 'src/app/general/utils/models/more';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
+import { NotificationLink } from '../../utils/models/notification-link';
 import { Router } from '@angular/router';
 
 

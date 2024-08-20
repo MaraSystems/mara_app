@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { IToast, Toast } from "../models/toast.class";
+import { IToast, Toast } from "../models/toast";
 import { Update } from "@ngrx/entity";
 
 export enum ToastActionTypes{

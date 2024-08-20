@@ -10,7 +10,7 @@ import { Auth } from "../models/auth.model";
 import { AppState } from "src/app/app.state";
 import { GetClientAction } from "src/app/client/utils/store/client-store.action";
 import { RouterService } from "src/app/router/utils/router.service";
-import { ToastEnum } from "src/app/general/features/toast/utils/models/toast.enum";
+import { ToastType } from "src/app/general/features/toast/utils/models/toast-type";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 
 @Injectable()
@@ -30,7 +30,7 @@ export class AuthStoreEffect {
                 }),
                 catchError(err => of(new GetPasswordAuthActionFail(err)).pipe(
                     tap(() => {
-                        this.store.dispatch(new AddToast({ title: 'Password Request', type: ToastEnum.ERROR }));
+                        this.store.dispatch(new AddToast({ title: 'Password Request', type: ToastType.ERROR }));
                     })
                 ))
             )

@@ -3,9 +3,9 @@ import { Client } from '../../../../client/utils/models/client';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
 import { UpdateClientAction } from 'src/app/client/utils/store/client-store.action';
-import { OnboardEnum } from 'src/app/profile/utils/onboard.enum';
+import { OnboardStatus } from 'src/app/profile/utils/onboard-status';
 import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { LogoutAuthAction } from 'src/app/auth/utils/store/auth-store.action';
@@ -38,7 +38,7 @@ export class ProfileCreateComponent extends UnSubscriber implements OnInit {
   nextPage() {
     this.currentPage++;
     if (this.currentPage > this.pagelength) {
-      this.store.dispatch(new UpdateClientAction({ id: this.profile._id, changes: { onboard: OnboardEnum.COMPLETED } }, {
+      this.store.dispatch(new UpdateClientAction({ id: this.profile._id, changes: { onboard: OnboardStatus.COMPLETED } }, {
         success: () => {
           this.store.dispatch(new AddToast({ title: 'Welcome Onboard' }));
           this.router.navigateByUrl('/profile/info');

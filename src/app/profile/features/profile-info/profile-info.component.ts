@@ -10,9 +10,9 @@ import { UpdateClientAction } from '../../../client/utils/store/client-store.act
 import * as addressUtil from 'src/app/general/utils/lib/address';
 import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
-import { ToastEnum } from 'src/app/general/features/toast/utils/models/toast.enum';
-import { PopupService } from 'src/app/general/features/popup/features/popup.service';
-import { OnboardEnum } from '../../utils/onboard.enum';
+import { ToastType } from 'src/app/general/features/toast/utils/models/toast-type';
+import { PopupService } from 'src/app/general/features/popup/popup.service';
+import { OnboardStatus } from '../../utils/onboard-status';
 
 @Component({
   selector: 'app-profile-info',
@@ -25,7 +25,7 @@ export class ProfileInfoComponent extends UnSubscriber implements OnInit {
   form!: FormGroup;
   updateData!: Partial<Client>;
   address: addressUtil.IAddress = { countries: addressUtil.listCountries, states: [], cities: [] };
-  onboardEnum = OnboardEnum;
+  onboardEnum = OnboardStatus;
 
   constructor (
     public store: Store<AppState>,
@@ -74,7 +74,7 @@ export class ProfileInfoComponent extends UnSubscriber implements OnInit {
         this.store.dispatch(new AddToast({ title: 'User update' }));
       },
       failure: () => {
-        this.store.dispatch(new AddToast({ title: 'User update', type: ToastEnum.ERROR }));
+        this.store.dispatch(new AddToast({ title: 'User update', type: ToastType.ERROR }));
       }
     }));
   }

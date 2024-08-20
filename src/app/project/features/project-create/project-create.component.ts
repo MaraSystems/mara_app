@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Project } from '../../utils/models/project.model';
+import { Project } from '../../utils/models/project';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { CreateProjectAction } from '../../utils/store/project-store.action';
 import { projectCategories } from 'src/app/general/utils/models/project-categories';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
-import { SharePrivacyEnum } from 'src/app/general/features/share/utils/models/share.privacy-enum';
-import { ShareAccessEnum } from 'src/app/general/features/share/utils/models/share.access-enum';
+import { SharePrivacyType } from 'src/app/general/features/share/utils/models/share-privacy-type';
+import { ShareAccessType } from 'src/app/general/features/share/utils/models/share-access-type';
 import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { Router } from '@angular/router';
-import { ProjectStatus } from '../../utils/models/project-status.enum';
+import { ProjectStatus } from '../../utils/models/project-status';
 
 
 @Component({
@@ -51,7 +51,7 @@ export class ProjectCreateComponent extends UnSubscriber implements OnInit {
       tags: new FormControl(null, [Validators.required]),
       description: new FormControl(null, [Validators.maxLength(10000)]),
       userId: new FormControl(null),
-      privacy: new FormControl({ type: SharePrivacyEnum.PUBLIC, access: ShareAccessEnum.ENGAGE } as Privacy),
+      privacy: new FormControl({ type: SharePrivacyType.PUBLIC, access: ShareAccessType.ENGAGE } as Privacy),
       status: new FormControl(ProjectStatus.DRAFT),
       hidden: new FormControl(false),
       likes: new FormControl([]),
