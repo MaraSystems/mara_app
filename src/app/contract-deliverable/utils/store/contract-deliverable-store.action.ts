@@ -2,6 +2,7 @@ import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
 import { ContractDeliverable } from "../models/contract-deliverable";
 import { ListOptions } from "src/app/general/utils/models/list-options";
+import { SideEffects } from "src/app/general/utils/models/side-effects";
 
 export enum ContractDeliverableActionsType {
     CREATE_CONTRACT_DELIVERABLE = "[CONTRACT_DELIVERABLE] Create Contract Deliverable",
@@ -23,7 +24,7 @@ export enum ContractDeliverableActionsType {
 
 export class CreateContractDeliverableAction implements Action {
     readonly type = ContractDeliverableActionsType.CREATE_CONTRACT_DELIVERABLE;
-    constructor(public payload: ContractDeliverable){}
+    constructor(public payload: ContractDeliverable, public sideEffects = new SideEffects()){}
 }
 
 export class CreateContractDeliverableActionSuccess implements Action {
@@ -38,7 +39,7 @@ export class CreateContractDeliverableActionFail implements Action {
 
 export class UpdateContractDeliverableAction implements Action {
     readonly type = ContractDeliverableActionsType.UPDATE_CONTRACT_DELIVERABLE;
-    constructor(public payload: Update<ContractDeliverable>, public contractId: string){}
+    constructor(public payload: Update<ContractDeliverable>, public contractId: string, public sideEffects = new SideEffects()){}
 }
 
 export class UpdateContractDeliverableActionSuccess implements Action {

@@ -108,10 +108,25 @@ export class ContractAccessService {
   }
 
   private approveContract(contract: Contract, update: Partial<Contract>) {
+    let response: DataResponse<Contract>;
     return this.complianceService.checkCompliance(contract.contractorId, ComplianceTitleEnum.SIGNATURE)
       .pipe(
         mergeMap(({ data: compliance }) => this.attachmentService.getAttachment(compliance.attachment)),
-        mergeMap(({ data: attachment }) => this.accessService.updateOne<Contract>(this.domain, { _id: contract._id }, { ...update, approvedAt: new Date(), contractorSignature: { version: attachment.versions.length - 1, attachment: attachment._id }}))
+        mergeMap(({ data: attachment }) => this.accessService.updateOne<Contract>(this.domain, { _id: contract._id }, { ...update, approvedAt: new Date(), contractorSignature: { version: attachment.versions.length - 1, attachment: attachment._id }})),
+        tap((r) => response = r),
+        mergeMap(() => this.notificationService.createNotification({ 
+          subject: 'Contract Approval',
+          description: `The contract ${contract.title} has been approved by the contractor`,
+          model: NotificationType.CONTRACT,
+          modelId: response.data._id,
+          users: [
+            { status: NotificationStatusType.PENDING, userId: contract.clientId },
+            { status: NotificationStatusType.PENDING, userId: contract.contractorId }
+          ],
+          hidden: false,
+          links: [{ title: 'Open Contract', url: `http://${location.host}/contracts/${response.data._id}`}]
+         } as Notification)),
+         map(() => response)
       )
   }
 
@@ -122,6 +137,7 @@ export class ContractAccessService {
   private initiateContract(contract: Contract, update: Partial<Contract>) {
     let contractCost = 0;
     let attachment: Attachment;
+    let response: DataResponse<Contract>;
 
     return this.complianceService.checkCompliance(contract.clientId, ComplianceTitleEnum.SIGNATURE)
       .pipe(
@@ -142,7 +158,21 @@ export class ContractAccessService {
           title: 'Contract Deposit', 
           platform: TransactionPlatform.CONTRACTOR
         } as Transaction)),
-        mergeMap(() => this.accessService.updateOne<Contract>(this.domain, { _id: contract._id }, { ...update, initiatedAt: new Date(), clientSignature: { version: attachment.versions.length - 1, attachment: attachment._id }}))
+        mergeMap(() => this.accessService.updateOne<Contract>(this.domain, { _id: contract._id }, { ...update, initiatedAt: new Date(), clientSignature: { version: attachment.versions.length - 1, attachment: attachment._id }})),
+        tap((r) => response = r),
+        mergeMap(() => this.notificationService.createNotification({ 
+          subject: 'Contract Initiated',
+          description: `The contract ${contract.title} has been initiated by the client`,
+          model: NotificationType.CONTRACT,
+          modelId: response.data._id,
+          users: [
+            { status: NotificationStatusType.PENDING, userId: contract.clientId },
+            { status: NotificationStatusType.PENDING, userId: contract.contractorId }
+          ],
+          hidden: false,
+          links: [{ title: 'Open Contract', url: `http://${location.host}/contracts/${response.data._id}`}]
+         } as Notification)),
+         map(() => response)
       )
   }
 }

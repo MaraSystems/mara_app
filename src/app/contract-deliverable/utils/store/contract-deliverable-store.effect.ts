@@ -9,6 +9,8 @@ import { ContractDeliverableAccessService } from "../access/contract-deliverable
 import { CreateContractDeliverableAction, CreateContractDeliverableActionFail, CreateContractDeliverableActionSuccess, GetContractDeliverableAction, GetContractDeliverableActionFail, GetContractDeliverableActionSuccess, ListContractDeliverablesAction, ListContractDeliverablesActionFail, ListContractDeliverablesActionSuccess, ContractDeliverableActionsType, UpdateContractDeliverableAction, UpdateContractDeliverableActionFail, UpdateContractDeliverableActionSuccess } from "./contract-deliverable-store.action";
 import { ContractDeliverable } from "../models/contract-deliverable";
 import { ToastType } from "src/app/general/features/toast/utils/models/toast-type";
+import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
+import { UpdateContractAction } from "src/app/contract/utils/store/contract-store.action";
 
 @Injectable()
 export class ContractDeliverableStoreEffect {
@@ -24,12 +26,14 @@ export class ContractDeliverableStoreEffect {
         mergeMap((action: UpdateContractDeliverableAction) => 
             this.contractDeliverableAccessService.updateContractDeliverable(action.payload).pipe(
                 map((response: DataResponse<ContractDeliverable>) => {  
-                    this.router.navigate(['/contracts', action.contractId, 'deliverables', action.payload.id]);                  
+                    handleSuccessSideEffects((action as UpdateContractDeliverableAction).sideEffects);
                     return new UpdateContractDeliverableActionSuccess({ id: action.payload.id as string, changes: response.data});
                 }),
                 catchError(err => of(new UpdateContractDeliverableActionFail(err)).pipe(
-                    tap(() => {
+                    tap((failedAction) => {
+                        handleFailureSideEffects((action as UpdateContractDeliverableAction).sideEffects, failedAction.payload); 
                         this.store.dispatch(new AddToast({ title: 'Contract Deliverable Update', type: ToastType.ERROR }));
+  
                     })
                 ))
             )

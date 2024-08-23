@@ -3,5 +3,6 @@ export interface More {
     icon: string;
     link?: string;
     popup?: string;
+    hidden?: boolean;
     action?: () => void;
 }

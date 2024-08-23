@@ -33,6 +33,8 @@ import { ContractState, contractReducer } from "./contract/utils/store/contract-
 import { ContractDeliverableState, contractDeliverableReducer } from "./contract-deliverable/utils/store/contract-deliverable-store.reducer";
 import { NotificationStoreEffect } from "./notification/utils/store/notification-store.effect";
 import { NotificationState, notificationReducer } from "./notification/utils/store/notification-store.reducer";
+import { RevisionStoreEffect } from "./revision/utils/store/revision-store.effect";
+import { revisionReducer, RevisionState } from "./revision/utils/store/revision-store.reducer";
 
 export const appEffects = [
     ClientStoreEffect,
@@ -50,7 +52,8 @@ export const appEffects = [
     BankStoreEffect,
     ContractStoreEffect,
     ContractDeliverableStoreEffect,
-    NotificationStoreEffect
+    NotificationStoreEffect,
+    RevisionStoreEffect
 ];
 
 export interface AppState {
@@ -70,7 +73,8 @@ export interface AppState {
     banks: BankState,
     contracts: ContractState,
     contractDeliverables: ContractDeliverableState,
-    notifications: NotificationState
+    notifications: NotificationState,
+    revisions: RevisionState
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -90,5 +94,6 @@ export const appReducers: ActionReducerMap<AppState> = {
     banks: bankReducer,
     contracts: contractReducer,
     contractDeliverables: contractDeliverableReducer,
-    notifications: notificationReducer
+    notifications: notificationReducer,
+    revisions: revisionReducer
 }

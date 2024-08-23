@@ -1,5 +1,6 @@
 export enum ContractDeliverableStatus {
-    DRAFT = 'draft',
+    PENDING = 'pending',
     PROCESSING = 'processing',
+    REJECTED = 'rejected',
     COMPLETED = 'completed'
 }

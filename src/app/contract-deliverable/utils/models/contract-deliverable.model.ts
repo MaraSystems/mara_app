@@ -1,4 +1,3 @@
-import { ContractDeliverableStatus } from "./contract-deliverable-status";
 
 export class ContractDeliverable {
     _id!: string;
@@ -7,8 +6,8 @@ export class ContractDeliverable {
     description!: string;
     duration!: number;
     price!: number;
+    documents!: string[];
     image!: string;
     startedAt!: Date;
     finishedAt!: Date;
-    status!: ContractDeliverableStatus;
 }
