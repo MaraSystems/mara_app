@@ -11,6 +11,7 @@ export class MoreComponent implements OnInit {
   @Input() list: More[] = [];
   @Input() flat = true;
   @Input() elevated = true;
+  @Input() down = false;
   
   show = false;
   icon = '';

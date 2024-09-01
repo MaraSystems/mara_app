@@ -8,18 +8,18 @@ import { PopupService } from 'src/app/general/features/popup/popup.service';
 import { ProjectDeliverable } from '../../utils/models/project-deliverable';
 import { DeleteProjectDeliverableAction, GetProjectDeliverableAction, UpdateProjectDeliverableAction } from '../../utils/store/project-deliverable-store.action';
 import { selectProjectDeliverableById } from '../../utils/store/project-deliverable-store.selector';
-import { Attachment } from 'src/app/general/features/attachment/utils/models/attachment';
-import { ListAttachmentsAction } from 'src/app/general/features/attachment/utils/store/attachment-store.action';
+import { Attachment } from 'src/app/attachment/utils/models/attachment';
+import { ListAttachmentsAction } from 'src/app/attachment/utils/store/attachment-store.action';
 import { toggleList } from 'src/app/general/utils/lib/toggleList';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
-import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/store/comment-store.selector';
-import { ListCommentsAction } from 'src/app/general/features/comment/utils/store/comment-store.action';
-import { CommentType } from 'src/app/general/features/comment/utils/models/comment-type';
+import { selectCommentsByModelId } from 'src/app/comment/utils/store/comment-store.selector';
+import { ListCommentsAction } from 'src/app/comment/utils/store/comment-store.action';
+import { CommentType } from 'src/app/comment/utils/models/comment-type';
 import { GetProjectAction } from 'src/app/project/utils/store/project-store.action';
 import { selectProjectById } from 'src/app/project/utils/store/project-store.selector';
 import { Toast } from 'src/app/general/features/toast/utils/models/toast';
-import { AttachmentType } from 'src/app/general/features/attachment/utils/models/attachment-type';
+import { AttachmentType } from 'src/app/attachment/utils/models/attachment-type';
 
 @Component({
   selector: 'app-project-deliverable-view',

@@ -24,10 +24,8 @@ export class RevisionStoreEffect {
         ofType<CreateRevisionAction>(RevisionActionsType.CREATE_REVISION),
         mergeMap((action: CreateRevisionAction) => 
             this.revisionAccessService.createRevision(action.payload).pipe(
-                map((response: DataResponse<Revision>) => {  
-                    console.log(response);
-                    
-                    handleSuccessSideEffects((action as CreateRevisionAction).sideEffects);
+                map((response: DataResponse<Revision>) => {                      
+                    handleSuccessSideEffects((action as CreateRevisionAction).sideEffects, response);
                     return new CreateRevisionActionSuccess(response.data);
                 }),
                 catchError(err => of(new CreateRevisionActionFail(err)).pipe(
@@ -60,7 +58,7 @@ export class RevisionStoreEffect {
         ofType<GetRevisionAction>(RevisionActionsType.GET_REVISION),
         mergeMap((action: GetRevisionAction) => 
             this.revisionAccessService.getRevision(action.payload).pipe(
-                map((response: DataResponse<Revision>) => {                    
+                map((response: DataResponse<Revision>) => {                                        
                     return new GetRevisionActionSuccess(response.data);
                 }),
                 catchError(err => of(new GetRevisionActionFail(err))
@@ -71,7 +69,7 @@ export class RevisionStoreEffect {
     listRevisions$ = createEffect(() => this.actions$.pipe(
         ofType<ListRevisionsAction>(RevisionActionsType.LIST_REVISIONS),
         mergeMap((action: ListRevisionsAction) => 
-            this.revisionAccessService.listRevisions(action.contractId).pipe(
+            this.revisionAccessService.listRevisions(action.model, action.modelId).pipe(
                 map((response: DataResponse<Revision[]>) => {                    
                     return new ListRevisionsActionSuccess(response.data);
                 }),

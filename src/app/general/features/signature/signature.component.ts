@@ -4,10 +4,10 @@ import { Auth } from 'src/app/auth/utils/models/auth.model';
 import { Client } from 'src/app/client/utils/models/client';
 import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
 import { CreateComplianceAction, GetComplianceAction } from 'src/app/profile/features/compliance/utils/store/compliance-store.action';
-import { GetAttachmentAction } from '../attachment/utils/store/attachment-store.action';
+import { GetAttachmentAction } from '../../../attachment/utils/store/attachment-store.action';
 import { Compliance, ComplianceModel, ComplianceStatusEnum, ComplianceTitleEnum } from 'src/app/client/utils/models/compliance';
 import { UnSubscriber } from '../../utils/services/unsubscriber.service';
-import { selectAttachmentById } from '../attachment/utils/store/attachment-store.selector';
+import { selectAttachmentById } from '../../../attachment/utils/store/attachment-store.selector';
 import { AddToast } from '../toast/utils/store/toast.action';
 
 export interface Point {

@@ -88,6 +88,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { 
+    path: 'revisions', 
+    loadChildren: () => import('./revision/features/revision-shell/revision-shell.module').then(
+      (m) => m.RevisionShellModule
+    ),
+    canActivate: [AuthGuard]
+  },
+  { 
     path: '404', 
     loadChildren: () => import('./notfound/notfound.module').then(
       (m) => m.NotfoundModule

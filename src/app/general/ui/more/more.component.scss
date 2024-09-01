@@ -18,7 +18,6 @@
     .options {
         position: absolute;
         right: calc(100% - calc(2 * var(--gap-small)));
-        bottom: 50%;
         display: flex;
         flex-direction: column;
         border: 1px solid var(--color-primary);
@@ -47,6 +46,14 @@
         &::before {
             position: relative;
         }
+    }
+
+    .down-option {
+        top: 50%;
+    }
+
+    .up-option {
+        bottom: 50%;
     }
     
     .cover {

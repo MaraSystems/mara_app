@@ -21,8 +21,8 @@ import { WalletTransaction } from 'src/app/dashboard/utils/models/wallet-transac
 import { TransactionAction } from 'src/app/transaction/utils/models/transaction-action';
 import { TransactionType } from 'src/app/transaction/utils/models/transaction-type';
 import { TransactionPlatform } from 'src/app/transaction/utils/models/transaction-platform';
-import { AttachmentAccessService } from 'src/app/general/features/attachment/utils/access/attachment-access.service';
-import { Attachment } from 'src/app/general/features/attachment/utils/models/attachment';
+import { AttachmentAccessService } from 'src/app/attachment/utils/access/attachment-access.service';
+import { Attachment } from 'src/app/attachment/utils/models/attachment';
 import { ContractRequest } from '../models/contract-request';
 
 @Injectable({

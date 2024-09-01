@@ -1,0 +1,17 @@
+export enum FileType{
+    JPG= '.jpg',
+    JPEG= '.jpeg',
+    PNG= '.png',
+    ICON= '.ico',
+    PDF= '.pdf',
+    HTML= '.html',
+    TEXT= '.txt',
+    JSON= '.json',
+    MP4= '.mp4',
+    MP3= '.mp3',
+    WAV= '.wav',
+    OGG= '.ogg',
+    AAC= '.aac',
+    M4A= '.m4a',
+    WEBM= '.webm',
+}

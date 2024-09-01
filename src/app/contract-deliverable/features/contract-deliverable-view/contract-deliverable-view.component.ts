@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { More } from 'src/app/general/utils/models/more';
 import { PopupService } from 'src/app/general/features/popup/popup.service';
 import { ContractDeliverable } from '../../utils/models/contract-deliverable';
@@ -10,20 +10,21 @@ import { GetContractDeliverableAction, UpdateContractDeliverableAction } from '.
 import { selectContractDeliverableById } from '../../utils/store/contract-deliverable-store.selector';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
-import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/store/comment-store.selector';
-import { CreateCommentAction, ListCommentsAction } from 'src/app/general/features/comment/utils/store/comment-store.action';
-import { CommentType } from 'src/app/general/features/comment/utils/models/comment-type';
+import { selectCommentsByModelId } from 'src/app/comment/utils/store/comment-store.selector';
+import { ListCommentsAction } from 'src/app/comment/utils/store/comment-store.action';
+import { CommentType } from 'src/app/comment/utils/models/comment-type';
 import { GetContractAction } from 'src/app/contract/utils/store/contract-store.action';
 import { selectContractById } from 'src/app/contract/utils/store/contract-store.selector';
-import { AttachmentType } from 'src/app/general/features/attachment/utils/models/attachment-type';
+import { AttachmentType } from 'src/app/attachment/utils/models/attachment-type';
 import { Contract } from 'src/app/contract/utils/models/contract';
 import { ContractStatus } from 'src/app/contract/utils/models/contract-status';
 import { ContractDeliverableStatus } from '../../utils/models/contract-deliverable-status';
-import { selectAttachmentById, selectAttachmentsByModelId } from 'src/app/general/features/attachment/utils/store/attachment-store.selector';
+import { selectAttachmentsByModelId } from 'src/app/attachment/utils/store/attachment-store.selector';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { CreateRevisionAction } from 'src/app/revision/utils/store/revision-store.action';
 import { Revision } from 'src/app/revision/utils/models/revision';
-import { RevisionStatus } from 'src/app/revision/utils/models/revision-status';
+import { RevisionType } from 'src/app/revision/utils/models/revision.type';
+import { RevisionDecision } from 'src/app/revision/utils/models/revision-decision';
 
 @Component({
   selector: 'app-contract-deliverable-view',
@@ -41,7 +42,8 @@ export class ContractDeliverableViewComponent extends UnSubscriber implements On
     { name: 'Request Review', icon: 'outgoing_mail', action: () => { this.requestReview() }, hidden: true },
     { name: 'Enable Reviews', icon: 'toggle_on', action: () => { this.enableReviews() }, hidden: true },
     { name: 'Disable Reviews', icon: 'toggle_off', action: () => { this.disableReviews() }, hidden: true },
-    { name: 'Start Review', icon: 'rate_review', action: () => { this.startReview() }, hidden: true }
+    { name: 'Start Review', icon: 'rate_review', action: () => { this.startReview() }, hidden: true },
+    { name: 'Conversations', icon: 'rate_review', action: () => { this.conversations() } }
   ];
   commentModel = CommentType.CONTRACT;
   commentsCount = 0;
@@ -55,7 +57,8 @@ export class ContractDeliverableViewComponent extends UnSubscriber implements On
   constructor(
     public store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
-    public popupService: PopupService
+    public popupService: PopupService,
+    private router: Router
   ){
     super();
   }
@@ -107,7 +110,8 @@ export class ContractDeliverableViewComponent extends UnSubscriber implements On
     this.store.dispatch(new CreateRevisionAction({ 
       reviewerId: this.contract.clientId,
       requesterId: this.auth.id,
-      status: RevisionStatus.REQUESTED
+      model: RevisionType.CONTRACT_DELIVERABLE,
+      modelId: this.deliverable._id
     } as Partial<Revision>, {
       success: () => this.store.dispatch(new AddToast({ title: 'Revision request successful'})),
       failure: (error?: string) => this.store.dispatch(new AddToast({ title: 'Revision request failed', description: error }))
@@ -115,7 +119,17 @@ export class ContractDeliverableViewComponent extends UnSubscriber implements On
   }
 
   startReview() {
-    
+    this.store.dispatch(new CreateRevisionAction({ 
+      reviewerId: this.contract.clientId,
+      requesterId: this.auth.id,
+      model: RevisionType.CONTRACT_DELIVERABLE,
+      modelId: this.deliverable._id
+    } as Partial<Revision>, {
+      success: (response) => {
+        this.router.navigateByUrl(`revisions/${response?.data._id}/review`);
+      },
+      failure: (error?: string) => this.store.dispatch(new AddToast({ title: 'Revision request failed', description: error }))
+    }));
   }
 
   enableReviews() {    
@@ -138,5 +152,9 @@ export class ContractDeliverableViewComponent extends UnSubscriber implements On
         this.store.dispatch(new AddToast({ title: 'Disable contract deliverable review failed', description: error }));
       }
     }))
+  }
+
+  conversations() {
+    this.router.navigateByUrl(`revisions?model=${RevisionType.CONTRACT_DELIVERABLE}&modelId=${this.deliverable._id}`);
   }
 }

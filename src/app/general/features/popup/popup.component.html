@@ -1,9 +1,12 @@
 <div class="popup">
     <div class="popup-cover" (click)="close()"></div>
-    <div class="popup-wrapper">
+    <div class="popup-wrapper" [ngClass]="{'popup-full': full}">
         <span class="popup-header">
             <span class="popup-title header-3">{{heading}}</span>
-            <span class="material-symbols-outlined popup-header-icon" (click)="close()">close</span>
+            <span class="popup-controls">
+                <span class="material-symbols-outlined popup-header-icon" (click)="close()">close</span>
+                <span class="material-symbols-outlined popup-header-icon popup-toggle" (click)="full = !full">{{ full ? 'close_fullscreen' : 'open_in_full'}}</span>
+            </span>
         </span>    
         <ng-content class="popup-content"></ng-content>
     </div>

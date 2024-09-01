@@ -1,4 +1,5 @@
 export interface DataResponse<T> {
     success: boolean;
-    data: T
+    data: T;
+    message?: string;
 }

@@ -3,6 +3,7 @@ import { Update } from "@ngrx/entity";
 import { Revision } from "../models/revision";
 import { ListOptions } from "src/app/general/utils/models/list-options";
 import { SideEffects } from "src/app/general/utils/models/side-effects";
+import { RevisionType } from "../models/revision.type";
 
 export enum RevisionActionsType {
     CREATE_REVISION = "[REVISION] Create Revision",
@@ -24,7 +25,7 @@ export enum RevisionActionsType {
 
 export class CreateRevisionAction implements Action {
     readonly type = RevisionActionsType.CREATE_REVISION;
-    constructor(public payload: Partial<Revision>, public sideEffects = new SideEffects()){}
+    constructor(public payload: Partial<Revision>, public sideEffects = new SideEffects<Revision>()){}
 }
 
 export class CreateRevisionActionSuccess implements Action {
@@ -69,7 +70,7 @@ export class GetRevisionActionFail implements Action {
 
 export class ListRevisionsAction implements Action {
     readonly type = RevisionActionsType.LIST_REVISIONS;
-    constructor(public contractId: string, public payload?: ListOptions){}
+    constructor(public model: RevisionType, public modelId: string, public payload?: ListOptions){}
 }
 
 export class ListRevisionsActionSuccess implements Action {

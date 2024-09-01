@@ -85,6 +85,14 @@ html, body {
             text-transform: capitalize;
         }
 
+        &-unit {
+            color: var(--color-dark);
+        }
+
+        &-note {
+            color: var(--color-primary);
+        }
+
         &-data {
             border: none;
             background-color: transparent;

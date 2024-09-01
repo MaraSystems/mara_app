@@ -4,7 +4,7 @@ import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.servic
 import { Share } from '../../utils/models/share';
 import { GetClientAction } from 'src/app/client/utils/store/client-store.action';
 import { selectClientById } from 'src/app/client/utils/store/client-store.selector';
-import { ShareAccessType } from '../../utils/models/share-access-type';
+import { ShareAccessType } from '../../utils/models/share-access';
 import { FormControl } from '@angular/forms';
 import { DeleteShareAction, UpdateShareAction } from '../../utils/store/share-store.action';
 

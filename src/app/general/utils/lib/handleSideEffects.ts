@@ -1,8 +1,9 @@
+import { DataResponse } from "../models/data-response";
 import { SideEffects } from "../models/side-effects";
 
-export const handleSuccessSideEffects = (sideEffects: SideEffects, message?: string) => {
+export function handleSuccessSideEffects<T> (sideEffects: SideEffects<T>, response?: DataResponse<T>){
     if (sideEffects.success) {
-        sideEffects.success(message);
+        sideEffects.success(response);
     }
 }
 
@@ -11,4 +12,8 @@ export const handleFailureSideEffects = (sideEffects: SideEffects, error?: strin
         const message = (error as any).message || error;
         sideEffects.failure(message);
     }
+}
+
+function a<T>() {
+
 }

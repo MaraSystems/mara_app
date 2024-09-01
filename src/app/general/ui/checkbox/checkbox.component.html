@@ -12,6 +12,8 @@
         [formControl]="control" 
         [placeholder]="placeholder"
         [required]="required"
-        >
+        (change)="changed.emit(input.value)">
+    
+    <h1 *ngIf="note" class="text-2">{{note}}</h1>
 </span>
 <app-form-errors [control]="control" [name]="name"></app-form-errors>

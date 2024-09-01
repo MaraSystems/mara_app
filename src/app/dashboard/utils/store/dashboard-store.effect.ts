@@ -17,9 +17,7 @@ export class DashboardStoreEffect {
         ofType<GetWalletAction>(DashboardActionsType.GET_WALLET),
         mergeMap((action: GetWalletAction) => 
             this.transactionService.getWallet(action.payload).pipe(
-                map((response: DataResponse<number>) => {    
-                    console.log(response);
-                                                                                                
+                map((response: DataResponse<number>) => {                                                                                                    
                     return new GetWalletActionSuccess({ data: response.data, id: 'wallet-balance', type: DashboardWidgetType.TRANSACTIONS });
                 }),
                 catchError(err => of(new GetWalletActionFail(err))

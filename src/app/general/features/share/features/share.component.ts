@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output, Type } from '@angular/core';
 import { Privacy } from '../utils/models/privacy';
 import { Share } from '../utils/models/share';
-import { SharePrivacyType } from '../utils/models/share-privacy-type';
-import { ShareAccessType } from '../utils/models/share-access-type';
+import { SharePrivacyType } from '../utils/models/share-privacy';
+import { ShareAccessType } from '../utils/models/share-access';
 import { Store } from '@ngrx/store';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { ListSharesAction } from '../utils/store/share-store.action';
 import { GetClientAction } from 'src/app/client/utils/store/client-store.action';
 import { selectClientById } from 'src/app/client/utils/store/client-store.selector';
-import { ShareStateType } from '../utils/models/share-state-type';
+import { ShareState } from '../utils/models/share-state';
 import { selectSharesByModelId } from '../utils/store/share-store.selector';
 import { ShareType } from '../utils/models/share-type';
 
@@ -41,7 +41,7 @@ export class ShareComponent extends UnSubscriber implements OnInit {
       this.store.dispatch(new ListSharesAction(this.model, this.modelId));
       this.store.dispatch(new GetClientAction(this.ownerId));
       this.newSubscription = this.store.select(selectClientById(this.ownerId)).subscribe(client => {
-        const owner: any = { userId: client._id, email: client.email, access: ShareAccessType.OWNER, model: this.model, modelId: this.modelId, state: ShareStateType.ACCEPTED };    
+        const owner: any = { userId: client._id, email: client.email, access: ShareAccessType.OWNER, model: this.model, modelId: this.modelId, state: ShareState.ACCEPTED };    
 
         this.newSubscription = this.store.select(selectSharesByModelId(this.model, this.modelId)).subscribe(sharedList => {
           this.sharedList = [owner, ...sharedList]; 

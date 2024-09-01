@@ -1,2 +1,2 @@
 <span [ngClass]="{ active }" class="material-symbols-outlined icon">{{icon}}</span>
-<span class="text-2 value">{{value}}</span>
+<span *ngIf="value" class="text-2 value">{{value}}</span>

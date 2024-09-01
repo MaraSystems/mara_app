@@ -1,4 +1,4 @@
-import { EnvTypes } from "src/app/general/utils/models/env.enum";
+import { EnvTypes } from "src/app/general/utils/models/env";
 
 export const environment = {
     env: EnvTypes.PRODUCTION,

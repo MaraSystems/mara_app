@@ -16,9 +16,9 @@ import { AddToast } from 'src/app/general/features/toast/utils/store/toast.actio
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
 import { toggleList } from 'src/app/general/utils/lib/toggleList';
-import { CommentType } from 'src/app/general/features/comment/utils/models/comment-type';
-import { ListCommentsAction } from 'src/app/general/features/comment/utils/store/comment-store.action';
-import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/store/comment-store.selector';
+import { CommentType } from 'src/app/comment/utils/models/comment-type';
+import { ListCommentsAction } from 'src/app/comment/utils/store/comment-store.action';
+import { selectCommentsByModelId } from 'src/app/comment/utils/store/comment-store.selector';
 import { ToastType } from 'src/app/general/features/toast/utils/models/toast-type';
 import { Toast } from 'src/app/general/features/toast/utils/models/toast';
 import { Privacy } from 'src/app/general/features/share/utils/models/privacy';

@@ -11,7 +11,7 @@ import { PopupModule } from 'src/app/general/features/popup/popup.module';
 import { DirectivesModule } from 'src/app/general/utils/directives/directives.module';
 import { EmptyModule } from 'src/app/general/ui/empty/empty.module';
 import { ContractDeliverableItemModule } from 'src/app/contract-deliverable/ui/contract-deliverable-item/contract-deliverable-item.module';
-import { CommentListModule } from 'src/app/general/features/comment/features/comment-list/comment-list.module';
+import { CommentListModule } from 'src/app/comment/features/comment-list/comment-list.module';
 import { ShareModule } from 'src/app/general/features/share/features/share.module';
 
 

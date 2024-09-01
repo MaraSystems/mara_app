@@ -11,6 +11,7 @@ export class PopupComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() heading = '';
   @Input() component!: Type<any>;
   @Input() data!: any;
+  @Input() full = false;
 
   componentHolder!: ComponentRef<any>;
   element!: HTMLElement;

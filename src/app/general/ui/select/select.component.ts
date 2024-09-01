@@ -18,6 +18,8 @@ export class SelectComponent extends InputComponent implements OnChanges {
   }
 
   useList() {
+    this.keys = [];
+    this.values = [];
     for (const item of this.list) {
       if (typeof item !== 'string') {
         this.keys.push(item.key);

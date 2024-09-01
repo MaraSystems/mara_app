@@ -6,8 +6,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { CreateBankAction, DeleteBankAction, UpdateBankAction } from '../../utils/store/bank-store.action';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
-import { SharePrivacyType } from 'src/app/general/features/share/utils/models/share-privacy-type';
-import { ShareAccessType } from 'src/app/general/features/share/utils/models/share-access-type';
+import { SharePrivacyType } from 'src/app/general/features/share/utils/models/share-privacy';
+import { ShareAccessType } from 'src/app/general/features/share/utils/models/share-access';
 import { Privacy } from 'src/app/general/features/share/utils/models/privacy';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { Router } from '@angular/router';
@@ -47,9 +47,7 @@ export class BankUpdateComponent extends UnSubscriber implements OnInit {
     });
   }
 
-  initForm() {
-    console.log(this.bank);
-    
+  initForm() {    
     this.form = new FormGroup({
       bankName: new FormControl(this.bank.bankName, [Validators.minLength(3), Validators.required]),
       accountNumber: new FormControl(this.bank.accountNumber, [Validators.pattern(accountNumberPattern), Validators.required]),

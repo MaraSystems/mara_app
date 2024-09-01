@@ -9,15 +9,15 @@ const routes: Routes = [
     )
   },
   { 
-    path: 'create', 
-    loadChildren: () => import('../revision-create/revision-create.module').then(
-      (m) => m.RevisionCreateModule
+    path: ':id', 
+    loadChildren: () => import('../revision-view/revision-view.module').then(
+      (m) => m.RevisionViewModule
     )
   },
   { 
-    path: ':deliverable_id', 
-    loadChildren: () => import('../revision-view/revision-view.module').then(
-      (m) => m.RevisionViewModule
+    path: ':id/review', 
+    loadChildren: () => import('../revision-review/revision-review.module').then(
+      (m) => m.RevisionReviewModule
     )
   },
 ];

@@ -1,15 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Share } from '../../utils/models/share';
-import { ShareAccessType } from '../../utils/models/share-access-type';
+import { ShareAccessType } from '../../utils/models/share-access';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Privacy } from '../../utils/models/privacy';
 import { listValidator } from 'src/app/general/utils/validators/listValidator';
 import { Store } from '@ngrx/store';
-import { CreateShareAction, ListSharesAction } from '../../utils/store/share-store.action';
-
-
-import { ShareStateType } from '../../utils/models/share-state-type';import { ShareType } from '../../utils/models/share-type';
+import { CreateShareAction } from '../../utils/store/share-store.action';
+import { ShareType } from '../../utils/models/share-type';
+import { ShareState } from '../../utils/models/share-state';
 @Component({
   selector: 'app-share-add',
   templateUrl: './share-add.component.html',
@@ -57,7 +56,7 @@ export class ShareAddComponent extends UnSubscriber implements OnInit {
         model: this.model,
         modelId: this.modelId,
         access,
-        state: ShareStateType.PENDING
+        state: ShareState.PENDING
       };
 
       this.store.dispatch(new CreateShareAction(share));

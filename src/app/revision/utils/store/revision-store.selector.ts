@@ -3,7 +3,7 @@ import { RevisionState, revisionAdapter } from "./revision-store.reducer";
 import { Revision } from "../models/revision";
 import { RevisionType } from "../models/revision.type";
 
-export const contractDeliverableSelector = createFeatureSelector<Readonly<RevisionState>>('contractDeliverables');
+export const contractDeliverableSelector = createFeatureSelector<Readonly<RevisionState>>('revisions');
 
 export const selectAllRevisionsByModelId = (model: RevisionType, modelId: string) => createSelector(
     contractDeliverableSelector,

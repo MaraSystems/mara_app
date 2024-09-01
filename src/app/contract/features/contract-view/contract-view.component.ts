@@ -15,9 +15,9 @@ import { ContractStatus } from '../../utils/models/contract-status';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
-import { CommentType } from 'src/app/general/features/comment/utils/models/comment-type';
-import { ListCommentsAction } from 'src/app/general/features/comment/utils/store/comment-store.action';
-import { selectCommentsByModelId } from 'src/app/general/features/comment/utils/store/comment-store.selector';
+import { CommentType } from 'src/app/comment/utils/models/comment-type';
+import { ListCommentsAction } from 'src/app/comment/utils/store/comment-store.action';
+import { selectCommentsByModelId } from 'src/app/comment/utils/store/comment-store.selector';
 import { Share } from 'src/app/general/features/share/utils/models/share';
 import { summerizeDeliverables } from 'src/app/general/utils/lib/summerizeDeliverables';
 import { ToastType } from 'src/app/general/features/toast/utils/models/toast-type';
@@ -26,9 +26,9 @@ import { GetComplianceAction } from 'src/app/profile/features/compliance/utils/s
 import { GetClientAction } from 'src/app/client/utils/store/client-store.action';
 import { selectClientById } from 'src/app/client/utils/store/client-store.selector';
 import { Client } from 'src/app/client/utils/models/client';
-import { GetAttachmentAction } from 'src/app/general/features/attachment/utils/store/attachment-store.action';
+import { GetAttachmentAction } from 'src/app/attachment/utils/store/attachment-store.action';
 import { ComplianceTitleEnum } from 'src/app/client/utils/models/compliance';
-import { selectAttachmentById } from 'src/app/general/features/attachment/utils/store/attachment-store.selector';
+import { selectAttachmentById } from 'src/app/attachment/utils/store/attachment-store.selector';
 import { ShareType } from 'src/app/general/features/share/utils/models/share-type';
 @Component({
   selector: 'app-contract-view',

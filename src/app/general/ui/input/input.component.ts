@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -14,6 +14,8 @@ export class InputComponent implements OnChanges {
   @Input() type: 'text' | 'email' | 'date' | 'phone' | 'number' | 'checkbox' = 'text';
   @Input() control!: FormControl;
   @Input() required!: boolean;
+  @Output() changed = new EventEmitter();
+  @Input() note = '';
 
   isValid() {
     const { invalid, touched } = this.control;    

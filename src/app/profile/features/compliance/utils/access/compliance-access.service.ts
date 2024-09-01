@@ -4,8 +4,8 @@ import { catchError, map, mergeMap, of, tap, throwError } from "rxjs";
 import { Update } from '@ngrx/entity';
 import { Compliance, ComplianceStatusEnum, ComplianceTitleEnum } from 'src/app/client/utils/models/compliance';
 import { DataResponse } from 'src/app/general/utils/models/data-response';
-import { AttachmentType } from 'src/app/general/features/attachment/utils/models/attachment-type';
-import { AttachmentAccessService } from 'src/app/general/features/attachment/utils/access/attachment-access.service';
+import { AttachmentType } from 'src/app/attachment/utils/models/attachment-type';
+import { AttachmentAccessService } from 'src/app/attachment/utils/access/attachment-access.service';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 
 @Injectable({

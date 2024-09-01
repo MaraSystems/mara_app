@@ -1,21 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AccessService } from 'src/app/general/utils/services/access.service';
-import { Collection } from '@black-ink/lonedb';
-import { catchError, concatMap, map, merge, mergeMap, of, tap, throwError, toArray } from 'rxjs';
+import { catchError, mergeMap, tap, throwError } from 'rxjs';
 import { Update } from '@ngrx/entity';
 import { Revision } from '../models/revision';
-import { ProjectDeliverable } from 'src/app/project-deliverable/utils/models/project-deliverable';
-import { Attachment } from 'src/app/general/features/attachment/utils/models/attachment';
-import { AttachmentType } from 'src/app/general/features/attachment/utils/models/attachment-type';
-import { ProjectDeliverableAccessService } from 'src/app/project-deliverable/utils/access/project-deliverable-access.service';
-import { AttachmentAccessService } from 'src/app/general/features/attachment/utils/access/attachment-access.service';
-import { UploadData } from 'src/app/general/features/attachment/utils/models/upload-data';
-import { RevisionStatus } from '../models/revision-status';
+import { AttachmentAccessService } from 'src/app/attachment/utils/access/attachment-access.service';
 import { DataResponse } from 'src/app/general/utils/models/data-response';
 import { NotificationAccessService } from 'src/app/notification/utils/access/notification-access.service';
 import { NotificationType } from 'src/app/notification/utils/models/notification-type';
 import { Notification } from 'src/app/notification/utils/models/notification';
 import { NotificationStatusType } from 'src/app/notification/utils/models/notification-status-type';
+import { RevisionType } from '../models/revision.type';
+import { RevisionDecision } from '../models/revision-decision';
 
 
 @Injectable({
@@ -31,26 +26,21 @@ export class RevisionAccessService {
   ) {}
 
   createRevision(data: Partial<Revision>) {
-    const { reviewerId, requesterId, ...changes } = data;
-    let response: DataResponse<Revision>;
+    const { reviewerId, requesterId, model, modelId, ...changes } = data;
+    let response: DataResponse<Revision>;    
 
-    console.log(data);
-    
-
-    return this.accessService.findOne<Revision>(this.domain, { reviewerId, $not: { status: RevisionStatus.REVIEWED }})
+    return this.accessService.findOne<Revision>(this.domain, { reviewerId, model, modelId, decision: RevisionDecision.PENDING })
       .pipe(
         mergeMap((r) => {
+          console.log(r);
+          
           response = r;
-          const { status, _id, requesterId: oldRequester } = response.data;
-          const newStatus = requesterId === oldRequester
-            ? RevisionStatus.IN_REVIEW
-            : status;
-
-          return this.updateRevision({ id: _id, changes: { ...changes, status: newStatus } })
+          const { _id, requesterId: oldRequester } = response.data;
+          return this.updateRevision({ id: _id, changes })
         }),
         catchError((error) => {          
           if (error === 'Not found') {
-            return this.accessService.insertOne(this.domain, data)
+            return this.accessService.insertOne(this.domain, { ...data, decision: RevisionDecision.PENDING, comments: [] })
               .pipe(
                 tap((r) => {
                   response = r;
@@ -81,8 +71,8 @@ export class RevisionAccessService {
     return response;
   }
 
-  listRevisions(contractId: string, limit = 10, skip = 0) {
-    const response = this.accessService.find<Revision[]>(this.domain, { contractId });
+  listRevisions(model: RevisionType, modelId: string, limit = 10, skip = 0) {
+    const response = this.accessService.find<Revision[]>(this.domain, { model, modelId });
     return response;
   }
 

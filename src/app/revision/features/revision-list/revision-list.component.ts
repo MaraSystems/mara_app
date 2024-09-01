@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { Revision } from '../../utils/models/revision';
 import { ListRevisionsAction } from '../../utils/store/revision-store.action';
+import { RevisionType } from '../../utils/models/revision.type';
+import { selectAllRevisionsByModelId } from '../../utils/store/revision-store.selector';
 // import { selectAllRevisions } from '../../utils/store/revision-store.selector';
 
 @Component({
@@ -12,8 +14,9 @@ import { ListRevisionsAction } from '../../utils/store/revision-store.action';
   styleUrls: ['./revision-list.component.scss']
 })
 export class RevisionListComponent extends UnSubscriber implements OnInit{
-  deliverables: Revision[] = [];
-  id: string = '';
+  revisions: Revision[] = [];
+  model!: RevisionType;
+  modelId!: string;
   
   constructor(
     public store: Store,
@@ -23,11 +26,13 @@ export class RevisionListComponent extends UnSubscriber implements OnInit{
   }
 
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.paramMap.get('contract_id') as string;    
-    this.store.dispatch(new ListRevisionsAction(this.id, { limit: 10, skip: 1 }));
+    this.model = this.activatedRoute.snapshot.queryParamMap.get('model') as RevisionType;    
+    this.modelId = this.activatedRoute.snapshot.queryParamMap.get('modelId') as string;   
 
-    // this.newSubscription = this.store.select(selectAllRevisions(this.id)).subscribe(deliverables => {      
-    //   this.deliverables = deliverables;            
-    // });
+    this.store.dispatch(new ListRevisionsAction(this.model, this.modelId, { limit: 10, skip: 1 }));
+
+    this.newSubscription = this.store.select(selectAllRevisionsByModelId(this.model, this.modelId)).subscribe(revisions => {      
+      this.revisions = revisions;                
+    });
   }
 }

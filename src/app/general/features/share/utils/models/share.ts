@@ -1,5 +1,4 @@
-import { ShareAccessType } from "./share-access-type";
-import { ShareStateType } from "./share-state-type";
+import { ShareAccessType } from "./share-access";
 import { ShareType } from "./share-type";
 
 
@@ -10,7 +9,7 @@ export interface Share {
     model: ShareType,
     modelId: string;
     access: ShareAccessType;
-    state: ShareStateType;
+    state: ShareType;
     fullname?: string;
     image?: string;
 }

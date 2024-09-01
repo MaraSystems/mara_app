@@ -1,0 +1,25 @@
+<span class="name text-1">{{attachment.name}}</span>
+
+<span class="date text-2">{{attachment.createdAt | date}}</span>
+<span class="stats">
+    <app-icon-counter *ngIf="revision" icon="comment" (click)="popupService.open('attachment-revision-' + attachment._id)" [flat]="true"></app-icon-counter>
+    <app-icon-counter *ngIf="revision" icon="zoom_in" (click)="popupService.open('attachment-frame-' + attachment._id)" [flat]="true"></app-icon-counter>
+    <app-icon-counter *ngIf="revision" [icon]="hideFile ? 'keyboard_arrow_down' : 'keyboard_arrow_up'" (click)="hideFile = !hideFile" [flat]="true"></app-icon-counter>
+    <app-icon-counter *ngIf="revision" [icon]="seen ? 'visibility' : 'visibility_off'" (click)="this.preview()" [flat]="true"></app-icon-counter>
+    <app-icon-counter [active]="true" icon="change_circle" [value]="attachment.versions.length - 1" [flat]="true" title="Version"></app-icon-counter>
+    <app-more class="more" [elevated]="false" [list]="moreList" *ngIf="moreList.length" [down]="true"></app-more>
+</span>
+
+<app-frame *ngIf="!hideFile" class="frame" [url]="url"></app-frame>
+
+<app-popup [name]="'attachment-view-update-' + attachment._id" heading="Update Attachment">
+    <app-attachment-upload [model]="attachment.model" [modelId]="attachment.modelId" [attachment]="attachment" [popupId]="'attachment-view-update-' + attachment._id"></app-attachment-upload>
+</app-popup>
+
+<app-popup *ngIf="revision" [name]="'attachment-revision-' + attachment._id" heading="Review">
+    <app-comment-list (commented)="commented.emit($event)" [model]="commentType.ATTACHMENT" [modelId]="attachment._id"></app-comment-list>
+</app-popup>
+
+<app-popup [name]="'attachment-frame-' + attachment._id" [full]="true" [heading]="attachment.name">
+    <app-frame class="frame" [url]="url" style="margin: var(--gap-small);"></app-frame>
+</app-popup>

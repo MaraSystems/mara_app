@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Share } from '../../utils/models/share';
-import { SharePrivacyType } from '../../utils/models/share-privacy-type';
-import { ShareAccessType } from '../../utils/models/share-access-type';
+import { SharePrivacyType } from '../../utils/models/share-privacy';
+import { ShareAccessType } from '../../utils/models/share-access';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
 import { Privacy } from '../../utils/models/privacy';
