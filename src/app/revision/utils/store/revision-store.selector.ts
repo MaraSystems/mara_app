@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { RevisionState, revisionAdapter } from "./revision-store.reducer";
 import { Revision } from "../models/revision";
-import { RevisionType } from "../models/revision.type";
+import { RevisionType } from "../models/revision-type";
 
 export const contractDeliverableSelector = createFeatureSelector<Readonly<RevisionState>>('revisions');
 

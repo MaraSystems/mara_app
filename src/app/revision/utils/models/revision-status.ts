@@ -1,4 +1,5 @@
-export enum RevisionDecision {
+export enum RevisionStatus {
+    REQUESTED = 'requested',
     PENDING = 'pending',
     COMMENT = 'comment',
     AMEND = 'amend',

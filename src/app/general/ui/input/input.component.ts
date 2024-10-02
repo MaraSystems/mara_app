@@ -16,12 +16,29 @@ export class InputComponent implements OnChanges {
   @Input() required!: boolean;
   @Output() changed = new EventEmitter();
   @Input() note = '';
+  @Input() edit = false;
+
+  get showData() {
+    const flag = !!this.control.value || this.edit;        
+    return flag;
+  }
 
   isValid() {
     const { invalid, touched } = this.control;    
     return invalid && touched;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {    
+  focus(element: HTMLElement, input: HTMLElement = element) {    
+    element.classList.remove('empty');
+    input.focus();    
   }
+
+  blur(element: HTMLElement, input: HTMLElement = element) {
+    if (!this.control.value) {
+      element.classList.add('empty');
+    }
+    input.blur();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {}
 }

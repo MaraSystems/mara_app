@@ -1,7 +1,7 @@
 <app-navbar *ngIf="notApp"></app-navbar>
 
-<div [ngClass]="{ app: notApp }" class="app-page">
-    <app-sidebar *ngIf="notApp"></app-sidebar>
+<div [ngClass]="{ app: notApp }" class="app-page" (mouseover)="toggleSidebar($event)">
+    <app-sidebar *ngIf="notApp && showSidebar"></app-sidebar>
 
     <div class="app-content">
         <app-toast style="z-index: 2;"></app-toast>

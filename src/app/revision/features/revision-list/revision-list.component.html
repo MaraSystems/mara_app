@@ -1,0 +1,9 @@
+<div class="header">
+    <h1 class="header-title header-3">Revisions</h1>
+</div>
+
+<div class="revisions">
+    <app-revision-item *ngFor="let item of revisions" [revision]="item"></app-revision-item>
+</div>
+
+<app-comment-add [model]="commentType.REVISION" [modelId]="modelId" (commented)="addComment($event)"></app-comment-add>

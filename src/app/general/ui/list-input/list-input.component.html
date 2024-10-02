@@ -1,16 +1,24 @@
-<span class="form-control" (click)="input.focus()" [ngClass]="{ invalid: (control.invalid && control.touched) }" >
+<span class="form-control" (click)="focus(data, input)" [ngClass]="{ invalid: (control.invalid && control.touched) }" >
     <span class="info" *ngIf="label">
-        <label [for]="name" class="form-control-label text-1">{{name}}</label>
+        <label [for]="name" class="form-control-label text-1">{{name}} list</label>
         <h1 *ngIf="measure" class="text-2 unit">{{measure}}</h1>
     </span>
     
-    <span class="container form-control-data" (click)="control.markAsTouched()">
+    <span class="container form-control-data" (click)="control.markAsTouched()" #data [ngClass]="{'empty': !showData}">
         <span class="item" *ngFor="let item of items" [ngClass]="{ invalid: !validateItem(item) }">
             <span class="item-value text-2">{{item}}</span>
             <span class="material-symbols-outlined item-close" (click)="removeItem(item)" >close</span>
         </span>
     
-        <input class="text-1 data" (keyup)="keyUp($event, input)" #input [placeholder]="placeholder">
+        <input 
+        #input
+        [type]="type" 
+        [name]="name" 
+        class="data text-1" 
+        [placeholder]="placeholder"
+        (blur)="blur(data, input)"
+        (keyup)="keyUp($event, input)"
+        >
     </span>
+    <app-form-errors [control]="control" [name]="name"></app-form-errors>
 </span>
-<app-form-errors [control]="control" [name]="name"></app-form-errors>

@@ -11,8 +11,8 @@ import { DirectivesModule } from 'src/app/general/utils/directives/directives.mo
   ],
   imports: [
     CommonModule,
-    DirectivesModule
-  ],
+    DirectivesModule,
+],
   exports: [
     RevisionItemComponent
   ]

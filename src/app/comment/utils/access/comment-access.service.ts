@@ -49,7 +49,7 @@ export class CommentAccessService {
   }
 
   listComments(model: string, modelId: string, data?: ListOptions) {
-    const response = this.accessService.find<[Comment]>(this.domain, { model, modelId, hidden: false });
+    const response = this.accessService.find<Comment[]>(this.domain, { model, modelId, hidden: false });
     return response;
   }
 

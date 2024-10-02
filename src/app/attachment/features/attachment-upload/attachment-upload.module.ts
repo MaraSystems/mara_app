@@ -4,6 +4,7 @@ import { AttachmentUploadComponent } from './attachment-upload.component';
 import { InputModule } from 'src/app/general/ui/input/input.module';
 import { FileInputModule } from 'src/app/general/ui/file-input/file-input.module';
 import { TextAreaModule } from 'src/app/general/ui/text-area/text-area.module';
+import { ButtonModule } from 'src/app/general/ui/button/button.module';
 
 
 
@@ -15,7 +16,8 @@ import { TextAreaModule } from 'src/app/general/ui/text-area/text-area.module';
     CommonModule,
     InputModule,
     FileInputModule,
-    TextAreaModule
+    TextAreaModule,
+    ButtonModule
   ],
   exports: [
     AttachmentUploadComponent,

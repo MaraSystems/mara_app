@@ -16,21 +16,6 @@
         align-self: stretch;
     }
 
-    .image {
-        position: relative;
-
-        .verification-badge {
-            padding: var(--gap-x-small);
-            border-radius: 50%;
-            background-color: var(--color-secondary);
-            color: var(--color-light);
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            box-shadow: var(--shadow-high);
-        }
-    }
-
     .basic {
         display: flex;
         flex-direction: column;
@@ -38,23 +23,27 @@
         gap: var(--gap-small);
     }
 
-    .names {
+    .name {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
-        gap: var(--gap-x-small);
-
-        &-extra {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: var(--gap-x-small);
-        }
+        gap: var(--gap-small);
     }
 
-    .fullname, .username {
+    .fullname {
         color: var(--color-dark);
         text-wrap: nowrap;
+    }
+
+    .badge {
+        border-radius: 50%;
+        box-shadow: var(--shadow-low);        
+        font-size: var(--gap-normal);
+    }
+
+    .business {
+        background-color: var(--color-secondary) !important;
+        outline: 1px dashed var(--color-secondary) !important;
     }
 
     .details {

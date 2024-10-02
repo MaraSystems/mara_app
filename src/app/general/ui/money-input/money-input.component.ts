@@ -10,5 +10,4 @@ import { emailPattern } from '../../utils/lib/patterns';
 })
 export class MoneyInputComponent extends InputComponent {
   @Input() override control!: FormControl;
-  edit = false;
 }

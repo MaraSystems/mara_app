@@ -5,6 +5,7 @@ import { Attachment } from "../models/attachment";
 import { UploadData } from "../models/upload-data";
 import { DownloadData } from "../models/download-data";
 import { SideEffects } from "src/app/general/utils/models/side-effects";
+import { AttachmentType } from "../models/attachment-type";
 
 export enum AttachmentActionsType {
     UPLOAD_ATTACHMENT = "[ATTACHMENT] Upload Attachment",
@@ -60,7 +61,7 @@ export class GetAttachmentActionFail implements Action {
 
 export class ListAttachmentsAction implements Action {
     readonly type = AttachmentActionsType.LIST_ATTACHMENTS;
-    constructor(public model: string, public modelId: string, public payload?: ListOptions){}
+    constructor(public model: AttachmentType, public modelId: string, public payload?: ListOptions){}
 }
 
 export class ListAttachmentsActionSuccess implements Action {

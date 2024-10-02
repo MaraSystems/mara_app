@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { UnSubscriber } from './general/utils/services/unsubscriber.service';
 import { AppState } from './app.state';
 import { Store } from '@ngrx/store';
@@ -22,11 +22,12 @@ export class AppComponent  extends UnSubscriber implements OnInit {
   auth!: Auth;
   notApp = false;
   notAppUrl = ['/', '/404'];
+  showSidebar = true;
 
   constructor(
     private store: Store<AppState>,
-    private authAccessService: AuthAccessService,
     @Inject(DOCUMENT) private document: Document,
+    private el: ElementRef,
     private router: Router,
   ) {
     super();
@@ -35,7 +36,7 @@ export class AppComponent  extends UnSubscriber implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new GetAuthAction());
     this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
-      this.auth = auth;
+      this.auth = auth;      
       if (this.auth) {
         this.onboardClient();
       }
@@ -54,4 +55,10 @@ export class AppComponent  extends UnSubscriber implements OnInit {
       }
     });
   }
+
+  toggleSidebar(event: MouseEvent) {
+    const element: Element = this.el.nativeElement;
+    const { right } = element.getBoundingClientRect();
+    // this.showSidebar = (right/10) > event.clientX;
+  } 
 }

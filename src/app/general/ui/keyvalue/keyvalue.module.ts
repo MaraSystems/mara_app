@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KeyvalueComponent } from './keyvalue.component';
 import { InputModule } from '../input/input.module';
+import { FormErrorsModule } from '../form-errors/form-errors.module';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { InputModule } from '../input/input.module';
   ],
   imports: [
     CommonModule,
-    InputModule
+    InputModule,
+    FormErrorsModule
   ],
   exports: [
     KeyvalueComponent

@@ -8,7 +8,6 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   styleUrls: ['./keyvalue.component.scss']
 })
 export class KeyvalueComponent extends InputComponent {
-  @Input() edit = false;
   @Input() icon!: string;
   @Input() value!: string | null | number | Date;
   @Input() list!: string[];

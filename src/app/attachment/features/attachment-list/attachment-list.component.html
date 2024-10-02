@@ -6,7 +6,7 @@
 </div>
 
 <div class="list" *ngIf="attachments.length">
-    <app-attachment-item [viewOnly]="viewOnly" [deletable]="add" *ngFor="let item of attachments" [attachment]="item" [userId]="userId"></app-attachment-item>
+    <app-attachment-item [viewOnly]="viewOnly" [deletable]="add" *ngFor="let item of attachments" [attachment]="item" [userId]="userId" (commented)="commented.emit($event)"></app-attachment-item>
 </div>
 
 <app-empty *ngIf="!attachments.length" [name]="model + 'attachments'"></app-empty>

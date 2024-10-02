@@ -1,10 +1,13 @@
-<img class="image" [src]="client.image || '../../../../assets/images/db.png'" alt="" srcset="">
+<span class="avater-small">
+    <img *ngIf="client.image" [src]="client.image" alt="" style="width: auto;" class="avater-small-image">
+    <span *ngIf="!client.image" class="material-symbols-outlined avater-small-icon">person</span>
+</span>
 
 <span class="details">
     <span class="name">
         <span class="text-1 fullname">{{(client.firstname || '') + ' ' + (client.lastname || '')}}</span>
-        <span class="material-symbols-outlined badge">verified_user</span>
-        <span class="text-1 username">@{{client.username}}</span>
+        <span class="material-symbols-outlined badge">verified</span>
+        <span class="text-3 username">{{'@' + client.username}}</span>
     </span>
 
     <span class="controls">

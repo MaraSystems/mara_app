@@ -3,20 +3,21 @@
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
-    padding: var(--gap-small);
-    width: calc(100% - calc(var(--gap-small) * 2));
+    padding: var(--gap-x-small);
+    width: -webkit-fill-available;
     background-color: var(--color-light);
 
     .app-details {
         display: flex;
         align-items: center;
         gap: var(--gap-small);
-        padding: var(--gap-small);
+        padding: var(--gap-x-small);
         cursor: pointer;
-    }
-    
-    .app-name {
-        display: none;
+
+        .icon {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
     }
 
     .controls {
@@ -28,7 +29,7 @@
 
         &-item {
             color: var(--Dark-Variant, #292A2B);
-            font-size: var(--gap-big);
+            font-size: var(--gap-normal);
             cursor: pointer;
 
             &:hover {
@@ -43,9 +44,10 @@
         padding: var(--gap-normal);
         width: calc(100% - calc(var(--gap-normal) * 2));
 
-        .app-name {
-            color: var(--color-primary);
-            display: flex;
+        .controls {
+            &-item {
+                font-size: var(--gap-big);
+            }
         }
     }
 }

@@ -1,4 +1,7 @@
-<h5 class="text-1 key">{{ name }}</h5>
+<span class="key">
+    <h5 class="text-1">{{ name }}</h5>
+    <app-form-errors *ngIf="control" [control]="control" [name]="name"></app-form-errors>
+</span>
 
 <h5 class="text-1 value" *ngIf="!edit && type !== 'date' && !measure">{{ getValue() || value }}</h5>
 

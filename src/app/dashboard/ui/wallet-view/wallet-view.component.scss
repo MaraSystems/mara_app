@@ -18,12 +18,10 @@
     .control {
         display: flex;
         flex-direction: row;
+        justify-content: stretch;
         gap: var(--gap-big);
         align-items: center;
-
-        .debit {
-            background-color: var(--color-secondary);
-        }
+        width: -webkit-fill-available;
     }
 }
 

@@ -1,15 +1,13 @@
 <div class="summary" *ngIf="profile">
 
     <div class="basic">
-        <span class="image">
-            <img [src]="profile.image || '../../../../assets/images/db.png'" alt="">
-            <span class="material-symbols-outlined verification-badge" *ngIf="profile.emailVerified">
-                {{ profile.business ? 'handshake' : 'done' }}
-            </span>
+        <span class="avater">
+            <img *ngIf="profile.image" [src]="profile.image" alt="" style="width: auto;" class="avater-image">
+            <span *ngIf="!profile.image" class="material-symbols-outlined avater-icon" >person</span>
         </span>
-        <div class="names">
-            <h1 class="fullname header-2">{{ (profile.firstname || '') + ' ' + (profile.lastname || '') }}</h1>
-            <h5 class="username text-1">@{{ profile.username }}</h5>
+        <div class="name">
+            <h1 class="fullname header-3">{{ (profile.firstname || '') + ' ' + (profile.lastname || '') }}</h1>
+            <span class="material-symbols-outlined badge" [ngClass]="{business: profile.business}">verified</span>
         </div>
     </div>
 </div>

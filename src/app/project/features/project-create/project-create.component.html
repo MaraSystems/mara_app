@@ -7,11 +7,6 @@
         <app-input type="text" name="tags" class="form-group" [control]="getControl('tags')"></app-input>
         <app-text-area name="description" class="form-group" [control]="getControl('description')"></app-text-area>
 
-        <button 
-            [disabled]="form.invalid"
-            class="button form-group text-1"
-            type="submit">
-            Create Project
-        </button>
+        <app-button [disabled]="form.invalid" class="form-group" text="Create Project" (click)="createProject()"></app-button>
     </form>
 </div>

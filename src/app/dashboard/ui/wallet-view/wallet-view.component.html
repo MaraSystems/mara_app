@@ -6,15 +6,8 @@
 </span>
 
 <span class="control">
-    <span class="button credit" (click)="popupService.open('wallet-credit')">
-        <span class="material-symbols-outlined">account_balance</span>
-        <span class="control-text">Deposit</span>
-    </span>
-
-    <span class="button debit" (click)="popupService.open('wallet-debit')">
-        <span class="material-symbols-outlined">account_balance</span>
-        <span class="control-text">Withdraw</span>
-    </span>
+    <app-button text="Deposit" (click)="popupService.open('wallet-credit')" [style]="{ justifyContent: 'center !important' }"></app-button>
+    <app-button text="Withdraw" (click)="popupService.open('wallet-debit')" bgColor="var(--color-secondary)"></app-button>
 </span>
 
 <app-popup [name]="'wallet-credit'">

@@ -1,36 +1,11 @@
 <div class="pane">
-    <div class="pane-item" routerLink="/dashboard" [ngClass]="{ 'pane-item-active': active === 'dashboard' }">
-        <span class="material-symbols-outlined pane-icon">dashboard</span>
-        <!-- <span class="text-1">Dashboard</span> -->
-        <h1 *ngIf="openSidebar" class="pane-title text-1">Dashboard</h1>
-    </div>
+    <app-button text="Dashboard" icon="dashboard" [elevated]="active === 'dashboard'" routerLink="/dashboard" bgColor="var(--color-light)" color="var(--color-dark)"></app-button>
 
-    <div class="pane-item" routerLink="/projects" [ngClass]="{ 'pane-item-active': active === 'projects' }">
-        <span class="material-symbols-outlined pane-icon">cases</span>
-        <h1 *ngIf="openSidebar" class="pane-title text-1">Projects</h1>
-    </div>
+    <app-button text="Projects" icon="checkbook" [elevated]="active === 'projects'" routerLink="/projects" bgColor="var(--color-light)" color="var(--color-dark)"></app-button>
 
-    <div class="pane-item"routerLink="/contracts" [ngClass]="{ 'pane-item-active': active === 'contracts' }">
-        <span class="material-symbols-outlined pane-icon">checkbook</span>
-        <h1 *ngIf="openSidebar" class="pane-title text-1">Contracts</h1>
-    </div>
+    <app-button text="Contracts" icon="cases" [elevated]="active === 'contracts'" routerLink="/contracts" bgColor="var(--color-light)" color="var(--color-dark)"></app-button>
 
-    <div class="pane-item" routerLink="/transactions" [ngClass]="{ 'pane-item-active': active === 'wallet' }">
-        <span class="material-symbols-outlined pane-icon">wallet</span>
-        <h1 *ngIf="openSidebar" class="pane-title text-1">Transactions</h1>
-    </div>
+    <app-button text="Transactions" icon="wallet" [elevated]="active === 'transactinos'" routerLink="/transactions/history" bgColor="var(--color-light)" color="var(--color-dark)"></app-button>
 
-    <div class="pane-item" routerLink="/settings" [ngClass]="{ 'pane-item-active': active === 'settings' }">
-        <span class="material-symbols-outlined pane-icon">settings</span>
-        <h1 *ngIf="openSidebar" class="pane-title text-1">Settings</h1>
-    </div>
-</div>
-
-<div class="pane">
-    <div class="pane-item" (click)="logout()">
-        <span class="material-symbols-outlined pane-icon">logout</span>
-        <h1 *ngIf="openSidebar" class="pane-title text-1">Logout</h1>
-    </div>
-
-    <span class="material-symbols-outlined sidebar-toggle" (click)="openSidebar = !openSidebar">{{ openSidebar ? 'close_fullscreen' : 'open_in_full'}}</span>
+    <app-button text="Settings" icon="settings" [elevated]="active === 'settings'" routerLink="/settings" bgColor="var(--color-light)" color="var(--color-dark)"></app-button>
 </div>

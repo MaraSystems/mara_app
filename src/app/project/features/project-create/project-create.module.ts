@@ -7,6 +7,7 @@ import { InputModule } from 'src/app/general/ui/input/input.module';
 import { FileInputModule } from 'src/app/general/ui/file-input/file-input.module';
 import { SelectModule } from 'src/app/general/ui/select/select.module';
 import { TextAreaModule } from 'src/app/general/ui/text-area/text-area.module';
+import { ButtonModule } from 'src/app/general/ui/button/button.module';
 
 
 
@@ -21,7 +22,8 @@ import { TextAreaModule } from 'src/app/general/ui/text-area/text-area.module';
     InputModule,
     FileInputModule,
     SelectModule,
-    TextAreaModule
+    TextAreaModule,
+    ButtonModule
   ]
 })
 export class ProjectCreateModule { }

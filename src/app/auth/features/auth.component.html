@@ -5,12 +5,8 @@
         <app-input type="email" name="email" class="form-group" [control]="getControl('email')" #email></app-input>
         <app-password class="form-group" [control]="getControl('password')" [email]="form.get('email')?.value"></app-password>
 
-        <button 
-            [disabled]="form.invalid"
-            class="button form-group text-1"
-            type="submit">
-            Login
-        </button>
+        <app-button [disabled]="form.invalid" class="form-group" text="Login" (click)="login()"></app-button>
+
     </form>
 
     <app-alt-auth></app-alt-auth>

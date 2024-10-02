@@ -35,29 +35,20 @@
         }
     }
 
-    .deliverables {
+    .revisions {
         display: flex;
         flex-direction: column;
-        gap: var(--gap-small);
+        gap: var(--gap-normal);
+        padding:var(--gap-small);
         width: -webkit-fill-available;
         height: -webkit-fill-available;
-        overflow: hidden;
-
-        &-list {
-            display: flex;
-            flex-direction: column;
-            gap: var(--gap-x-small);
-            padding:var(--gap-small);
-            width: -webkit-fill-available;
-            height: -webkit-fill-available;
-            overflow: auto;
-        }
+        overflow: auto;
     }
 }
 
 @media only screen and (min-width: 760px){
     :host {
-        .deliverables-list {
+        .revisions {
             gap: var(--gap-big);
         }
     }

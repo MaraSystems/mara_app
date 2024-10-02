@@ -1,12 +1,13 @@
-import { RevisionDecision } from "./revision-decision";
-import { RevisionType } from "./revision.type";
+import { RevisionStatus } from "./revision-status";
+import { RevisionType } from "./revision-type";
 
 export interface Revision {
     _id: string;
+    userId: string;
     reviewerId: string;
-    requesterId: string;
+    commentId: string;
     comments: string[];
-    decision: RevisionDecision;
+    status: RevisionStatus;
     model: RevisionType;
     modelId: string;
     createdAt: Date;

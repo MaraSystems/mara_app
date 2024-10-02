@@ -1,10 +1,18 @@
-<span class="form-control" [ngClass]="{ invalid: (control.invalid && control.touched) }" (click)="textarea.focus()">
+<span class="form-control" [ngClass]="{ invalid: (control.invalid && control.touched) }" (click)="focus(textarea)">
     <span class="info">
         <label [for]="name" class="form-control-label text-1">{{name}}</label>
     </span>
     
-    <textarea #textarea class="text-1 form-control-data" [name]="name" [ngClass]="{ invalid: (control.invalid && control.touched) }" [formControl]="control" >
+    <textarea 
+        (blur)="blur(textarea)"
+        #textarea 
+        class="text-1 form-control-data" 
+        [name]="name" [ngClass]="{ invalid: (control.invalid && control.touched) }" 
+        [formControl]="control" 
+        [placeholder]="placeholder"
+        [ngClass]="{'empty': !showData}"
+        >
     </textarea>
-    
+ 
+    <app-form-errors [control]="control" [name]="name"></app-form-errors>
 </span>
-<app-form-errors [control]="control" [name]="name"></app-form-errors>

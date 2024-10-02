@@ -5,19 +5,11 @@
     gap: 0.125rem;
     align-self: stretch;
 
-    .info {
-        display: flex;
-        justify-content: space-between;
-        align-self: stretch;
-        align-items: center;
-    }
-
     .invalid {
         border: 1px solid var(--color-error) !important;
     }
 
     .container {
-        display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         gap: var(--gap-small);
@@ -33,11 +25,6 @@
             border: 1px solid var(--color-primary);
             padding: var(--gap-x-small);
             border-radius: var(--gap-x-small);
-
-            .email {
-                width: 1px;
-                border: none;
-            }
 
             &-value {
                 border: none;

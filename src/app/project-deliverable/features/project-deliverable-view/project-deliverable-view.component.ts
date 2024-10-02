@@ -49,7 +49,7 @@ export class ProjectDeliverableViewComponent extends UnSubscriber implements OnI
   ngOnInit(): void {    
     this.id = this.activatedRoute.snapshot.paramMap.get('deliverable_id') as string;   
     this.store.dispatch(new GetProjectDeliverableAction(this.id)); 
-    this.store.dispatch(new ListAttachmentsAction('project-document', this.id));
+    this.store.dispatch(new ListAttachmentsAction(AttachmentType.PROJECT_DELIVERABLE, this.id));
     
     this.newSubscription = this.store.select(selectProjectDeliverableById(this.id)).subscribe(deliverable => {
       this.deliverable = deliverable;        

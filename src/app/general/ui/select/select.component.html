@@ -1,12 +1,14 @@
-<span class="form-control" (click)="select.focus()" [ngClass]="{ invalid: (control.invalid && control.touched) }" >
+<span class="form-control" (click)="focus(select)" [ngClass]="{ invalid: (control.invalid && control.touched) }" >
     <span class="info" *ngIf="label">
         <label [for]="name" class="form-control-label text-1">{{name}}</label>
         <h1 *ngIf="measure" class="measure">{{measure}}</h1>
     </span>
     
-    <select class="form-control-data text-1" [name]="name" [formControl]="control" #select>
+    <select class="form-control-data text-1" [name]="name" [formControl]="control" #select (blur)="blur(select)" [ngClass]="{'empty': !showData}">
         <option disabled [defaultSelected]="true" class="default">Select {{name}}</option>
+        <hr>
         <option *ngFor="let item of keys; index as i" [selected]="item === control.value" [ngValue]="item">{{ values[i] }}</option>
     </select>
+
+    <app-form-errors [control]="control" [name]="name"></app-form-errors>
 </span>
-<app-form-errors [control]="control" [name]="name"></app-form-errors>

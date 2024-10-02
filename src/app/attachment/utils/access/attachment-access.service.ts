@@ -5,6 +5,7 @@ import { Attachment } from '../models/attachment';
 import { catchError, map, mergeMap, throwError } from 'rxjs';
 import { AttachmentVersion } from '../models/attachment-version';
 import { Update } from '@ngrx/entity';
+import { AttachmentType } from '../models/attachment-type';
 
 @Injectable({
   providedIn: 'root'
@@ -65,7 +66,7 @@ export class AttachmentAccessService {
       );
   }
 
-  listAttachments(model: string, modelId: string, limit = 10, skip = 0) {
+  listAttachments(model: AttachmentType, modelId: string, limit = 10, skip = 0) {
     return this.accessService.find<Attachment[]>(this.domain, { model, modelId })
       .pipe(
         map(response => {

@@ -7,11 +7,6 @@
     box-shadow: var(--shadow-medium);
     border-radius: var(--gap-small);
 
-    .image {
-        width: 40px;
-        height: 40px;
-    }
-
     .details {
         display: grid;
         grid-template-columns: 1fr max-content;
@@ -26,18 +21,20 @@
             grid-area: name;
             display: flex;
             align-items: center;
+            gap: var(--gap-x-small);
 
             .fullname {
                 font-weight: bold;
             }
 
             .badge {
-                font-size: 15px;
+                font-size: calc(var(--gap-normal) / 1.5);
             }
 
             .username {
                 font-weight: 700;
                 font-style: italic;
+                color: var(--color-dark);
             }
         }    
 

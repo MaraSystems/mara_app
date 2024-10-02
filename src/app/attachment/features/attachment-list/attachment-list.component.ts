@@ -18,6 +18,7 @@ export class AttachmentListComponent extends UnSubscriber implements OnInit {
   @Input() model!: AttachmentType;
   @Input() add = true;
   @Input() viewOnly = false;
+  @Output() commented = new EventEmitter<string>();
 
   attachments: Attachment[] = [];
   userId = '';

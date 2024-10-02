@@ -14,7 +14,6 @@ import { NavbarModule } from './general/features/navbar/navbar.module';
 import { FootbarModule } from './general/features/footbar/footbar.module';
 import { NotfoundModule } from './notfound/notfound.module';
 import { PopupModule } from './general/features/popup/popup.module';
-import { TabsModule } from './general/ui/tabs/tabs.module';
 
 
 @NgModule({
@@ -34,7 +33,6 @@ import { TabsModule } from './general/ui/tabs/tabs.module';
     NavbarModule,
     FootbarModule,
     NotfoundModule,
-    TabsModule
   ],
   bootstrap: [AppComponent]
 })

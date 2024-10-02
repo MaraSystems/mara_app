@@ -42,7 +42,7 @@ export class ShareAddComponent extends UnSubscriber implements OnInit {
   initForm() {
     this.form = new FormGroup({
       list: new FormControl('', [Validators.required, listValidator({ type: 'email' })]),
-      access: new FormControl('', Validators.required)
+      access: new FormControl(ShareAccessType.VIEW, Validators.required)
     });
   }
 

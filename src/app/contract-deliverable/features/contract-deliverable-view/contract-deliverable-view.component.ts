@@ -23,8 +23,8 @@ import { selectAttachmentsByModelId } from 'src/app/attachment/utils/store/attac
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { CreateRevisionAction } from 'src/app/revision/utils/store/revision-store.action';
 import { Revision } from 'src/app/revision/utils/models/revision';
-import { RevisionType } from 'src/app/revision/utils/models/revision.type';
-import { RevisionDecision } from 'src/app/revision/utils/models/revision-decision';
+import { RevisionType } from 'src/app/revision/utils/models/revision-type';
+import { RevisionStatus } from 'src/app/revision/utils/models/revision-status';
 
 @Component({
   selector: 'app-contract-deliverable-view',
@@ -108,8 +108,9 @@ export class ContractDeliverableViewComponent extends UnSubscriber implements On
 
   requestReview() {    
     this.store.dispatch(new CreateRevisionAction({ 
-      reviewerId: this.contract.clientId,
-      requesterId: this.auth.id,
+      userId: this.contract.clientId,
+      reviewerId: this.auth.id,
+      status: RevisionStatus.REQUESTED,
       model: RevisionType.CONTRACT_DELIVERABLE,
       modelId: this.deliverable._id
     } as Partial<Revision>, {
@@ -120,8 +121,8 @@ export class ContractDeliverableViewComponent extends UnSubscriber implements On
 
   startReview() {
     this.store.dispatch(new CreateRevisionAction({ 
-      reviewerId: this.contract.clientId,
-      requesterId: this.auth.id,
+      userId: this.contract.clientId,
+      status: RevisionStatus.PENDING,
       model: RevisionType.CONTRACT_DELIVERABLE,
       modelId: this.deliverable._id
     } as Partial<Revision>, {
@@ -156,5 +157,15 @@ export class ContractDeliverableViewComponent extends UnSubscriber implements On
 
   conversations() {
     this.router.navigateByUrl(`revisions?model=${RevisionType.CONTRACT_DELIVERABLE}&modelId=${this.deliverable._id}`);
+  }
+
+  addComment(commentId: string) {
+    this.store.dispatch(new CreateRevisionAction({ 
+      userId: this.contract.clientId,
+      status: RevisionStatus.COMMENT,
+      model: RevisionType.CONTRACT_DELIVERABLE,
+      modelId: this.deliverable._id,
+      commentId
+    } as Partial<Revision>));
   }
 }

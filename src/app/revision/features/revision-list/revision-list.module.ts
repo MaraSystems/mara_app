@@ -5,6 +5,7 @@ import { TableHeaderModule } from 'src/app/general/ui/table-header/table-header.
 import { EmptyModule } from 'src/app/general/ui/empty/empty.module';
 import { RevisionItemModule } from '../../ui/revision-item/revision-item.module';
 import { RevisionListRoutingModule } from './revision-list-routing.module';
+import { CommentAddModule } from 'src/app/comment/features/comment-add/comment-add.module';
 
 
 
@@ -17,7 +18,8 @@ import { RevisionListRoutingModule } from './revision-list-routing.module';
     TableHeaderModule,
     EmptyModule,
     RevisionItemModule,
-    RevisionListRoutingModule
+    RevisionListRoutingModule,
+    CommentAddModule
   ],
   exports: [
     RevisionListComponent

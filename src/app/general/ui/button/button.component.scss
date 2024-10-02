@@ -1,0 +1,37 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: center;
+    gap: var(--gap-normal);
+    padding: var(--gap-small) var(--gap-normal);
+    border-radius: var(--gap-small);
+    width: -webkit-fill-available;
+    cursor: pointer;
+
+    &:hover {
+        transition-duration: .5s;
+        box-shadow: var(--shadow-high);
+    }
+
+    .icon {
+        font-size: var(--gap-big);
+        color: inherit;
+    }
+
+    .text {
+        text-align: left;
+        width: -webkit-fill-available;
+        text-wrap: nowrap;
+
+        &-full {
+            text-align: center !important;
+        }
+    }
+}
+
+@media only screen and (min-width: 760px){
+    :host {
+        padding: var(--gap-small);
+    }
+}

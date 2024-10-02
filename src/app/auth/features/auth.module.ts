@@ -9,6 +9,7 @@ import { InputModule } from 'src/app/general/ui/input/input.module';
 import { PasswordModule } from '../ui/password/password.module';
 import { AltAuthModule } from '../ui/alt-auth/alt-auth.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ButtonModule } from 'src/app/general/ui/button/button.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     InputModule,
     PasswordModule,
     AltAuthModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ButtonModule
   ],
   exports: [
     AuthComponent

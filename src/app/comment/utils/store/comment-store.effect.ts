@@ -66,7 +66,7 @@ export class CommentStoreEffect {
         ofType<ListCommentsAction>(CommentActionsType.LIST_COMMENTS),
         mergeMap((action: ListCommentsAction) => 
             this.commentAccessService.listComments(action.model, action.modelId, action.payload).pipe(
-                map((response: DataResponse<[Comment]>) => {                    
+                map((response: DataResponse<Comment[]>) => {                    
                     return new ListCommentsActionSuccess(response.data);
                 }),
                 catchError(err => of(new ListCommentsActionFail(err))

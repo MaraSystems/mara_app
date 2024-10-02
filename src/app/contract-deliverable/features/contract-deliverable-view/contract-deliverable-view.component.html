@@ -24,7 +24,7 @@
 </div>
 
 <div class="section documents">
-    <app-attachment-list [viewOnly]="[contractStatus.REQUESTED, contractStatus.APPROVED].includes(contract.status)" [modelId]="this.id" [model]="attatmentModel.CONTRACT_DELIVERABLE" class="section-container" [add]="false"></app-attachment-list>
+    <app-attachment-list [viewOnly]="[contractStatus.REQUESTED, contractStatus.APPROVED].includes(contract.status)" [modelId]="this.id" [model]="attatmentModel.CONTRACT_DELIVERABLE" class="section-container" [add]="false" (commented)="addComment($event)"></app-attachment-list>
 </div>
 
 <app-more class="more" [list]="moreList" [elevated]="true"></app-more>

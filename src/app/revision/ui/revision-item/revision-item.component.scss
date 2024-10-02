@@ -1,60 +1,44 @@
 :host {
     display: grid;
-    grid-template-columns: min-content 1fr;
+    grid-template-columns: max-content 1fr;
     grid-auto-rows: auto;
-    grid-template-areas: 
-    "image title title"
-    "image duration price"
-    ;
+    grid-template-areas: "avater-small header"
+                        ". content";
     width: -webkit-fill-available;
     gap: var(--gap-small);
     padding: var(--gap-small);
-    border-radius: var(--gap-small);
-    box-shadow: var(--shadow-medium);
-    align-items: center;
-    cursor: pointer;
 
-    .image {
-        grid-area: image;
-        border: 1px solid var(--color-secondary);
-        border-radius: 50%;
-        padding: var(--gap-small);
-        display: flex;
+    .avater-small {
+        grid-area: avater-small;
+    }
+
+    .header {
+        grid-area: header;
+        display: grid;
+        grid-template-columns: max-content max-content 1fr max-content;
+        width: -webkit-fill-available;
         align-items: center;
-        justify-content: center;
-        width: var(--gap-big);
-        height: var(--gap-big);
+        gap: var(--gap-small);
 
-        img {
-            width: inherit;
-            height: inherit;
+        .status-icon {
+            background-color: var(--color-secondary);
+            color: var(--color-light);
+            padding: var(--gap-x-small);
+            border-radius: 50%;
+            font-size: var(--gap-normal);
         }
     }
 
-    .title {
-        grid-area: title;
-        text-align: left;
-    }
-
-    .duration {
-        grid-area: duration;
-    }
-
-    .price {
-        grid-area: price;
-        align-content: center;
-    }
-
-    .delete {
-        color: var(--color-primary);
+    .content {
+        grid-area: content;
+        // display: flex;
+        // flex-direction: column;
+        // width: -webkit-fill-available;
+        // gap: var(--gap-small);
+        // align-items: center;
     }
 }
 
 @media only screen and (min-width: 760px){
-    :host {
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-areas: 
-            "image title duration price"
-        ;
-    }
+    
 }

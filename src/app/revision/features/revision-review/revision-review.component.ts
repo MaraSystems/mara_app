@@ -11,8 +11,7 @@ import { Attachment } from 'src/app/attachment/utils/models/attachment';
 import { ListAttachmentsAction } from 'src/app/attachment/utils/store/attachment-store.action';
 import { selectAttachmentsByModelId } from 'src/app/attachment/utils/store/attachment-store.selector';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
-import { RevisionDecision } from '../../utils/models/revision-decision';
-import { ToastType } from 'src/app/general/features/toast/utils/models/toast-type';
+import { RevisionStatus } from '../../utils/models/revision-status';
 import { CommentType } from 'src/app/comment/utils/models/comment-type';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { KeyValue } from '@angular/common';
@@ -33,9 +32,9 @@ export class RevisionReviewComponent extends UnSubscriber implements OnInit{
   commentType = CommentType;
   form!: FormGroup;
   decisionChoises: KeyValue<string, string>[] = [
-    { key: RevisionDecision.COMMENT, value: 'Just a comment' },
-    { key: RevisionDecision.AMEND, value: 'Request for changes' },
-    { key: RevisionDecision.APPROVE, value: 'Nice!, Approved' }
+    { key: RevisionStatus.COMMENT, value: 'Just a comment' },
+    { key: RevisionStatus.AMEND, value: 'Request for changes' },
+    { key: RevisionStatus.APPROVE, value: 'Nice!, Approved' }
   ];
   getControl = getFormControl;
   hideFiles = false;
@@ -61,7 +60,7 @@ export class RevisionReviewComponent extends UnSubscriber implements OnInit{
       this.revision = revision;
       if (this.revision) {        
         this.initForm();
-        this.store.dispatch(new ListAttachmentsAction(this.revision.model, this.revision.modelId));
+        this.store.dispatch(new ListAttachmentsAction(this.revision.model as any, this.revision.modelId));
 
         this.newSubscription = this.store.select(selectAttachmentsByModelId(this.revision.model, this.revision.modelId)).subscribe(attachments => {
           this.attachments = attachments;     
@@ -74,15 +73,14 @@ export class RevisionReviewComponent extends UnSubscriber implements OnInit{
 
   initForm() {
     this.form = new FormGroup({
-      decision: new FormControl(this.revision.decision, [Validators.required]),
+      decision: new FormControl(this.revision.status === RevisionStatus.PENDING ? '' : this.revision.status, [Validators.required]),
     });    
   }
 
   submitRevision(commentId: string) {
-    const decision: RevisionDecision = getFormControl(this.form, 'decision').value;
-    const comments = [ commentId, ...this.revision.comments ];
+    const status: RevisionStatus = getFormControl(this.form, 'decision').value;
 
-    this.store.dispatch(new UpdateRevisionAction({ id: this.id, changes: { decision, comments } }, {
+    this.store.dispatch(new UpdateRevisionAction({ id: this.id, changes: { status, commentId } }, {
       success: () => {
         this.store.dispatch(new AddToast({ title: 'Revision submitsion successful' }));
         this.router.navigateByUrl(`/revisions?model=${this.revision.model}&modelId=${this.revision.modelId}`);

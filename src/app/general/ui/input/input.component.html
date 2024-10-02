@@ -1,9 +1,8 @@
-<span class="form-control" [ngClass]="{ invalid: (control.invalid && control.touched) }" (click)="input.focus()">
+<span class="form-control" [ngClass]="{ invalid: (control.invalid && control.touched) }" (click)="focus(input)">
     <span class="info" *ngIf="label">
         <label [for]="name" class="form-control-label text-1">{{name}}</label>
         <h1 *ngIf="measure" class="text-2 unit">{{measure}}</h1>
     </span>
-    
     <input 
         #input
         [type]="type" 
@@ -12,7 +11,8 @@
         [formControl]="control" 
         [placeholder]="placeholder"
         [required]="required"
-        [ngClass]="{checkbox: type === 'checkbox'}"
+        [ngClass]="{checkbox: type === 'checkbox', 'empty': !showData}"
+        (blur)="blur(input)"
         >
+    <app-form-errors [control]="control" [name]="name"></app-form-errors>
 </span>
-<app-form-errors [control]="control" [name]="name"></app-form-errors>
