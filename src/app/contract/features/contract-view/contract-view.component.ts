@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Contract } from '../../utils/models/contract';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { selectContractById } from '../../utils/store/contract-store.selector';
@@ -30,12 +30,13 @@ import { GetAttachmentAction } from 'src/app/attachment/utils/store/attachment-s
 import { ComplianceTitleEnum } from 'src/app/client/utils/models/compliance';
 import { selectAttachmentById } from 'src/app/attachment/utils/store/attachment-store.selector';
 import { ShareType } from 'src/app/general/features/share/utils/models/share-type';
+import { ContractDeliverableStatus } from 'src/app/contract-deliverable/utils/models/contract-deliverable-status';
 @Component({
   selector: 'app-contract-view',
   templateUrl: './contract-view.component.html',
   styleUrls: ['./contract-view.component.scss']
 })
-export class ContractViewComponent extends UnSubscriber implements OnInit {
+export class ContractViewComponent extends BaseComponent implements OnInit {
   auth!: Auth;
   contract!: Contract;
   deliverables: ContractDeliverable[] = [];
@@ -43,7 +44,9 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
   id!: string;
   price!: string;
   duration!: number;
-  moreList: More[] = [];
+  moreList: More[] = [
+    { name: 'Complete', icon: 'check_circle', action: () => { this.completeContract() }, hidden: true },
+  ];
   liked = false;
   bookmarked = false;
   commentModel = CommentType.PROJECT;
@@ -80,6 +83,9 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
       const summary = summerizeDeliverables(this.deliverables);
       this.price = summary.price;
       this.duration = summary.duration;
+
+      const completeIndex = this.moreList.findIndex(item => item.name === 'Complete');
+      this.moreList[completeIndex].hidden = !(this.contract.status === ContractStatus.COMPLETED && deliverables.every(deliverable => deliverable.status === ContractDeliverableStatus.COMPLETED)); 
     });
     
     this.newSubscription = this.store.select(selectContractById(this.id)).subscribe(contract => {
@@ -89,7 +95,7 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
 
     this.newSubscription = this.store.select(selectCommentsByModelId(this.commentModel, this.id)).subscribe(comments => {
       this.commentsCount = comments.length;
-    });
+    }); 
   }
 
   approveContract() {
@@ -122,6 +128,17 @@ export class ContractViewComponent extends UnSubscriber implements OnInit {
       },
       failure: () => {
         this.store.dispatch(new AddToast({ title: 'Contract Termination Failed' }));
+      }
+    }));
+  }
+
+  completeContract() {
+    this.store.dispatch(new UpdateContractAction({ id: this.id, changes: { status: ContractStatus.COMPLETED }}, {
+      success: () => {
+        this.store.dispatch(new AddToast({ title: 'Contract Completion Successful' }));
+      },
+      failure: () => {
+        this.store.dispatch(new AddToast({ title: 'Contract Completion Failed' }));
       }
     }));
   }

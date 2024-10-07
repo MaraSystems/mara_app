@@ -3,7 +3,7 @@ import { Share } from '../../utils/models/share';
 import { SharePrivacyType } from '../../utils/models/share-privacy';
 import { ShareAccessType } from '../../utils/models/share-access';
 import { FormControl, FormGroup } from '@angular/forms';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Privacy } from '../../utils/models/privacy';
 import { Store } from '@ngrx/store';
 import { ShareType } from '../../utils/models/share-type';
@@ -14,7 +14,7 @@ import { ShareType } from '../../utils/models/share-type';
   templateUrl: './share-access.component.html',
   styleUrls: ['./share-access.component.scss']
 })
-export class ShareAccessComponent extends UnSubscriber implements OnInit {
+export class ShareAccessComponent extends BaseComponent implements OnInit {
   @Input() model!: ShareType;
   @Input() modelId!: string;
   @Input() privacy!: SharePrivacyType;

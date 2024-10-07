@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { selectAllClientBanks } from '../../utils/store/bank-store.selector';
 import { Bank } from '../../utils/models/bank.model';
 import { ListBanksAction } from '../../utils/store/bank-store.action';
@@ -13,7 +13,7 @@ import { PopupService } from 'src/app/general/features/popup/popup.service';
   templateUrl: './bank-list.component.html',
   styleUrls: ['./bank-list.component.scss']
 })
-export class BankListComponent extends UnSubscriber implements OnInit {
+export class BankListComponent extends BaseComponent implements OnInit {
   auth!: Auth;
   banks: Bank[] = [];
   selectedBankId = '';

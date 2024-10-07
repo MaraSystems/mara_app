@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Share } from '../../utils/models/share';
 import { GetClientAction } from 'src/app/client/utils/store/client-store.action';
 import { selectClientById } from 'src/app/client/utils/store/client-store.selector';
@@ -13,7 +13,7 @@ import { DeleteShareAction, UpdateShareAction } from '../../utils/store/share-st
   templateUrl: './share-item.component.html',
   styleUrls: ['./share-item.component.scss']
 })
-export class ShareItemComponent extends UnSubscriber implements OnInit {
+export class ShareItemComponent extends BaseComponent implements OnInit {
   @Input() share!: Share;
 
   @Output() changed = new EventEmitter<ShareAccessType>();

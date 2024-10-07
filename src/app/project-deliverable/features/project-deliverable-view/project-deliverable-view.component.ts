@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { ActivatedRoute } from '@angular/router';
@@ -26,7 +26,7 @@ import { AttachmentType } from 'src/app/attachment/utils/models/attachment-type'
   templateUrl: './project-deliverable-view.component.html',
   styleUrls: ['./project-deliverable-view.component.scss']
 })
-export class ProjectDeliverableViewComponent extends UnSubscriber implements OnInit {
+export class ProjectDeliverableViewComponent extends BaseComponent implements OnInit {
   auth!: Auth;
   deliverable!: ProjectDeliverable;
   attachment: Attachment[] = [];

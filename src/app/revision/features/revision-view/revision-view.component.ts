@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { ActivatedRoute } from '@angular/router';
@@ -24,7 +24,7 @@ import { GetRevisionAction } from 'src/app/revision/utils/store/revision-store.a
   templateUrl: './revision-view.component.html',
   styleUrls: ['./revision-view.component.scss']
 })
-export class RevisionViewComponent extends UnSubscriber implements OnInit {
+export class RevisionViewComponent extends BaseComponent implements OnInit {
   auth!: Auth;
   revision!: Revision;
   contract!: Contract;

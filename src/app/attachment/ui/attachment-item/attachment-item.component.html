@@ -2,7 +2,7 @@
 
 <span class="name text-1">{{attachment.name}}</span>
 <span class="version text-2">{{ 'V.' + version}}</span>
-<app-more class="more" [elevated]="false" [list]="moreList" *ngIf="moreList.length"></app-more>
+<app-more class="more" [elevated]="false" [list]="moreList"></app-more>
 
 <app-popup [name]="'attachment-update-' + attachment._id" heading="Update Attachment">
     <app-attachment-upload [named]="deletable" [model]="attachment.model" [modelId]="attachment.modelId" [attachment]="attachment" [popupId]="'attachment-update-' + attachment._id" (updated)="updated.emit()"></app-attachment-upload>

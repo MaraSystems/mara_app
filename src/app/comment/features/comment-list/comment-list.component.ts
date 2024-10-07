@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { ListCommentsAction } from '../../utils/store/comment-store.action';
 import { selectCommentsByModelId } from '../../utils/store/comment-store.selector';
 import { Comment } from '../../utils/models/comment';
@@ -12,7 +12,7 @@ import { CommentPage } from '../../utils/models/comment-page';
   templateUrl: './comment-list.component.html',
   styleUrls: ['./comment-list.component.scss']
 })
-export class CommentListComponent extends UnSubscriber implements OnInit {
+export class CommentListComponent extends BaseComponent implements OnInit {
   @Input() model!: CommentType;
   @Input() modelId = '';
   @Output() commented = new EventEmitter<string>();

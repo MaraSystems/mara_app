@@ -26,9 +26,10 @@ export class AccessService {
   }
 
   public insertOne<T>(endpoint: string, entry: Partial<T>) {    
+    delete (entry as any)._id;
     const collection = this.db.createCollection<T>(endpoint, { timestamp: true });
     const data = collection.insertOne(entry as T);
-    const response: DataResponse<T> = { success: true, data };
+    const response: DataResponse<T> = { success: true, data };    
     return of(response);
   }
 
@@ -44,7 +45,7 @@ export class AccessService {
 
   public find<T>(endpoint: string, query?: any, options?: IQueryOption) {    
     const collection = this.db.createCollection<T>(endpoint, { timestamp: true });    
-    const data = collection.find(query, options);     
+    const data = collection.find(query, { sort: { createdAt: 'asc' }, ...options });     
     const response: DataResponse<T> = { success: true, data: data as T };        
     return of(response);
   }

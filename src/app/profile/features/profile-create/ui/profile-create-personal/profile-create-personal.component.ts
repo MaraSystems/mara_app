@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -16,7 +16,7 @@ import { Client } from 'src/app/client/utils/models/client';
   templateUrl: './profile-create-personal.component.html',
   styleUrls: ['./profile-create-personal.component.scss']
 })
-export class ProfileCreatePersanalComponent extends UnSubscriber implements OnInit {
+export class ProfileCreatePersanalComponent extends BaseComponent implements OnInit {
   @Output() done = new EventEmitter();
 
   profile!: Client;

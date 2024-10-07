@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Bank } from '../../utils/models/bank.model';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { selectBankById } from '../../utils/store/bank-store.selector';
@@ -22,7 +22,7 @@ import { ShareType } from 'src/app/general/features/share/utils/models/share-typ
   templateUrl: './bank-view.component.html',
   styleUrls: ['./bank-view.component.scss']
 })
-export class BankViewComponent extends UnSubscriber implements OnInit {
+export class BankViewComponent extends BaseComponent implements OnInit {
   auth!: Auth;
   bank!: Bank;
   id!: string;

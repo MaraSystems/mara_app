@@ -26,6 +26,6 @@ export class FileInputComponent extends InputComponent implements OnInit {
     const files = Array.from(event.target.files);
     const dataList = await Promise.all(files.map(async (file: any) => upload(file)));    
     this.src = dataList[0];
-    this.control.setValue(dataList);    
+    this.control.setValue(this.multiple ? dataList : this.src);    
   }
 }

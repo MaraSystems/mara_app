@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UnSubscriber } from '../../utils/services/unsubscriber.service';
+import { BaseComponent } from '../../utils/services/basecomponent.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent extends UnSubscriber implements OnInit {
+export class SidebarComponent extends BaseComponent implements OnInit {
   active = 'dashboard';
 
   constructor(

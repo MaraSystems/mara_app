@@ -72,24 +72,7 @@
 <app-more class="more" [list]="moreList" [elevated]="true"></app-more>
 
 <span class="popups">
-    <app-popup [name]="'contract-update-' + id" heading="Contract">
-        <!-- <app-contract-update></app-contract-update> -->
-    </app-popup>
-    
     <app-popup [name]="'contract-comment-' + id" heading="Comments">
         <app-comment-list [model]="commentModel" [modelId]="id"></app-comment-list>
-    </app-popup>
-    
-    <app-popup [name]="'contract-share-' + id" heading="Contract">
-        <!-- <app-share 
-            *ngIf="contract.privacy" 
-            [model]="shareModel" 
-            [modelId]="contract._id" 
-            [privacy]="contract.privacy.type" 
-            [access]="contract.privacy.access" 
-            [link]="'contract/'+contract._id" 
-            [ownerId]="contract.userId" 
-            (changed)="updatePrivacy($event)"
-            (shareTo)="updateSharedList($event)"></app-share> -->
     </app-popup>
 </span>

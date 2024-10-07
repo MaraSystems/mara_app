@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Contract } from '../../utils/models/contract';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { GetContractAction } from '../../utils/store/contract-store.action';
 import { ListContractDeliverablesAction } from 'src/app/contract-deliverable/utils/store/contract-deliverable-store.action';
@@ -13,7 +13,7 @@ import { selectAllContractDeliverables } from 'src/app/contract-deliverable/util
   templateUrl: './contract-item.component.html',
   styleUrls: ['./contract-item.component.scss']
 })
-export class ContractItemComponent extends UnSubscriber implements OnInit {
+export class ContractItemComponent extends BaseComponent implements OnInit {
   @Input() contract!: Contract;
   price!: string;
   duration!: number;

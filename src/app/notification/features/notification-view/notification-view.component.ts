@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Notification } from '../../utils/models/notification';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { selectNotificationById } from '../../utils/store/notification-store.selector';
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: './notification-view.component.html',
   styleUrls: ['./notification-view.component.scss']
 })
-export class NotificationViewComponent extends UnSubscriber implements OnChanges {
+export class NotificationViewComponent extends BaseComponent implements OnChanges {
   @Input({ required: true }) id = '';
   @Input({ required: true }) userId = '';
 

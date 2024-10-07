@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Client } from 'src/app/client/utils/models/client';
 import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Comment } from '../../utils/models/comment';
 import { toggleList } from 'src/app/general/utils/lib/toggleList';
 import { DeleteCommentAction, ListCommentsAction, UpdateCommentAction } from '../../utils/store/comment-store.action';
@@ -18,7 +18,7 @@ import { PopupService } from '../../../general/features/popup/popup.service';
   templateUrl: './comment-item.component.html',
   styleUrls: ['./comment-item.component.scss']
 })
-export class CommentItemComponent extends UnSubscriber implements OnInit {
+export class CommentItemComponent extends BaseComponent implements OnInit {
   @Input() comment!: Comment;
   @Output() open = new EventEmitter();
 

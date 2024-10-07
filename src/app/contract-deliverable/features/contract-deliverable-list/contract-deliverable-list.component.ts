@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { ContractDeliverable } from '../../utils/models/contract-deliverable';
@@ -11,7 +11,7 @@ import { selectAllContractDeliverables } from '../../utils/store/contract-delive
   templateUrl: './contract-deliverable-list.component.html',
   styleUrls: ['./contract-deliverable-list.component.scss']
 })
-export class ContractDeliverableListComponent extends UnSubscriber implements OnInit{
+export class ContractDeliverableListComponent extends BaseComponent implements OnInit{
   deliverables: ContractDeliverable[] = [];
   id: string = '';
   

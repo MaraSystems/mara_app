@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { Revision } from '../../utils/models/revision';
@@ -16,7 +16,7 @@ import { Auth } from 'src/app/auth/utils/models/auth.model';
   templateUrl: './revision-list.component.html',
   styleUrls: ['./revision-list.component.scss']
 })
-export class RevisionListComponent extends UnSubscriber implements OnInit{
+export class RevisionListComponent extends BaseComponent implements OnInit{
   revisions: Revision[] = [];
   model!: RevisionType;
   modelId!: string;
@@ -39,7 +39,7 @@ export class RevisionListComponent extends UnSubscriber implements OnInit{
     this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => this.auth = auth);
 
     this.newSubscription = this.store.select(selectAllRevisionsByModelId(this.model, this.modelId)).subscribe(revisions => {      
-      this.revisions = revisions;                      
+      this.revisions = revisions;     
     });
   }
 
@@ -52,7 +52,6 @@ export class RevisionListComponent extends UnSubscriber implements OnInit{
       commentId
     } as Partial<Revision>, {
       success: (response) => {
-        console.log(response);
         
       },
       failure: (error?: string) => {

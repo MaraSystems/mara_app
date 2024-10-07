@@ -19,8 +19,8 @@ import { CommentAddModule } from 'src/app/comment/features/comment-add/comment-a
     EmptyModule,
     RevisionItemModule,
     RevisionListRoutingModule,
-    CommentAddModule
-  ],
+    CommentAddModule,
+],
   exports: [
     RevisionListComponent
   ]

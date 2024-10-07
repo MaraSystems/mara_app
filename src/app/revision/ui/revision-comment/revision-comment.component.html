@@ -1,0 +1,18 @@
+<span *ngIf="referencedComment" class="reference">
+    <span class="text-3" unit="Replied to"></span>
+    <span class="text-2">{{referencedComment.statement}}</span>
+</span>
+
+<span *ngIf="attachment" class="attachment">
+    <span class="text-3" unit="File"></span>
+    <span class="text-2">{{attachment.name}}</span>
+</span>
+
+<span class="statement">
+    <span *ngIf="comment" class="text-1">{{comment.statement}}</span>
+    <app-more class="more" [list]="moreList" [elevated]="true" [elevated]="false" [flat]="false"></app-more>
+</span>
+
+<app-popup *ngIf="comment" [name]="'revision-comment-reply-' + this.comment._id">
+    <app-comment-list [model]="commentType.COMMENT" [modelId]="comment._id" (commented)="commented.emit($event)"></app-comment-list>
+</app-popup>

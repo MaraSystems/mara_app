@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Project } from '../../utils/models/project';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { CreateProjectAction } from '../../utils/store/project-store.action';
@@ -20,7 +20,7 @@ import { ProjectStatus } from '../../utils/models/project-status';
   templateUrl: './project-create.component.html',
   styleUrls: ['./project-create.component.scss']
 })
-export class ProjectCreateComponent extends UnSubscriber implements OnInit {
+export class ProjectCreateComponent extends BaseComponent implements OnInit {
   project!: Project;
   form!: FormGroup;
   categories = projectCategories;

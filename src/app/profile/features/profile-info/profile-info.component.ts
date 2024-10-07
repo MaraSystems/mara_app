@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../client/utils/models/client';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { ActivatedRoute } from '@angular/router';
@@ -19,7 +19,7 @@ import { OnboardStatus } from '../../utils/onboard-status';
   templateUrl: './profile-info.component.html',
   styleUrls: ['./profile-info.component.scss']
 })
-export class ProfileInfoComponent extends UnSubscriber implements OnInit {
+export class ProfileInfoComponent extends BaseComponent implements OnInit {
   profile!: Client;
   edit = false;
   form!: FormGroup;

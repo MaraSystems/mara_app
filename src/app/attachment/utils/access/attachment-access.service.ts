@@ -19,8 +19,11 @@ export class AttachmentAccessService {
 
   private addAttachmentVersion(uploadData: UploadData, versions: AttachmentVersion[] = []) {
     const latest = versions.length;
-    const { data: url, ...attachment } = uploadData;
+    const latestVersion = versions[latest - 1];
+    const { data, ...attachment } = uploadData;
     const { name, model, modelId } = attachment;
+
+    const url = data ? data : localStorage.getItem(`${latestVersion?.path}`) as string
     const path = `${model}/${modelId}/${ name ? `${name}/` : ''}${latest}`;
     localStorage.setItem(path, url);
 
@@ -28,7 +31,7 @@ export class AttachmentAccessService {
       delete v.url;
       return v;
     });    
-
+    
     versions.push({ _v: latest, path, date: new Date(), previews: [] });
     return { ...attachment, versions } as Partial<Attachment>;
   }
@@ -39,17 +42,20 @@ export class AttachmentAccessService {
       .pipe(
         map(({ data: attachment }) => {
           const { versions } = attachment;
-          return this.addAttachmentVersion(uploadData, versions);
+          return this.addAttachmentVersion({ ...uploadData}, versions);
         }),
         mergeMap((attachmentData) => this.accessService.updateOne(this.domain, { _id }, attachmentData)),
-        catchError((error) => {          
+        catchError((error) => {                    
           if (error === 'Not found') {
-            return this.accessService.insertOne(this.domain, this.addAttachmentVersion(uploadData));
+            const newAttachment = this.addAttachmentVersion(uploadData); 
+            return this.accessService.insertOne(this.domain, newAttachment);
           } else {
             return throwError(error);
           }
         }),
-        mergeMap(({ data }) => this.getAttachment(data._id))
+        mergeMap(({ data }) => {
+          return this.getAttachment(data._id);
+        })
       )
   }
 
@@ -88,7 +94,7 @@ export class AttachmentAccessService {
     return response;
   }
 
-  deleteAttachment(id: string) {    
+  deleteAttachment(id: string) {        
     const response = this.accessService.removeOne<Attachment>(this.domain, { _id: id });
     return response;
   }

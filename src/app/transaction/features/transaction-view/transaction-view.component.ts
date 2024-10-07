@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Transaction } from '../../utils/models/transaction';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { selectTransactionById } from '../../utils/store/transaction-store.selector';
@@ -14,7 +14,7 @@ import { Toast } from 'src/app/general/features/toast/utils/models/toast';
   templateUrl: './transaction-view.component.html',
   styleUrls: ['./transaction-view.component.scss']
 })
-export class TransactionViewComponent extends UnSubscriber implements OnInit, OnChanges {
+export class TransactionViewComponent extends BaseComponent implements OnInit, OnChanges {
   @Input() id!: string;
 
   transaction!: Transaction;

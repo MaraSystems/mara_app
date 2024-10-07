@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, OnInit } from '@angular/core';
-import { UnSubscriber } from './general/utils/services/unsubscriber.service';
+import { BaseComponent } from './general/utils/services/basecomponent.service';
 import { AppState } from './app.state';
 import { Store } from '@ngrx/store';
 import { selectActiveAuth } from './auth/utils/store/auth-store.selector';
@@ -18,7 +18,7 @@ import { OnboardStatus } from './profile/utils/onboard-status';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent  extends UnSubscriber implements OnInit {
+export class AppComponent  extends BaseComponent implements OnInit {
   auth!: Auth;
   notApp = false;
   notAppUrl = ['/', '/404'];

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { selectAllProjects } from '../../utils/store/project-store.selector';
 import { Project } from '../../utils/models/project';
 import { ListProjectsAction } from '../../utils/store/project-store.action';
@@ -10,7 +10,7 @@ import { ListProjectsAction } from '../../utils/store/project-store.action';
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss']
 })
-export class ProjectListComponent extends UnSubscriber implements OnInit {
+export class ProjectListComponent extends BaseComponent implements OnInit {
   projects: Project[] = [];
 
   constructor(

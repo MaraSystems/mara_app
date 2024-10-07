@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Notification } from '../../utils/models/notification';
 import { ListNotificationsAction } from '../../utils/store/notification-store.action';
 import { PopupService } from 'src/app/general/features/popup/popup.service';
@@ -13,7 +13,7 @@ import { Auth } from 'src/app/auth/utils/models/auth.model';
   templateUrl: './notification-list.component.html',
   styleUrls: ['./notification-list.component.scss']
 })
-export class NotificationListComponent extends UnSubscriber implements OnInit {
+export class NotificationListComponent extends BaseComponent implements OnInit {
   notifications: Notification[] = [];
   selectedNotificationId = '';
   auth!: Auth;

@@ -26,7 +26,7 @@ export class CommentStoreEffect {
                 }),
                 catchError(err => of(new CreateCommentActionFail(err)).pipe(
                     tap(() => {
-                        handleFailureSideEffects((action as CreateCommentAction).sideEffects);
+                        handleFailureSideEffects((action as CreateCommentAction).sideEffects, err);
                     })
                 ))
             )
@@ -43,7 +43,7 @@ export class CommentStoreEffect {
                 }),
                 catchError(err => of(new UpdateCommentActionFail(err)).pipe(
                     tap(() => {
-                        handleFailureSideEffects((action as UpdateCommentAction).sideEffects);
+                        handleFailureSideEffects((action as UpdateCommentAction).sideEffects, err);
                     })
                 ))
             )

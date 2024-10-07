@@ -1,12 +1,12 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import { UnSubscriber } from '../../utils/services/unsubscriber.service';
+import { BaseComponent } from '../../utils/services/basecomponent.service';
 
 @Component({
   selector: 'app-frame',
   templateUrl: './frame.component.html',
   styleUrls: ['./frame.component.scss']
 })
-export class FrameComponent extends UnSubscriber implements OnInit {
+export class FrameComponent extends BaseComponent implements OnInit {
   @Input() url = '';
   frameDocument!: Document;
 

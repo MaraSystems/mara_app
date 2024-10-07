@@ -4,7 +4,7 @@ import { Share } from '../utils/models/share';
 import { SharePrivacyType } from '../utils/models/share-privacy';
 import { ShareAccessType } from '../utils/models/share-access';
 import { Store } from '@ngrx/store';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { ListSharesAction } from '../utils/store/share-store.action';
 import { GetClientAction } from 'src/app/client/utils/store/client-store.action';
 import { selectClientById } from 'src/app/client/utils/store/client-store.selector';
@@ -17,7 +17,7 @@ import { ShareType } from '../utils/models/share-type';
   templateUrl: './share.component.html',
   styleUrls: ['./share.component.scss']
 })
-export class ShareComponent extends UnSubscriber implements OnInit {
+export class ShareComponent extends BaseComponent implements OnInit {
   @Input() model!: ShareType;
   @Input() modelId!: string;
   @Input() privacy!: SharePrivacyType;

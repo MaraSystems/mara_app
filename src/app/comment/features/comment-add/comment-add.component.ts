@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Client } from 'src/app/client/utils/models/client';
 import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { CreateCommentAction } from '../../utils/store/comment-store.action';
 import { Comment } from '../../utils/models/comment';
 import { CommentType } from '../../utils/models/comment-type';
@@ -14,7 +14,7 @@ import { upload } from 'src/app/general/utils/lib/upload';
   templateUrl: './comment-add.component.html',
   styleUrls: ['./comment-add.component.scss']
 })
-export class CommentAddComponent extends UnSubscriber implements OnInit {
+export class CommentAddComponent extends BaseComponent implements OnInit {
   @Input() model!: CommentType;
   @Input() modelId = '';
   @Output() commented = new EventEmitter<string>();

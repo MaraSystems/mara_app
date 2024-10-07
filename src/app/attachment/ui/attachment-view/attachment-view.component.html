@@ -7,7 +7,7 @@
     <app-icon-counter *ngIf="revision" [icon]="hideFile ? 'keyboard_arrow_down' : 'keyboard_arrow_up'" (click)="hideFile = !hideFile" [flat]="true"></app-icon-counter>
     <app-icon-counter *ngIf="revision" [icon]="seen ? 'visibility' : 'visibility_off'" (click)="this.preview()" [flat]="true"></app-icon-counter>
     <app-icon-counter [active]="true" icon="change_circle" [value]="attachment.versions.length - 1" [flat]="true" title="Version"></app-icon-counter>
-    <app-more class="more" [elevated]="false" [list]="moreList" *ngIf="moreList.length" [down]="true"></app-more>
+    <app-more class="more" [elevated]="false" [list]="moreList" [down]="true"></app-more>
 </span>
 
 <app-frame *ngIf="!hideFile" class="frame" [url]="url"></app-frame>

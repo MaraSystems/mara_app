@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Contract, ContractRequest } from '../../utils/models/contract.model';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { CreateContractAction } from '../../utils/store/contract-store.action';
@@ -25,7 +25,7 @@ import { ContractDeliverable } from 'src/app/contract-deliverable/utils/models/c
   templateUrl: './contract-create.component.html',
   styleUrls: ['./contract-create.component.scss']
 })
-export class ContractCreateComponent extends UnSubscriber implements OnInit {
+export class ContractCreateComponent extends BaseComponent implements OnInit {
   contract!: ContractRequest;
   project!: Project;
   form!: FormGroup;

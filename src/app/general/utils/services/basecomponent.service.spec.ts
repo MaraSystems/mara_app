@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UnSubscriber } from './unsubscriber.service';
+import { BaseComponent } from './basecomponent.service';
 
-describe('UnSubscriber', () => {
-  let service: UnSubscriber;
+describe('BaseComponent', () => {
+  let service: BaseComponent;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(UnSubscriber);
+    service = TestBed.inject(BaseComponent);
   });
 
   it('should be created', () => {

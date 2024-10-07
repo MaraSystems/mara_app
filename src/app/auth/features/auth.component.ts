@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { LoginAuthAction } from '../utils/store/auth-store.action';
 import { Login } from '../utils/models/login.model';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
 })
-export class AuthComponent extends UnSubscriber implements OnInit {
+export class AuthComponent extends BaseComponent implements OnInit {
   form!: FormGroup;
   completed = false;
   loginData!: Login;

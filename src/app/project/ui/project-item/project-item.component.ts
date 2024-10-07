@@ -4,7 +4,7 @@ import { GetProjectAction } from '../../utils/store/project-store.action';
 import { ListProjectDeliverablesAction } from 'src/app/project-deliverable/utils/store/project-deliverable-store.action';
 import { selectAllProjectDeliverables } from 'src/app/project-deliverable/utils/store/project-deliverable-store.selector';
 import { Store } from '@ngrx/store';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { summerizeDeliverables } from 'src/app/general/utils/lib/summerizeDeliverables';
 
 @Component({
@@ -12,7 +12,7 @@ import { summerizeDeliverables } from 'src/app/general/utils/lib/summerizeDelive
   templateUrl: './project-item.component.html',
   styleUrls: ['./project-item.component.scss']
 })
-export class ProjectItemComponent extends UnSubscriber implements OnInit {
+export class ProjectItemComponent extends BaseComponent implements OnInit {
   @Input() project!: Project;
   price!: string;
   duration!: number;

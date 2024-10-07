@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { UploadAttachmentAction } from 'src/app/attachment/utils/store/attachment-store.action';
@@ -16,7 +16,7 @@ import { FileType } from '../../utils/models/file-type';
   templateUrl: './attachment-upload.component.html',
   styleUrls: ['./attachment-upload.component.scss']
 })
-export class AttachmentUploadComponent extends UnSubscriber implements OnInit {
+export class AttachmentUploadComponent extends BaseComponent implements OnInit {
   @Input () multiple = false;
   @Input () named = false;
   @Input () modelId = '';
@@ -62,7 +62,7 @@ export class AttachmentUploadComponent extends UnSubscriber implements OnInit {
     return control;
   }
 
-  uploadAttachment() {    
+  uploadAttachment() {        
     this.store.dispatch(new UploadAttachmentAction({ ...this.uploadData, model: this.model, modelId: this.modelId, _id: this.attachment?._id }, {
       success: () => {        
         this.popupService.close(this.popupId);

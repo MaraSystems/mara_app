@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { Client } from 'src/app/client/utils/models/client';
 import { phonePattern } from 'src/app/general/utils/lib/patterns';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Kin } from 'src/app/client/utils/models/kin';
 import { selectKinByUserId } from '../utils/store/kin-store.selector';
 import * as addressUtil from 'src/app/general/utils/lib/address';
@@ -18,7 +18,7 @@ import { Auth } from 'src/app/auth/utils/models/auth.model';
   templateUrl: './kin.component.html',
   styleUrls: ['./kin.component.scss']
 })
-export class KinComponent extends UnSubscriber implements OnInit {
+export class KinComponent extends BaseComponent implements OnInit {
   kin!: Kin;
   userId!: string;
   edit = false;

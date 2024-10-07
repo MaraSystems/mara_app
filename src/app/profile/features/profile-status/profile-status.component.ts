@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../client/utils/models/client';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { FormGroup } from '@angular/forms';
@@ -18,7 +18,7 @@ import { Compliance, ComplianceTitleEnum } from 'src/app/client/utils/models/com
   templateUrl: './profile-status.component.html',
   styleUrls: ['./profile-status.component.scss']
 })
-export class ProfileStatusComponent extends UnSubscriber implements OnInit {
+export class ProfileStatusComponent extends BaseComponent implements OnInit {
   client!: Client;
   complainces!: Compliance[];
   edit = false;

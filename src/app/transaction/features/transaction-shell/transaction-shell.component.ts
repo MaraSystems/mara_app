@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Transaction } from '../../utils/models/transaction';
 import { Router } from '@angular/router';
 
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './transaction-shell.component.html',
   styleUrls: ['./transaction-shell.component.scss']
 })
-export class TransactionShellComponent extends UnSubscriber implements OnInit {
+export class TransactionShellComponent extends BaseComponent implements OnInit {
   transactions: Transaction[] = [];
   tabs = ['history', 'banks'];
   selectedTab = 0;

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -21,7 +21,7 @@ import { phonePattern } from 'src/app/general/utils/lib/patterns';
   templateUrl: './profile-create-kin.component.html',
   styleUrls: ['./profile-create-kin.component.scss']
 })
-export class ProfileCreateKinComponent extends UnSubscriber implements OnInit {
+export class ProfileCreateKinComponent extends BaseComponent implements OnInit {
   @Input({ required: true }) userId = '';
   @Output() done = new EventEmitter();
 

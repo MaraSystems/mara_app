@@ -13,8 +13,12 @@ export class MoreComponent implements OnInit {
   @Input() elevated = true;
   @Input() down = false;
   
-  show = false;
+  showOptions = false;
   icon = '';
+
+  get show(): boolean {
+    return this.list.some(item => !item.hidden);
+  }
 
   constructor(
     private popupService: PopupService
@@ -25,7 +29,7 @@ export class MoreComponent implements OnInit {
   }
 
   clicked(i: number): void {
-    this.show = false;
+    this.showOptions = false;
     const item = this.list[i];    
 
     if (item.action) {

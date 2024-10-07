@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { selectAllTransactions } from '../../utils/store/transaction-store.selector';
 import { Transaction } from '../../utils/models/transaction';
 import { ListTransactionsAction } from '../../utils/store/transaction-store.action';
@@ -11,7 +11,7 @@ import { PopupService } from 'src/app/general/features/popup/popup.service';
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.scss']
 })
-export class TransactionListComponent extends UnSubscriber implements OnInit {
+export class TransactionListComponent extends BaseComponent implements OnInit {
   transactions: Transaction[] = [];
   selectedTransactionId = '';
 

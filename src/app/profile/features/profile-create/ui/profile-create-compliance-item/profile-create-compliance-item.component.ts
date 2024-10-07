@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -13,7 +13,7 @@ import { ComplianceModel } from 'src/app/client/utils/models/compliance';
   templateUrl: './profile-create-compliance-item.component.html',
   styleUrls: ['./profile-create-compliance-item.component.scss']
 })
-export class ProfileCreateComplianceItemComponent extends UnSubscriber implements OnInit {
+export class ProfileCreateComplianceItemComponent extends BaseComponent implements OnInit {
   @Input() data: { title: string, expiry: boolean }[] = [];
   @Input() model!: ComplianceModel;
 

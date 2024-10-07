@@ -27,7 +27,7 @@ export class BankStoreEffect {
                 }),
                 catchError(err => of(new CreateBankActionFail(err)).pipe(
                     tap(() => {
-                        handleFailureSideEffects((action as CreateBankAction).sideEffects);
+                        handleFailureSideEffects((action as CreateBankAction).sideEffects, err);
                     })
                 ))
             )
@@ -44,7 +44,7 @@ export class BankStoreEffect {
                 }),
                 catchError(err => of(new UpdateBankActionFail(err)).pipe(
                     tap(() => {
-                        handleFailureSideEffects((action as UpdateBankAction).sideEffects);
+                        handleFailureSideEffects((action as UpdateBankAction).sideEffects, err);
                     })
                 ))
             )

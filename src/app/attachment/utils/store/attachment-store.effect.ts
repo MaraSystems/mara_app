@@ -28,7 +28,7 @@ export class AttachmentStoreEffect {
                 }),
                 catchError(err => of(new UploadAttachmentActionFail(err)).pipe(
                     tap(() => {
-                        handleFailureSideEffects((action as UploadAttachmentAction).sideEffects);
+                        handleFailureSideEffects((action as UploadAttachmentAction).sideEffects, err);
                     })
                 ))
             )
@@ -86,7 +86,7 @@ export class AttachmentStoreEffect {
                 }),
                 catchError(err => of(new UpdateAttachmentAction(err)).pipe(
                     tap(() => {
-                        handleFailureSideEffects((action as UpdateAttachmentAction).sideEffects);
+                        handleFailureSideEffects((action as UpdateAttachmentAction).sideEffects, err);
                     })
                 ))
             )

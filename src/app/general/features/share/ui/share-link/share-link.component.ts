@@ -4,14 +4,14 @@ import { Store } from '@ngrx/store';
 import { Client } from 'src/app/client/utils/models/client';
 import { ListClientsAction } from 'src/app/client/utils/store/client-store.action';
 import { selectAllClients } from 'src/app/client/utils/store/client-store.selector';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 
 @Component({
   selector: 'app-share-link',
   templateUrl: './share-link.component.html',
   styleUrls: ['./share-link.component.scss']
 })
-export class ShareLinkComponent extends UnSubscriber implements OnInit {
+export class ShareLinkComponent extends BaseComponent implements OnInit {
   @Input() link!: string;
   @Output() shareTo = new EventEmitter<string[]>();
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Contract } from '../../utils/models/contract';
 import { ListContractsAction } from '../../utils/store/contract-store.action';
 import { selectAllClientContracts } from '../../utils/store/contract-store.selector';
@@ -12,7 +12,7 @@ import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
   templateUrl: './contract-list.component.html',
   styleUrls: ['./contract-list.component.scss']
 })
-export class ContractListComponent extends UnSubscriber implements OnInit {
+export class ContractListComponent extends BaseComponent implements OnInit {
   contracts: Contract[] = [];
   auth!: Auth;
 

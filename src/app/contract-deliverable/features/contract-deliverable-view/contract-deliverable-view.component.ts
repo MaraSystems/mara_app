@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,17 +21,18 @@ import { ContractStatus } from 'src/app/contract/utils/models/contract-status';
 import { ContractDeliverableStatus } from '../../utils/models/contract-deliverable-status';
 import { selectAttachmentsByModelId } from 'src/app/attachment/utils/store/attachment-store.selector';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
-import { CreateRevisionAction } from 'src/app/revision/utils/store/revision-store.action';
+import { CreateRevisionAction, ListRevisionsAction } from 'src/app/revision/utils/store/revision-store.action';
 import { Revision } from 'src/app/revision/utils/models/revision';
 import { RevisionType } from 'src/app/revision/utils/models/revision-type';
 import { RevisionStatus } from 'src/app/revision/utils/models/revision-status';
+import { selectAllRevisionsByModelId } from 'src/app/revision/utils/store/revision-store.selector';
 
 @Component({
   selector: 'app-contract-deliverable-view',
   templateUrl: './contract-deliverable-view.component.html',
   styleUrls: ['./contract-deliverable-view.component.scss']
 })
-export class ContractDeliverableViewComponent extends UnSubscriber implements OnInit {
+export class ContractDeliverableViewComponent extends BaseComponent implements OnInit {
   auth!: Auth;
   deliverable = new ContractDeliverable();
   contract!: Contract;
@@ -43,16 +44,19 @@ export class ContractDeliverableViewComponent extends UnSubscriber implements On
     { name: 'Enable Reviews', icon: 'toggle_on', action: () => { this.enableReviews() }, hidden: true },
     { name: 'Disable Reviews', icon: 'toggle_off', action: () => { this.disableReviews() }, hidden: true },
     { name: 'Start Review', icon: 'rate_review', action: () => { this.startReview() }, hidden: true },
-    { name: 'Conversations', icon: 'rate_review', action: () => { this.conversations() } }
+    { name: 'Conversations', icon: 'forum', action: () => { this.conversations() }, hidden: true },
+    { name: 'Completed', icon: 'check_circle', action: () => { this.complete() }, hidden: true },
   ];
   commentModel = CommentType.CONTRACT;
   commentsCount = 0;
   attatmentModel = AttachmentType;
   contractStatus = ContractStatus;
   contractInitiated = false;
-  reviewable = false;
+  processing = false;
+  drafted = false;
   isContractor = false;
   hasChanges = false;
+  approved = false;
 
   constructor(
     public store: Store<AppState>,
@@ -71,7 +75,8 @@ export class ContractDeliverableViewComponent extends UnSubscriber implements On
       this.deliverable = deliverable;              
       if (this.deliverable) {
         this.store.dispatch(new GetContractAction(deliverable.contractId));
-        this.reviewable = deliverable.status === ContractDeliverableStatus.PROCESSING;
+        this.processing = deliverable.status === ContractDeliverableStatus.PROCESSING;
+        this.drafted = deliverable.status === ContractDeliverableStatus.DRAFT;
 
         this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
           this.auth = auth;
@@ -81,19 +86,22 @@ export class ContractDeliverableViewComponent extends UnSubscriber implements On
             this.isContractor = contract.contractorId === auth.id;
 
             const requestReviewOptionIndex = this.moreList.findIndex(item => item.name === 'Request Review');
-            this.moreList[requestReviewOptionIndex].hidden = !(this.reviewable && this.isContractor && this.contractInitiated);   
+            this.moreList[requestReviewOptionIndex].hidden = !(this.processing && this.isContractor && this.contractInitiated);   
+
+            const conversationsIndex = this.moreList.findIndex(item => item.name === 'Conversations');
+            this.moreList[conversationsIndex].hidden = this.drafted;   
 
             this.newSubscription = this.store.select(selectAttachmentsByModelId(AttachmentType.CONTRACT_DELIVERABLE, this.id)).subscribe(attachmentList => {
               this.hasChanges = attachmentList.some(attachment => attachment.versions.length > 1);       
 
               const enableReviewsOptionIndex = this.moreList.findIndex(item => item.name === 'Enable Reviews');
-              this.moreList[enableReviewsOptionIndex].hidden = !(this.hasChanges && this.isContractor && !this.reviewable);   
+              this.moreList[enableReviewsOptionIndex].hidden = !(this.hasChanges && this.isContractor && this.drafted);   
 
               const disableReviewsOptionIndex = this.moreList.findIndex(item => item.name === 'Disable Reviews');
-              this.moreList[disableReviewsOptionIndex].hidden = !(this.hasChanges && this.isContractor && this.reviewable);   
+              this.moreList[disableReviewsOptionIndex].hidden = !(this.hasChanges && this.isContractor && this.processing);   
 
               const startReviewOptionIndex = this.moreList.findIndex(item => item.name === 'Start Review');
-              this.moreList[startReviewOptionIndex].hidden = !(this.hasChanges && this.reviewable);   
+              this.moreList[startReviewOptionIndex].hidden = !(this.hasChanges && this.processing);   
             });
           });
         }); 
@@ -103,6 +111,13 @@ export class ContractDeliverableViewComponent extends UnSubscriber implements On
     this.store.dispatch(new ListCommentsAction(this.commentModel, this.id));
     this.newSubscription = this.store.select(selectCommentsByModelId(this.commentModel, this.id)).subscribe(comments => {
       this.commentsCount = comments.length;
+    });
+
+    this.store.dispatch(new ListRevisionsAction(RevisionType.CONTRACT_DELIVERABLE, this.id, { limit: 10, skip: 1 }));
+    this.newSubscription = this.store.select(selectAllRevisionsByModelId(RevisionType.CONTRACT_DELIVERABLE, this.id)).subscribe(revisions => {
+      this.approved = revisions.some(revision => revision.status === RevisionStatus.APPROVE);            
+      const completeIndex = this.moreList.findIndex(item => item.name === 'Completed');
+      this.moreList[completeIndex].hidden = !(this.approved && this.processing && this.isContractor);  
     });
   }
 
@@ -167,5 +182,18 @@ export class ContractDeliverableViewComponent extends UnSubscriber implements On
       modelId: this.deliverable._id,
       commentId
     } as Partial<Revision>));
+  }
+
+  complete() {    
+    this.store.dispatch(new UpdateContractDeliverableAction({ id: this.id, changes: { status: ContractDeliverableStatus.COMPLETED }}, this.contract._id, {
+      success: () => {
+        this.store.dispatch(new AddToast({ title: 'Contract deliverable complete successful'}));
+        this.router.navigateByUrl(`contracts/${this.contract._id}`);
+      },
+      failure: (error?: string) => {
+        this.store.dispatch(new AddToast({ title: 'Contract deliverable complete failed', description: error }));
+      }
+    }));
+    
   }
 }

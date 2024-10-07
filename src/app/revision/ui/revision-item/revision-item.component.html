@@ -10,6 +10,11 @@
     <span class="text-2">{{revision.createdAt | date}}</span>
 </span>
 
-<div class="content">
-    
+<div *ngIf="revision.commentId" class="comment">
+    <app-revision-comment [commentId]="revision.commentId" (commented)="commented.emit($event)"></app-revision-comment>
+
+    <span *ngIf="revision.comments.length" class="comment-list">
+        <app-revision-comment *ngFor="let item of revision.comments" [commentId]="item" (commented)="commented.emit($event)"></app-revision-comment>
+    </span>
 </div>
+

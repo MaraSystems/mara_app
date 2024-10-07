@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Project } from '../../utils/models/project';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { selectProjectById } from '../../utils/store/project-store.selector';
@@ -32,7 +32,7 @@ import { ShareType } from 'src/app/general/features/share/utils/models/share-typ
   templateUrl: './project-view.component.html',
   styleUrls: ['./project-view.component.scss']
 })
-export class ProjectViewComponent extends UnSubscriber implements OnInit {
+export class ProjectViewComponent extends BaseComponent implements OnInit {
   auth!: Auth;
   project!: Project;
   deliverables: ProjectDeliverable[] = [];

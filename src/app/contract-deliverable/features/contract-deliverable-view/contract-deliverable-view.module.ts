@@ -12,6 +12,7 @@ import { AttachmentListModule } from 'src/app/attachment/features/attachment-lis
 import { AttachmentUploadModule } from 'src/app/attachment/features/attachment-upload/attachment-upload.module';
 import { CommentListModule } from 'src/app/comment/features/comment-list/comment-list.module';
 import { ShareModule } from 'src/app/general/features/share/features/share.module';
+import { ButtonModule } from "../../../general/ui/button/button.module";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ShareModule } from 'src/app/general/features/share/features/share.modul
     AttachmentListModule,
     AttachmentUploadModule,
     CommentListModule,
-    ShareModule
-  ]
+    ShareModule,
+    ButtonModule,
+]
 })
 export class ContractDeliverableViewModule { }

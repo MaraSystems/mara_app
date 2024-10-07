@@ -1,7 +1,7 @@
 import { AfterContentChecked, AfterRenderRef, AfterViewChecked, AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { More } from 'src/app/general/utils/models/more';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { DeleteAttachmentAction, UpdateAttachmentAction, UploadAttachmentAction } from 'src/app/attachment/utils/store/attachment-store.action';
 import { Attachment } from '../../utils/models/attachment';
 import { PopupService } from '../../../general/features/popup/popup.service';
@@ -15,7 +15,7 @@ import { CommentType } from '../../../comment/utils/models/comment-type';
   templateUrl: './attachment-view.component.html',
   styleUrls: ['./attachment-view.component.scss']
 })
-export class AttachmentViewComponent extends UnSubscriber implements OnInit {
+export class AttachmentViewComponent extends BaseComponent implements OnInit {
   @Input() small = true;
   @Input({ required: true }) attachment!: Attachment;
   @Input() viewOnly = false;

@@ -25,8 +25,8 @@ export class ContractStoreEffect {
                     return new CreateContractActionSuccess(response.data);
                 }),
                 catchError(err => of(new CreateContractActionFail(err)).pipe(
-                    tap(() => {
-                        handleFailureSideEffects((action as CreateContractAction).sideEffects);
+                    tap((failedAction) => {                        
+                        handleFailureSideEffects((action as CreateContractAction).sideEffects, failedAction.payload);
                     })
                 ))
             )

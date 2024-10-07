@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { selectToasts } from '../utils/store/toast.selector';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { RemoveToast, UpdateToast } from '../utils/store/toast.action';
 import { Toast } from '../utils/models/toast';
 import { ToastType } from '../utils/models/toast-type';
@@ -13,7 +13,7 @@ import { ToastType } from '../utils/models/toast-type';
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.scss']
 })
-export class ToastComponent extends UnSubscriber implements OnInit {
+export class ToastComponent extends BaseComponent implements OnInit {
   toasts!: Observable<Toast[]>
   element!: Element;
   timeout = 1000;

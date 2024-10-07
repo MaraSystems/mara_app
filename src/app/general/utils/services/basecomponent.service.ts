@@ -1,10 +1,11 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { More } from '../models/more';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UnSubscriber implements OnDestroy {
+export class BaseComponent implements OnDestroy {
   private _subscription: Subscription = new Subscription;
 
   ngOnDestroy(): void {

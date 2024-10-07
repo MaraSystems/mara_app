@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { CreateClientAction } from '../../utils/store/client-store.action';
 import { phonePattern, usernamePattern } from 'src/app/general/utils/lib/patterns';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Client } from '../../utils/models/client';
 import { OnboardStatus } from 'src/app/profile/utils/onboard-status';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ import { AddToast } from 'src/app/general/features/toast/utils/store/toast.actio
   templateUrl: './client-create.component.html',
   styleUrls: ['./client-create.component.scss']
 })
-export class ClientCreateComponent extends UnSubscriber implements OnInit {
+export class ClientCreateComponent extends BaseComponent implements OnInit {
   form!: FormGroup;
   completed = false;
   client!: Client;

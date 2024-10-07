@@ -7,13 +7,13 @@ import { DataResponse } from 'src/app/general/utils/models/data-response';
 import { Client } from 'src/app/client/utils/models/client';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { LoginAuthActionSuccess } from '../store/auth-store.action';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthAccessService extends UnSubscriber {
+export class AuthAccessService extends BaseComponent {
   auth!: Auth;
 
   constructor(

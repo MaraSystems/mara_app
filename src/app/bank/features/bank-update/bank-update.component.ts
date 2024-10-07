@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Bank } from '../../utils/models/bank.model';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { CreateBankAction, DeleteBankAction, UpdateBankAction } from '../../utils/store/bank-store.action';
@@ -22,7 +22,7 @@ import { selectBankById } from '../../utils/store/bank-store.selector';
   templateUrl: './bank-update.component.html',
   styleUrls: ['./bank-update.component.scss']
 })
-export class BankUpdateComponent extends UnSubscriber implements OnInit {
+export class BankUpdateComponent extends BaseComponent implements OnInit {
   @Input() id = '';
   bank!: Bank;
   form!: FormGroup;

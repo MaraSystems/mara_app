@@ -38,7 +38,6 @@ export class RevisionAccessService {
     return status === RevisionStatus.PENDING
       ? this.accessService.findOne<Revision>(this.domain, { userId, model, modelId, status })
           .pipe(
-            tap(console.log),
             mergeMap((r) => this.getRevision(r.data._id)),
             catchError((error) => {          
               if (error === 'Not found') {
@@ -76,7 +75,7 @@ export class RevisionAccessService {
   }
 
   listRevisions(model: RevisionType, modelId: string, limit = 10, skip = 0) {
-    return this.accessService.find<Revision[]>(this.domain, { model, modelId, '@not': { status: RevisionStatus.PENDING } })
+    return this.accessService.find<Revision[]>(this.domain, { model, modelId, '@not': { status: RevisionStatus.PENDING } }, { sort: { createdAt: 'asc' } })
   }
 
   updateRevision(data: Update<Revision>) {    

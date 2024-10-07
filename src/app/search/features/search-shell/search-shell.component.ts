@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 
 @Component({
   selector: 'app-search-shell',
   templateUrl: './search-shell.component.html',
   styleUrls: ['./search-shell.component.scss']
 })
-export class SearchShellComponent extends UnSubscriber implements OnInit {
+export class SearchShellComponent extends BaseComponent implements OnInit {
   constructor(
     public store: Store
   ){

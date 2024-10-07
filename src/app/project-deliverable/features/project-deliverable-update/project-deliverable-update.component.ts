@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { ProjectDeliverable } from '../../utils/models/project-deliverable';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
@@ -16,7 +16,7 @@ import { ToastType } from 'src/app/general/features/toast/utils/models/toast-typ
   templateUrl: './project-deliverable-update.component.html',
   styleUrls: ['./project-deliverable-update.component.scss']
 })
-export class ProjectDeliverableUpdateComponent extends UnSubscriber implements OnInit {
+export class ProjectDeliverableUpdateComponent extends BaseComponent implements OnInit {
   deliverable!: ProjectDeliverable;
   updateData!: Partial<ProjectDeliverable>;
   id!: string;

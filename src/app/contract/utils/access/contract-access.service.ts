@@ -58,7 +58,7 @@ export class ContractAccessService {
         } as Partial<Contract>)),
         tap(contractResponse => response = contractResponse),
         concatMap(() => data.deliverables),
-        mergeMap((deliverableId) => this.contractDeliverableService.createContractDeliverable(deliverableId, response.data._id))
+        mergeMap((deliverableId) => this.contractDeliverableService.createContractDeliverable(deliverableId, response.data._id)),
       ).pipe(
         toArray(),
         mergeMap(() => this.notificationService.createNotification({ 

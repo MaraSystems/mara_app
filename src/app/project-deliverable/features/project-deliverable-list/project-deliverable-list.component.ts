@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectDeliverable } from '../../utils/models/project-deliverable';
@@ -11,7 +11,7 @@ import { selectAllProjectDeliverables } from '../../utils/store/project-delivera
   templateUrl: './project-deliverable-list.component.html',
   styleUrls: ['./project-deliverable-list.component.scss']
 })
-export class ProjectDeliverableListComponent extends UnSubscriber implements OnInit{
+export class ProjectDeliverableListComponent extends BaseComponent implements OnInit{
   deliverables: ProjectDeliverable[] = [];
   id: string = '';
   

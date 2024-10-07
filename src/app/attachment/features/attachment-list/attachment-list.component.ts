@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PopupService } from 'src/app/general/features/popup/popup.service';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { ListAttachmentsAction } from '../../utils/store/attachment-store.action';
 import { selectAttachmentsByModelId } from '../../utils/store/attachment-store.selector';
 import { Attachment } from '../../utils/models/attachment';
@@ -13,7 +13,7 @@ import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
   templateUrl: './attachment-list.component.html',
   styleUrls: ['./attachment-list.component.scss']
 })
-export class AttachmentListComponent extends UnSubscriber implements OnInit {
+export class AttachmentListComponent extends BaseComponent implements OnInit {
   @Input() modelId = '';
   @Input() model!: AttachmentType;
   @Input() add = true;

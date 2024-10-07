@@ -29,7 +29,7 @@ export class ClientStoreEffect {
                 }),
                 catchError(err => of(new CreateClientActionFail(err)).pipe(
                     tap(() => {
-                        handleFailureSideEffects((action as CreateClientAction).sideEffects);
+                        handleFailureSideEffects((action as CreateClientAction).sideEffects, err);
                     })
                 ))
             )

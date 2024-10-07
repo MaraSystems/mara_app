@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/app.state";
 import { PopupService } from "src/app/general/features/popup/popup.service";
-import { UnSubscriber } from "src/app/general/utils/services/unsubscriber.service";
+import { BaseComponent } from "src/app/general/utils/services/basecomponent.service";
 import { UpdateWalletAction } from "../../utils/store/dashboard-store.action";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { TransactionPlatform } from "src/app/transaction/utils/models/transaction-platform";
@@ -17,7 +17,7 @@ import { AddToast } from "src/app/general/features/toast/utils/store/toast.actio
   templateUrl: './wallet-credit.component.html',
   styleUrls: ['./wallet-credit.component.scss']
 })
-export class WalletCreditComponent extends UnSubscriber implements OnInit {
+export class WalletCreditComponent extends BaseComponent implements OnInit {
   @Input({ required: true }) userId = '';
   @Input({ required: true }) balance = 0;
   form!: FormGroup;

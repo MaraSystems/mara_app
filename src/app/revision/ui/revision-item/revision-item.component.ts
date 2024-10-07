@@ -1,26 +1,28 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Revision } from '../../utils/models/revision';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { GetClientAction } from 'src/app/client/utils/store/client-store.action';
 import { Client } from 'src/app/client/utils/models/client';
 import { selectClientById } from 'src/app/client/utils/store/client-store.selector';
 import { GetCommentAction } from 'src/app/comment/utils/store/comment-store.action';
 import { RevisionStatus } from '../../utils/models/revision-status';
-import { selectCommentById } from 'src/app/comment/utils/store/comment-store.selector';
-import { Comment } from 'src/app/comment/utils/models/comment';
+import { More } from 'src/app/general/utils/models/more';
+
 
 @Component({
   selector: 'app-revision-item',
   templateUrl: './revision-item.component.html',
   styleUrls: ['./revision-item.component.scss']
 })
-export class RevisionItemComponent extends UnSubscriber implements OnInit {
+export class RevisionItemComponent extends BaseComponent implements OnInit {
   @Input({ required: true }) revision!: Revision;
+  @Output() commented = new EventEmitter<string>();
+
   client!: Client;
   reviewer!: Client;
   revisionStatus = RevisionStatus;
-  comment!: Comment;
+  moreList: More[] = [];
 
   get statusIcon() {
     switch (this.revision.status) {
@@ -58,7 +60,7 @@ export class RevisionItemComponent extends UnSubscriber implements OnInit {
     super();
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.store.dispatch(new GetClientAction(this.revision.userId));
     if (this.revision.reviewerId) {
       this.store.dispatch(new GetClientAction(this.revision.reviewerId));
@@ -72,14 +74,10 @@ export class RevisionItemComponent extends UnSubscriber implements OnInit {
       this.reviewer = reviewer;
     });
 
-    if (this.revision.commentId) {
-      this.store.dispatch(new GetCommentAction(this.revision.commentId));
-    }
+    this.setOptions();    
+  }
 
-    if (this.revision.commentId) {
-      this.newSubscription = this.store.select(selectCommentById(this.revision.commentId)).subscribe(comment => {
-        this.comment = comment;
-      });
-    }
+  setOptions() {    
+    
   }
 }

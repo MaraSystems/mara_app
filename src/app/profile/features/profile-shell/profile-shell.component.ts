@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Client } from 'src/app/client/utils/models/client';
 import { More } from 'src/app/general/utils/models/more';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 
 @Component({
   selector: 'app-profile-shell',
   templateUrl: './profile-shell.component.html',
   styleUrls: ['./profile-shell.component.scss']
 })
-export class ProfileShellComponent extends UnSubscriber implements OnInit {
+export class ProfileShellComponent extends BaseComponent implements OnInit {
   profile!: Client;
   tabs = ['info', 'interests', 'kin', 'status'];
   selectedTab = 0;

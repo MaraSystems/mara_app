@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Project } from '../../utils/models/project';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import {  GetProjectAction, UpdateProjectAction } from '../../utils/store/project-store.action';
@@ -17,7 +17,7 @@ import { ToastType } from 'src/app/general/features/toast/utils/models/toast-typ
   templateUrl: './project-update.component.html',
   styleUrls: ['./project-update.component.scss']
 })
-export class ProjectUpdateComponent extends UnSubscriber implements OnInit {
+export class ProjectUpdateComponent extends BaseComponent implements OnInit {
   id!: string;
   project!: Project;
   updateData!: Partial<Project>;

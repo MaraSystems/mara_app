@@ -48,7 +48,7 @@ export class AuthStoreEffect {
                 }),
                 catchError(err => of(new LoginAuthActionFail(err)).pipe(
                     tap(() => {                                                
-                        handleFailureSideEffects((action as LoginAuthAction).sideEffects);
+                        handleFailureSideEffects((action as LoginAuthAction).sideEffects, err);
                     })
                 ))
             )
@@ -78,7 +78,8 @@ export class AuthStoreEffect {
                 }),
                 catchError(err => of(new LogoutAuthActionFail(err)).pipe(
                     tap(() => {
-                        handleFailureSideEffects((action as LogoutAuthAction).sideEffects);                    })
+                        handleFailureSideEffects((action as LogoutAuthAction).sideEffects, err);
+                    })
                 ))
             )
         )

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Bank } from '../../utils/models/bank.model';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { CreateBankAction } from '../../utils/store/bank-store.action';
@@ -20,7 +20,7 @@ import { accountNumberPattern } from 'src/app/general/utils/lib/patterns';
   templateUrl: './bank-create.component.html',
   styleUrls: ['./bank-create.component.scss']
 })
-export class BankCreateComponent extends UnSubscriber implements OnInit {
+export class BankCreateComponent extends BaseComponent implements OnInit {
   bank!: Bank;
   form!: FormGroup;
 

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { FormGroup } from '@angular/forms';
@@ -14,7 +14,7 @@ import { CreateComplianceAction } from '../../../compliance/utils/store/complian
   templateUrl: './profile-create-compliance.component.html',
   styleUrls: ['./profile-create-compliance.component.scss']
 })
-export class ProfileCreateComplianceComponent extends UnSubscriber {
+export class ProfileCreateComplianceComponent extends BaseComponent {
   @Input({ required: true }) userId = '';
   @Output() done = new EventEmitter();
 

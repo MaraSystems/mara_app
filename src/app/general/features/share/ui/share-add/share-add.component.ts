@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Share } from '../../utils/models/share';
 import { ShareAccessType } from '../../utils/models/share-access';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Privacy } from '../../utils/models/privacy';
 import { listValidator } from 'src/app/general/utils/validators/listValidator';
 import { Store } from '@ngrx/store';
@@ -14,7 +14,7 @@ import { ShareState } from '../../utils/models/share-state';
   templateUrl: './share-add.component.html',
   styleUrls: ['./share-add.component.scss']
 })
-export class ShareAddComponent extends UnSubscriber implements OnInit {
+export class ShareAddComponent extends BaseComponent implements OnInit {
   @Input() model!: ShareType;
   @Input() modelId!: string;
   @Output() changed = new EventEmitter<Privacy>();

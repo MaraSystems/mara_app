@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Revision } from '../../utils/models/revision';
@@ -23,7 +23,7 @@ import { getFormControl } from 'src/app/general/utils/lib/getFormControl';
   templateUrl: './revision-review.component.html',
   styleUrls: ['./revision-review.component.scss']
 })
-export class RevisionReviewComponent extends UnSubscriber implements OnInit{
+export class RevisionReviewComponent extends BaseComponent implements OnInit{
   id: string = '';
   userId: string = '';
   attachments: Attachment[] = [];

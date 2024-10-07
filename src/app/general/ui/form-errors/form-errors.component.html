@@ -1,25 +1,25 @@
-<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['required']">{{name}} is required</small>
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['required']">Field is required</small>
 
-<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['email']">Email is invalid</small>
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['email']">Field is an invalid email</small>
 
-<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['phone']">Phone is invalid</small>
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['phone']">Field is an invalid phone</small>
 
-<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['maxlength']">{{name}} exceeds length {{control.errors['maxlength'].requiredLength}}</small>
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['maxlength']">Field exceeds length {{control.errors['maxlength'].requiredLength}}</small>
 
-<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['minlength']">{{name}} not up to length {{control.errors['minlength'].requiredLength}}</small>
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['minlength']">Field not up to length {{control.errors['minlength'].requiredLength}}</small>
 
-<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['pattern']">{{name}} is invalid</small>
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['pattern']">Field is invalid</small>
 
-<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['min']">{{name}} must be at least {{control.errors['min'].min}}</small>
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['min']">Field must be at least {{control.errors['min'].min}}</small>
 
-<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['max']">{{name}} must be at most {{control.errors['max'].max}}</small>
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['max']">Field must be at most {{control.errors['max'].max}}</small>
 
-<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['minfiles']">{{name}} must have at least {{control.errors['minfiles'].min}} files</small>
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['minfiles']">Field must have at least {{control.errors['minfiles'].min}} files</small>
 
-<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['maxfiles']">{{name}} must have at most {{control.errors['maxfiles'].min}} files</small>
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['maxfiles']">Field must have at most {{control.errors['maxfiles'].min}} files</small>
 
-<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['maxList']">{{name}} must have at most {{control.errors['maxItems'].max}} items</small>
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['maxList']">Field must have at most {{control.errors['maxItems'].max}} items</small>
 
-<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['minList']">{{name}} must have at most {{control.errors['minItems'].min}} items</small>
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['minList']">Field must have at most {{control.errors['minItems'].min}} items</small>
 
-<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['list']">{{name}} contain an invalid {{control.errors['list'].type}}</small>
+<small class="error text-3" *ngIf="control.errors && control.touched && control.invalid && control.errors['list']">Field contain an invalid {{control.errors['list'].type}}</small>

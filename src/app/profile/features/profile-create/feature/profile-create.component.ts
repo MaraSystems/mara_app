@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../../client/utils/models/client';
-import { UnSubscriber } from 'src/app/general/utils/services/unsubscriber.service';
+import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { PopupService } from 'src/app/general/features/popup/popup.service';
@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
   templateUrl: './profile-create.component.html',
   styleUrls: ['./profile-create.component.scss']
 })
-export class ProfileCreateComponent extends UnSubscriber implements OnInit {
+export class ProfileCreateComponent extends BaseComponent implements OnInit {
   profile!: Client;
   currentPage = 1;
   pagelength = 3;

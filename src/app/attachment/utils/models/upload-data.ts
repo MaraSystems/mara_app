@@ -7,5 +7,4 @@ export interface UploadData {
     model: AttachmentType;
     modelId: string;
     data: string;
-    // type: FileType;
 }
