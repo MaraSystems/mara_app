@@ -1,20 +1,18 @@
-<span class="form-control" [ngClass]="{ invalid: (control.invalid && control.touched) }" (click)="focus(input)">
+<span class="form-control" [ngClass]="{ invalid: (control.invalid && control.touched) }">
     <span class="info" *ngIf="label">
         <label [for]="name" class="form-control-label text-1">{{name}}</label>
         <h1 *ngIf="measure" class="text-2 unit">{{measure}}</h1>
     </span>
-        
+
     <span [ngClass]="{ hidden: !showData }" class="form-control-data text-1" >{{control.value | currency:'₦' }}</span>
-    
-    <input 
-        #input
+
+    <input
         type="number"
-        [name]="name" 
-        class="form-control-data text-1" 
-        [formControl]="control" 
+        [name]="name"
+        class="form-control-data text-1"
+        [formControl]="control"
         [ngClass]="{'empty': !showData}"
         [required]="required"
-        (blur)="blur(input)"
         [placeholder]="placeholder"
     >
 

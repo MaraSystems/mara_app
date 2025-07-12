@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, ElementRef, SimpleChanges } from '@angular/core';
 import { InputComponent } from '../input/input.component';
 import { KeyValue } from '@angular/common';
 
@@ -12,8 +12,27 @@ export class SelectComponent extends InputComponent implements OnChanges {
   keys: string[] = [];
   values: string[] = [];
 
-  
-  public override ngOnChanges(changes: SimpleChanges): void {
+  constructor(
+    override host: ElementRef<HTMLElement>
+  ) {
+    super(host);
+  }
+
+  public override onDocumentClick(event: MouseEvent) {
+    const clicked = this.host.nativeElement.contains(event.target as Node);
+    if (clicked) {
+      this.focus();
+    } else {
+      this.blur();
+    }
+  }
+
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.controlElement = this.host.nativeElement.querySelector('.form-control-data') as HTMLElement;
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
     this.useList();
   }
 
@@ -29,6 +48,6 @@ export class SelectComponent extends InputComponent implements OnChanges {
         this.keys.push(item);
         this.values.push(item);
       }
-    }     
+    }
   }
 }

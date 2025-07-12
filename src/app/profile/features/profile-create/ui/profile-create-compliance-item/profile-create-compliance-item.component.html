@@ -7,4 +7,4 @@
 
 <app-file-input name="Document" [label]="false" [control]="getControl(form, 'document')"></app-file-input>
 
-<app-input [required]="expiry" name="Expiry Date" type="date" *ngIf="expiry" [control]="getControl(form, 'expiry')"></app-input>
+<app-text-input [required]="expiry" name="Expiry Date" type="date" *ngIf="expiry" [control]="getControl(form, 'expiry')"></app-text-input>

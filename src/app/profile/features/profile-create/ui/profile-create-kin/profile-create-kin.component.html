@@ -2,19 +2,19 @@
 
 <form action="" class="form" [formGroup]="form">
 
-    <app-input name="firstname" [control]="getControl(form, 'firstname')"></app-input>
+    <app-text-input name="firstname" [control]="getControl(form, 'firstname')"></app-text-input>
 
-    <app-input name="lastname" [control]="getControl(form, 'lastname')"></app-input>
+    <app-text-input name="lastname" [control]="getControl(form, 'lastname')"></app-text-input>
 
-    <app-input name="email" [control]="getControl(form, 'email')"></app-input>
+    <app-text-input name="email" [control]="getControl(form, 'email')"></app-text-input>
 
-    <app-input name="phone" [control]="getControl(form, 'phone')"></app-input>
+    <app-text-input name="phone" [control]="getControl(form, 'phone')"></app-text-input>
 
     <app-select name="gender" [control]="getControl(form, 'gender')" [list]="genderEnum"></app-select>
 
-    <app-input name="dob" [control]="getControl(form, 'dob')" type="date"></app-input>
+    <app-text-input name="dob" [control]="getControl(form, 'dob')" type="date"></app-text-input>
 
-    <app-input name="relationship" [control]="getControl(form, 'relationship')"></app-input>
+    <app-text-input name="relationship" [control]="getControl(form, 'relationship')"></app-text-input>
 
     <app-select name="country" [control]="getControl(form, 'country')" [list]="address.countries"></app-select>
 
@@ -22,7 +22,7 @@
 
     <app-select name="city" [control]="getControl(form, 'city')" [list]="address.cities"></app-select>
 
-    <app-input name="street" [control]="getControl(form, 'street')"></app-input>
+    <app-text-input name="street" [control]="getControl(form, 'street')"></app-text-input>
 
     <button [disabled]="form.invalid" class="button text-1 form-control" (click)="updateKin()">Continue</button>
 </form>

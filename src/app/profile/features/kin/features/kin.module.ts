@@ -6,7 +6,6 @@ import { KeyvalueModule } from 'src/app/general/ui/keyvalue/keyvalue.module';
 import { KinRoutingModule } from './kin-routing.module';
 
 
-
 @NgModule({
   declarations: [
     KinComponent

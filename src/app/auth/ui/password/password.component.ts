@@ -1,5 +1,4 @@
-import { Component, Input, OnInit, forwardRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, ElementRef, Input, OnInit, forwardRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { InputComponent } from 'src/app/general/ui/input/input.component';
@@ -24,11 +23,12 @@ export class PasswordComponent extends InputComponent {
 
   constructor(
     private store: Store<AppState>,
+    public override host: ElementRef<HTMLElement>
   ) {
-    super();
+    super(host);
   }
 
-  public request() {    
+  public request() {
     this.running = true;
     this.store.dispatch(new GetPasswordAuthAction(this.email));
 

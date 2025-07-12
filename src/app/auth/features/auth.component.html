@@ -2,7 +2,7 @@
 
 <div class="container">
     <form action="" class="form" [formGroup]="form" (ngSubmit)="login()">
-        <app-input type="email" name="email" class="form-group" [control]="getControl('email')" #email></app-input>
+        <app-text-input type="email" name="email" class="form-group" [control]="getControl('email')" #email></app-text-input>
         <app-password class="form-group" [control]="getControl('password')" [email]="form.get('email')?.value"></app-password>
 
         <app-button [disabled]="form.invalid" class="form-group" text="Login" (click)="login()"></app-button>
@@ -10,7 +10,7 @@
     </form>
 
     <app-alt-auth></app-alt-auth>
-    
+
     <span class="register-option text-1">
         Don't have an account yet? <a [routerLink]="'/register'">Sign Up</a>
     </span>

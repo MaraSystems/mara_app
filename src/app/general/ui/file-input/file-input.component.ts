@@ -15,17 +15,17 @@ export class FileInputComponent extends InputComponent implements OnInit {
   src = '';
   accept: string[] = [];
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.accept = this.fileTypes.map(type => (FileType as any)[type]);
   }
 
-  async upload(event: any) {    
+  async upload(event: any) {
     this.control.markAllAsTouched();
     this.control.markAsDirty();
 
     const files = Array.from(event.target.files);
-    const dataList = await Promise.all(files.map(async (file: any) => upload(file)));    
+    const dataList = await Promise.all(files.map(async (file: any) => upload(file)));
     this.src = dataList[0];
-    this.control.setValue(this.multiple ? dataList : this.src);    
+    this.control.setValue(this.multiple ? dataList : this.src);
   }
 }

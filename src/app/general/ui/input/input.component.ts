@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })
-export class InputComponent implements OnChanges {
+export class InputComponent implements OnInit, OnDestroy {
   @Input() name: string = '';
   @Input() placeholder: string = '';
   @Input() label = true;
@@ -18,27 +18,41 @@ export class InputComponent implements OnChanges {
   @Input() note = '';
   @Input() edit = false;
 
+  controlElement!: HTMLElement;
+
+  constructor(public host: ElementRef<HTMLElement>) {}
+
   get showData() {
-    const flag = !!this.control.value || this.edit;        
+    const flag = !!this.control.value || this.edit;
     return flag;
   }
 
   isValid() {
-    const { invalid, touched } = this.control;    
+    const { invalid, touched } = this.control;
     return invalid && touched;
   }
 
-  focus(element: HTMLElement, input: HTMLElement = element) {    
-    element.classList.remove('empty');
-    input.focus();    
+  onDocumentClick(event: MouseEvent) {}
+
+  ngOnInit(): void {
+    document.addEventListener('click', (event) => this.onDocumentClick(event), false);
   }
 
-  blur(element: HTMLElement, input: HTMLElement = element) {
+  ngOnDestroy(): void {
+    document.removeEventListener('click', (event) => this.onDocumentClick(event), false);
+  }
+
+  focus() {
+    this.edit = true;
+    this.controlElement.focus();
+    this.controlElement.classList.remove('empty');
+  }
+
+  blur() {
+    this.edit = false;
     if (!this.control.value) {
-      element.classList.add('empty');
+      this.controlElement.blur();
+      this.controlElement.classList.add('empty');
     }
-    input.blur();
   }
-
-  ngOnChanges(changes: SimpleChanges): void {}
 }

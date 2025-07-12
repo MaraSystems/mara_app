@@ -1,15 +1,13 @@
-import { Component, Input, ElementRef } from '@angular/core';
-import { InputComponent } from '../input/input.component';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { emailPattern } from '../../utils/lib/patterns';
+import { InputComponent } from '../input/input.component';
 
 @Component({
-  selector: 'app-money-input',
-  templateUrl: './money-input.component.html',
-  styleUrls: ['./money-input.component.scss'],
+  selector: 'app-text-input',
+  templateUrl: './text-input.component.html',
+  styleUrls: ['./text-input.component.scss'],
 })
-export class MoneyInputComponent extends InputComponent {
-  @Input() override control!: FormControl;
+export class TextInputComponent extends InputComponent {
 
   constructor(
     override host: ElementRef<HTMLElement>

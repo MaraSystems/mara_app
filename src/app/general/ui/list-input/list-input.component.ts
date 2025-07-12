@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef } from '@angular/core';
 import { InputComponent } from '../input/input.component';
 import { FormControl } from '@angular/forms';
 import { emailPattern } from '../../utils/lib/patterns';
@@ -16,7 +16,27 @@ export class ListInputComponent extends InputComponent {
     return Array.from(this.control.value || []);
   }
 
-  keyUp(event: KeyboardEvent, input: HTMLInputElement) {    
+  constructor(
+    override host: ElementRef<HTMLElement>
+  ) {
+    super(host);
+  }
+
+  public override onDocumentClick(event: MouseEvent) {
+    const clicked = this.host.nativeElement.contains(event.target as Node);
+    if (clicked) {
+      this.focus();
+    } else {
+      this.blur();
+    }
+  }
+
+  override ngOnInit(): void {
+    super.ngOnInit();
+    this.controlElement = this.host.nativeElement.querySelector('.form-control-data') as HTMLElement;
+  }
+
+  keyUp(event: KeyboardEvent, input: HTMLInputElement) {
     if (event.key === this.break && input.value !== this.break) {
       const item = input.value.replace(this.break, '');
       input.value = '';
@@ -33,6 +53,6 @@ export class ListInputComponent extends InputComponent {
   }
 
   validateItem(item: string) {
-    return item.match(emailPattern);    
+    return item.match(emailPattern);
   }
 }

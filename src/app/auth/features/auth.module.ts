@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PasswordComponent } from '../ui/password/password.component';
-import { AltAuthComponent } from '../ui/alt-auth/alt-auth.component';
 import { RouterModule } from '@angular/router';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
-import { InputModule } from 'src/app/general/ui/input/input.module';
+import { TextInputModule } from 'src/app/general/ui/text-input/text-input.module';
 import { PasswordModule } from '../ui/password/password.module';
 import { AltAuthModule } from '../ui/alt-auth/alt-auth.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,7 +18,7 @@ import { ButtonModule } from 'src/app/general/ui/button/button.module';
     CommonModule,
     RouterModule,
     AuthRoutingModule,
-    InputModule,
+    TextInputModule,
     PasswordModule,
     AltAuthModule,
     ReactiveFormsModule,

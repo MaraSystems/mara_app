@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, forwardRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ElementRef } from '@angular/core';
 import { InputComponent } from '../input/input.component';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-keyvalue',
@@ -14,11 +13,13 @@ export class KeyvalueComponent extends InputComponent {
 
   @Output() clickEvent = new EventEmitter<string>();
 
-  constructor (){
-    super();
+  constructor (
+    public override host: ElementRef<HTMLElement>
+  ){
+    super(host);
   }
 
-  getValue() {    
+  getValue() {
     return this.control ? this.control.value : this.value;
   }
 }
