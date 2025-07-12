@@ -1,5 +1,0 @@
-export enum ContractDeliverableStatus {
-    DRAFT = 'draft',
-    PROCESSING = 'processing',
-    COMPLETED = 'completed'
-}

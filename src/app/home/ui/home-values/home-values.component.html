@@ -1,43 +1,26 @@
-<section class="values">
-    <div class="slider">
-        <div
-            class="slide"
-            *ngFor="let slide of list; index as i"
-            [ngClass]="{ 
-                'active-slide': (i === sliderService.currentSlideIndex && sliderService.direction === 'normal'), 
-                'inactive-slide': (i !== sliderService.currentSlideIndex && sliderService.direction === 'normal'),
-                'active-slide-reverse': (i === sliderService.currentSlideIndex && sliderService.direction === 'reverse'), 
-                'inactive-slide-reverse': (i !== sliderService.currentSlideIndex && sliderService.direction === 'reverse')
-            }"
-            [ngStyle]="setBackground(slide.image)"
-            >
-            <div class="slide-content">
-                <h1 class="slide-title header-1">{{ slide.title }}</h1>
-                <p class="slide-description header-2">{{ slide.descripton }}</p>
-            </div>
-            <div class="slide-buttons">
-                <button 
-                    class="button text-1 bordered"
-                    routerLink="/auth"
-                    *ngIf="!auth"
-                    [ngStyle]="{ color: 'var(--color-primary)', backgroundColor: 'var(--color-light)', borderColor: 'var(--color-primary)' }">
-                    Login
-                </button>
-                <button 
-                    class="button text-1 bordered"
-                    routerLink="/profile"
-                    *ngIf="auth"
-                    [ngStyle]="{ color: 'var(--color-primary)', backgroundColor: 'var(--color-light)', borderColor: 'var(--color-primary)' }">
-                    Profile
-                </button>
-                <button 
-                    class="button text-1 bordered"
-                    routerLink="/showcase"
-                    [ngStyle]="{ color: 'var(--color-primary)', backgroundColor: 'var(--color-black)', borderColor: 'var(--color-primary)' }">
-                    Explore
-                </button>
-            </div>
-        </div>
-    </div>
-    <app-switcher [active]="sliderService.currentSlideIndex" [totalItems]="slides.length" (select)="sliderService.selectSlide($event)"></app-switcher>
-</section>
+<div class="content">
+    <h1 class="title header-1">{{ title }}</h1>
+    <p class="description header-2">{{ descripton }}</p>
+</div>
+<div class="buttons">
+    <button
+        class="button text-1 bordered"
+        routerLink="/auth"
+        *ngIf="!auth"
+        [ngStyle]="{ color: 'var(--color-primary)', backgroundColor: 'var(--color-light)', borderColor: 'var(--color-primary)' }">
+        Login
+    </button>
+    <button
+        class="button text-1 bordered"
+        routerLink="/profile"
+        *ngIf="auth"
+        [ngStyle]="{ color: 'var(--color-primary)', backgroundColor: 'var(--color-light)', borderColor: 'var(--color-primary)' }">
+        Profile
+    </button>
+    <button
+        class="button text-1 bordered"
+        routerLink="/showcase"
+        [ngStyle]="{ color: 'var(--color-primary)', backgroundColor: 'var(--color-black)', borderColor: 'var(--color-primary)' }">
+        Explore
+    </button>
+</div>
