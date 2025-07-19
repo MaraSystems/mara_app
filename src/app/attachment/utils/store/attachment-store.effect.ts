@@ -5,24 +5,29 @@ import { Store } from "@ngrx/store";
 import { AddToast } from "src/app/general/features/toast/utils/store/toast.action";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { UploadAttachmentAction, UploadAttachmentActionFail, UploadAttachmentActionSuccess, DeleteAttachmentAction, DeleteAttachmentActionFail, DeleteAttachmentActionSuccess, GetAttachmentAction, GetAttachmentActionFail, GetAttachmentActionSuccess, ListAttachmentsAction, ListAttachmentsActionFail, ListAttachmentsActionSuccess, AttachmentActionsType, UpdateAttachmentAction, UpdateAttachmentActionSuccess } from "./attachment-store.action";
-import { AttachmentAccessService } from "../access/attachment-access.service";
 import { Attachment } from "../models/attachment";
 import { ToastType } from "../../../general/features/toast/utils/models/toast-type";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
+  import { ApiAccessService } from "src/app/general/utils/services/api-access.service";
+import { LocalAccessService } from "src/app/general/utils/services/local-access.service";
+import { AccessService } from "src/app/general/utils/services/access.service";
 
 @Injectable()
-export class AttachmentStoreEffect {
+export class AttachmentStoreEffect extends AccessService {
     constructor(
         private actions$: Actions,
-        private attachmentAccessService: AttachmentAccessService,
-        private store: Store
-    ){}
+        private store: Store,
+        localAccessService: LocalAccessService,
+        apiAccessService: ApiAccessService,
+    ){
+      super(localAccessService, apiAccessService);
+    }
 
     uploadAttachment$ = createEffect(() => this.actions$.pipe(
         ofType<UploadAttachmentAction>(AttachmentActionsType.UPLOAD_ATTACHMENT),
-        mergeMap((action: UploadAttachmentAction) => 
-            this.attachmentAccessService.uploadAttachment(action.payload).pipe(
-                map((response: DataResponse<Attachment>) => {            
+        mergeMap((action: UploadAttachmentAction) =>
+            this.accessService.uploadAttachment(action.payload).pipe(
+                map((response: DataResponse<Attachment>) => {
                     handleSuccessSideEffects((action as UploadAttachmentAction).sideEffects);
                     return new UploadAttachmentActionSuccess(response.data, action.payload._id);
                 }),
@@ -37,9 +42,9 @@ export class AttachmentStoreEffect {
 
     deleteAttachment$ = createEffect(() => this.actions$.pipe(
         ofType<DeleteAttachmentAction>(AttachmentActionsType.DELETE_ATTACHMENT),
-        mergeMap((action: DeleteAttachmentAction) => 
-            this.attachmentAccessService.deleteAttachment(action.payload).pipe(
-                map((response: DataResponse<Attachment>) => {         
+        mergeMap((action: DeleteAttachmentAction) =>
+            this.accessService.deleteAttachment(action.payload).pipe(
+                map((response: DataResponse<Attachment>) => {
                     this.store.dispatch(new AddToast({ title: 'Attachment delete' }));
                     return new DeleteAttachmentActionSuccess(response.data);
                 }),
@@ -54,9 +59,9 @@ export class AttachmentStoreEffect {
 
     getAttachment$ = createEffect(() => this.actions$.pipe(
         ofType<GetAttachmentAction>(AttachmentActionsType.GET_ATTACHMENT),
-        mergeMap((action: GetAttachmentAction) => 
-            this.attachmentAccessService.getAttachment(action.payload).pipe(
-                map((response: DataResponse<Attachment>) => {                    
+        mergeMap((action: GetAttachmentAction) =>
+            this.accessService.getAttachment(action.payload).pipe(
+                map((response: DataResponse<Attachment>) => {
                     return new GetAttachmentActionSuccess(response.data);
                 }),
                 catchError(err => of(new GetAttachmentActionFail(err))
@@ -66,9 +71,9 @@ export class AttachmentStoreEffect {
 
     listAttachments$ = createEffect(() => this.actions$.pipe(
         ofType<ListAttachmentsAction>(AttachmentActionsType.LIST_ATTACHMENTS),
-        mergeMap((action: ListAttachmentsAction) => 
-            this.attachmentAccessService.listAttachments(action.model, action.modelId).pipe(
-                map((response: DataResponse<Attachment[]>) => {                                        
+        mergeMap((action: ListAttachmentsAction) =>
+            this.accessService.listAttachments(action.model, action.modelId).pipe(
+                map((response: DataResponse<Attachment[]>) => {
                     return new ListAttachmentsActionSuccess(response.data);
                 }),
                 catchError(err => of(new ListAttachmentsActionFail(err))
@@ -78,9 +83,9 @@ export class AttachmentStoreEffect {
 
     updateAttachment$ = createEffect(() => this.actions$.pipe(
         ofType<UpdateAttachmentAction>(AttachmentActionsType.UPDATE_ATTACHMENT),
-        mergeMap((action: UpdateAttachmentAction) => 
-            this.attachmentAccessService.updateAttachment(action.payload).pipe(
-                map((response: DataResponse<Attachment>) => {            
+        mergeMap((action: UpdateAttachmentAction) =>
+            this.accessService.updateAttachment(action.payload).pipe(
+                map((response: DataResponse<Attachment>) => {
                     handleSuccessSideEffects((action as UpdateAttachmentAction).sideEffects);
                     return new UpdateAttachmentActionSuccess({ ...action.payload, changes: response.data });
                 }),

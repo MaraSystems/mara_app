@@ -14,8 +14,8 @@ import { environment } from 'src/environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileShellComponent } from 'src/app/profile/features/profile-shell/profile-shell.component';
-import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
-import { RegisterClientAction } from 'src/app/client/utils/store/client-store.action';
+import { selectAuthClient } from 'src/app/users/utils/store/client-store.selector';
+import { RegisterClientAction } from 'src/app/users/utils/store/client-store.action';
 import { Database } from '@black-ink/lonedb';
 import { TestsService } from 'src/tests/tests.service';
 

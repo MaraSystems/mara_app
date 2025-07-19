@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Client } from '../../../../client/utils/models/client';
+import { User } from '../../../../users/utils/models/user';
 import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { PopupService } from 'src/app/general/features/popup/popup.service';
-import { UpdateClientAction } from 'src/app/client/utils/store/client-store.action';
+import { UpdateProfileAction } from 'src/app/users/utils/store/user-store.action';
 import { OnboardStatus } from 'src/app/profile/utils/onboard-status';
-import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
+import { selectAuthUser } from 'src/app/users/utils/store/user-store.selector';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { LogoutAuthAction } from 'src/app/auth/utils/store/auth-store.action';
 import { Router } from '@angular/router';
@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile-create.component.scss']
 })
 export class ProfileCreateComponent extends BaseComponent implements OnInit {
-  profile!: Client;
+  profile!: User;
   currentPage = 1;
   pagelength = 3;
 
@@ -30,15 +30,15 @@ export class ProfileCreateComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.newSubscription = this.store.select(selectAuthClient).subscribe(client => {
-      this.profile = client;
+    this.newSubscription = this.store.select(selectAuthUser).subscribe(user => {
+      this.profile = user;
     })
   }
 
   nextPage() {
     this.currentPage++;
     if (this.currentPage > this.pagelength) {
-      this.store.dispatch(new UpdateClientAction({ id: this.profile._id, changes: { onboard: OnboardStatus.COMPLETED } }, {
+      this.store.dispatch(new UpdateProfileAction({ onboard: OnboardStatus.COMPLETED }, {
         success: () => {
           this.store.dispatch(new AddToast({ title: 'Welcome Onboard' }));
           this.router.navigateByUrl('/profile/info');

@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { KinState } from "./kin-store.reducer";
-import { Kin } from "src/app/client/utils/models/kin";
+import { Kin } from "src/app/users/utils/models/kin";
 
 export const kinSelector = createFeatureSelector<Readonly<KinState>>('kins');
 

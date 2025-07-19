@@ -1,0 +1,61 @@
+:host {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-auto-rows: auto;
+    grid-template-areas:
+    "image username username"
+    "image email email"
+    "image phone status"
+    ;
+    width: -webkit-fill-available;
+    gap: var(--gap-small);
+    padding: var(--gap-small);
+    border-radius: var(--gap-small);
+    align-items: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-medium);
+
+    .image {
+        grid-area: image;
+        border: 1px solid var(--color-secondary);
+        border-radius: 50%;
+        padding: var(--gap-small);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--gap-big);
+        height: var(--gap-big);
+
+        img {
+            width: inherit;
+            height: inherit;
+        }
+    }
+
+    .username {
+        grid-area: username;
+        text-align: left;
+    }
+
+    .email {
+        grid-area: email;
+        text-align: left;
+    }
+
+    .phone {
+        grid-area: phone;
+    }
+
+    .status {
+        grid-area: status;
+    }
+}
+
+@media only screen and (min-width: 760px){
+    :host {
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-areas:
+            "image username email phone status"
+        ;
+    }
+}

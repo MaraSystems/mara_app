@@ -11,7 +11,7 @@ import { DebugElement, inject } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
-import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
+import { selectAuthClient } from 'src/app/users/utils/store/client-store.selector';
 
 describe('ProfileInterestsComponent', () => {
   let component: ProfileInterestsComponent;
@@ -58,7 +58,7 @@ describe('ProfileInterestsComponent', () => {
   it('should disable update button when form is invalid', () => {
     component.edit = true;
     component.form.controls['email'].setValue('me');
-    fixture.detectChanges();    
+    fixture.detectChanges();
     const button = el.query(By.css('#update'));
     expect(button.nativeElement.disabled).toEqual(true);
   });

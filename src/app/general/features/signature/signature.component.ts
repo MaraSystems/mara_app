@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
-import { Client } from 'src/app/client/utils/models/client';
-import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
+import { User } from 'src/app/users/utils/models/user';
+import { selectAuthUser } from 'src/app/users/utils/store/user-store.selector';
 import { CreateComplianceAction, GetComplianceAction } from 'src/app/profile/features/compliance/utils/store/compliance-store.action';
 import { GetAttachmentAction } from '../../../attachment/utils/store/attachment-store.action';
-import { Compliance, ComplianceModel, ComplianceStatusEnum, ComplianceTitleEnum } from 'src/app/client/utils/models/compliance';
+import { Compliance, ComplianceModel, ComplianceStatusEnum, ComplianceTitleEnum } from 'src/app/users/utils/models/compliance';
 import { BaseComponent } from '../../utils/services/basecomponent.service';
 import { selectAttachmentById } from '../../../attachment/utils/store/attachment-store.selector';
 import { AddToast } from '../toast/utils/store/toast.action';
@@ -24,7 +24,7 @@ export class SignatureComponent extends BaseComponent implements OnInit, AfterVi
   @Input() compliance!: Compliance | undefined;
   @Output() signed = new EventEmitter();
 
-  client!: Client;
+  user!: User;
   signature = '';
 
   context!: CanvasRenderingContext2D;
@@ -44,37 +44,37 @@ export class SignatureComponent extends BaseComponent implements OnInit, AfterVi
   constructor(
     private elementRef: ElementRef,
     private store: Store
-  ) { 
+  ) {
     super();
   }
 
   ngOnInit(): void {
-    this.store.select(selectAuthClient).subscribe(client => {
-      this.client = client;
+    this.store.select(selectAuthUser).subscribe(user => {
+      this.user = user;
       this.store.dispatch(new GetAttachmentAction(this.compliance?.attachment as string));
-      this.newSubscription = this.store.select(selectAttachmentById(this.compliance?.attachment as string)).subscribe(attachment => {        
+      this.newSubscription = this.store.select(selectAttachmentById(this.compliance?.attachment as string)).subscribe(attachment => {
         if (attachment) {
           // this.signature = attachment.versions[attachment.versions.length - 1].url as string;
         }
       });
-    });   
+    });
   }
 
   ngAfterViewInit(){
     const element = this.elementRef.nativeElement as HTMLElement;
     const canvas = element.querySelector('#canvas') as HTMLCanvasElement;
-    
+
     this.context = canvas.getContext('2d') as CanvasRenderingContext2D;
     this.context.strokeStyle = 'white';
     this.context.lineWidth = 1;
     this.context.lineCap = 'round';
     this.context.canvas.height = this.height;
-    this.width = this.context.canvas.width;    
+    this.width = this.context.canvas.width;
 
     this.draw();
   }
 
-  draw(){    
+  draw(){
     this.context.canvas.addEventListener("mousedown", (event: MouseEvent) => {
       this.trackMouse = true;
       this.lastPoint = this.getPoint(event);
@@ -88,11 +88,11 @@ export class SignatureComponent extends BaseComponent implements OnInit, AfterVi
     });
 
     this.setFont();
-  } 
+  }
 
   drawTracks  = (event: MouseEvent) => {
     if(!this.trackMouse || this.selectedFont !== 'custom') return;
-    
+
     this.context.beginPath();
     this.context.moveTo(this.lastPoint.x, this.lastPoint.y);
 
@@ -122,7 +122,7 @@ export class SignatureComponent extends BaseComponent implements OnInit, AfterVi
   }
 
   setFont(font = 'custom') {
-    const name = this.client.firstname+this.client.lastname;
+    const name = this.user.firstname+this.user.lastname;
     this.selectedFont = font
     this.context.clearRect(0, 0, this.width, this.height);
 
@@ -132,19 +132,19 @@ export class SignatureComponent extends BaseComponent implements OnInit, AfterVi
     else {
       this.context.fillStyle = 'var(--color-white)';
       this.context.font = `30px ${font}`;
-      this.context.fillText(name, this.width/10, this.height/2);      
+      this.context.fillText(name, this.width/10, this.height/2);
     }
   }
 
   updateSignature() {
-    this.signature = this.context.canvas.toDataURL();  
-    const compliance: Compliance = { userId: this.client._id, model: ComplianceModel.SIGNATURE, status: ComplianceStatusEnum.PENDING, hidden: false, title: ComplianceTitleEnum.SIGNATURE, ...this.compliance } as any;
-    
+    this.signature = this.context.canvas.toDataURL();
+    const compliance: Compliance = { userId: this.user._id, model: ComplianceModel.SIGNATURE, status: ComplianceStatusEnum.PENDING, hidden: false, title: ComplianceTitleEnum.SIGNATURE, ...this.compliance } as any;
+
     this.store.dispatch(new CreateComplianceAction({ compliance, document: this.signature }, {
       success: () => {
         this.store.dispatch(new AddToast({ title: 'Signature upload successful'}));
         this.signed.emit();
-      }, 
+      },
       failure: () => {
         this.store.dispatch(new AddToast({ title: 'Signature upload failed'}));
       }

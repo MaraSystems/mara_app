@@ -1,0 +1,12 @@
+<div class="header">
+    <h1 class="header-title header-3">Users</h1>
+</div>
+
+<div class="users" *ngIf="users.length">
+    <app-table-header [list]="['', 'Username', 'Email', 'Phone', 'Status']"></app-table-header>
+    <div class="users-list">
+        <app-user-item *ngFor="let item of users" [routerLink]="'/users/' + item._id" [user]="item"></app-user-item>
+    </div>
+</div>
+
+<app-empty *ngIf="!users.length" name="project"></app-empty>

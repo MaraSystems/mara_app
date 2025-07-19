@@ -8,7 +8,7 @@ import { AddToast } from 'src/app/general/features/toast/utils/store/toast.actio
 import { ToastType } from 'src/app/general/features/toast/utils/models/toast-type';
 import { getFormControl } from 'src/app/general/utils/lib/getFormControl';
 import { PopupService } from 'src/app/general/features/popup/popup.service';
-import { Kin } from 'src/app/client/utils/models/kin';
+import { Kin } from 'src/app/users/utils/models/kin';
 import { GenderType } from 'src/app/profile/utils/gender-type';
 import { selectKinByUserId } from '../../../kin/utils/store/kin-store.selector';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
@@ -59,13 +59,13 @@ export class ProfileCreateKinComponent extends BaseComponent implements OnInit {
       userId: new FormControl(this.userId),
     });
 
-    this.newSubscription = this.form.valueChanges.subscribe(data => {              
+    this.newSubscription = this.form.valueChanges.subscribe(data => {
       this.address = addressUtil.updateAddress(this.address, data);
       this.kin = { ...this.kin, ...data };
     });
   }
 
-  updateKin() {    
+  updateKin() {
     this.store.dispatch(new CreateKinAction(this.kin, {
       success: () => {
         this.done.emit();

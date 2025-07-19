@@ -4,7 +4,7 @@
     <h4 class="text-1 heading">Select Style</h4>
     <span class="styles-list">
         <span class="styles-list-item text-2" [ngClass]="{ selected: selectedFont === 'custom'}" (click)="setFont('custom')">Custom</span>
-        <span class="styles-list-item text-2" [ngClass]="{ selected: selectedFont === item}" [style.font-family]="item" *ngFor="let item of fonts" (click)="setFont(item)">{{ this.client.firstname+this.client.lastname }}</span>
+        <span class="styles-list-item text-2" [ngClass]="{ selected: selectedFont === item}" [style.font-family]="item" *ngFor="let item of fonts" (click)="setFont(item)">{{ this.user.firstname+this.user.lastname }}</span>
     </span>
 </span>
 

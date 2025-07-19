@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { ComplianceState } from "./compliance-store.reducer";
-import { Compliance } from "src/app/client/utils/models/compliance";
+import { Compliance } from "src/app/users/utils/models/compliance";
 
 export const complianceSelector = createFeatureSelector<Readonly<ComplianceState>>('compliances');
 

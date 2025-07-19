@@ -7,9 +7,6 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { Auth } from './auth/utils/models/auth.model';
 import { GetAuthAction } from './auth/utils/store/auth-store.action';
-import { GetClientAction } from './client/utils/store/client-store.action';
-import { selectClientById } from './client/utils/store/client-store.selector';
-import { OnboardStatus } from './profile/utils/onboard-status';
 
 
 @Component({
@@ -36,22 +33,10 @@ export class AppComponent  extends BaseComponent implements OnInit {
     this.store.dispatch(new GetAuthAction());
     this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
       this.auth = auth;
-      if (this.auth) {
-        this.onboardClient();
-      }
     });
 
     this.newSubscription = this.router.events.subscribe((event) => {
       this.notApp = !this.notAppUrl.includes(this.document.location.pathname) && !!this.auth;
-    });
-  }
-
-  onboardClient() {
-    this.store.dispatch(new GetClientAction(this.auth.id, true));
-    this.newSubscription = this.store.select(selectClientById(this.auth.id)).subscribe(client => {
-      if (client.onboard !== OnboardStatus.COMPLETED) {
-        this.router.navigateByUrl('/profile/create');
-      }
     });
   }
 

@@ -1,6 +1,6 @@
 import { EntityAdapter, EntityState, createEntityAdapter } from "@ngrx/entity";
 import { Action } from "@ngrx/store";
-import { Kin } from "src/app/client/utils/models/kin";
+import { Kin } from "src/app/users/utils/models/kin";
 import { CreateKinActionFail, CreateKinActionSuccess, GetKinActionFail, GetKinActionSuccess, KinActionsType, UpdateKinActionFail, UpdateKinActionSuccess } from "./kin-store.action";
 
 export interface KinState extends EntityState<Kin> {
@@ -33,47 +33,47 @@ export function kinReducer(state = initialState, action: Action): KinState {
         case KinActionsType.CREATE_KIN_SUCCESS:
             const createPayload = (action as CreateKinActionSuccess).payload;
             return kinAdapter.addOne(createPayload, { ...state, loading: false, loaded: true })
-            
+
         case KinActionsType.CREATE_KIN_FAIL:
             return {
                 ...state,
                 loading: false,
                 loaded: true,
                 error: (action as CreateKinActionFail).payload
-            }    
+            }
 
         case KinActionsType.UPDATE_KIN:
             return { ...state, loading: true, loaded: false };
 
         case KinActionsType.UPDATE_KIN_SUCCESS:
-            const updatePayload = (action as UpdateKinActionSuccess).payload;            
+            const updatePayload = (action as UpdateKinActionSuccess).payload;
             return kinAdapter.updateOne(updatePayload, { ...state, loading: false, loaded: true })
-            
+
         case KinActionsType.UPDATE_KIN_FAIL:
             return {
                 ...state,
                 loading: false,
                 loaded: true,
                 error: (action as UpdateKinActionFail).payload
-            }   
-            
+            }
+
         case KinActionsType.GET_KIN:
             return { ...state, loading: true, loaded: false };
 
         case KinActionsType.GET_KIN_SUCCESS:
             const { payload: kinPayload } = (action as GetKinActionSuccess);
             return kinAdapter.addOne(
-                kinPayload, 
+                kinPayload,
                 { ...state, loading: false, loaded: true }
             )
-            
+
         case KinActionsType.GET_KIN_FAIL:
             return {
                 ...state,
                 loading: false,
                 loaded: true,
                 error: (action as GetKinActionFail).payload
-            } 
+            }
 
         default:
             return state;

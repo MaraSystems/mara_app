@@ -1,6 +1,6 @@
 import { Action } from "@ngrx/store";
 import { Auth } from "../models/auth.model";
-import { Client } from "src/app/client/utils/models/client";
+import { User } from "src/app/users/utils/models/user";
 import { Login } from "../models/login.model";
 import { Update } from "@ngrx/entity";
 import { SideEffects } from "src/app/general/utils/models/side-effects";
@@ -82,7 +82,7 @@ export class LogoutAuthActionFail implements Action {
     constructor(public payload: string){}
 }
 
-export type IssuesAction = 
+export type IssuesAction =
 GetPasswordAuthAction |
 GetPasswordAuthActionSuccess |
 GetPasswordAuthActionFail |

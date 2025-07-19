@@ -1,7 +1,8 @@
-import { Kin } from "src/app/client/utils/models/kin";
+import { Kin } from "src/app/users/utils/models/kin";
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
 import { SideEffects } from "src/app/general/utils/models/side-effects";
+import { UpdateStr } from "@ngrx/entity/src/models";
 
 
 export enum KinActionsType {
@@ -35,7 +36,7 @@ export class CreateKinActionFail implements Action {
 
 export class UpdateKinAction implements Action {
     readonly type = KinActionsType.UPDATE_KIN;
-    constructor(public payload: Update<Kin>, public sideEffects = new SideEffects()){}
+    constructor(public payload: UpdateStr<Kin>, public sideEffects = new SideEffects()){}
 }
 
 export class UpdateKinActionSuccess implements Action {
@@ -63,7 +64,7 @@ export class GetKinActionFail implements Action {
     constructor(public payload: string){}
 }
 
-export type KinAction = 
+export type KinAction =
 CreateKinAction |
 CreateKinActionSuccess |
 CreateKinActionFail |

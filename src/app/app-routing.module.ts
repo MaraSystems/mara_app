@@ -20,8 +20,8 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    loadChildren: () => import('./client/features/client-create/client-create.module').then(
-      (m) => m.ClientCreateModule
+    loadChildren: () => import('./users/features/user-create/user-create.module').then(
+      (m) => m.UserCreateModule
     ),
     canActivate: [NoAuthGuard]
   },
@@ -33,9 +33,9 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'clients',
-    loadChildren: () => import('./client/features/client-shell/client-shell.module').then(
-      (m) => m.ClientShellModule
+    path: 'users',
+    loadChildren: () => import('./users/features/user-shell/user-shell.module').then(
+      (m) => m.UserShellModule
     )
   },
   {
@@ -58,10 +58,10 @@ const routes: Routes = [
       (m) => m.NotfoundModule
     )
   },
-  {
-    path: '**',
-    redirectTo: '404'
-  }
+  // {
+  //   path: '**',
+  //   redirectTo: '404'
+  // }
 ];
 
 @NgModule({

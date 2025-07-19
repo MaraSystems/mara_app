@@ -5,7 +5,7 @@ import { AppState } from 'src/app/app.state';
 import { FormGroup } from '@angular/forms';
 import { getFormControl } from 'src/app/general/utils/lib/getFormControl';
 import { PopupService } from 'src/app/general/features/popup/popup.service';
-import { Compliance, IdentificationComplianceEnum, AddressComplianceEnum, ComplianceModel } from 'src/app/client/utils/models/compliance';
+import { Compliance, IdentificationComplianceEnum, AddressComplianceEnum, ComplianceModel } from 'src/app/users/utils/models/compliance';
 import { CreateComplianceAction } from '../../../compliance/utils/store/compliance-store.action';
 
 
@@ -36,13 +36,13 @@ export class ProfileCreateComplianceComponent extends BaseComponent {
     super();
   }
 
-  updateCompliance() {  
-    const { document: [identificationDocument], ...identificationCompliance } = 
+  updateCompliance() {
+    const { document: [identificationDocument], ...identificationCompliance } =
       { ...this.identificationForm.value, userId: this.userId } as any;
 
     const { document: [addressDocument], ...addressCompliance } =
       { ...this.addressForm.value, userId: this.userId } as any;
-    
+
     this.store.dispatch(new CreateComplianceAction({ compliance: identificationCompliance, document: identificationDocument }, {
       success: () => {
         this.store.dispatch(new CreateComplianceAction({ compliance: addressCompliance, document: addressDocument }, {

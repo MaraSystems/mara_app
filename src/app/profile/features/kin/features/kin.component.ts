@@ -4,10 +4,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { Client } from 'src/app/client/utils/models/client';
+import { User } from 'src/app/users/utils/models/user';
 import { phonePattern } from 'src/app/general/utils/lib/patterns';
 import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
-import { Kin } from 'src/app/client/utils/models/kin';
+import { Kin } from 'src/app/users/utils/models/kin';
 import { selectKinByUserId } from '../utils/store/kin-store.selector';
 import * as addressUtil from 'src/app/general/utils/lib/address';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
@@ -33,7 +33,7 @@ export class KinComponent extends BaseComponent implements OnInit {
     super();
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.initForm();
     this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => {
       this.userId = auth?.id as string;
@@ -44,7 +44,7 @@ export class KinComponent extends BaseComponent implements OnInit {
         this.updateAddress(kin);
         this.initForm();
 
-        this.newSubscription = this.form.valueChanges.subscribe(data => {              
+        this.newSubscription = this.form.valueChanges.subscribe(data => {
           this.updateAddress(data);
         });
 
@@ -52,7 +52,7 @@ export class KinComponent extends BaseComponent implements OnInit {
           this.newSubscription = this.form.controls[control].valueChanges.subscribe(value => {
             this.updateData = this.updateData
               ? { ...this.updateData, [control]: value }
-              : { [control]: value } as Partial<Kin>;   
+              : { [control]: value } as Partial<Kin>;
           });
         });
       });
@@ -70,11 +70,11 @@ export class KinComponent extends BaseComponent implements OnInit {
   isRequired(name: string) {
     const value = ((this.kin || {}) as any)[name];
     const flag = !!value;
-    
+
     return flag;
   }
 
-  saveChanges() {        
+  saveChanges() {
     if (!this.kin) {
       this.store.dispatch(new CreateKinAction({ ...this.updateData as Kin, userId: this.userId }));
     }
@@ -102,7 +102,7 @@ export class KinComponent extends BaseComponent implements OnInit {
 
       email: new FormControl(this.kin?.email, [Validators.email, Validators.required]),
       phone: new FormControl(this.kin?.phone, [Validators.pattern(phonePattern), Validators.required]),
-      
+
       country: new FormControl(this.kin?.country, this.isRequired('country') ? [Validators.minLength(2), Validators.required]: []),
       state: new FormControl(this.kin?.state, this.isRequired('state') ? [Validators.minLength(2), Validators.required]: []),
       city: new FormControl(this.kin?.city, this.isRequired('city') ? [Validators.minLength(2), Validators.required]: []),

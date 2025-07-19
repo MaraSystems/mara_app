@@ -7,24 +7,35 @@ import { AuthAccessService } from "../access/auth-access.service";
 import { AuthActionsType, GetAuthAction, GetAuthActionFail, GetAuthActionSuccess, GetPasswordAuthAction, GetPasswordAuthActionFail, GetPasswordAuthActionSuccess, LoginAuthAction, LoginAuthActionFail, LoginAuthActionSuccess, LogoutAuthAction, LogoutAuthActionFail, LogoutAuthActionSuccess } from "./auth-store.action";
 import { DataResponse } from "src/app/general/utils/models/data-response";
 import { Auth } from "../models/auth.model";
-import { AppState } from "src/app/app.state";
-import { GetClientAction } from "src/app/client/utils/store/client-store.action";
-import { RouterService } from "src/app/router/utils/router.service";
+import { GetProfileAction } from "src/app/users/utils/store/user-store.action";
 import { ToastType } from "src/app/general/features/toast/utils/models/toast-type";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
+import { LocalAccessService } from "src/app/general/utils/services/local-access.service";
+import { EnvTypes } from "src/app/general/utils/models/env";
+import { ApiAccessService } from "src/app/general/utils/services/api-access.service";
+import { IAccessService } from "src/app/general/utils/services/iaccess.service";
+import { environment } from "src/environments/environment";
 
 @Injectable()
 export class AuthStoreEffect {
+    accessService!: IAccessService;
+
     constructor(
         private actions$: Actions,
+        localAccessService: LocalAccessService,
+        apiAccessService: ApiAccessService,
         private authAccessService: AuthAccessService,
-        private store: Store<AppState>,
-    ){}
+        private store: Store
+    ){
+      this.accessService = [EnvTypes.DEVELOPMENT, EnvTypes.TESTING].includes(environment.env)
+        ? localAccessService
+        : apiAccessService;
+    }
 
     getPasswordAuth$ = createEffect(() => this.actions$.pipe(
         ofType<GetPasswordAuthAction>(AuthActionsType.GET_PASSWORD_AUTH),
-        mergeMap((action: GetPasswordAuthAction) => 
-            this.authAccessService.getPassword(action.payload).pipe(
+        mergeMap((action: GetPasswordAuthAction) =>
+            this.accessService.requestPassword(action.payload).pipe(
                 map((response: DataResponse<string>) => {
                     return new GetPasswordAuthActionSuccess(response.data);
                 }),
@@ -39,15 +50,15 @@ export class AuthStoreEffect {
 
     loginAuth$ = createEffect(() => this.actions$.pipe(
         ofType<LoginAuthAction>(AuthActionsType.LOGIN_AUTH),
-        mergeMap((action: LoginAuthAction) => 
-            this.authAccessService.login(action.payload).pipe(
-                map((response: DataResponse<Auth>) => {         
-                    handleSuccessSideEffects((action as LoginAuthAction).sideEffects);           
-                    this.store.dispatch(new GetClientAction(response.data.id, true));               
+        mergeMap((action: LoginAuthAction) =>
+            this.accessService.login(action.payload).pipe(
+                map((response: DataResponse<Auth>) => {
+                    handleSuccessSideEffects((action as LoginAuthAction).sideEffects);
+                    this.store.dispatch(new GetProfileAction(true));
                     return new LoginAuthActionSuccess(response.data);
                 }),
                 catchError(err => of(new LoginAuthActionFail(err)).pipe(
-                    tap(() => {                                                
+                    tap(() => {
                         handleFailureSideEffects((action as LoginAuthAction).sideEffects, err);
                     })
                 ))
@@ -57,10 +68,10 @@ export class AuthStoreEffect {
 
     getAuth$ = createEffect(() => this.actions$.pipe(
         ofType<GetAuthAction>(AuthActionsType.GET_AUTH),
-        mergeMap((action: GetAuthAction) => 
+        mergeMap((action: GetAuthAction) =>
             this.authAccessService.getAuth().pipe(
-                map((response: DataResponse<Auth>) => {   
-                    this.store.dispatch(new GetClientAction(response.data.id, true));               
+                map((response: DataResponse<Auth>) => {
+                    this.store.dispatch(new GetProfileAction(true));
                     return new GetAuthActionSuccess(response.data);
                 }),
                 catchError(err => of(new GetAuthActionFail(err)))
@@ -70,7 +81,7 @@ export class AuthStoreEffect {
 
     logoutAuth$ = createEffect(() => this.actions$.pipe(
         ofType<LogoutAuthAction>(AuthActionsType.LOGOUT_AUTH),
-        mergeMap((action: LogoutAuthAction) => 
+        mergeMap((action: LogoutAuthAction) =>
             this.authAccessService.logout().pipe(
                 map(() => {
                     handleSuccessSideEffects((action as LogoutAuthAction).sideEffects);

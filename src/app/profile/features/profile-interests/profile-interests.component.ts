@@ -1,16 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Client } from '../../../client/utils/models/client';
+import { User } from '../../../users/utils/models/user';
 import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { phonePattern, usernamePattern } from 'src/app/general/utils/lib/patterns';
-import { UpdateClientAction } from '../../../client/utils/store/client-store.action';
+import { FormGroup } from '@angular/forms';
 import * as addressUtil from 'src/app/general/utils/lib/address';
-import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
-import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
-import { ToastType } from 'src/app/general/features/toast/utils/models/toast-type';
 import { PopupService } from 'src/app/general/features/popup/popup.service';
 import { OnboardStatus } from '../../utils/onboard-status';
 
@@ -20,10 +14,10 @@ import { OnboardStatus } from '../../utils/onboard-status';
   styleUrls: ['./profile-interests.component.scss']
 })
 export class ProfileInterestsComponent extends BaseComponent implements OnInit {
-  profile!: Client;
+  profile!: User;
   edit = false;
   form!: FormGroup;
-  updateData!: Partial<Client>;
+  updateData!: Partial<User>;
   address: addressUtil.IAddress = { countries: addressUtil.listCountries, states: [], cities: [] };
   onboardEnum = OnboardStatus;
 
@@ -35,6 +29,6 @@ export class ProfileInterestsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
 }

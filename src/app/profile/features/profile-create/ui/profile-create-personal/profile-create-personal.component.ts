@@ -4,12 +4,12 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as addressUtil from 'src/app/general/utils/lib/address';
-import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
+import { selectAuthUser } from 'src/app/users/utils/store/user-store.selector';
 import { getFormControl } from 'src/app/general/utils/lib/getFormControl';
 import { PopupService } from 'src/app/general/features/popup/popup.service';
 import { GenderType } from 'src/app/profile/utils/gender-type';
-import { UpdateClientAction } from 'src/app/client/utils/store/client-store.action';
-import { Client } from 'src/app/client/utils/models/client';
+import { UpdateProfileAction } from 'src/app/users/utils/store/user-store.action';
+import { User } from 'src/app/users/utils/models/user';
 
 @Component({
   selector: 'app-profile-create-personal',
@@ -19,9 +19,9 @@ import { Client } from 'src/app/client/utils/models/client';
 export class ProfileCreatePersanalComponent extends BaseComponent implements OnInit {
   @Output() done = new EventEmitter();
 
-  profile!: Client;
+  profile!: User;
   form!: FormGroup;
-  personalData!: Partial<Client>;
+  personalData!: Partial<User>;
   address: addressUtil.IAddress = { countries: addressUtil.listCountries, states: [], cities: [] };
   getControl = getFormControl;
   genderEnum = Object.values(GenderType);
@@ -34,8 +34,8 @@ export class ProfileCreatePersanalComponent extends BaseComponent implements OnI
   }
 
   ngOnInit(): void {
-    this.newSubscription = this.store.select(selectAuthClient).subscribe(client => {
-      this.profile = client;
+    this.newSubscription = this.store.select(selectAuthUser).subscribe(user => {
+      this.profile = user;
       this.address = addressUtil.updateAddress(this.address, this.profile);
       this.initForm();
     });
@@ -53,14 +53,14 @@ export class ProfileCreatePersanalComponent extends BaseComponent implements OnI
       street: new FormControl(this.profile.street, [Validators.minLength(2), Validators.required]),
     });
 
-    this.newSubscription = this.form.valueChanges.subscribe(data => {              
+    this.newSubscription = this.form.valueChanges.subscribe(data => {
       this.address = addressUtil.updateAddress(this.address, data);
       this.personalData = { ...this.personalData, ...data };
     });
   }
 
-  updateClient() {    
-    this.store.dispatch(new UpdateClientAction({ id: this.profile._id, changes: this.personalData }));
+  updateProfile() {
+    this.store.dispatch(new UpdateProfileAction(this.personalData));
     this.done.emit();
   }
 }

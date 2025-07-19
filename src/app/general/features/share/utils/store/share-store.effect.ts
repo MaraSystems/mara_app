@@ -2,22 +2,29 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { DataResponse } from "src/app/general/utils/models/data-response";
-import { ShareAccessService } from "../access/share-access.service";
 import { CreateShareAction, CreateShareActionFail, CreateShareActionSuccess, DeleteShareAction, DeleteShareActionFail, DeleteShareActionSuccess, GetShareAction, GetShareActionFail, GetShareActionSuccess, ListSharesAction, ListSharesActionFail, ListSharesActionSuccess, ShareActionsType, UpdateShareAction, UpdateShareActionSuccess, UpdateShareActionFail } from "./share-store.action";
 import { handleFailureSideEffects, handleSuccessSideEffects } from "src/app/general/utils/lib/handleSideEffects";
 import { Share } from "../models/share";
+import { Store } from "@ngrx/store";
+import { ApiAccessService } from "src/app/general/utils/services/api-access.service";
+import { LocalAccessService } from "src/app/general/utils/services/local-access.service";
+import { AccessService } from "src/app/general/utils/services/access.service";
 
 @Injectable()
-export class ShareStoreEffect {
+export class ShareStoreEffect extends AccessService {
     constructor(
         private actions$: Actions,
-        private shareAccessService: ShareAccessService
-    ){}
+        private store: Store,
+        localAccessService: LocalAccessService,
+        apiAccessService: ApiAccessService,
+    ){
+      super(localAccessService, apiAccessService);
+    }
 
     createShare$ = createEffect(() => this.actions$.pipe(
         ofType<CreateShareAction>(ShareActionsType.CREATE_SHARE),
-        mergeMap((action: CreateShareAction) => 
-            this.shareAccessService.createShare(action.payload).pipe(
+        mergeMap((action: CreateShareAction) =>
+            this.accessService.createShare(action.payload).pipe(
                 map((response: DataResponse<Share>) => {
                     handleSuccessSideEffects((action as CreateShareAction).sideEffects);
                     return new CreateShareActionSuccess(response.data);
@@ -33,8 +40,8 @@ export class ShareStoreEffect {
 
     updateShare$ = createEffect(() => this.actions$.pipe(
         ofType<UpdateShareAction>(ShareActionsType.UPDATE_SHARE),
-        mergeMap((action: UpdateShareAction) => 
-            this.shareAccessService.updateShare(action.payload).pipe(
+        mergeMap((action: UpdateShareAction) =>
+            this.accessService.updateShare(action.payload).pipe(
                 map((response: DataResponse<Share>) => {
                     handleSuccessSideEffects((action as UpdateShareAction).sideEffects);
                     return new UpdateShareActionSuccess({ id: action.payload.id as string, changes: response.data });
@@ -43,16 +50,16 @@ export class ShareStoreEffect {
                     tap(() => {
                         handleFailureSideEffects((action as UpdateShareAction).sideEffects);
                     })
-                ))            
+                ))
             )
         )
     ));
 
     getShare$ = createEffect(() => this.actions$.pipe(
         ofType<GetShareAction>(ShareActionsType.GET_SHARE),
-        mergeMap((action: GetShareAction) => 
-            this.shareAccessService.getShare(action.payload).pipe(
-                map((response: DataResponse<Share>) => {                                        
+        mergeMap((action: GetShareAction) =>
+            this.accessService.getShare(action.payload).pipe(
+                map((response: DataResponse<Share>) => {
                     return new GetShareActionSuccess(response.data);
                 }),
                 catchError(err => of(new GetShareActionFail(err))
@@ -62,9 +69,9 @@ export class ShareStoreEffect {
 
     listShares$ = createEffect(() => this.actions$.pipe(
         ofType<ListSharesAction>(ShareActionsType.LIST_SHARES),
-        mergeMap((action: ListSharesAction) => 
-            this.shareAccessService.listShares(action.model, action.modelId, action.payload).pipe(
-                map((response: DataResponse<[Share]>) => {                    
+        mergeMap((action: ListSharesAction) =>
+            this.accessService.listShares(action.model, action.modelId, action.payload).pipe(
+                map((response: DataResponse<Share[]>) => {
                     return new ListSharesActionSuccess(response.data);
                 }),
                 catchError(err => of(new ListSharesActionFail(err))
@@ -74,9 +81,9 @@ export class ShareStoreEffect {
 
     deleteShare$ = createEffect(() => this.actions$.pipe(
         ofType<DeleteShareAction>(ShareActionsType.DELETE_SHARE),
-        mergeMap((action: DeleteShareAction) => 
-            this.shareAccessService.deleteShare(action.payload).pipe(
-                map((response: DataResponse<Share>) => {         
+        mergeMap((action: DeleteShareAction) =>
+            this.accessService.deleteShare(action.payload).pipe(
+                map((response: DataResponse<Share>) => {
                     return new DeleteShareActionSuccess(response.data);
                 }),
                 catchError(err => of(new DeleteShareActionFail(err))

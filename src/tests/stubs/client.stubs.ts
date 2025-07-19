@@ -1,4 +1,4 @@
-import { Client } from "src/app/client/utils/models/client";
+import { Client } from "src/app/users/utils/models/client";
 import { NewClient } from "src/app/client/utils/models/new-client";
 
 export const newClientStub = () => ({

@@ -1,6 +1,6 @@
 import { ActionReducerMap } from "@ngrx/store";
-import { ClientState, clientReducer } from "./client/utils/store/client-store.reducer";
-import { ClientStoreEffect } from "./client/utils/store/client-store.effect";
+import { UserState, userReducer } from "./users/utils/store/user-store.reducer";
+import { UserStoreEffect } from "./users/utils/store/user-store.effect";
 import { ToastState, toastReducer } from "./general/features/toast/utils/store/toast.reducer";
 import { AuthState, authReducer } from "./auth/utils/store/auth-store.reducer";
 import { AuthStoreEffect } from "./auth/utils/store/auth-store.effect";
@@ -17,7 +17,7 @@ import { ComplianceStoreEffect } from "./profile/features/compliance/utils/store
 import { ComplianceState, complianceReducer } from "./profile/features/compliance/utils/store/compliance-store.reducer";
 
 export const appEffects = [
-    ClientStoreEffect,
+    UserStoreEffect,
     AuthStoreEffect,
     KinStoreEffect,
     AttachmentStoreEffect,
@@ -27,7 +27,7 @@ export const appEffects = [
 ];
 
 export interface AppState {
-    clients: ClientState,
+    users: UserState,
     toasts: ToastState,
     auth: AuthState,
     kins: KinState,
@@ -38,7 +38,7 @@ export interface AppState {
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
-    clients: clientReducer,
+    users: userReducer,
     toasts: toastReducer,
     auth: authReducer,
     kins: kinReducer,

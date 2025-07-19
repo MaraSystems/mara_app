@@ -43,11 +43,11 @@ export class AuthComponent extends BaseComponent implements OnInit {
     return this.form.controls[name] as FormControl;
   }
 
-  login() {    
+  login() {
     this.store.dispatch(new LoginAuthAction(this.loginData, {
-      success: () => {        
+      success: () => {
         this.store.dispatch(new AddToast({ title: 'Login successful' }));
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/profile');
       },
       failure: () => {
         this.store.dispatch(new AddToast({ title: 'Login failed' }));

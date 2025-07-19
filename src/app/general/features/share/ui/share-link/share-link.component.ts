@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Client } from 'src/app/client/utils/models/client';
-import { ListClientsAction } from 'src/app/client/utils/store/client-store.action';
-import { selectAllClients } from 'src/app/client/utils/store/client-store.selector';
+import { Client } from 'src/app/users/utils/models/client';
+import { ListClientsAction } from 'src/app/users/utils/store/client-store.action';
+import { selectAllClients } from 'src/app/users/utils/store/client-store.selector';
 import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 
 @Component({
@@ -33,11 +33,11 @@ export class ShareLinkComponent extends BaseComponent implements OnInit {
     });
   }
 
-  searchUsers(query: any) {    
+  searchUsers(query: any) {
     this.query = query;
     this.store.dispatch(new ListClientsAction());
     this.newSubscription = this.store.select(selectAllClients).subscribe(clients => {
-      this.clients = clients;      
+      this.clients = clients;
     });
   }
 
@@ -56,10 +56,10 @@ export class ShareLinkComponent extends BaseComponent implements OnInit {
     }, 1000);
   }
 
-  shareLink(search: HTMLInputElement) {    
+  shareLink(search: HTMLInputElement) {
     const list = Array.from(this.selectedClients);
     if (list.length) {
-      this.shareTo.emit(list);      
+      this.shareTo.emit(list);
       this.selectedClients.clear();
       this.control.reset();
       search.value = '';

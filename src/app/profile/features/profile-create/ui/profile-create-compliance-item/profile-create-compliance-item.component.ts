@@ -5,7 +5,7 @@ import { AppState } from 'src/app/app.state';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { getFormControl } from 'src/app/general/utils/lib/getFormControl';
 import { PopupService } from 'src/app/general/features/popup/popup.service';
-import { ComplianceModel } from 'src/app/client/utils/models/compliance';
+import { ComplianceModel } from 'src/app/users/utils/models/compliance';
 
 
 @Component({
@@ -31,8 +31,8 @@ export class ProfileCreateComplianceItemComponent extends BaseComponent implemen
     super();
   }
 
-  setExpiry (title: string) {    
-    const item = this.data.find(d => d.title === title);    
+  setExpiry (title: string) {
+    const item = this.data.find(d => d.title === title);
     this.expiry = !!item?.expiry;
 
     const expiryControl = getFormControl(this.form, 'expiry');
@@ -40,9 +40,9 @@ export class ProfileCreateComplianceItemComponent extends BaseComponent implemen
     expiryControl.setValue(expiryDate);
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.initForm();
-    this.list = this.data.map(d => d.title);    
+    this.list = this.data.map(d => d.title);
   }
 
   initForm() {
@@ -53,8 +53,8 @@ export class ProfileCreateComplianceItemComponent extends BaseComponent implemen
       model: new FormControl(this.model)
     });
 
-    this.newSubscription = this.form.valueChanges.subscribe(data => {                          
-      this.changes.emit(this.form);    
+    this.newSubscription = this.form.valueChanges.subscribe(data => {
+      this.changes.emit(this.form);
     });
 
     const modelControl = getFormControl(this.form, 'title');

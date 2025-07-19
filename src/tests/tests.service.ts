@@ -6,8 +6,8 @@ import { Login } from 'src/app/auth/utils/models/login.model';
 import { LoginAuthAction } from 'src/app/auth/utils/store/auth-store.action';
 import { Database } from '@black-ink/lonedb';
 import { environment } from 'src/environments/environment';
-import { ClientAccessService } from 'src/app/client/utils/access/client-access.service';
-import { RegisterClientAction } from 'src/app/client/utils/store/client-store.action';
+import { ClientAccessService } from 'src/app/users/utils/access/client-access.service';
+import { RegisterClientAction } from 'src/app/users/utils/store/client-store.action';
 import { firstValueFrom } from 'rxjs';
 import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { Auth } from 'src/app/auth/utils/models/auth.model';
@@ -20,7 +20,7 @@ export class TestsService {
 
   constructor(
     private store: Store,
-  ) { 
+  ) {
     this.db.empty();
   }
 
@@ -34,7 +34,7 @@ export class TestsService {
   }
 
   login(data: Partial<Login> = {}) {
-    const { email } = newClientStub();    
+    const { email } = newClientStub();
     this.store.dispatch(new LoginAuthAction({ email, password: '12345', ...data }));
   }
 }

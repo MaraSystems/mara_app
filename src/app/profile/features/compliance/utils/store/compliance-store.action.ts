@@ -1,7 +1,8 @@
-import { Compliance } from "src/app/client/utils/models/compliance";
+import { Compliance } from "src/app/users/utils/models/compliance";
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
 import { SideEffects } from "src/app/general/utils/models/side-effects";
+import { UpdateStr } from "@ngrx/entity/src/models";
 
 
 export enum ComplianceActionsType {
@@ -39,7 +40,7 @@ export class CreateComplianceActionFail implements Action {
 
 export class UpdateComplianceAction implements Action {
     readonly type = ComplianceActionsType.UPDATE_COMPLIANCE;
-    constructor(public payload: Update<Compliance>, public sideEffects = new SideEffects()){}
+    constructor(public payload: UpdateStr<Compliance>, public sideEffects = new SideEffects()){}
 }
 
 export class UpdateComplianceActionSuccess implements Action {
@@ -82,7 +83,7 @@ export class ListComplianceActionFail implements Action {
     constructor(public payload: string){}
 }
 
-export type ComplianceAction = 
+export type ComplianceAction =
 CreateComplianceAction |
 CreateComplianceActionSuccess |
 CreateComplianceActionFail |

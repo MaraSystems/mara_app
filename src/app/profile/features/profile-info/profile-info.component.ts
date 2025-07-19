@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Client } from '../../../client/utils/models/client';
+import { User } from '../../../users/utils/models/user';
 import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { phonePattern, usernamePattern } from 'src/app/general/utils/lib/patterns';
-import { UpdateClientAction } from '../../../client/utils/store/client-store.action';
+import { UpdateProfileAction } from '../../../users/utils/store/user-store.action';
 import * as addressUtil from 'src/app/general/utils/lib/address';
-import { selectAuthClient } from 'src/app/client/utils/store/client-store.selector';
+import { selectAuthUser } from 'src/app/users/utils/store/user-store.selector';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { ToastType } from 'src/app/general/features/toast/utils/models/toast-type';
 import { PopupService } from 'src/app/general/features/popup/popup.service';
@@ -20,10 +20,10 @@ import { OnboardStatus } from '../../utils/onboard-status';
   styleUrls: ['./profile-info.component.scss']
 })
 export class ProfileInfoComponent extends BaseComponent implements OnInit {
-  profile!: Client;
+  profile!: User;
   edit = false;
   form!: FormGroup;
-  updateData!: Partial<Client>;
+  updateData!: Partial<User>;
   address: addressUtil.IAddress = { countries: addressUtil.listCountries, states: [], cities: [] };
   onboardEnum = OnboardStatus;
 
@@ -35,13 +35,13 @@ export class ProfileInfoComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.newSubscription = this.store.select(selectAuthClient).subscribe(client => {
-      this.profile = client;
+    this.newSubscription = this.store.select(selectAuthUser).subscribe(user => {
+      this.profile = user;
 
       this.updateAddress(this.profile);
       this.initForm();
 
-      this.newSubscription = this.form.valueChanges.subscribe(data => {              
+      this.newSubscription = this.form.valueChanges.subscribe(data => {
         this.updateAddress(data);
       });
 
@@ -49,7 +49,7 @@ export class ProfileInfoComponent extends BaseComponent implements OnInit {
         this.newSubscription = this.form.controls[control].valueChanges.subscribe(value => {
           this.updateData = this.updateData
             ? { ...this.updateData, [control]: value }
-            : { [control]: value } as Partial<Client>;   
+            : { [control]: value } as Partial<User>;
         });
       });
     });
@@ -63,12 +63,12 @@ export class ProfileInfoComponent extends BaseComponent implements OnInit {
   isRequired(name: string) {
     const value = (this.profile as any)[name];
     const flag = !!value;
-    
+
     return flag;
   }
 
-  updateClient() {    
-    this.store.dispatch(new UpdateClientAction({ id: this.profile._id, changes: this.updateData }, {
+  updateProfile() {
+    this.store.dispatch(new UpdateProfileAction(this.updateData, {
       success: () => {
         this.edit = false;
         this.store.dispatch(new AddToast({ title: 'User update' }));
@@ -92,7 +92,7 @@ export class ProfileInfoComponent extends BaseComponent implements OnInit {
 
       email: new FormControl(this.profile.email, [Validators.email, Validators.required]),
       phone: new FormControl(this.profile.phone, [Validators.pattern(phonePattern), Validators.required]),
-      
+
       country: new FormControl(this.profile.country, this.isRequired('country') ? [Validators.minLength(2), Validators.required]: []),
       state: new FormControl(this.profile.state, this.isRequired('state') ? [Validators.minLength(2), Validators.required]: []),
       city: new FormControl(this.profile.city, this.isRequired('city') ? [Validators.minLength(2), Validators.required]: []),

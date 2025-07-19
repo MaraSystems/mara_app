@@ -6,8 +6,8 @@ import { ShareAccessType } from '../utils/models/share-access';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 import { ListSharesAction } from '../utils/store/share-store.action';
-import { GetClientAction } from 'src/app/client/utils/store/client-store.action';
-import { selectClientById } from 'src/app/client/utils/store/client-store.selector';
+import { GetClientAction } from 'src/app/users/utils/store/client-store.action';
+import { selectClientById } from 'src/app/users/utils/store/client-store.selector';
 import { ShareState } from '../utils/models/share-state';
 import { selectSharesByModelId } from '../utils/store/share-store.selector';
 import { ShareType } from '../utils/models/share-type';
@@ -32,7 +32,7 @@ export class ShareComponent extends BaseComponent implements OnInit {
 
   constructor(
     public store: Store
-  ) { 
+  ) {
     super();
   }
 
@@ -41,10 +41,10 @@ export class ShareComponent extends BaseComponent implements OnInit {
       this.store.dispatch(new ListSharesAction(this.model, this.modelId));
       this.store.dispatch(new GetClientAction(this.ownerId));
       this.newSubscription = this.store.select(selectClientById(this.ownerId)).subscribe(client => {
-        const owner: any = { userId: client._id, email: client.email, access: ShareAccessType.OWNER, model: this.model, modelId: this.modelId, state: ShareState.ACCEPTED };    
+        const owner: any = { userId: client._id, email: client.email, access: ShareAccessType.OWNER, model: this.model, modelId: this.modelId, state: ShareState.ACCEPTED };
 
         this.newSubscription = this.store.select(selectSharesByModelId(this.model, this.modelId)).subscribe(sharedList => {
-          this.sharedList = [owner, ...sharedList]; 
+          this.sharedList = [owner, ...sharedList];
         });
       });
     }
@@ -54,7 +54,7 @@ export class ShareComponent extends BaseComponent implements OnInit {
     this.changed.emit(data);
   }
 
-  share(list: string[]){    
+  share(list: string[]){
     this.shareTo.emit(list);
   }
 }
