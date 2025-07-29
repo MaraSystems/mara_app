@@ -2,18 +2,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--gap-x-big);
+    gap: var(--space-x-big);
     overflow-y: auto;
     overflow-x: hidden;
     width: -webkit-fill-available;
 }
 
-.home-item {
-    width: 100%;
-}
-
 @media only screen and (min-width: 760px){
     :host {
-        gap: var(--gap-max);
+        gap: var(--space-max);
     }
 }

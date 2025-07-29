@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Auth } from 'src/app/auth/utils/models/auth.model';
-import { selectActiveAuth } from 'src/app/auth/utils/store/auth-store.selector';
 import { BaseComponent } from 'src/app/general/utils/services/basecomponent.service';
 
 @Component({
@@ -10,8 +8,6 @@ import { BaseComponent } from 'src/app/general/utils/services/basecomponent.serv
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent extends BaseComponent implements OnInit {
-  auth: Auth | undefined;
-
   constructor(
     private store: Store
   ){
@@ -19,6 +15,5 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.newSubscription = this.store.select(selectActiveAuth).subscribe(auth => this.auth = auth);
   }
 }

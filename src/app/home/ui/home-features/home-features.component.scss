@@ -1,60 +1,82 @@
 :host {
+  display: flex;
+  padding: var(--space-big);
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-x-big);
+
+  .header {
     display: flex;
-    padding: var(--gap-big);
     flex-direction: column;
     align-items: center;
-    gap: var(--gap-x-big);
-
-    .list {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--gap-x-big);
-    }
-
-    .item {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--gap-small);
-        align-self: stretch;
-    }
-
-    .image {
-        width: 100%;
-        height: 9.375rem;
-        border-radius: var(--gap-x-small);
-    }
+    gap: var(--space-normal);
 
     .description {
-        color: var(--color-dark);
-        text-align: center;
+      text-align: center;
+      color: var(--color-accent);
     }
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-x-big);
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-small);
+      padding: var(--space-big);
+      box-shadow: var(--shadow-low);
+      border-radius: var(--space-small);
+
+      &:hover {
+        box-shadow: var(--shadow-high);
+        transition-duration: 1ms;
+      }
+
+      .icon {
+        font-size: var(--space-big);
+        border-radius: 100%;
+        color: var(--color-secondary);
+        padding: var(--space-normal);
+        background-color: rgba($color: #5F3DC4, $alpha: .1);
+      }
+
+      .description {
+          color: var(--color-accent);
+          text-align: center;
+      }
+    }
+  }
 }
 
 
 @media only screen and (min-width: 760px){
     :host {
-        padding: var(--gap-x-big);
-        gap: var(--gap-x-big);
+        padding: var(--space-x-big);
+        gap: var(--space-x-big);
         align-self: stretch;
-    
-        .list {
-            justify-content: center;
-            flex-direction: row;
-            gap: 2.6875rem;
-            align-self: stretch;
+
+        .features {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+
+            .item {
+                padding: var(--space-normal);
+                gap: var(--space-normal);
+            }
         }
-    
-        .item {
-            padding: var(--gap-small);
-            gap: var(--gap-small);
-        }
-    
-        .image {
-            width: 100%;
-            height: 12rem;
-            border-radius: var(--gap-small);
+    }
+}
+
+@media only screen and (min-width: 1600px){
+    :host {
+        .features {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            width: 80%;
         }
     }
 }

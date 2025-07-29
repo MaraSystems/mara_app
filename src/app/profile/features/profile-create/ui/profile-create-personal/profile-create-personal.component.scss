@@ -1,8 +1,0 @@
-:host {
-    width: -webkit-fill-available;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: max-content 1fr;
-    gap: var(--gap-normal);
-    max-width: var(--enclosed-500);
-}

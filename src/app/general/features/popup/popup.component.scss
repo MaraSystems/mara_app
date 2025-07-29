@@ -21,7 +21,7 @@
             position: fixed;
             height: 100%;
             width: 100%;
-            backdrop-filter: blur(var(--gap-x-small));
+            backdrop-filter: blur(var(--space-x-small));
             background-color: var(--color-overlay);
         }
 
@@ -29,7 +29,7 @@
             height: 100%;
             width: 100%;
             z-index: var(--index-elevated);
-            background-color: var(--color-white);
+            background-color: var(--color-light);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -39,13 +39,13 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: var(--gap-normal);
+            padding: var(--space-normal);
             width: -webkit-fill-available;
 
             &-icon {
                 color: var(--color-dark);
                 cursor: pointer;
-                font-size: var(--gap-big);
+                font-size: var(--space-big);
             }
         }
 
@@ -57,7 +57,7 @@
         &-controls {
             display: flex;
             align-items: center;
-            gap: var(--gap-normal);
+            gap: var(--space-normal);
         }
 
         &-toggle {
@@ -70,16 +70,16 @@
     :host {
         .popup {
             align-items: flex-end;
-            
+
             &-wrapper {
                 width: var(--enclosed-500);
-                margin: var(--gap-small);
-                border-radius: var(--gap-normal);
+                margin: var(--space-small);
+                border-radius: var(--space-normal);
                 box-shadow: var(--shadow-high);
             }
 
             &-full {
-                width: calc(100% - var(--gap-small) * 2) !important;
+                width: calc(100% - var(--space-small) * 2) !important;
             }
 
             &-toggle {

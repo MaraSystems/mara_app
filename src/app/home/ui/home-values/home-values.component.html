@@ -1,26 +1,5 @@
-<div class="content">
-    <h1 class="title header-1">{{ title }}</h1>
-    <p class="description header-2">{{ descripton }}</p>
-</div>
-<div class="buttons">
-    <button
-        class="button text-1 bordered"
-        routerLink="/auth"
-        *ngIf="!auth"
-        [ngStyle]="{ color: 'var(--color-primary)', backgroundColor: 'var(--color-light)', borderColor: 'var(--color-primary)' }">
-        Login
-    </button>
-    <button
-        class="button text-1 bordered"
-        routerLink="/profile"
-        *ngIf="auth"
-        [ngStyle]="{ color: 'var(--color-primary)', backgroundColor: 'var(--color-light)', borderColor: 'var(--color-primary)' }">
-        Profile
-    </button>
-    <button
-        class="button text-1 bordered"
-        routerLink="/showcase"
-        [ngStyle]="{ color: 'var(--color-primary)', backgroundColor: 'var(--color-black)', borderColor: 'var(--color-primary)' }">
-        Explore
-    </button>
-</div>
+<h1 class="title header-1">Agentic Solutions for a World in Motion</h1>
+<p class="description text-1">We ease your stress. We automate your world</p>
+<span class="controls">
+  <app-button routerLink="/showcase" [text]="'Join Waitlist'"></app-button>
+</span>

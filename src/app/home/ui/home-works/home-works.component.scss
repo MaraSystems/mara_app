@@ -1,80 +1,88 @@
 :host {
     display: flex;
-    padding: var(--gap-x-big) 5%;
+    padding: var(--space-x-big) 5%;
     flex-direction: column;
     align-items: center;
-    gap: var(--gap-x-big);
+    gap: var(--space-x-big);
     align-self: stretch;
     background: var(--color-light);
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-normal);
+
+      .description {
+        text-align: center;
+        color: var(--color-accent);
+      }
+    }
 
     .list {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
         justify-content: center;
-        gap: var(--gap-x-big);
+        gap: var(--space-x-big);
+        padding: var(--space-x-big);
+        width: calc(100% - var(--space-x-big));
     }
 
     .item {
         display: flex;
-        align-items: center;
-        padding: var(--gap-small);
-        gap: var(--gap-x-small, 1rem);
-    }
+        align-self: flex-start;
+        align-items: flex-start;
+        padding: var(--space-small);
+        gap: var(--space-x-small, 1rem);
+        box-shadow: var(--shadow-low);
 
-    .reversed {
-        flex-direction: row-reverse;
+        .icon {
+          font-size: var(--space-big);
+          border-radius: 100%;
+          color: var(--color-secondary);
+          padding: var(--space-normal);
+          background-color: rgba($color: #5F3DC4, $alpha: .1);
+        }
+
         .details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: flex-start;
+            gap: var(--space-small);
+            flex: 1 0 0;
+
+            .name {
+              color: var(--color-dark);
+              text-align: center;
+          }
+
+          .description {
+              color: var(--color-dark);
+              text-align: left;
+          }
         }
-
-        .description {
-            text-align: left !important;
-        }
-    }
-
-    .image {
-        width: 11.875rem;
-        height: 17.5rem;
-        border-radius: var(--gap-small);
-        justify-self: center;
-    }
-
-    .details {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-end;
-        gap: var(--gap-big);
-    }
-
-    .description {
-        color: var(--color-dark);
-        text-align: right;
     }
 }
 
 @media only screen and (min-width: 760px){
     :host {
-        padding: var(--gap-x-big) 15%;
-        gap: var(--gap-x-big);
-    
+        padding: var(--space-x-big);
+        gap: var(--space-x-big);
+        align-self: stretch;
+
         .list {
-            gap: var(--gap-x-big);
-        }
-    
-        .item {
-            gap: var(--gap-max);
-        }
-    
-        .image {
-            width: 25rem;
-            height: 31.25rem;
-        }
-    
-        .details {
-            padding: var(--gap-normal);
-            gap: var(--gap-x-big);
+            width: 80%;
+
+            .item {
+                padding: var(--space-normal);
+                gap: var(--space-normal);
+                width: 50%;
+            }
+
+            .reversed {
+              align-self: flex-end !important;
+            }
         }
     }
 }

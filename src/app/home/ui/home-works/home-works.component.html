@@ -1,17 +1,29 @@
-<h1 class="page-title header-3">How it works</h1>
-    <div class="list">
-        <div class="item" *ngFor="let item of list; index as i" [ngClass]="{ reversed: i%2 !== 0 }">
-            <img [src]="item.image" alt="" class="image">
-            <span class="details">
-                <p class="description text-1">{{item.description}}</p>
-                <button 
-                    class="button text-1 bordered"
-                    [ngClass]="{ elevated: false }"
-                    [routerLink]="item.link"
-                    *ngIf="!(['/auth', '/clients/register'].includes(item.link) && auth)"
-                    [ngStyle]="{ color: 'var(--color-primary)', backgroundColor: item.background, borderColor: 'var(--color-primary)' }">
-                    {{item.action}}
-                </button>
-            </span>
-        </div>
+<div class="header">
+  <h1 class="header-3">How it works</h1>
+  <span class="text-1 description">Core values that drive our commitment to your success.</span>
+</div>
+<div class="list">
+    <div class="item">
+      <span class="material-symbols-outlined icon">chat</span>
+        <span class="details">
+            <h5 class="name text-1">Talk to us</h5>
+            <p class="description text-3">Share your vision and challenges. We listen to understand your unique needs.</p>
+        </span>
     </div>
+
+    <div class="item reversed">
+      <span class="material-symbols-outlined icon">build</span>
+        <span class="details">
+            <h5 class="name text-1">We build & automate</h5>
+            <p class="description text-3">Our experts design and implement tailored solutions, from web apps to AI agents.</p>
+        </span>
+    </div>
+
+    <div class="item">
+      <span class="material-symbols-outlined icon">trending_up</span>
+        <span class="details">
+            <h5 class="name text-1">You grow effortlessly</h5>
+            <p class="description text-3">With your new systems in place, you can focus on scaling your business.</p>
+        </span>
+    </div>
+</div>

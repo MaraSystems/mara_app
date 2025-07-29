@@ -11,10 +11,10 @@
         display: flex;
         height: 100%;
         min-width: 200px;
-        padding: var(--gap-x-small, 5px);
+        padding: var(--space-x-small, 5px);
         justify-content: center;
         align-items: center;
-        gap: var(--gap-small, 10px);
+        gap: var(--space-small, 10px);
         flex: 1 0 0;
         color: var(--color-dark);
         cursor: pointer;
@@ -25,14 +25,14 @@
         color: var(--color-primary);
         transition-duration: .5s;
         background-color: var(--color-light);
-        border-radius: var(--gap-small);
+        border-radius: var(--space-small);
     }
 }
 
 @media only screen and (min-width: 760px){
     :host {
-        margin-top: var(--gap-big);
-        border-radius: var(--gap-small);
+        margin-top: var(--space-big);
+        border-radius: var(--space-small);
         box-shadow: var(--shadow-low);
     }
 }

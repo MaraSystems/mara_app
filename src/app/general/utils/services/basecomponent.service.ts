@@ -1,6 +1,7 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { More } from '../models/more';
+import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root'

@@ -1,0 +1,105 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    position: fixed;
+    z-index: var(--index-pop);
+    right: 1vw;
+    bottom: 1vh;
+    width: min(calc(100% - var(--space-big)), 350px);
+    gap: var(--space-small);
+
+    .window {
+      position: inherit;
+      top: 0;
+      left: 0;
+      display: grid;
+      grid-template-rows: min-content 1fr min-content;
+      height: 100%;
+      width: 100%;
+      background-color: var(--color-light);
+      border-radius: var(--space-normal);
+
+      .header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        align-self: stretch;
+        padding: var(--space-normal);
+        border-bottom: 1px solid rgba($color: black, $alpha: .1);
+
+        .brand {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: var(--space-small);
+
+          .logo {
+            width: var(--space-big);
+            height: var(--space-big);
+          }
+
+          .name {
+            display: flex;
+          }
+        }
+      }
+
+      .messages {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: scroll;
+
+        .item {
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          gap: var(--space-small);
+          padding: var(--space-small);
+
+          &-content {
+            padding: var(--space-normal);
+            background-color: var(--color-dark);
+            color: var(--color-light);
+            border-radius: var(--space-small);
+          }
+        }
+
+        .reversed {
+          flex-direction: row-reverse !important;
+        }
+      }
+
+      .control {
+        border-top: 1px solid rgba($color: black, $alpha: .1);
+        padding: var(--space-normal);
+      }
+    }
+
+    .toggle {
+      padding: var(--space-normal);
+      background-color: var(--color-primary);
+      width: min-content;
+      border-radius: 100%;
+      box-shadow: var(--shadow-medium);
+      align-self: flex-end;
+      cursor: pointer;
+      color: var(--color-light);
+    }
+}
+
+@media only screen and (min-width: 760px){
+    :host {
+        padding: var(--space-big);
+
+        .window {
+          height: 550px;
+          box-shadow: var(--shadow-medium);
+          position: relative;
+        }
+    }
+}

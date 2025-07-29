@@ -1,49 +1,24 @@
 import { ActionReducerMap } from "@ngrx/store";
-import { UserState, userReducer } from "./users/utils/store/user-store.reducer";
-import { UserStoreEffect } from "./users/utils/store/user-store.effect";
 import { ToastState, toastReducer } from "./general/features/toast/utils/store/toast.reducer";
-import { AuthState, authReducer } from "./auth/utils/store/auth-store.reducer";
-import { AuthStoreEffect } from "./auth/utils/store/auth-store.effect";
-import { KinStoreEffect } from "./profile/features/kin/utils/store/kin-store.effect";
-import { KinState, kinReducer } from "./profile/features/kin/utils/store/kin-store.reducer";
 import { routerReducer } from "@ngrx/router-store";
 import { RouterState } from "./router/store/router.reducer";
-import { AttachmentStoreEffect } from "./attachment/utils/store/attachment-store.effect";
-import { AttachmentState, attachmentReducer } from "./attachment/utils/store/attachment-store.reducer";
 import { ToastEffect } from "./general/features/toast/utils/store/toast.effect";
-import { ShareStoreEffect } from "./general/features/share/utils/store/share-store.effect";
-import { ShareState, shareReducer } from "./general/features/share/utils/store/share-store.reducer";
-import { ComplianceStoreEffect } from "./profile/features/compliance/utils/store/compliance-store.effect";
-import { ComplianceState, complianceReducer } from "./profile/features/compliance/utils/store/compliance-store.reducer";
+import { botReducer, BotState } from "./general/features/bot/utils/store/bot.reducer";
+import { BotStoreEffect } from "./general/features/bot/utils/store/bot.effect";
 
 export const appEffects = [
-    UserStoreEffect,
-    AuthStoreEffect,
-    KinStoreEffect,
-    AttachmentStoreEffect,
     ToastEffect,
-    ShareStoreEffect,
-    ComplianceStoreEffect
+    BotStoreEffect
 ];
 
 export interface AppState {
-    users: UserState,
     toasts: ToastState,
-    auth: AuthState,
-    kins: KinState,
     router: RouterState,
-    attachments: AttachmentState,
-    shares: ShareState,
-    compliances: ComplianceState,
+    bot: BotState
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
-    users: userReducer,
     toasts: toastReducer,
-    auth: authReducer,
-    kins: kinReducer,
     router: routerReducer,
-    attachments: attachmentReducer,
-    shares: shareReducer,
-    compliances: complianceReducer
+    bot: botReducer
 };

@@ -1,20 +1,19 @@
 :root {
-    --color-primary: #7482FE;
-    --color-secondary: #414888;
+    --color-primary: #5F3DC4;
+    --color-secondary: #1601f9;
     --color-light: #F2F4FF;
+     --color-accent: #a4a4ab;
     --color-dark: #1B1E38;
-    --color-white: #FFFFFF;
-    --color-black: #000000;
     --color-overlay: #1b1e387b;
     --color-error: red;
-    
-    --gap-none: 0px;
-    --gap-x-small: 5px;
-    --gap-small: 10px;
-    --gap-normal: 20px;
-    --gap-big: 30px;
-    --gap-x-big: 50px;
-    --gap-max: 100px;
+
+    --space-none: 0px;
+    --space-x-small: 5px;
+    --space-small: 10px;
+    --space-normal: 20px;
+    --space-big: 30px;
+    --space-x-big: 50px;
+    --space-max: 100px;
 
     --shadow-high: 0px 3px 8px 0px rgba(92, 94, 96, 0.25);
     --shadow-medium: 0px 2px 5px 0px rgba(92, 94, 96, 0.25);
@@ -46,15 +45,15 @@
 html, body {
     width: 100%;
     height: 100%;
-    background-color: var(--color-white);
+    background-color: var(--color-light);
 }
 
 .container {
     display: flex;
-    padding: 0rem var(--gap-small);
+    padding: 0rem var(--space-small);
     flex-direction: column;
     align-items: center;
-    gap: var(--gap-big);
+    gap: var(--space-big);
     align-self: stretch;
 }
 
@@ -62,7 +61,7 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--gap-normal);
+    gap: var(--space-normal);
     align-self: stretch;
 
     &-group {
@@ -72,12 +71,12 @@ html, body {
     &-control {
         display: flex;
         flex-direction: column;
-        gap: var(--gap-x-small);
+        gap: var(--space-x-small);
         align-self: stretch;
-        border-radius: var(--gap-x-small);
+        border-radius: var(--space-x-small);
         border: 1px solid var(--color-primary);
         width: -webkit-fill-available;
-        padding: var(--gap-x-small);
+        padding: var(--space-x-small);
         color: var(--color-dark);
         align-items: flex-start;
 
@@ -109,8 +108,8 @@ html, body {
         }
 
         &-data.checkbox {
-            width: var(--gap-normal);
-            height: var(--gap-normal);
+            width: var(--space-normal);
+            height: var(--space-normal);
             accent-color: var(--color-primary);
         }
 
@@ -121,7 +120,7 @@ html, body {
 }
 
 .bordered {
-    border-radius: var(--gap-x-big);
+    border-radius: var(--space-x-big);
     border: 1px solid !important;
 }
 
@@ -149,7 +148,7 @@ html, body {
     font-family: "Lato", sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
-    line-height: 2rem; 
+    line-height: 2rem;
     letter-spacing: 0.07rem;
 }
 
@@ -165,7 +164,7 @@ html, body {
     font-family: "Lato", sans-serif;
     font-size: 0.8rem;
     font-weight: 400;
-    line-height: .8rem; 
+    line-height: .8rem;
     letter-spacing: 0.04rem;
 }
 
@@ -173,17 +172,17 @@ html, body {
     font-family: "Lora", serif;
     font-size: 0.6rem;
     font-weight: 300;
-    line-height: .5rem; 
+    line-height: .5rem;
     letter-spacing: 0.03rem;
 }
 
 .button {
     display: flex;
-    padding: var(--gap-small) var(--gap-normal);
+    padding: var(--space-small) var(--space-normal);
     justify-content: center;
     align-items: center;
-    gap: var(--gap-normal);
-    border-radius: var(--gap-x-big);
+    gap: var(--space-normal);
+    border-radius: var(--space-x-big);
     background-color: var(--color-primary);
     color: var(--color-light);
     cursor: pointer;
@@ -207,7 +206,7 @@ html, body {
 }
 
 .icon {
-    font-size: var(--gap-normal);
+    font-size: var(--space-normal);
     color: var(--color-dark);
 
     &:hover {
@@ -224,7 +223,7 @@ html, body {
 
 .unit-container {
     display: flex;
-    gap: var(--gap-x-small);
+    gap: var(--space-x-small);
     align-items: center;
 }
 
@@ -233,7 +232,7 @@ html, body {
     align-items: center;
     background-color: var(--color-primary);
     color: var(--color-light);
-    border-radius: var(--gap-x-small);
+    border-radius: var(--space-x-small);
     padding: 3px;
 }
 
@@ -244,10 +243,10 @@ html, body {
 
 .tag {
     background-color: var(--color-primary);
-    padding: var(--gap-small);
+    padding: var(--space-small);
     box-shadow: var(--shadow-medium);
     color: var(--color-light);
-    border-radius: var(--gap-small);
+    border-radius: var(--space-small);
 }
 
 .badge {
@@ -265,18 +264,18 @@ html, body {
 .avater-small {
     position: relative;
     border-radius: 50%;
-    padding: var(--gap-x-small);
+    padding: var(--space-x-small);
     box-shadow: var(--shadow-low);
     height: min-content;
     width: min-content;
 
     &-image {
-        width: var(--gap-big);
-        height: var(--gap-big);
+        width: var(--space-big);
+        height: var(--space-big);
     }
 
     &-icon {
-        font-size: var(--gap-big);
+        font-size: var(--space-big);
         color: var(--color-primary);
     }
 }
@@ -284,18 +283,18 @@ html, body {
 .avater {
     position: relative;
     border-radius: 50%;
-    padding: var(--gap-big);
+    padding: var(--space-big);
     box-shadow: var(--shadow-high);
     height: min-content;
     width: min-content;
 
     &-image {
-        width: var(--gap-max);
-        height: var(--gap-max);
+        width: var(--space-max);
+        height: var(--space-max);
     }
 
     &-icon {
-        font-size: var(--gap-max);
+        font-size: var(--space-max);
         color: var(--color-primary);
     }
 }
@@ -306,42 +305,42 @@ html, body {
         line-height: 5rem;
         letter-spacing: 0.3rem;
     }
-    
+
     .header-2 {
         font-size: 2.5rem;
         line-height: 4rem;
         letter-spacing: 0.2rem;
     }
-    
+
     .header-3 {
         font-size: 2rem;
         line-height: 3rem;
         letter-spacing: 0.2rem;
     }
-    
+
     .text-1 {
         font-size: 1.2rem;
         line-height: 1.3rem;
         letter-spacing: 0.05rem;
     }
-    
+
     .text-2 {
         font-size: 1rem;
         line-height: 1rem;
         letter-spacing: 0.03rem;
     }
-    
+
     .text-3 {
         font-size: .8rem;
         line-height: .8rem;
         letter-spacing: 0.01rem;
     }
-    
+
     .button {
-        padding: var(--gap-small) var(--gap-x-big);
+        padding: var(--space-small) var(--space-x-big);
     }
 
     .form-control {
-        padding: var(--gap-small);
+        padding: var(--space-small);
     }
 }

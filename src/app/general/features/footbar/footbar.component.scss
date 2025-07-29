@@ -1,20 +1,20 @@
 :host {
     display: flex;
     width: -webkit-fill-available;
-    padding: var(--gap-x-small);
+    padding: var(--space-x-small);
     align-items: center;
     justify-content: space-around;
-    gap: var(--gap-small);
+    gap: var(--space-small);
     background: var(--color-light);
 
     .pane-icon {
         display: flex;
-        padding: var(--gap-x-small);
+        padding: var(--space-x-small);
         justify-content: center;
         align-items: center;
-        font-size: var(--gap-big);
+        font-size: var(--space-big);
         color: var(--color-dark);
-        border-radius: var(--gap-x-small);
+        border-radius: var(--space-x-small);
     }
 
     .pane-icon.active {

@@ -1,76 +1,33 @@
 :host {
     display: flex;
-    width: calc(100% - var(--gap-small));
-    padding: var(--gap-small);
-    flex-direction: column;
+    flex-direction: row;
+    gap: var(--space-big);
     align-items: center;
-    gap: var(--gap-x-big);
+    justify-content: space-around;
+    padding: var(--space-normal);
+    width: calc(100% - var(--space-normal));
+    border-top: 1px solid rgba($color: black, $alpha: .1);
 
-    .newsletter {
+    .brand {
+      display: none;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-small);
+
+      .logo {
+        width: var(--space-big);
+        height: var(--space-big);
+      }
+
+      .name {
         display: flex;
-        padding: var(--gap-small) var(--gap-normal);
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--gap-normal);
-        align-self: stretch;
-        background: var(--color-light);
-
-        &-header {
-            color: var(--color-dark);
-        }
-
-        &-note {
-            color: var(--color-dark);
-        }
-
-        &-form {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            align-self: stretch;
-        }
-
-        &-email{
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.3125rem;
-            align-self: stretch;
-            border: 1px solid var(--color-primary);
-            height: 40px;
-        }
-
-        &-subscribe{
-            display: flex;
-            padding: var(--gap-small) var(--gap-x-big);
-            justify-content: center;
-            align-items: center;
-            gap: var(--gap-normal);
-            align-self: stretch;
-            background: var(--color-primary);
-            border: none;
-            color: var(--color-dark);
-        }
-
+      }
     }
 
     .links {
         display: flex;
-        padding: var(--gap-small);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: var(--gap-normal);
-
-        .app-name {
-            color: var(--color-dark);
-        }
-
-        &-list {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--gap-normal);
-        }
+        align-items: flex-start;
+        gap: var(--space-normal);
 
         &-item {
             color: var(--color-dark);
@@ -86,16 +43,20 @@
 
 @media only screen and (min-width: 760px){
     :host {
-        gap: var(--gap-max);
-        padding: var(--gap-x-big) var(--gap-big);
-        width: calc(100% - var(--gap-big));
+        gap: var(--space-max);
+        padding: var(--space-x-big) var(--space-big);
+        width: calc(100% - var(--space-big));
 
         .newsletter {
-            padding: var(--gap-normal);
-    
+            padding: var(--space-normal);
+
             &-form {
                 max-width: 43.875rem;
             }
+        }
+
+        .brand {
+          display: flex;
         }
     }
 }

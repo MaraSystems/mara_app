@@ -11,14 +11,16 @@ import { IAccessService } from './iaccess.service';
   providedIn: 'root'
 })
 export class AccessService {
-  accessService!: IAccessService;
+  api!: IAccessService;
 
   constructor(
       localAccessService: LocalAccessService,
       apiAccessService: ApiAccessService,
   ){
-    this.accessService = [EnvTypes.DEVELOPMENT, EnvTypes.TESTING].includes(environment.env)
-      ? localAccessService
-      : apiAccessService;
+    // this.accessService = [EnvTypes.DEVELOPMENT, EnvTypes.TESTING].includes(environment.env)
+    //   ? localAccessService
+    //   : apiAccessService;
+
+    this.api = localAccessService;
   }
 }

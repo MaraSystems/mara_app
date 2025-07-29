@@ -32,10 +32,10 @@ export class ButtonComponent implements OnInit, OnChanges{
 
     if (changes['elevated']?.currentValue) {
       this.element.classList.add('elevated');
-    } 
+    }
 
     if (changes['disabled']?.currentValue) {
       this.element.classList.add('disabled');
-    }    
+    }
   }
 }

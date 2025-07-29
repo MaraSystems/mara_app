@@ -1,31 +1,19 @@
 :host {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: var(--gap-normal);
-    height: 100vh;
+    gap: var(--space-big);
     position: relative;
-    background: url(../../../../assets/images//home-value-projects.png);
-    background-size: cover;
-    background-blend-mode: screen;
-    padding: var(--gap-normal);
-
-    .content {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--gap-x-big);
-        flex: 1 0 0;
-        align-self: stretch;
-        padding: var(--gap-normal);
-    }
+    padding: var(--space-big);
 
     .title {
-      color: var(--color-light);
+      color: var(--color-dark);
+      text-align: center;
     }
 
     .description {
-      color: var(--color-white);
+      color: var(--color-dark);
     }
 
     .buttons {
@@ -33,16 +21,12 @@
         align-items: flex-start;
         gap: 2.5rem;
         align-self: stretch;
-        padding: 0px var(--gap-normal);
+        padding: 0px var(--space-normal);
     }
 }
 
 @media only screen and (min-width: 760px){
     :host {
-      padding: var(--gap-x-big);
-
-      .content {
-          padding: var(--gap-normal);
-      }
+      padding: var(--space-x-big);
   }
 }

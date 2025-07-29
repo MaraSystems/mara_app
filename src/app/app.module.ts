@@ -9,28 +9,22 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from './general/features/toast/features/toast.module';
-import { SidebarModule } from './general/features/sidebar/sidebar.module';
-import { NavbarModule } from './general/features/navbar/navbar.module';
 import { FootbarModule } from './general/features/footbar/footbar.module';
 import { NotfoundModule } from './notfound/notfound.module';
 import { PopupModule } from './general/features/popup/popup.module';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     PopupModule,
     StoreModule.forRoot(appReducers),
-    StoreDevtoolsModule.instrument({ name: 'Contractor' }),
+    StoreDevtoolsModule.instrument({ name: 'Mara Systems' }),
     EffectsModule.forRoot(appEffects),
     HttpClientModule,
     ToastModule,
-    SidebarModule,
-    NavbarModule,
     FootbarModule,
     NotfoundModule,
   ],

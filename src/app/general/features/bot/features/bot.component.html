@@ -1,0 +1,24 @@
+<div class="window" *ngIf="active">
+
+  <span class="header">
+    <span class="brand">
+      <img src="../../../../../assets/images/logo.png" alt="M" class="logo">
+      <span href="" class="name text-1">Mara Asistant</span>
+    </span>
+
+    <span class="material-symbols-outlined close" (click)="active = false">close</span>
+  </span>
+
+  <div class="messages">
+    <span class="item" *ngFor="let item of messages" [ngClass]="{reversed: item.type === 'person'}">
+      <!-- <span class="material-symbols-outlined icon" (click)="active = false">{{ item.type }}</span> -->
+      <p class="item-content text-3">{{ item.content }}</p>
+    </span>
+  </div>
+
+  <span class="control">
+    <app-message-input (send)="messageBot($event)"></app-message-input>
+  </span>
+</div>
+
+<span class="material-symbols-outlined toggle" (click)="active = !active">close</span>

@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Auth } from 'src/app/auth/utils/models/auth.model';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home-values',
@@ -7,9 +6,5 @@ import { Auth } from 'src/app/auth/utils/models/auth.model';
   styleUrls: ['./home-values.component.scss']
 })
 export class HomeValuesComponent implements OnInit {
-  @Input() auth: Auth | undefined;
-  title = 'Simplified Projects';
-  descripton = 'Contractor simplifies projects and ensures payments with user-friendly features, including Escrow for financial peace of mind.';
-
   ngOnInit(): void {}
 }

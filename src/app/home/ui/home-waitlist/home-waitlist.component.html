@@ -1,0 +1,33 @@
+<div class="message">
+  <div class="header">
+    <h1 class="header-3">Ready to Automate?</h1>
+    <span class="text-1 description">Join our waitlist to get early access and updates on our agentic AI solutions. Let's build the future, together.</span>
+  </div>
+
+  <span class="list">
+    <div class="item">
+      <span class="material-symbols-outlined icon">check_circle</span>
+      <p class="description text-2">Priority access to new features</p>
+    </div>
+
+    <div class="item">
+      <span class="material-symbols-outlined icon">check_circle</span>
+      <p class="description text-2">Exclusive content and insights</p>
+    </div>
+
+    <div class="item">
+      <span class="material-symbols-outlined icon">check_circle</span>
+      <p class="description text-2">A consultation on your automation needs</p>
+    </div>
+  </span>
+</div>
+
+<div class="newsletter">
+    <h1 class="text-1">Join the Waitlist</h1>
+    <span class="newsletter-form">
+        <app-text-input type="text" [control]="formControls.fullname" name="Fullname"></app-text-input>
+        <app-text-input type="email" [control]="formControls.email" name="Email"></app-text-input>
+        <app-text-area type="text" [control]="formControls.message" name="Message"></app-text-area>
+        <app-button [disabled]="form.invalid" [text]="'Join Waitlist'" (click)="join()"></app-button>
+    </span>
+</div>

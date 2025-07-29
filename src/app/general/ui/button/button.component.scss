@@ -3,9 +3,9 @@
     flex-direction: row;
     justify-content: stretch;
     align-items: center;
-    gap: var(--gap-normal);
-    padding: var(--gap-small) var(--gap-normal);
-    border-radius: var(--gap-small);
+    gap: var(--space-normal);
+    padding: var(--space-small) var(--space-normal);
+    border-radius: var(--space-small);
     width: -webkit-fill-available;
     cursor: pointer;
 
@@ -15,7 +15,7 @@
     }
 
     .icon {
-        font-size: var(--gap-big);
+        font-size: var(--space-big);
         color: inherit;
     }
 
@@ -32,6 +32,6 @@
 
 @media only screen and (min-width: 760px){
     :host {
-        padding: var(--gap-small);
+        padding: var(--space-small);
     }
 }

@@ -1,0 +1,48 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-big);
+    align-items: center;
+    justify-content: space-around;
+    padding: var(--space-normal);
+    width: calc(100% - var(--space-normal));
+    border-bottom: 1px solid rgba($color: black, $alpha: .1);
+
+    .brand {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-small);
+
+      .logo {
+        width: var(--space-big);
+        height: var(--space-big);
+      }
+
+      .name {
+        display: flex;
+      }
+    }
+
+    .nav {
+      display: none;
+      flex-direction: row;
+      gap: var(--space-big);
+      align-items: center;
+      justify-content: space-around;
+
+      &-item {
+        text-decoration: none;
+        color: var(--color-dark);
+      }
+    }
+}
+
+@media only screen and (min-width: 760px){
+    :host {
+        .nav {
+          display: flex;
+        }
+    }
+}
+
