@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "contractor_app": {
+    "mara_app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -94,13 +94,13 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "contractor_app:build:production"
+              "browserTarget": "mara_app:build:production"
             },
             "development": {
-              "browserTarget": "contractor_app:build:development"
+              "browserTarget": "mara_app:build:development"
             },
             "staging": {
-              "browserTarget": "contractor_app:build:staging"
+              "browserTarget": "mara_app:build:staging"
             }
           },
           "defaultConfiguration": "development"
@@ -108,7 +108,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "contractor_app:build"
+            "browserTarget": "mara_app:build"
           }
         },
         "test": {
