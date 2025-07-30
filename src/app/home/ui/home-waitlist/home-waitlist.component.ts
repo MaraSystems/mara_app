@@ -6,6 +6,7 @@ import { AccessService } from 'src/app/general/utils/services/access.service';
 import { Store } from '@ngrx/store';
 import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
 import { ToastType } from 'src/app/general/features/toast/utils/models/toast-type';
+import { TriggerBotAction } from 'src/app/general/features/bot/utils/store/bot.action';
 
 @Component({
   selector: 'app-home-waitlist',
@@ -15,6 +16,7 @@ import { ToastType } from 'src/app/general/features/toast/utils/models/toast-typ
 export class HomeWaitlistComponent extends BaseComponent implements OnInit {
   form!: FormGroup;
   data!: IWaitList;
+  submit = false;
 
   constructor(
     private readonly accessService: AccessService,
@@ -42,12 +44,17 @@ export class HomeWaitlistComponent extends BaseComponent implements OnInit {
   }
 
   join() {
+    const messageToBot = `My name is ${this.data.fullname}, ${this.data.message}`;
+    this.submit = true;
+
     this.newSubscription = this.accessService.api.joinWaitlist(this.data).subscribe(done => {
       if (done.success) {
         this.form.reset();
       }
 
+      this.submit = false;
       this.store.dispatch(new AddToast({ title: 'Join waitlist', description: done.message, type: done.success ? ToastType.NOTE : ToastType.ERROR }));
+      this.store.dispatch(new TriggerBotAction(messageToBot));
     });
   }
 }

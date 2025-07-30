@@ -7,5 +7,5 @@ import { IMessage, ISendMessageParams } from '../../features/bot/utils/models/im
 export interface IAccessService {
   joinWaitlist: (data: IWaitList) => Observable<DataResponse<null>>;
 
-  sendMessage: (data: ISendMessageParams) => Observable<DataResponse<string>>;
+  sendMessage: (data: ISendMessageParams) => Observable<DataResponse<null>>;
 }

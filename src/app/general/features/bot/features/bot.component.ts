@@ -32,6 +32,13 @@ export class BotComponent extends BaseComponent implements OnInit {
     this.newSubscription = this.store.select(selectMessages).subscribe(messages => {
       this.messages = messages;
     });
+
+    this.newSubscription = this.store.select(state => state.bot.message).subscribe(message => {
+      if (message) {
+        this.messageBot(message);
+        this.active = true;
+      }
+    });
   }
 
   messageBot(message: string){

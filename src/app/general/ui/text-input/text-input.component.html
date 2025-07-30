@@ -1,6 +1,6 @@
 <span class="form-control" [ngClass]="{ invalid: (control.invalid && control.touched) }">
     <span class="info" *ngIf="label">
-        <label [for]="name" class="form-control-label text-1">{{name}}</label>
+        <label [for]="name" class="form-control-label text-1" [ngClass]="{ 'text-2': edit || control.value}">{{name}}</label>
         <h1 *ngIf="measure" class="text-2 unit">{{measure}}</h1>
     </span>
     <input

@@ -36,15 +36,10 @@ export class ApiAccessService implements IAccessService {
   }
 
   joinWaitlist(entry: IWaitList) {
-    return this.request<null>({ method: 'post', endpoint: 'users', body: entry });
+    return this.request<null>({ method: 'post', endpoint: '18ee5939-e8da-4975-9ecd-068ad379106a', body: entry });
   }
 
   sendMessage(data: ISendMessageParams){
-    return this.request<string>({ method: 'post', endpoint: '8e449eec-f72e-45c7-b2b2-f4e846170157', body: data }).pipe(
-      map((data) => {
-        const response: DataResponse<string> = { success: true, data: (data as any).output };
-        return response;
-      })
-    )
+    return this.request<null>({ method: 'post', endpoint: '8e449eec-f72e-45c7-b2b2-f4e846170157', body: data });
   }
 }

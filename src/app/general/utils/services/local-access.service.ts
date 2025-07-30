@@ -70,7 +70,7 @@ export class LocalAccessService implements IAccessService {
   }
 
   sendMessage(data: ISendMessageParams){
-    const response: DataResponse<string> = { success: true, data: 'Bot reply' };
+    const response: DataResponse<null> = { success: true, data: null, message: 'Bot reply' };
     return of(response);
   };
 }
