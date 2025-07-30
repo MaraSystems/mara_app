@@ -2,7 +2,7 @@
     --color-primary: #5F3DC4;
     --color-secondary: #1601f9;
     --color-light: #F2F4FF;
-     --color-accent: #a4a4ab;
+     --color-accent: #707070;
     --color-dark: #1B1E38;
     --color-overlay: #1b1e387b;
     --color-error: red;
@@ -46,6 +46,7 @@ html, body {
     width: 100%;
     height: 100%;
     background-color: var(--color-light);
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -132,7 +133,7 @@ html, body {
     font-family: "Lato", sans-serif;
     font-size: 2rem;
     font-weight: 900;
-    line-height: 4rem;
+    line-height: 3rem;
     letter-spacing: 0.2rem;
 }
 
@@ -140,7 +141,7 @@ html, body {
     font-family: "Lora", serif;
     font-size: 1.7rem;
     font-weight: 700;
-    line-height: 3rem;
+    line-height: 2rem;
     letter-spacing: 0.1rem;
 }
 
@@ -148,7 +149,7 @@ html, body {
     font-family: "Lato", sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
-    line-height: 2rem;
+    line-height: 1.5rem;
     letter-spacing: 0.07rem;
 }
 
@@ -156,7 +157,7 @@ html, body {
     font-family: "Lora", serif;
     font-size: 1rem;
     font-weight: 500;
-    line-height: 1rem;
+    line-height: 1.2rem;
     letter-spacing: 0.05rem;
 }
 
@@ -164,7 +165,7 @@ html, body {
     font-family: "Lato", sans-serif;
     font-size: 0.8rem;
     font-weight: 400;
-    line-height: .8rem;
+    line-height: 1.1rem;
     letter-spacing: 0.04rem;
 }
 
@@ -172,7 +173,7 @@ html, body {
     font-family: "Lora", serif;
     font-size: 0.6rem;
     font-weight: 300;
-    line-height: .5rem;
+    line-height: 1rem;
     letter-spacing: 0.03rem;
 }
 
@@ -182,12 +183,14 @@ html, body {
     justify-content: center;
     align-items: center;
     gap: var(--space-normal);
-    border-radius: var(--space-x-big);
+    border-radius: var(--space-small);
     background-color: var(--color-primary);
     color: var(--color-light);
     cursor: pointer;
     border: none;
     text-wrap: nowrap;
+    text-decoration: none;
+    width: min-content;
 
     &:disabled {
         opacity: .5;
@@ -302,42 +305,32 @@ html, body {
 @media only screen and (min-width: 760px){
     .header-1 {
         font-size: 3rem;
-        line-height: 5rem;
         letter-spacing: 0.3rem;
     }
 
     .header-2 {
         font-size: 2.5rem;
-        line-height: 4rem;
         letter-spacing: 0.2rem;
     }
 
     .header-3 {
         font-size: 2rem;
-        line-height: 3rem;
         letter-spacing: 0.2rem;
     }
 
     .text-1 {
         font-size: 1.2rem;
-        line-height: 1.3rem;
         letter-spacing: 0.05rem;
     }
 
     .text-2 {
         font-size: 1rem;
-        line-height: 1rem;
         letter-spacing: 0.03rem;
     }
 
     .text-3 {
         font-size: .8rem;
-        line-height: .8rem;
         letter-spacing: 0.01rem;
-    }
-
-    .button {
-        padding: var(--space-small) var(--space-x-big);
     }
 
     .form-control {

@@ -2,14 +2,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-x-big);
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     width: -webkit-fill-available;
+
+    .content {
+      height: 100%;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-max);
+    }
 }
 
 @media only screen and (min-width: 760px){
     :host {
-        gap: var(--space-max);
     }
 }

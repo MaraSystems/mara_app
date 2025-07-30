@@ -14,6 +14,7 @@
 
     .description {
       color: var(--color-dark);
+      text-align: center;
     }
 
     .buttons {
@@ -27,6 +28,6 @@
 
 @media only screen and (min-width: 760px){
     :host {
-      padding: var(--space-x-big);
+      padding: var(--space-max);
   }
 }

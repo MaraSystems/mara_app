@@ -10,15 +10,17 @@
   </span>
 
   <div class="messages">
-    <span class="item" *ngFor="let item of messages" [ngClass]="{reversed: item.type === 'person'}">
-      <!-- <span class="material-symbols-outlined icon" (click)="active = false">{{ item.type }}</span> -->
+    <span class="item" *ngFor="let item of messages" [ngClass]="{reversed: item.type === messageType.HUMAN}">
       <p class="item-content text-3">{{ item.content }}</p>
+    </span>
+    <span class="item" *ngIf="typing">
+      <p class="text-1">...</p>
     </span>
   </div>
 
   <span class="control">
-    <app-message-input (send)="messageBot($event)"></app-message-input>
+    <app-message-input (send)="messageBot($event)" [wait]="typing"></app-message-input>
   </span>
 </div>
 
-<span class="material-symbols-outlined toggle" (click)="active = !active">close</span>
+<span class="material-symbols-outlined toggle" (click)="active = !active">{{ active ? 'close' : 'robot'}}</span>

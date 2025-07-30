@@ -5,6 +5,7 @@ import { BaseComponent } from 'src/app/general/utils/services/basecomponent.serv
 import { SendMessageAction } from '../utils/store/bot.action';
 import { selectMessages } from '../utils/store/bot.selector';
 import { IMessage } from '../utils/models/imessage';
+import { MessengerEnum } from '../utils/models/messager.enum';
 
 @Component({
   selector: 'app-bot',
@@ -15,6 +16,9 @@ export class BotComponent extends BaseComponent implements OnInit {
   element!: Element;
   active = false;
   messages!: IMessage[];
+  sessionId = new Date().toString()
+  messageType = MessengerEnum;
+  typing = false;
 
   constructor(
     public store: Store<AppState>,
@@ -31,6 +35,14 @@ export class BotComponent extends BaseComponent implements OnInit {
   }
 
   messageBot(message: string){
-    this.store.dispatch(new SendMessageAction(message));
+    this.typing = true;
+    this.store.dispatch(new SendMessageAction({ message, sessionId: this.sessionId }, {
+      success: () => {
+        this.typing = false;
+      },
+      failure: () => {
+        this.typing = false;
+      }
+    }));
   }
 }

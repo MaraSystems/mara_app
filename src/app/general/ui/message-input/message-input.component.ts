@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { InputComponent } from '../input/input.component';
 
 @Component({
@@ -7,6 +7,7 @@ import { InputComponent } from '../input/input.component';
   styleUrls: ['./message-input.component.scss'],
 })
 export class MessageInputComponent implements OnInit, OnDestroy {
+  @Input() wait = false;
   @Output() send = new EventEmitter();
   input!: HTMLInputElement;
 

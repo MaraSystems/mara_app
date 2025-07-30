@@ -1,6 +1,6 @@
 import { Action } from "@ngrx/store";
 import { SideEffects } from "src/app/general/utils/models/side-effects";
-import { IMessage } from "../models/imessage";
+import { IMessage, ISendMessageParams } from "../models/imessage";
 
 export enum BotActionsType {
     SEND_MESSAGE = "[BOT] Send Message",
@@ -10,12 +10,12 @@ export enum BotActionsType {
 
 export class SendMessageAction implements Action {
     readonly type = BotActionsType.SEND_MESSAGE;
-    constructor(public payload: string, public sideEffects = new SideEffects()){}
+    constructor(public payload: ISendMessageParams, public sideEffects = new SideEffects()){}
 }
 
 export class SendMessageActionSuccess implements Action {
     readonly type = BotActionsType.SEND_MESSAGE_SUCCESS;
-    constructor(public payload: IMessage){}
+    constructor(public payload: string){}
 }
 
 export class SendMessageActionFail implements Action {

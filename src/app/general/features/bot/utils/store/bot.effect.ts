@@ -23,7 +23,7 @@ export class BotStoreEffect extends AccessService {
         ofType<SendMessageAction>(BotActionsType.SEND_MESSAGE),
         mergeMap((action: SendMessageAction) =>
             this.api.sendMessage(action.payload).pipe(
-                map((response: DataResponse<IMessage>) => {
+                map((response: DataResponse<string>) => {
                     handleSuccessSideEffects((action as SendMessageAction).sideEffects);
                     return new SendMessageActionSuccess(response.data);
                 }),

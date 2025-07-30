@@ -27,11 +27,11 @@ const initialState = botAdapter.getInitialState(defualtIssue);
 export function botReducer(state = initialState, action: Action): BotState {
     switch (action.type) {
         case BotActionsType.SEND_MESSAGE:
-            const sendPayload = { content: (action as SendMessageAction).payload, _id: new Date().toString(), type: MessengerEnum.HUMAN, created_at: new Date() };
+            const sendPayload = { content: (action as SendMessageAction).payload.message, _id: new Date().toString(), type: MessengerEnum.HUMAN, created_at: new Date() };
             return botAdapter.addOne(sendPayload, { ...state, loading: true, loaded: false })
 
         case BotActionsType.SEND_MESSAGE_SUCCESS:
-            const replyPayload = (action as SendMessageActionSuccess).payload;
+            const replyPayload = { content: (action as SendMessageActionSuccess).payload, _id: new Date().toString(), type: MessengerEnum.ROBOT, created_at: new Date() };
             return botAdapter.addOne(replyPayload, { ...state, loading: false, loaded: true })
 
         case BotActionsType.SEND_MESSAGE_FAIL:

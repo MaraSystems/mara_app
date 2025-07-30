@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
-import { IQuery, IQueryOption } from '@black-ink/lonedb';
 import { DataResponse } from '../models/data-response';
 import { IAccessService } from './iaccess.service';
 import { IWaitList } from 'src/app/home/utils/models/waitlist';
-import { Observable } from 'rxjs';
-import { IMessage } from '../../features/bot/utils/models/imessage';
+import { map } from 'rxjs';
+import { ISendMessageParams } from '../../features/bot/utils/models/imessage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiAccessService implements IAccessService {
-    host = environment.apiUrl;
+  host = environment.apiUrl;
 
   constructor(
     private httpClient: HttpClient,
@@ -40,7 +39,12 @@ export class ApiAccessService implements IAccessService {
     return this.request<null>({ method: 'post', endpoint: 'users', body: entry });
   }
 
-  sendMessage(message: string){
-    return this.request<IMessage>({ method: 'post', endpoint: 'messages', body: { content: message } });
+  sendMessage(data: ISendMessageParams){
+    return this.request<string>({ method: 'post', endpoint: '8e449eec-f72e-45c7-b2b2-f4e846170157', body: data }).pipe(
+      map((data) => {
+        const response: DataResponse<string> = { success: true, data: (data as any).output };
+        return response;
+      })
+    )
   }
 }

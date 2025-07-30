@@ -4,8 +4,8 @@
     gap: var(--space-big);
     align-items: center;
     justify-content: space-around;
-    padding: var(--space-normal);
-    width: calc(100% - var(--space-normal));
+    padding: var(--space-big);
+    width: calc(100% - var(--space-big));
     border-top: 1px solid rgba($color: black, $alpha: .1);
 
     .brand {
@@ -44,7 +44,6 @@
 @media only screen and (min-width: 760px){
     :host {
         gap: var(--space-max);
-        padding: var(--space-x-big) var(--space-big);
         width: calc(100% - var(--space-big));
 
         .newsletter {

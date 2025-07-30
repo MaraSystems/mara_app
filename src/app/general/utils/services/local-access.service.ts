@@ -5,7 +5,7 @@ import { DataResponse } from '../models/data-response';
 import { catchError, map, mergeMap, Observable, of, tap, throwError } from 'rxjs';
 import { IAccessService } from './iaccess.service';
 import { IWaitList } from 'src/app/home/utils/models/waitlist';
-import { IMessage } from '../../features/bot/utils/models/imessage';
+import { IMessage, ISendMessageParams } from '../../features/bot/utils/models/imessage';
 import { MessengerEnum } from '../../features/bot/utils/models/messager.enum';
 
 @Injectable({
@@ -69,9 +69,8 @@ export class LocalAccessService implements IAccessService {
     return of(response);
   }
 
-  sendMessage(message: string){
-    return this.insertOne<IMessage>('messages', { content: message, type: MessengerEnum.HUMAN }).pipe(
-      mergeMap(() => this.insertOne<IMessage>('messages', { content: 'Bot reply', type: MessengerEnum.ROBOT }))
-    )
+  sendMessage(data: ISendMessageParams){
+    const response: DataResponse<string> = { success: true, data: 'Bot reply' };
+    return of(response);
   };
 }

@@ -3,11 +3,12 @@ import { SideEffects } from "../models/side-effects";
 
 export function handleSuccessSideEffects<T> (sideEffects: SideEffects<T>, response?: DataResponse<T>){
     if (sideEffects.success) {
+        console.log(response)
         sideEffects.success(response);
     }
 }
 
-export const handleFailureSideEffects = (sideEffects: SideEffects, error?: string | Error) => {    
+export const handleFailureSideEffects = (sideEffects: SideEffects, error?: string | Error) => {
     if (sideEffects.failure) {
         const message = (error as any).message || error;
         sideEffects.failure(message);

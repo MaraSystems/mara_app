@@ -21,6 +21,6 @@ export class AccessService {
     //   ? localAccessService
     //   : apiAccessService;
 
-    this.api = localAccessService;
+    this.api = apiAccessService;
   }
 }

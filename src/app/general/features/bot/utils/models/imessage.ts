@@ -5,3 +5,8 @@ export interface IMessage {
     type: MessengerEnum;
     content: string;
 }
+
+export interface ISendMessageParams {
+  message: string;
+  sessionId: string;
+}

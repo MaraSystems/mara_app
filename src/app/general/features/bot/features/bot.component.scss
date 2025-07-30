@@ -45,32 +45,37 @@
             display: flex;
           }
         }
+
+        .close {
+          cursor: pointer;
+        }
       }
 
       .messages {
-        height: 100%;
-        width: 100%;
+        height: calc(100% - (2 * var(--space-small)));
+        width: calc(100% - (2 * var(--space-small)));
         display: flex;
         flex-direction: column;
         overflow: scroll;
+        padding: var(--space-small);
 
         .item {
           display: flex;
           flex-direction: row;
-          align-items: flex-start;
-          gap: var(--space-small);
-          padding: var(--space-small);
+          justify-content: flex-start;
+          padding: var(--space-x-small);
 
           &-content {
-            padding: var(--space-normal);
+            padding: var(--space-small);
             background-color: var(--color-dark);
             color: var(--color-light);
             border-radius: var(--space-small);
+            max-width: 80%;
           }
         }
 
         .reversed {
-          flex-direction: row-reverse !important;
+          justify-content: flex-end !important;
         }
       }
 
