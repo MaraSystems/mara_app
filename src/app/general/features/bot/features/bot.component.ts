@@ -19,6 +19,7 @@ export class BotComponent extends BaseComponent implements OnInit {
   sessionId = new Date().toString()
   messageType = MessengerEnum;
   typing = false;
+  keyboardOn = false;
 
   constructor(
     public store: Store<AppState>,
@@ -38,6 +39,10 @@ export class BotComponent extends BaseComponent implements OnInit {
         this.messageBot(message);
         this.active = true;
       }
+    });
+
+    window.addEventListener('resize', () => {
+      this.keyboardOn = window.innerHeight < screen.height - 150;
     });
   }
 

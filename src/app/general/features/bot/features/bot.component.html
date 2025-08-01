@@ -11,15 +11,15 @@
 
   <div class="messages">
     <span class="item" *ngFor="let item of messages" [ngClass]="{reversed: item.type === messageType.HUMAN}">
-      <p class="item-content text-3">{{ item.content }}</p>
+      <p class="item-content text-2">{{ item.content }}</p>
     </span>
     <span class="item" *ngIf="typing">
       <p class="text-1">...</p>
     </span>
   </div>
 
-  <span class="control">
-    <app-message-input (send)="messageBot($event)" [wait]="typing"></app-message-input>
+  <span class="control" [ngClass]="{'keyboard-on': keyboardOn}">
+    <app-message-input (send)="messageBot($event)" [wait]="typing" placeholder="Ask me anything"></app-message-input>
   </span>
 </div>
 

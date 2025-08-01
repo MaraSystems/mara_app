@@ -76,12 +76,23 @@
 
         .reversed {
           justify-content: flex-end !important;
+
+          .item-content {
+            background-color: rgba($color: black, $alpha: .1);
+            color: var(--color-dark);
+          }
         }
       }
 
       .control {
-        border-top: 1px solid rgba($color: black, $alpha: .1);
         padding: var(--space-normal);
+        background-color: var(--color-light);
+        width: calc(100% - (2 * var(--space-normal)));
+      }
+
+      .keyboard-on{
+        position: fixed;
+        bottom: 0;
       }
     }
 
@@ -105,6 +116,10 @@
           height: 550px;
           box-shadow: var(--shadow-medium);
           position: relative;
+
+          .control {
+            position: unset;
+          }
         }
     }
 }

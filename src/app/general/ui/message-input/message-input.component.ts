@@ -8,7 +8,9 @@ import { InputComponent } from '../input/input.component';
 })
 export class MessageInputComponent implements OnInit, OnDestroy {
   @Input() wait = false;
+  @Input() placeholder = 'Message here.'
   @Output() send = new EventEmitter();
+
   input!: HTMLInputElement;
 
   constructor(
@@ -32,7 +34,10 @@ export class MessageInputComponent implements OnInit, OnDestroy {
   }
 
   sendMessage() {
-    this.send.emit(this.input.value);
+    if (this.input.value) {
+      this.send.emit(this.input.value);
+    }
+
     this.input.value = '';
   }
 }
