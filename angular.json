@@ -32,7 +32,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/animations.scss"
+              "src/animations.scss",
+              "node_modules/mara-ng/src/styles.scss"
             ],
             "scripts": []
           },

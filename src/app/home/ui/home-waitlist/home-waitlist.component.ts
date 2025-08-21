@@ -4,9 +4,8 @@ import { BaseComponent } from 'src/app/general/utils/services/basecomponent.serv
 import { IWaitList } from '../../utils/models/waitlist';
 import { AccessService } from 'src/app/general/utils/services/access.service';
 import { Store } from '@ngrx/store';
-import { AddToast } from 'src/app/general/features/toast/utils/store/toast.action';
-import { ToastType } from 'src/app/general/features/toast/utils/models/toast-type';
 import { TriggerBotAction } from 'src/app/general/features/bot/utils/store/bot.action';
+import { ToastService } from 'mara-ng';
 
 @Component({
   selector: 'app-home-waitlist',
@@ -20,7 +19,8 @@ export class HomeWaitlistComponent extends BaseComponent implements OnInit {
 
   constructor(
     private readonly accessService: AccessService,
-    private store: Store
+    private store: Store,
+    private toastService: ToastService
   ){
     super();
   }
@@ -53,7 +53,9 @@ export class HomeWaitlistComponent extends BaseComponent implements OnInit {
       }
 
       this.submit = false;
-      this.store.dispatch(new AddToast({ title: 'Join waitlist', description: done.message, type: done.success ? ToastType.NOTE : ToastType.ERROR }));
+      done.success
+        ? this.toastService.note('Join Waitlist', done.message)
+        : this.toastService.error('Join Waitlist', done.message);
       this.store.dispatch(new TriggerBotAction(messageToBot));
     });
   }

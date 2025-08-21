@@ -8,11 +8,9 @@ import { HomeBenefitsComponent } from '../ui/home-benefits/home-benefits.compone
 import { HomeFooterComponent } from '../ui/home-footer/home-footer.component';
 import { HomeFeaturesComponent } from '../ui/home-features/home-features.component';
 import { HomeRoutingModule } from './home-routing.module';
-import { ButtonModule } from 'src/app/general/ui/button/button.module';
 import { HomeHeaderComponent } from '../ui/home-header/home-header.component';
-import { TextInputModule } from 'src/app/general/ui/text-input/text-input.module';
-import { TextAreaModule } from 'src/app/general/ui/text-area/text-area.module';
 import { BotModule } from 'src/app/general/features/bot/features/bot.module';
+import { ButtonModule, TextInputModule, TextAreaModule } from 'mara-ng';
 
 
 

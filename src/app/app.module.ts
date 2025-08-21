@@ -8,10 +8,9 @@ import { appEffects, appReducers } from './app.state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
-import { ToastModule } from './general/features/toast/features/toast.module';
 import { FootbarModule } from './general/features/footbar/footbar.module';
 import { NotfoundModule } from './notfound/notfound.module';
-import { PopupModule } from './general/features/popup/popup.module';
+import { PopupModule, ToastModule } from 'mara-ng';
 
 
 @NgModule({

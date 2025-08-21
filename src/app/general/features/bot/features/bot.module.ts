@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BotComponent } from './bot.component';
-import { MessageInputModule } from 'src/app/general/ui/message-input/message-input.module';
+import { MessageInputModule } from 'mara-ng';
 
 
 

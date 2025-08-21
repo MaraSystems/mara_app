@@ -25,9 +25,9 @@
 <div class="newsletter">
     <h1 class="text-1">Join the Waitlist</h1>
     <span class="newsletter-form">
-        <app-text-input type="text" [control]="formControls.fullname" name="Fullname"></app-text-input>
-        <app-text-input type="email" [control]="formControls.email" name="Email"></app-text-input>
-        <app-text-area type="text" [control]="formControls.message" name="Message"></app-text-area>
-        <app-button [disabled]="form.invalid || submit" [text]="'Join Waitlist'" (click)="join()"></app-button>
+        <m-text-input type="text" [control]="formControls.fullname" name="Fullname"></m-text-input>
+        <m-text-input type="email" [control]="formControls.email" name="Email"></m-text-input>
+        <m-text-area type="text" [control]="formControls.message" name="Message"></m-text-area>
+        <m-button [disabled]="form.invalid || submit" [text]="'Join Waitlist'" (click)="join()"></m-button>
     </span>
 </div>
